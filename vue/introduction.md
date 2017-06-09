@@ -12,12 +12,10 @@
     .title-wrapper
         margin 0 0 20px
         padding 50px 0 25px
-        border-bottom 1px solid #eaecef
 
         h1
             border none
             margin 0
-            font-weight 600
             font-size 32px
 
         p
@@ -36,7 +34,6 @@
 
         h3
             text-align center
-            font-weight 600
             color $colorBlack
 
         .md-a-btn
