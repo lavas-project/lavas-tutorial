@@ -1,0 +1,29 @@
+{
+    "menu": [
+        {
+            "name": "vue",
+            "key": "vue",
+            "children": [
+                {
+                    "name": "功能概述",
+                    "key": "vue/introduction"
+                },
+                {
+                    "name": "基础教程",
+                    "key": "vue/01-foundation"
+                },
+                {
+                    "name": "进阶教程",
+                    "key": "vue/02-advanced"
+                },
+                {
+                    "name": "更多",
+                    "key": "vue/03-more"
+                }
+            ]
+        }
+    ],
+    "ignore": [
+        "vue/工作分工"
+    ]
+}
