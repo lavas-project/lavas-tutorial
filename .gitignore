@@ -4,3 +4,4 @@ node_modules
 tmp
 *.log
 *.idea
+*.html
