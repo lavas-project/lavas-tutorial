@@ -98,16 +98,16 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build)
 
 ## 如何修改 `service-worker.js` 文件内容 ？？？
 
-*如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发呢？* 要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 `service-worker.js` 文件。
+**如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发呢？** 要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 `service-worker.js` 文件。
 
 
 要让 sw-prcahce 工具生成 `service-worker.js` 文件，需要给它提供一个 `.tmpl` 的模板文件。工具默认使用插件默认模板文件，但是我们也可以定制自己的模板（最好参考默认模板），通过配置导入模板，实现定制换开发。在上面的配置文件可以发现，就是通过 `templateFilePath: 'build/sw.tmpl'` 导入定制化模板来生成`service-worker.js` 文件。 *项目中将模板文件提取到了 build 文件夹下，便于开发者后期相应的维护开发。*
 
 
-*导出项目中做了什么定制化呢？*
+**导出项目中做了什么定制化呢？**
 这就来给大家介绍下，为了在 `service-worker.js` 文件内容更新时，能够让主页面及时做出重载更新，我们在 `build/sw.tmpl` 文件的 `activted` 中通过 `postMessage` 抛出了 `updateMessage` 的信息，在 `sw-register.js` 中，注册了消息的监听，一旦接收到 `updateMessage` 消息，主页面做出 `reload` 的操作重载页面。
 
-*注意* 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
+**注意** 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
 
 ``` js
