@@ -6,7 +6,7 @@ App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，�
 
 如果要开发一个App Shell, 首先需要明确区分页面 Shell 和 动态内容部分。一般而言，您的应用应加载尽可能最简单的 Shell，如在给出 bpwa-demo-news 中，我们将头部导航作为 Shell，其余部分为动态内容，也就需要适时更新的部分。明确了之后，我们就可以着手开发这部分了。
 
-![示例](./images/app-shell-1.png.png)
+![示例](./images/app-shell-1.png)
 
 
 ## app-shells 管理和使用
