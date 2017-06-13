@@ -6,19 +6,18 @@
 
 本地安装最新版本的 nodeJs 和 npm
 
-- nodeJs：[https://nodejs.org/en](https://nodejs.org/en/)
-
-- npm: [https://docs.npmjs.com](https://docs.npmjs.com/)
+- nodeJs：[http://nodejs.cn](http://nodejs.cn)
+- npm: [https://docs.npmjs.com](https://docs.npmjs.com)
 
 学习 Vue 相关知识
 
 - Vue: [https://cn.vuejs.org](https://cn.vuejs.org)
-
 - Vuex: [https://vuex.vuejs.org/zh-cn](https://vuex.vuejs.org/zh-cn)
-
 - Vue-router: [https://router.vuejs.org/zh-cn](https://router.vuejs.org/zh-cn)
 
-学习 pwa 相关知识， 请访问 [https://pwa.baidu.com/doc](https://pwa.baidu.com/doc)
+学习 pwa 相关知识
+
+- PWA: [https://pwa.baidu.com/doc](https://pwa.baidu.com/doc)
 
 
 ## 依赖工具
@@ -85,7 +84,7 @@ build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配
 
 首先我们需要学习 [Vue](https://cn.vuejs.org)，[Vuex](https://vuex.vuejs.org/zh-cn) 相关知识。
 
-该文件夹里面封装了多套 shell components, 我们在初始化工程时默认选择一种 app-shell component, 该 app-shell 封装的粒度为在不同 page 页面中抽离出来的相似或相同的逻辑，如果提供的 app-shell 在细节上不能满足我们具体的业务开发，我们可以通过修改 app-shell 来满足需求，详情可以参考[维护 app-shells](../aaa.md)。app-shells 的 component 数据都和 Vuex store 绑定，这样我们通过在其他业务 component 需要修改 app shell 样式的时候直接通过调用 action 方法。
+该文件夹里面封装了多套 shell components, 我们在初始化工程时默认选择一种 app-shell component, 该 app-shell 封装的粒度为在不同 page 页面中抽离出来的相似或相同的逻辑，如果提供的 app-shell 在细节上不能满足我们具体的业务开发，我们可以通过修改 app-shell 来满足需求，详情可以参考[维护 app-shells](./05-define-app-shell.md)。app-shells 的 component 数据都和 Vuex store 绑定，这样我们通过在其他业务 component 需要修改 app shell 样式的时候直接通过调用 action 方法。
 
 参照 Vue 最佳实践，我们不建议操作 dom 直接控制 app-shell 内的某些元素的隐藏和展现或者相关的样式变更，通常我们建议将这些样式的变更和 Vuex 数据绑定，然后通过 action 方法暴露给其他 component 使用。
 
