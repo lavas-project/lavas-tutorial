@@ -1,13 +1,13 @@
 # 维护 manifest.json
 
-开始之前，您可以[查看添加到屏幕相关内容](https://pwa.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)，快速掌握相关基础。
+开始之前，您可以查看[添加到屏幕](https://pwa.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)相关内容，快速掌握相关基础。
 
 为了实现 PWA 应用添加至桌面的功能，我们需要准备 manifest.json 文件配置应用的图标、名称等信息。 **项目中这些信息在哪里配置呢?**
 
 
 ## 如何配置？
 
-配置文件文件一般在 config 文件夹下，这里的配置也不例外，就在 `config/manifest.json`中，开发中我们一般只需要关注该文件的配置内容即可满足开发需求。`config/manifest.json` 中配置了应用添加到屏幕所需的相关字段（这里给出部分必须的参数，具体的可以参看[配置文档及示例](https://pwa.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)），根据这些配置，项目 build 后会自动生成所需的 `manifest.json` 文件。下面是具体的配置代码及简单的介绍：
+项目的配置文件一般在 config 文件夹下，这里的配置也不例外，就在 `config/manifest.json`中，开发中我们一般只需要关注该文件的配置内容即可满足开发需求。`config/manifest.json` 中配置了应用添加到屏幕所需的相关字段（这里给出部分必须的参数，具体的可以参看[配置文档及示例](https://pwa.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)），根据这些配置，项目 build 后会自动生成所需的 `manifest.json` 文件。下面是具体的配置代码及简单的介绍：
 
 ``` js
 module.exports = {

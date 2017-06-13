@@ -1,6 +1,6 @@
 # 维护 service worker 文件
 
-开始之前，您可以[查看 servier worker 相关内容](https://pwa.baidu.com/doc/offline-and-cache-loading/01-service-worker-introduction)，快速掌握相关基础。
+开始之前，您可以查看 [servier worker](https://pwa.baidu.com/doc/offline-and-cache-loading/01-service-worker-introduction) 相关内容，快速掌握相关基础。
 
 servier-worker.js 作为缓存管理的重要文件，在导出工程的时候我们默认给了一个能覆盖缓存需求的 service-worker.js 文件。
 但是我们默认提供的文件可能在后续您的开发过程中并不能完全覆盖您的需求，所以你需要对其进行一定的维护。
@@ -112,7 +112,7 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build)
 
 
 **导出项目中做了什么定制化呢？**
-这就来给大家介绍下，为了在 `service-worker.js` 文件内容更新时，能够让主页面及时做出重载更新，我们在 `build/sw.tmpl` 文件的 `activted` 中通过 `postMessage` 抛出了 `updateMessage` 的信息，在 `sw-register.js` 中，注册了消息的监听，一旦接收到 `updateMessage` 消息，主页面做出 `reload` 的操作重载页面。
+这就来给大家介绍下，为了在 `service-worker.js` 文件内容更新时，能够让主页面及时做出重载更新，我们在 `build/sw.tmpl` 文件的 `activate` 监听事件中通过 `postMessage` 抛出了 `updateMessage` 的信息，在 `sw-register.js` 中，注册了消息的监听，一旦接收到 `updateMessage` 消息，主页面做出 `reload` 的操作重载页面。
 
 **注意：** 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
@@ -201,6 +201,7 @@ window.onload = function () {
 };
 
 ```
+
 
 ## 缓存补充
 
