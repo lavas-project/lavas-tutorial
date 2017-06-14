@@ -1,11 +1,47 @@
-# 检验 pwa 站点
+# 检验 PWA 站点
 
 
-## checkList
+## CheckList
 
-[https://developers.google.com/web/progressive-web-apps/checklist](https://developers.google.com/web/progressive-web-apps/checklist)
+对于 PWA 站点是否完善，Google 通过 PWA 所需要具备的一些特性和最佳实践给出了一个 Checklist, 该 Checklist 从多个方面来提供 PWA 站点检测的标准。如果我们对 PWA 工程的检测要求集成到持续集成系统的话(类似后面所提到的 Lighthouse)，我们可以参照 Checklist 进行一系列的检测。
 
-## chrome
+Checklist: [https://developers.google.com/web/progressive-web-apps/checklist](https://developers.google.com/web/progressive-web-apps/checklist)
+
+## Chrome Devtool
+
+Chrome 有一个强大之处在于它的 Devtool 的强大，我们可以通过 Chrome Devtool 进行一系列的检测和验证自己的 PWA 站点。
+
+**进入方式**
+
+- windows: `F12`
+- mac: `Command + Shift + I`
+
+**NetWork**
+
+我们可以通过 Network 选项卡观察 Web App 的网络请求情况。
+可以观察某一个静态资源或者异步请求的请求情况、缓存情况、返回情况等。
+
+![chrome network](./images/chrome-network.png)
+
+**Application**
+
+调试检测 PWA 项目， Application 选项卡主要是用来调试和观察 Service Worker 文件以及 CacheStorage 缓存的。
+
+![chrome application](./images/chrome-application.png)
+
+对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://pwa.baidu.com/doc/offline-and-cache-loading/04-service-worker-debug)
+也可以深入了解 [Google Chrome Devtool](https://developers.google.com/web/tools/chrome-devtools)
 
 
-## lighthouse
+## Lighthouse
+
+Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。您可以将其作为一个 Chrome 扩展程序运行，或从命令行运行。 您为 Lighthouse 提供一个您要审查的网址，它将针对此页面运行一连串的测试，然后生成一个有关页面性能的报告。
+
+从此处，您可以失败的测试为指示器，看看可以采取哪些措施来改进您的应用。
+
+注：Lighthouse 目前非常关注 PWA 功能，如`添加到主屏幕`和离线支持。不过，此项目的首要目标是针对网络应用质量的各个方面提供端到端审查。
+
+
+运行 Lighthouse 的方式有两种：作为 Chrome 扩展程序运行，或作为命令行工具运行。 Chrome 扩展程序提供了一个对用户更友好的界面，方便读取报告。 命令行工具允许您将 Lighthouse 集成到持续集成系统。
+
+详细信息，可以去 [Lighthouse 官方文档](https://developers.google.com/web/tools/lighthouse) 查看
