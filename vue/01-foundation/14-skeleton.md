@@ -10,8 +10,7 @@
 
 ## 开发调试
 
-在开发环境中，skeleton 对应的路由组件位于`pages/Skeleton.vue`，通过`/skeleton`路由即可访问。
-在生产环境构建过程中，这个路由会被删除，所以不用担心在生产环境中被访问到。
+在开发环境中，skeleton 对应的路由组件位于`pages/Skeleton.vue`，通过`/skeleton`路由即可访问。我们在`router.js`中使用了占位符，只有在开发环境中才会插入这个路由，所以不用担心在生产环境中被用户访问到。
 
 ![模版项目展示的skeleton](./images/bpwa-skeleton.png)
 
