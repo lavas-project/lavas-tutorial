@@ -120,35 +120,35 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build)
 ``` js
 // sw.tmpl文件中
 self.addEventListener('activate', function(event) {
-  var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
+    var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
 
-  event.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      return cache.keys().then(function(existingRequests) {
-        return Promise.all(
-          existingRequests.map(function(existingRequest) {
-            if (!setOfExpectedUrls.has(existingRequest.url)) {
-              return cache.delete(existingRequest);
+    event.waitUntil(
+        caches.open(cacheName).then(function(cache) {
+            return cache.keys().then(function(existingRequests) {
+                return Promise.all(
+                    existingRequests.map(function(existingRequest) {
+                        if (!setOfExpectedUrls.has(existingRequest.url)) {
+                            return cache.delete(existingRequest);
+                        }
+                    })
+                );
+            });
+        }).then(function() {
+            <% if (clientsClaim) { %>
+            return self.clients.claim();
+            <% } %>
+        }).then(function() {
+            if (!firstRegister) {
+                return self.clients.matchAll()
+                    .then(function (clients) {
+                        if (clients && clients.length) {
+                            var currentClient = clients[0];
+                            currentClient.postMessage('updateMessage');
+                        }
+                    })
             }
-          })
-        );
-      });
-    }).then(function() {
-      <% if (clientsClaim) { %>
-      return self.clients.claim();
-      <% } %>
-    }).then(function() {
-      if (!firstRegister) {
-        return self.clients.matchAll()
-          .then(function (clients) {
-            if (clients && clients.length) {
-              var currentClient = clients[0];
-              currentClient.postMessage('updateMessage');
-            }
-          })
-      }
-    })
-  );
+        })
+    );
 });
 
 ```
