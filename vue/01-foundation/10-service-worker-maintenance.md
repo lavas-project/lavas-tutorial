@@ -208,10 +208,7 @@ window.onload = function () {
 缓存内容及策略主要通过 `config/sw-precache.js`配置文件来控制，常用配置的参数如下：
 * 配置项中有 `mergeStaticsConfig` 参数（定制化提供参数），默认是 true，即在没配置的情况下，默认缓存所有静态文件
 * 如果不想缓存所有的静态文件，需要配置 ` staticFileGlobs` 参数，将需要缓存的静态文件，依次写入
-* sw-precache 与 sw-toolbox 一起使用，sw-toolbox 可以为动态资源提供更好的缓存机制。
-对于需要动态缓存的资源，可以通过配置文件中的 runtimeCaching 参数来配置，此时 sw-precache 模块就会帮我们引入 sw-toolbox 模块。所以在 sw-precache 中使用 runtimeCaching 配置选项可以参考 sw-toolbox 的配置规则，最终动态的路由规则会被添加到 service worker.js 文件的最后。下面对 runtimeCaching 的具体配置也给出相应的介绍，后期开发应用还是比较广泛的。
-
-runtimeCaching 的配置选项数组中的每个对象都需要一个urlPattern，它是一个正则表达式或一个字符串，遵循sw-toolbox的配置约定。此外，还需要一个handler，指定其读取动态资源的策略（包括 5 种：networkFirst、cacheFirst、fastest、cacheOnly、networkOnly）。
+* 对于需要动态缓存的资源，可以通过配置文件中的 runtimeCaching 参数来配置，此时 sw-precache 模块就会帮我们引入 sw-toolbox 模块。所以在 sw-precache 中使用 runtimeCaching 配置选项可以参考 sw-toolbox 的配置规则，最终动态的路由规则会被添加到 service worker.js 文件的最后。下面对 runtimeCaching 的具体配置也给出相应的介绍，后期开发应用还是比较广泛的。
 
 例如，下面的配置为两种不同URL模式定义了实时缓存行为。它对两种请求使用不同的处理程序，并为/fonts/模式相匹配的请求指定了最大可用缓存：
 
@@ -236,9 +233,12 @@ runtimeCaching: [
 ]
 ```
 
+runtimeCaching 的配置选项数组中的每个对象都需要一个urlPattern，它是一个正则表达式或一个字符串，遵循sw-toolbox的配置约定。此外，还需要一个handler，指定其读取动态资源的策略（包括 5 种：networkFirst、cacheFirst、fastest、cacheOnly、networkOnly）。
+
+
 下面配置相关参数介绍取自[使用指南](https://metaquant.org/programing/sw-precache-guide.html)， 为了您查阅方便直接备注在这里。
 
-sw-toolbox提供五种针对网络请求的处理程序(handler)，具体如下表：
+**sw-toolbox提供五种针对网络请求的处理程序(handler)，具体如下表：**
 
 * networkFirst：首先尝试通过网络来处理请求，如果成功就将响应存储在缓存中，否则返回缓存中的资源来回应请求。它适用于以下类型的API请求，即你总是希望返回的数据是最新的，但是如果无法获取最新数据，则返回一个可用的旧数据。
 
@@ -250,7 +250,7 @@ sw-toolbox提供五种针对网络请求的处理程序(handler)，具体如下�
 
 * networkOnly：尝试从网络获取网址来处理请求。如果获取资源失败，则请求失败，这基本上与不使用service worker的效果相同。
 
-sw-toolbox选项中的cache选项可以指定缓存的最大数目以及缓存时间等，具体如下：
+**sw-toolbox选项中的cache选项可以指定缓存的最大数目以及缓存时间等，具体如下：**
 
 * cache.name[String]：用于存储实时缓存对象的缓存名称。使用唯一的名称允许您自定义缓存的最大空间和缓存时间。默认值：在运行时根据service worker的registration.scope值生成。
 
