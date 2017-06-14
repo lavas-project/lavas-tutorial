@@ -48,3 +48,4 @@
 - 以页面为粗粒度的按需加载静态资源。
 - 以功能组件和业务组件为粒度来开发维护组件。
 - 控制 service worker precache 的文件内容和数量 (CacheStorage 容量有限)。
+
