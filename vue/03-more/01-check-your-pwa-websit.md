@@ -45,3 +45,13 @@ Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。�
 运行 Lighthouse 的方式有两种：作为 Chrome 扩展程序运行，或作为命令行工具运行。 Chrome 扩展程序提供了一个对用户更友好的界面，方便读取报告。 命令行工具允许您将 Lighthouse 集成到持续集成系统。
 
 详细信息，可以去 [Lighthouse 官方文档](https://developers.google.com/web/tools/lighthouse) 查看
+
+## 真机测试
+
+- 手机百度 / 百度手机浏览器
+- Chrome / fireFox 浏览器
+- 主流的安卓机型的自带浏览器
+- 微信 / QQ 浏览器
+- UC 浏览器
+- 360 浏览器
+- 猎豹浏览器
