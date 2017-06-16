@@ -29,7 +29,7 @@ Chrome 有一个强大之处在于它的 Devtool 的强大，我们可以通过 
 
 ![chrome application](./images/chrome-application.png)
 
-对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://pwa.baidu.com/doc/offline-and-cache-loading/04-service-worker-debug)
+对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://pwa.baidu.com/doc/offline-and-cache-loading/service-worker/04-service-worker-debug)
 也可以深入了解 [Google Chrome Devtool](https://developers.google.com/web/tools/chrome-devtools)
 
 

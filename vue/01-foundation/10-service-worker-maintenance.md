@@ -1,6 +1,6 @@
 # 维护 service worker 文件
 
-开始之前，您可以查看 [servier worker](https://pwa.baidu.com/doc/offline-and-cache-loading/01-service-worker-introduction) 相关内容，快速掌握相关基础。查看 service worker [ 浏览器支持情况](http://caniuse.com/#feat=serviceworkers)
+开始之前，您可以查看 [servier worker](https://pwa.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。查看 service worker [ 浏览器支持情况](http://caniuse.com/#feat=serviceworkers)
 
 servier-worker.js 作为缓存管理的重要文件，在导出工程的时候我们默认给了一个能覆盖缓存需求的 service-worker.js 文件。
 但是我们默认提供的文件可能在后续您的开发过程中并不能完全覆盖您的需求，所以你需要对其进行一定的维护。
