@@ -22,12 +22,12 @@
 
 ## 依赖工具
 
-如果想在本地开发 PWA 工程，从 0 开始开发一个基于 Vue 的 PWA 项目是非常困难的，我们还有很多除了业务实现之外的事情需要做。为了节省大家在业务之外减少开发时间，我们提供了一套命令行工具 --- bpwa-cli。目前 bpwa-cli 提供了脚手架初始化工作，能够帮助我们在正式开发之前做好充分准备。
+如果想在本地开发 PWA 工程，从 0 开始开发一个基于 Vue 的 PWA 项目是非常困难的，我们还有很多除了业务实现之外的事情需要做。为了节省大家在业务之外减少开发时间，我们提供了一套命令行工具 --- lavas-cli。目前 lavas-cli 提供了脚手架初始化工作，能够帮助我们在正式开发之前做好充分准备。
 
-可以通过以下方式 npm 安装 bpwa-cli：
+可以通过以下方式 npm 安装 lavas-cli：
 
 ```base
-[sudo] npm install -g bpwa-cli
+[sudo] npm install -g lavas-cli
 ```
 
 ## 初始化工程
@@ -35,7 +35,7 @@
 执行以下命令可以初始化 PWA 工程：
 
 ```bash
-bpwa init
+lavas init
 ```
 
 ![cli init command](./images/cli-init.png)

@@ -127,19 +127,19 @@
     </div>
 </div>
 
-`bpwa-cli` 是一个命令行工具，可以通过它来快速创建 PWA 项目。它提供了多种常用的 APP Shell 给用户选择，降低了开发成本，也简化了工作流程，让 PWA 项目变得易于管理。
+`lavas-cli` 是一个命令行工具，可以通过它来快速创建 PWA 项目。它提供了多种常用的 APP Shell 给用户选择，降低了开发成本，也简化了工作流程，让 PWA 项目变得易于管理。
 
-可以通过 `npm install` 方便快捷地安装 bpwa-cli：
+可以通过 `npm install` 方便快捷地安装 lavas-cli：
 
 ```bash
-[sudo] npm install -g bpwa-cli
-bpwa init
+[sudo] npm install -g lavas-cli
+lavas init
 ```
 
-想了解更多关于 bpwa-cli 的使用方法，请戳下面的链接：
+想了解更多关于 lavas-cli 的使用方法，请戳下面的链接：
 
 <div>
     <a href="/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli"
         class="md-a-btn"
-    >安装 bpwa-cli</a>
+    >安装 lavas-cli</a>
 </div>
