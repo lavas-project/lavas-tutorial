@@ -11,7 +11,7 @@ App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，�
 
 ## app-shells 管理和使用
 
-导出项目中，提供了 `src/app-shells` 目录来统一存放 Shell， 单个 Shell 其实都是以一个组件的形式存在，只是考虑到其有自身的特殊性，我们将它独立出来管理。开发者可以根据需求自己定制 Shell，也可以再我们提供的Shell基础上进行二次开发。每个 Shell 文件夹中包含一个 `.vue` 的主体文件、一个集中状态管理的容器 `store`（它包含了 Shell 所需的state、 actions、 mutations等）。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档，也可以参考[组件开发](./04-how-to-develop-a-component.md)。最终这里配置的 store 会在 `src/store` 中通过 Vuex 的 store 统一管理起来，在主页面 `src/App.vue` 中导入 Shell 组件即可使用。
+导出项目中，提供了 `src/app-shells` 目录来统一存放 Shell， 单个 Shell 其实都是以一个组件的形式存在，只是考虑到其有自身的特殊性，我们将它独立出来管理。开发者可以根据需求自己定制 Shell，也可以再我们提供的Shell基础上进行二次开发。每个 Shell 文件夹中包含一个 `.vue` 的主体文件、一个集中状态管理的容器 `store`（它包含了 Shell 所需的state、 actions、 mutations等）。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档。最终这里配置的 store 会在 `src/store` 中通过 Vuex 的 store 统一管理起来，在主页面 `src/App.vue` 中导入 Shell 组件即可使用。
 
 ``` html
 <template>
