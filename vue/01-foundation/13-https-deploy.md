@@ -1,6 +1,6 @@
 # https 环境部署
 
-PWA 项目必须部署在 https 环境上才能够生效，主要是因为 server worker 只会在 https 环境下才能注册成功，我们不用担心在本地开发的时候 service worker 是否生效的问题，因为 service worker 在 `localhost` 和 `127.0.0.1` 的 host 下是能够注册成功的，这样可以确保我们在本地调试工作都是能够顺利进行的，我们这里讲述的是如何部署线上的 https 环境来确保我们的 PWA 应用成功运行。
+PWA 项目必须部署在 https 环境上才能够生效，主要是因为 server worker 只会在 https 环境下才能注册成功，我们不用担心在本地开发的时候 service worker 是否生效的问题，因为 service worker 在 localhost 和 127.0.0.1 的 host 下是能够注册成功的，这样可以确保我们在本地调试工作都是能够顺利进行的，我们这里讲述的是如何部署线上的 https 环境来确保我们的 PWA 应用成功运行。
 
 ## 什么是 https
 

@@ -4,7 +4,7 @@
 
 ## 生产环境构建
 
-生产环境构建出的所有静态资源默认输出在`/dist`文件夹下。
+生产环境构建出的所有静态资源默认输出在 /dist 文件夹下。
 
 ```bash
 npm run build
@@ -18,6 +18,6 @@ npm run build
 
 ## 部署到服务器
 
-由于模版项目默认使用了 vue-router 的 HTML5 History 模式，需要将所有 URL 指向 index.html，避免在单页面项目中出现404情况，这就需要在服务器端进行一些配置。
+由于模版项目默认使用了 vue-router 的 HTML5 History 模式，需要将所有 URL 指向 index.html，避免在单页面项目中出现 404 情况，这就需要在服务器端进行一些配置。
 
-具体配置可参考[vue-router官方文档中Apache，nginx和Express的配置](https://router.vuejs.org/en/essentials/history-mode.html)。
+具体配置可参考[ vue-router 官方文档中 Apache，nginx 和 Express 的配置](https://router.vuejs.org/en/essentials/history-mode.html)。
