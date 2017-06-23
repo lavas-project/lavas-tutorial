@@ -155,7 +155,7 @@ self.addEventListener('activate', function(event) {
 ## service worker 的注册
 
 
-注册部分在项目的 src/sw-register.js 文件中，并在 `index.html` 引入执行。上面内容提及的 `service-worker.js` 更新时 `updateMessage` 的信息监听和页面重载部分，也是在 `src/sw-register.js`里完成的，开发者可根据需求做相应的扩展。
+注册部分在项目的 src/sw-register.js 文件中，并在 index.html 引入执行。上面内容提及的 service-worker.js 更新时 'updateMessage' 的信息监听和页面重载部分，也是在 src/sw-register.js 里完成的，开发者可根据需求做相应的扩展。
 
 
 ``` js
