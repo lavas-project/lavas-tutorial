@@ -8,7 +8,7 @@
 
 ## 配置文件
 
-主题相关的配置文件在 `config/theme.js` 中，结构如下：
+主题相关的配置文件在 config/theme.js 中，结构如下：
 
 ``` js
 // 定义主题列表
@@ -42,13 +42,13 @@ module.exports = {
 };
 ```
 
-在 `themeList` 里可以定义多个主题，每个主题包含两部分：
-* `themeColor`
+在 themeList 里可以定义多个主题，每个主题包含两部分：
+* themeColor
     * `primary` 主要颜色，vuetify 中大部分组件以及我们的 app shell 都会大量使用
     * `accent` 通常根据主要颜色调整明暗后生成，以显示层次感
     * `secondary` 次要颜色，通常与主要颜色形成对比
     * `info/warning/error/success` 项目不同状态下定义的颜色，例如 vuetify 在 [Alerts](https://vuetifyjs.com/components/alerts)组件中会使用
-* `materialDesign` 包含了一系列 material 设计相关的变量
+* materialDesign 包含了一系列 material 设计相关的变量
 
 > info
 > 
@@ -64,12 +64,12 @@ module.exports = {
 
 在开发自己的控件时，需要尽量关联以上主题变量。
 
-在具体使用时，不需要在每一个 `.vue` 文件的样式部分使用 `@import` 来引入这些变量，直接使用即可，方法如下：
-* 使用 `themeColor` 中的变量：`background: $theme.primary`
-* 使用 `materialDesign` 中的变量：`color: $material-theme.bg-color`
+在具体使用时，不需要在每一个 '.vue' 文件的样式部分使用 @import 来引入这些变量，直接使用即可，方法如下：
+* 使用 themeColor 中的变量：`background: $theme.primary`
+* 使用 materialDesign 中的变量：`color: $material-theme.bg-color`
 
 > info
 > 
-> 需要注意的是，使用主题相关的变量时，`:`不能够省略，原因是[省略冒号的情况下，stylus 编译器无法区分 hash 和选择器](https://github.com/stylus/stylus/issues/1405)
+> 需要注意的是，使用主题相关的变量时，':' 不能够省略，原因是[省略冒号的情况下，stylus 编译器无法区分 hash 和选择器](https://github.com/stylus/stylus/issues/1405)
 
 

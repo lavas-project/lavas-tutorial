@@ -99,10 +99,10 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 **如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发呢 ？**
 
-要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 `service-worker.js` 文件。
+要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 service-worker.js 文件。
 
 
-要让 sw-precahce 工具生成 service-worker.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置导入模板，实现定制化开发。在上面的配置文件可以发现，就是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成`service-worker.js` 文件。
+要让 sw-precahce 工具生成 service-worker.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置导入模板，实现定制化开发。在上面的配置文件可以发现，就是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 service-worker.js 文件。
 **项目中将模板文件提取到了 config 文件夹下，便于开发者后期相应的维护开发。**
 
 
