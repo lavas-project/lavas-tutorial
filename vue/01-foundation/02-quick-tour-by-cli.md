@@ -4,10 +4,9 @@
 
 ## 准备
 
-本地安装最新版本的 nodeJs 和 npm
+本地安装最新版本的 Node.js
 
-- nodeJs：[http://nodejs.cn](http://nodejs.cn)
-- npm: [https://docs.npmjs.com](https://docs.npmjs.com)
+- Node.js：[https://nodejs.org/](https://nodejs.org/en/)
 
 学习 Vue 相关知识
 
