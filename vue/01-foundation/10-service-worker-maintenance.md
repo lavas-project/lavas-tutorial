@@ -23,7 +23,6 @@ servier-worker.js 作为缓存管理的重要文件，在导出工程的时候�
 
 
 ``` js
-
 /* sw-precache.js中的配置 */
 
 build: {
@@ -91,9 +90,7 @@ build: {
 
 
 // webpack.prod.conf.js中通过组件引入配置，生成文件
-new SWPrecacheWebpackPlugin(config.swPrecache.build)
-
-
+new SWPrecacheWebpackPlugin(config.swPrecache.build);
 ```
 
 
@@ -187,7 +184,6 @@ self.addEventListener('activate', function(event) {
 ```
 
 ``` js
-
 // index.html 中引入注册代码
 window.onload = function () {
     var script = document.createElement('script');

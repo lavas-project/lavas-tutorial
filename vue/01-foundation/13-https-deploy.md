@@ -32,7 +32,7 @@ https 是将 http 置于 ssl/tls 之上，其效果是加密 http 流量(traffic
 参照： [https://foofish.net/https-free-for-lets-encrypt.html](https://foofish.net/https-free-for-lets-encrypt.html)
 在获取证书成功之后，通常做法我们只需要修改 Nginx 中有关证书的配置并 reload 服务即可：
 
-``` bash
+```nginx
 server {
     listen 443;
     server_name yourwebsit.com, www.yourwebsit.net;

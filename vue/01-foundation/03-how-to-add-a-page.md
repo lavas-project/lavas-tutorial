@@ -38,34 +38,35 @@ routes: [
 ## 页面组织结构
 
 还是以 NotFound 页面为例，一个典型的 '.vue' 单文件组件包含 template，script 和 style 三部分：
+
 ```html
-    <template>
-    </template>
+<template>
+</template>
 
-    <script>
-    import {mapActions} from 'vuex';
-    import pageLoadingMixin from '@/mixins/pageLoadingMixin';
+<script>
+import {mapActions} from 'vuex';
+import pageLoadingMixin from '@/mixins/pageLoadingMixin';
 
-    export default {
-        name: 'notFound',
-        mixins: [pageLoadingMixin],
-        methods: {
-            ...mapActions([
-                'setPageLoading',
-                'showBottomNav',
-                'setAppHeader'
-            ])
-        },
-        activated() {
-            this.setAppHeader({});
-            this.hideBottomNav();
-            this.setPageLoading(false);
-        }
-    };
-    </script>
+export default {
+    name: 'notFound',
+    mixins: [pageLoadingMixin],
+    methods: {
+        ...mapActions([
+            'setPageLoading',
+            'showBottomNav',
+            'setAppHeader'
+        ])
+    },
+    activated() {
+        this.setAppHeader({});
+        this.hideBottomNav();
+        this.setPageLoading(false);
+    }
+};
+</script>
 
-    <style lang="stylus" scoped>
-    </style>
+<style lang="stylus" scoped>
+</style>
 ```
 
 ## 与 app shell 的交互
@@ -93,7 +94,7 @@ const actions = {
         commit(types.SET_APP_BOTTOM_NAV, {show: false});
     },
     ...
-}
+};
 ```
 
 那么在路由组件中，何时调用这些操作方法呢？前面介绍过，路由组件默认使用了 keep-alive，会在生命周期中增加两个钩子函数： activated 和 deactivated ，分别在组件激活和注销时触发。在 NotFound 页面中，在 activated 时进行了设置头部，隐藏底部导航条等操作。
@@ -114,12 +115,13 @@ app shell组件触发的事件如下，为了避免重复，在事件名之前�
     * app-bottom-navigator:click-nav 点击底部项目，事件对象中包含当前导航项目 name
 
 当路由组件想监听事件时，只需要在 activated 钩子中注册事件处理函数：
+
 ```js
-    import EventBus from '@/event-bus';
-    // 在activated钩子中注册
-    EventBus.$on(`app-header:click-action`, ({actionIdx}) => {
-        // 处理点击按钮事件
-    });
+import EventBus from '@/event-bus';
+// 在activated钩子中注册
+EventBus.$on(`app-header:click-action`, ({actionIdx}) => {
+    // 处理点击按钮事件
+});
 ```
 
 ### 加载中动画展示

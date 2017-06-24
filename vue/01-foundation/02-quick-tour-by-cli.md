@@ -26,7 +26,7 @@
 
 可以通过以下方式 npm 安装 lavas-cli：
 
-```base
+```shell
 [sudo] npm install -g lavas-cli
 ```
 
@@ -34,7 +34,7 @@
 
 执行以下命令可以初始化 PWA 工程：
 
-```bash
+```shell
 lavas init
 ```
 
@@ -45,7 +45,7 @@ lavas init
 
 通过初始化命令，可以在 `项目存储目录` 下找到我们新建的项目 `pwa-demo` 文件夹。
 
-```bash
+```
 pwa-demo/ (项目根目录)
     | - build/ (Webpack 和 dev-server 相关调试和构建配置文件)
     | - config/ (通用模块配置)
@@ -96,7 +96,7 @@ build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配
 
 执行下列操作进行预览：
 
-```bash
+```shell
 cd pwa-demo
 npm install
 npm run dev

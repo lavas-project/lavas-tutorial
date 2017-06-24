@@ -36,6 +36,7 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 关于 v-enter，v-leave-active 这些 CSS 类的添加时机，可参阅[文档 Transition Classes 一节](https://vuejs.org/v2/guide/transitions.html#Transition-Classes)。
 
 如果需要更换页面切换效果，例如想使用渐隐/渐显代替滑动，只需要简单修改上述 CSS 类的样式规则即可：
+
 ```css
 .app-view
     opacity 1
@@ -49,5 +50,5 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 ```
 
 > info
-> 
+>
 > 如果不需要页面的切换动画，可以在 appShell 的状态树中通过设置 needPageTransition 进行关闭。

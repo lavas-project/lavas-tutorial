@@ -17,33 +17,31 @@ sw.js 控制着页面资源和请求的缓存，那么如果缓存策略需要�
 看一下具体实例：
 
 ```javascript
+// 安装阶段跳过等待，直接进入 active
+self.addEventListener('install', function (event) {
+    event.waitUntil(self.skipWaiting());
+});
 
-    // 安装阶段跳过等待，直接进入 active
-    self.addEventListener('install', function (event) {
-        event.waitUntil(self.skipWaiting());
-    });
+self.addEventListener('activate', function (evnet) {
+    event.waitUntil(
+        Promise.all([
 
-    self.addEventListener('activate', function (evnet) {
-        event.waitUntil(
-            Promise.all([
+            // 更新客户端
+            self.clients.claim(),
 
-                // 更新客户端
-                self.clients.claim(),
-
-                // 清理旧版本
-                caches.keys().then(function (cacheList) {
-                    Promise.all(
-                        cacheList.map(function (cacheName) {
-                            if (cacheName !== 'my-test-cache-v1') {
-                                caches.delete(cacheName);
-                            }
-                        })
-                    )
-                })
-            ])
-        );
-    });
-
+            // 清理旧版本
+            caches.keys().then(function (cacheList) {
+                Promise.all(
+                    cacheList.map(function (cacheName) {
+                        if (cacheName !== 'my-test-cache-v1') {
+                            caches.delete(cacheName);
+                        }
+                    })
+                )
+            })
+        ])
+    );
+});
 ```
 
 另外要注意一点，sw.js 文件可能会因为浏览器缓存问题，当文件有了变化时，浏览器里还是旧的文件。这会导致更新得不到响应。如遇到该问题，可尝试这么做：在 webserver 上添加对该文件的过滤规则，不缓存或设置较短的有效期。
@@ -56,7 +54,6 @@ sw.js 控制着页面资源和请求的缓存，那么如果缓存策略需要�
 参考如下示例：
 
 ```javascript
-
 var version = '1.0.1';
 
 navigator.serviceWorker.register('/sw.js').then(function (reg) {
@@ -66,7 +63,6 @@ navigator.serviceWorker.register('/sw.js').then(function (reg) {
         });
     }
 });
-
 ```
 
 #### debug时更新

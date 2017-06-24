@@ -10,7 +10,8 @@
 ![material 图标](./images/material-icons.png)
 
 我们已经引入了 material 字体文件和所需样式表，直接使用 vuetify 中[ Icons ](https://vuetifyjs.com/components/icons)组件即可，基本方法如下：
-```js
+
+```html
 <v-icon>home</v-icon>
 ```
 
@@ -36,7 +37,7 @@
 2. 在模版中使用 `<icon name="svg-test"></icon>` ，注意此处 name 需要加上配置文件中指定的前缀
 
 > info
-> 
+>
 > 如果在开发时向 svg 文件夹中添加图标，需要重启开发服务器才能完成注册工作。后续会添加热重载支持。
 
 ### 可选的 fontawesome 图标
@@ -47,6 +48,7 @@
 由于 vue-awesome 已经提供了 fontawesome 中全部 svg 格式的图标，如果想使用这些图标，方法如下：
 
 首先修改 config/icon.js 配置文件，在 icons 数组中添加需要的图标名称
+
 ```js
 {
     prefix: 'svg-',
@@ -61,5 +63,5 @@
 然后使用方法与自定义 svg 相同，只是不需要加前缀：`<icon name="envelope"></icon>`。
 
 > info
-> 
+>
 > 我们只会引入 icons 中指定的fontawesome svg，不用担心会引入全集。
