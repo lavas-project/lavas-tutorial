@@ -16,10 +16,10 @@ if (navigator.serviceWorker) {
     fetch(开关的异步接口)
     .then(status => {
         if (status 是 表示降级处理) {
-            // 注销所有已安装的 Srevice Worker
+            // 注销所有已安装的 service Worker
         }
         else {
-            // 注册 Service Worker
+            // 注册 service worker
         }
     });
 }

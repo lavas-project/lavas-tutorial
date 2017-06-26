@@ -1,6 +1,6 @@
 # 更新 service worker 缓存
 
-开始之前，您可以查看官网文档 [Service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。
+开始之前，您可以查看官网文档 [service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。
 
 下文的 service-worker.js 简称 sw.js
 
