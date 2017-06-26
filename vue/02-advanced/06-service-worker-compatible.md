@@ -16,10 +16,10 @@ if (navigator.serviceWorker) {
     fetch(开关的异步接口)
     .then(status => {
         if (status 是 表示降级处理) {
-            // 注销所有已安装的 Srevice Worker
+            // 注销所有已安装的 service Worker
         }
         else {
-            // 注册 Service Worker
+            // 注册 service worker
         }
     });
 }
@@ -27,7 +27,7 @@ if (navigator.serviceWorker) {
 
 要注意的有几点：
 
-- 降级一定要注销掉 Service Worker ，而不是简单地不安装。这是因为降级前可能已经有用户访问过网站，导致 Service Worker 被安装，不注销的话降级开关对这部分用户是不起作用的。
-- 降级开关需要有即时性，因此服务器和 Service Worker 以及浏览器 http 缓存都不应该缓存该接口。
+- 降级一定要注销掉 service worker ，而不是简单地不安装。这是因为降级前可能已经有用户访问过网站，导致 service worker 被安装，不注销的话降级开关对这部分用户是不起作用的。
+- 降级开关需要有即时性，因此服务器和 service worker 以及浏览器 http 缓存都不应该缓存该接口。
 - 降级开关异步接口如果条件允许的话最好走配置配送上线，遇到紧急问题，快速上线才是王道。
 - 出现问题并降级后，可能影响问题的排查，因此可以考虑加入对用户隐蔽的 debug 模式（如 url 传入特定字段，debug 模式中忽略降级接口。
