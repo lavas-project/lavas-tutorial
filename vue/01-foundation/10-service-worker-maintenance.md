@@ -1,6 +1,6 @@
-# 维护 service worker 文件
+# 维护 service worker 注册文件
 
-开始之前，您可以查看 [servier worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。查看 service worker [ 浏览器支持情况](http://caniuse.com/#feat=serviceworkers)
+开始之前，您可以查看 [service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。查看 service worker [ 浏览器支持情况](http://caniuse.com/#feat=serviceworkers)
 
 servier-worker.js 作为缓存管理的重要文件，在导出工程的时候我们默认给了一个能覆盖缓存需求的 service-worker.js 文件。
 但是我们默认提供的文件可能在后续您的开发过程中并不能完全覆盖您的需求，所以你需要对其进行一定的维护。
@@ -175,7 +175,7 @@ self.addEventListener('activate', function(event) {
         });
 
         var handlerUpdateMessage = function (e) {
-            // 在这里可以检测到 service worker 文件的更新，通常我们建议做页面的 reload，开发者也可自定义一些处理，可参照官方模版给用户更新提示
+            // 在这里可以检测到 service-worker.js 文件的更新，通常我们建议做页面的 reload，开发者也可自定义一些处理，可参照官方模版给用户更新提示
 
             location.reload();
         };
@@ -243,15 +243,15 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 * `cacheOnly`：从缓存中解析请求，如果没有对应缓存则请求失败。此选项适用于需要保证不会发出网络请求的情况，例如在移动设备上节省电量。
 
-* `networkOnly`：尝试从网络获取网址来处理请求。如果获取资源失败，则请求失败，这基本上与不使用service worker的效果相同。
+* `networkOnly`：尝试从网络获取网址来处理请求。如果获取资源失败，则请求失败，这基本上与不使用 service worker 的效果相同。
 
-**sw-toolbox选项中的cache选项可以指定缓存的最大数目以及缓存时间等，具体如下：**
+**sw-toolbox 选项中的 cache 选项可以指定缓存的最大数目以及缓存时间等，具体如下：**
 
-* `cache.name[String]`：用于存储实时缓存对象的缓存名称。使用唯一的名称允许您自定义缓存的最大空间和缓存时间。默认值：在运行时根据service worker的registration.scope值生成。
+* `cache.name[String]`：用于存储实时缓存对象的缓存名称。使用唯一的名称允许您自定义缓存的最大空间和缓存时间。默认值：在运行时根据 service worker 的 registration.scope 值生成。
 
-* `cache.maxEntries[Number]`：对缓存的项目实施least-recently缓存过期策略，可以将此项用于动态资源缓存。例如，将cache.maxEntries设置为10意味着在第11个项目被缓存之后，最近最少使用的条目将被自动删除。缓存永远不会超过cache.maxEntries规定的最大数量。此选项将仅在同时设置了cache.name时生效，它可以单独使用或与cache.maxAgeSeconds一起使用。默认值为空。
+* `cache.maxEntries[Number]`：对缓存的项目实施 least-recently 缓存过期策略，可以将此项用于动态资源缓存。例如，将 cache.maxEntries 设置为 10 意味着在第 11 个项目被缓存之后，最近最少使用的条目将被自动删除。缓存永远不会超过 cache.maxEntries 规定的最大数量。此选项将仅在同时设置了 cache.name 时生效，它可以单独使用或与 cache.maxAgeSeconds 一起使用。默认值为空。
 
-* `cache.maxAgeSeconds[Number]`：强制规定缓存项目的最大期限（以秒为单位),你可以用这个选项来存储没有自然过期策略的动态资源。例如，可以将cache.maxAgeSeconds设置为例如60 * 60 * 24，这意味着任何超过一天之前的缓存都将被自动删除。此选项仅在同时设置了cache.name时生效，它也可以单独使用或与cache.maxEntries一起使用。默认值为空。
+* `cache.maxAgeSeconds[Number]`：强制规定缓存项目的最大期限（以秒为单位),你可以用这个选项来存储没有自然过期策略的动态资源。例如，可以将 cache.maxAgeSeconds 设置为例如 60 * 60 * 24，这意味着任何超过一天之前的缓存都将被自动删除。此选项仅在同时设置了 cache.name 时生效，它也可以单独使用或与 cache.maxEntries 一起使用。默认值为空。
 
 
 
@@ -264,5 +264,5 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 ## 小结
 
-了解上面的这些内容之后，大家可以导出一份工程代码，轻松的完成 Service Worker 调试啦！！！
+了解上面的这些内容之后，大家可以导出一份工程代码，轻松的完成 service worker 调试啦！！！
 
