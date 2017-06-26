@@ -35,7 +35,7 @@
         color $color-white
         text-align center
         overflow hidden
-        padding 40px 0
+        padding 60px 0 40px
 
         h1
             color $color-white
