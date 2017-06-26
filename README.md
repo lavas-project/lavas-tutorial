@@ -187,8 +187,8 @@
         <h1>Lavas</h1>
         <p>PWA 脚手架工具</p>
         <div class="btn-box">
-            <a class="m-btn m-white" target="_blank">起步</a>
-            <a class="m-btn m-grey" target="_blank">Github</a>
+            <a class="m-btn m-white" href="/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli">起步</a>
+            <a class="m-btn m-grey" target="_blank" href="https://github.com/lavas-project/lavas-cli">Github</a>
         </div>
     </div>
 </div>
