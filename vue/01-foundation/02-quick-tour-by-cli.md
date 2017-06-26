@@ -4,9 +4,9 @@
 
 ## 准备
 
-本地安装最新版本的 nodeJs 和 npm
+本地安装最新版本的 Node.js 和 npm
 
-- nodeJs：[http://nodejs.cn](http://nodejs.cn)
+- Node.js：[http://nodejs.cn](http://nodejs.cn)
 - npm: [https://docs.npmjs.com](https://docs.npmjs.com)
 
 学习 Vue 相关知识
@@ -27,7 +27,7 @@
 可以通过以下方式 npm 安装 lavas-cli：
 
 ```base
-[sudo] npm install -g lavas-cli
+$ [sudo] npm install -g lavas-cli
 ```
 
 ## 初始化工程
@@ -35,10 +35,13 @@
 执行以下命令可以初始化 PWA 工程：
 
 ```bash
-lavas init
+$ lavas init
 ```
 
 ![cli init command](./images/cli-init.png)
+
+## 模版选择
+
 
 
 ## 目录结构
@@ -97,9 +100,9 @@ build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配
 执行下列操作进行预览：
 
 ```bash
-cd pwa-demo
-npm install
-npm run dev
+$ cd pwa-demo
+$ npm install
+$ npm run dev
 ```
 
 
