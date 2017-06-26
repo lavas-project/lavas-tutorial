@@ -26,6 +26,10 @@
     .m-title
         padding 0
         margin-bottom 20px
+        border-left 4px solid $color-blue
+        padding-left 14px
+        padding-bottom 0
+        line-height 1
 
     .m-def
         color $color-white
@@ -60,10 +64,7 @@
         padding 0 20px 0 0
 
         h2
-            border-left 4px solid $color-blue
-            padding-left 12px
-            padding-bottom 0
-            line-height 1
+            text-align center
 
     .m-btn
         display block
@@ -100,6 +101,9 @@
         &.m-grey
             color $color-black
             background $color-grey
+            &:hover
+                &:after
+                    background $color-white
 
         &.m-green
             color $color-white
@@ -183,7 +187,7 @@
         <h1>Lavas</h1>
         <p>PWA 脚手架工具</p>
         <div class="btn-box">
-            <a class="m-btn m-green" target="_blank">起步</a>
+            <a class="m-btn m-white" target="_blank">起步</a>
             <a class="m-btn m-grey" target="_blank">Github</a>
         </div>
     </div>
