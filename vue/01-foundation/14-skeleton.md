@@ -10,12 +10,13 @@
 
 ## 开发调试
 
-在开发环境中，skeleton 对应的路由组件位于 pages/Skeleton.vue，通过 '/skeleton' 路由即可访问。我们在 router.js 中使用了占位符，只有在开发环境中才会插入这个路由，所以不用担心在生产环境中被用户访问到。
+由于使用了[ webpack 插件](https://github.com/lavas-project/vue-skeleton-webpack-plugin)，在开发环境中，skeleton 对应的路由组件位于 pages/Skeleton.vue，通过 '/skeleton' 路由即可访问。我们在 router.js 中使用了占位符，只有在开发环境中才会插入这个路由，所以不用担心在生产环境中被用户访问到。
 
 ![模版项目展示的 skeleton](./images/bpwa-skeleton.png)
 
-由于 skeleton 中包含的代码和样式都会内联在最终的 html 中，所以应该尽可能保持 skeleton 结构和样式的精简。
-如无必要，尽量不要使用 vuetify 的组件，这会导致输出大量样式规则。
+有两点需要注意：
+1. 由于 skeleton 中包含的代码和样式都会内联在最终的 html 中，所以应该尽可能保持 skeleton 结构和样式的精简。如无必要，尽量不要在 skeleton 中使用 vuetify 的组件，这会导致输出大量样式规则。
+2. Skeleton.vue 中已经引入了[ normalize.css](https://github.com/necolas/normalize.css/)，这就意味着在全局样式，或者其他组件中都不需要重复引入了。
 
 ## 后续改进
 

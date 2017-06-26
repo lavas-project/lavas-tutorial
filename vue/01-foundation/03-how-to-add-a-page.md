@@ -22,13 +22,13 @@ routes: [
 ```
 
 这里有两点需要注意：
-1. '// <!-- INJECT_SKELETON_ROUTE -->'这行占位符不能删除，在开发环境下作为[ skeleton 路由](/guide/vue/doc/vue/01-foundation/14-skeleton)的插入点。
-2. 路由组件默认使用了 [keep-alive](https://vuejs.org/v2/guide/components.html#keep-alive)，避免切换时重新渲染。如果不想使用，可以通过路由对象的 meta.notKeepAlive 属性关闭。
+1. 在开发环境下，[插件](https://github.com/lavas-project/vue-skeleton-webpack-plugin)会向文件中自动插入[ skeleton 路由](/guide/vue/doc/vue/01-foundation/14-skeleton)，便于开发调试。
+2. 路由组件默认使用了 [keep-alive](https://vuejs.org/v2/guide/components.html#keep-alive)，避免切换时重新渲染。但在某些情况下并不适用，例如详情页组件需要每次根据路由参数请求新数据渲染，此时可以通过路由对象的 meta.notKeepAlive 属性关闭。
 ```js
     {
         path: '/',
-        name: 'home',
-        component: Home,
+        name: 'detail',
+        component: Detail,
         meta: {
             notKeepAlive: true
         }
@@ -45,22 +45,27 @@ routes: [
 
 <script>
 import {mapActions} from 'vuex';
-import pageLoadingMixin from '@/mixins/pageLoadingMixin';
 
 export default {
     name: 'notFound',
-    mixins: [pageLoadingMixin],
     methods: {
-        ...mapActions([
-            'setPageLoading',
-            'showBottomNav',
+        ...mapActions('appShell/appHeader', [
             'setAppHeader'
+        ]),
+        ...mapActions('appShell/appBottomNavigator', [
+            'hideBottomNav'
         ])
     },
     activated() {
-        this.setAppHeader({});
+        this.setAppHeader({
+            title: '页面未找到',
+            show: true,
+            showMenu: false,
+            showBack: true,
+            showLogo: false,
+            actions: []
+        });
         this.hideBottomNav();
-        this.setPageLoading(false);
     }
 };
 </script>
@@ -75,9 +80,9 @@ export default {
 
 ### 通过 Vuex 提交修改动作
 
-模版项目中 app shell 组件的状态放在 store 中统一管理，页面组件可以通过 mapGetters/Actions 访问当前 store 的状态和提交修改操作。
+模版项目中 app shell 组件的状态放在 store 中统一管理，页面组件可以通过 mapStates/Actions 访问当前 store 的状态和提交修改操作。
 
-在具体实现中，app-shells/BottomNavigation/store/index.js 中的 actions 对象定义了一系列操作，通过 mapActions 引入就可以在组件中使用这些方法，代码如下：
+在具体实现中，/store/modules/app-shell.js 中的 actions 对象定义了一系列操作，通过 mapActions 引入就可以在组件中使用这些方法，代码如下：
 
 ```js
 const actions = {
@@ -124,22 +129,6 @@ EventBus.$on(`app-header:click-action`, ({actionIdx}) => {
 });
 ```
 
-### 加载中动画展示
-
-app shell 中还包含了全局的加载中动画，在页面切换时显示，路由组件在合适的时机隐藏。
-
-加载中以[mixin](https://vuejs.org/v2/guide/mixins.html)的形式，位于 mixins/pageLoadingMixin 中，在离开路由时开启，关闭的时机由路由组件决定，例如 NotFound 页面不需要异步加载数据，所以在 activated 钩子中关闭加载中动画。
-
-```js
-    beforeRouteLeave(to, from, next) {
-        // 离开组件对应的路由时，开启loading
-        this.setPageLoading(true);
-        next();
-    }
-```
-
-全局的加载中并不一定适合所有场景，例如无限滚动上拉加载更多，或者多 tab 切换加载数据。这些加载中的效果需要在具体组件中实现。
-
 ## 组件开发
 
 [vuetify](https://vuetifyjs.com)提供了丰富的组件。
@@ -148,9 +137,19 @@ app shell 中还包含了全局的加载中动画，在页面切换时显示，�
 
 ## 异步请求数据
 
+vue-router给出了两种[ 获取数据的时机](https://router.vuejs.org/zh-cn/advanced/data-fetching.html)。参考官方的[ hackernews例子](https://github.com/vuejs/vue-hackernews-2.0)的例子，我们也采用在导航完成之前获取数据，同时停留在当前页面时，通过顶部的进度条提示用户。
+
 在 vuex 中，由于 mutation 必须是同步函数，异步请求可以放在 action 中执行，通过使用[async/await新特性](https://vuex.vuejs.org/zh-cn/actions.html)使代码变的简洁。
 
+对于开发者而言，只需要在组件的 asyncData 方法中调用 action 操作即可。
+
 推荐使用[axios](https://github.com/mzabriskie/axios)与服务端通信。axios 基于 Promise，兼容浏览器端和node.js环境。
+
+> info
+> 
+> 在组件中也可以通过 $loading 调用 start/finish 展示／隐藏进度条。但是这并不一定适合所有场景，例如无限滚动上拉加载更多，或者多 tab 切换加载数据。这些加载中的效果需要在具体组件中实现。
+
+关于请求数据的例子，可以参考我们的[ blog例子](https://github.com/lavas-project/lavas-demo-blog)。
 
 
 
