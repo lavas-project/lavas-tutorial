@@ -1,13 +1,12 @@
 # 快速开始 PWA 工程
 
-我们为开发 PWA 工程提供了一套 cli 脚手架工具，协助我们快速搭建一个 基于 Vue 的 PWA 工程，并且迅速体验 PWA 效果。 
+我们为开发 PWA 工程提供了一套 cli 脚手架工具，协助我们快速搭建一个 基于 Vue 的 PWA 工程，并且迅速体验 PWA 效果。
 
 ## 准备
 
-本地安装最新版本的 Node.js 和 npm
+本地安装最新版本的 Node.js
 
-- Node.js：[http://nodejs.cn](http://nodejs.cn)
-- npm: [https://docs.npmjs.com](https://docs.npmjs.com)
+- Node.js：[https://nodejs.org/](https://nodejs.org/en/)
 
 学习 Vue 相关知识
 
@@ -26,29 +25,26 @@
 
 可以通过以下方式 npm 安装 lavas-cli：
 
-```base
-$ [sudo] npm install -g lavas-cli
+```shell
+[sudo] npm install -g lavas-cli
 ```
 
 ## 初始化工程
 
 执行以下命令可以初始化 PWA 工程：
 
-```bash
-$ lavas init
+```shell
+lavas init
 ```
 
 ![cli init command](./images/cli-init.png)
-
-## 模版选择
-
 
 
 ## 目录结构
 
 通过初始化命令，可以在 `项目存储目录` 下找到我们新建的项目 `pwa-demo` 文件夹。
 
-```bash
+```
 pwa-demo/ (项目根目录)
     | - build/ (Webpack 和 dev-server 相关调试和构建配置文件)
     | - config/ (通用模块配置)
@@ -99,10 +95,10 @@ build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配
 
 执行下列操作进行预览：
 
-```bash
-$ cd pwa-demo
-$ npm install
-$ npm run dev
+```shell
+cd pwa-demo
+npm install
+npm run dev
 ```
 
 

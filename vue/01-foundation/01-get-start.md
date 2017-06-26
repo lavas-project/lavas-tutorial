@@ -36,7 +36,7 @@ PWA 工程构建出的 App 是一个 Web App，我们需要做的是使这样的
 
 传统的 Web App 在没有网络或者弱网的情况下就毫无用处了，这个是没有办法的，因为传统 Web App 的一切包括浏览器渲染的内容以及所依赖的一切静态资源都是基于 http 请求的，所以当网络情况恶劣的情况下，自然请求缓慢甚至失效，导致用户体验大打折扣。
 
-Web 发展进程中，我们有过很多的方法来优化因为 http 请求的原因导致的用户体验问题，这些都是治标不治本的行为，现在 HTML5 新的 [serviceWorker API](https://pwa.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction), 提供的离线缓存能力，颠覆了传统 Web App 的运作形式。
+Web 发展进程中，我们有过很多的方法来优化因为 http 请求的原因导致的用户体验问题，这些都是治标不治本的行为，现在 HTML5 新的 [serviceWorker API](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction), 提供的离线缓存能力，颠覆了传统 Web App 的运作形式。
 
 我们可以将一切 Web App 运行时必要的资源持久本地缓存起来，当无网或者弱网的时候，直接从缓存中取到资源，进行正常的 Web App 的渲染和执行。这样，在离线这块，Web App 是可以和 Native App 所媲美的。
 
