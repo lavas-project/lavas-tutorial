@@ -194,7 +194,7 @@
 </div>
 <div class="m-box">
     <h1 class="m-title">开始吧</h1>
-    <p>通过本教程，您将很快可以创建一个属于您的 Lavas PWA 框架</p>
+    <p>通过本教程，您将很快可以创建一个属于您的 Lavas PWA 框架。</p>
 </div>
 <div class="m-intro m-box">
     <div class="m-intro-box">
