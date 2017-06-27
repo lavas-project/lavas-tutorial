@@ -11,16 +11,16 @@ sw.js 作为缓存管理的重要文件，在导出工程的时候我们默认�
 
 导出项目中，使用了 [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) + [sw-precache](https://github.com/GoogleChrome/sw-precache) + [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin)( Webpack 插件)的方式，仅在 build 后自动生成可见的 sw.js 文件，可
 * 支持离线缓存静态资源能力，通过配置实现动态网络缓存，以及文件更新机制
-* 支持 sw.js 文件更新时，页面自动重载。
+* 支持 sw.js 文件更新时，页面提示更新重载。
 
-如果开发者没有特殊的缓存需求，可直接使用。如果开发者需要后续工程的定制化，就要再深入了解以下三方面内容：
+如果开发者没有特殊的缓存需求，可直接使用。如果开发者需要后续工程的定制化，就要再深入了解以下几方面内容：
 
 
 ## 如何配置缓存内容 —— 哪里配置，怎么配置 ？
 
-开发者可通过 config/sw-precache.js 文件进行缓存配置，根据配置为用户缓存网站静态与动态资源，并截获用户的所有网络请求，决定是从缓存还是网络获取相应资源，限制缓存大小等。对于无额外需求的开发者，一般仅需配置该文件就可满足项目需求。
+开发者可通过 config/sw-precache.js 文件进行缓存配置，根据配置为用户缓存网站静态与动态资源，并截获用户的所有网络请求，决定是从缓存还是网络获取相应资源，限制缓存大小等。对于无额外需求的开发者，一般仅需配置该文件就可满足项目需求，不配置默认缓存所有静态资源。
 
-下面来看一下，具体配置结构（此处给出了一些常用配置，更全面的配置可通过 [sw-precache](https://github.com/GoogleChrome/sw-precache) 查看），该配置在 webpack.prod.conf.js 中被 [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) 作为参数引入，build 时起作用，生成定制化 sw.js 文件。
+下面来看一下，具体配置结构（此处给出了一些常用配置，更全面的配置可通过 [sw-precache](https://github.com/GoogleChrome/sw-precache) 查看），该配置在 webpack.prod.conf.js 中被 [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) 组件作为参数引入，build 时起作用，生成定制化 sw.js 文件。
 
 
 
@@ -101,15 +101,14 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 **如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发呢 ？**
 
-要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 sw.js 文件。
+要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 sw.js 文件。要让 sw-precahce 工具生成 sw.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 sw.js 文件。
 
-
-要让 sw-precahce 工具生成 sw.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置导入模板，实现定制化开发。在上面的配置文件可以发现，就是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 sw.js 文件。
-**项目中将模板文件提取到了 config 文件夹下，便于开发者后期相应的维护开发。**
+**项目中将导入模板文件放在 config/sw.tmpl.js 下，便于开发者后期相应的维护开发。**
 
 
 **导出项目中做了什么定制化呢 ？**
-这就来给大家介绍下，为了在 sw.js 文件内容更新时，能够让主页面及时做出重载更新，我们在 config/sw.tmpl.js 文件的 activate 监听事件中通过 postMessage 抛出了 'updateMessage' 的信息，在 sw-register.js 中，注册了消息的监听，一旦接收到 'updateMessage' 消息，主页面给出相应的更新提示。
+
+这就来给大家介绍下，为了在 sw.js 文件内容更新时，能够让主页面及时提醒用户更新，我们在 config/sw.tmpl.js 文件的 activate 监听事件中通过 postMessage 抛出了 'updateMessage' 的信息，在 sw-register.js 中，注册了消息的监听，一旦接收到 'updateMessage' 消息，主页面给出相应的更新提示。
 
 **注意：** 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
@@ -264,11 +263,9 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 * 当发布了新版本代码，sw.js 文件本身怎么保证能拿到最新，而不是从缓存中读取。如果 sw.js 不能及时更新，service worker 内的缓存的文件就不能更新，项目中怎么解决呢？
 
-我们在 sw-rigester.js 的请求中增加了一个时间戳（index.html 中处理），保证每次 sw-rigester.js 文件请求都与服务器交互，获取最新的 sw-register.js 文件，且其中 sw.js 文件请求也带有最新的版本参数，保证每次 sw.js 文件请求的都是最新版本，版本参数是在 swRegister-webpack-plugin 插件内完成的。
+我们在 sw-rigester.js 的请求中增加了一个时间戳，保证每次 sw-rigester.js 文件请求都与服务器交互，获取最新的 sw-register.js 文件，且其中 sw.js 文件请求也带有最新的版本参数，保证每次 sw.js 文件请求的都是最新版本。您可在 build 后，在 dist/index.html 文件最后查看时间戳相关代码，包括版本参数等都是由 sw-register-webpack-plugin 插件完成，无需修改。
 
 * 当 sw.js 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 sw.js 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认让提示页面更新，进行 reload 处理（src/sw-register.js），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
-
-上面的两个问题已在导出项目中打包好，开发者可以直接使用，也可做相应的扩展。
 
 
 ## service worker 容错降级方案

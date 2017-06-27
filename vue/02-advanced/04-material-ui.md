@@ -1,6 +1,6 @@
 # 使用 Material Design UI 开发
 
-Material Design UI 是指基于 Google 的 Material Design 全新设计语言的功能非常强大，界面却十分清新简洁、美观，交互更加立体友好的一些 CSS 框架。它们也提供了很多常用的UI组件，除了最基本的菜单、按钮、滑动杆、进度条、单选框/复选框外，另外还提供了一些很有趣的图标、layouts、主题等。使用这些框架，我们能够快速搭建出交互友好的网站效果。既然有了，为啥不用呢？其中基于 Vuejs 2.0 和 Material Design 的这种 UI 库也很多（[查看更多](https://www.awesomes.cn/subject/vue#Dom-框架)），如 [muse-ui](http://www.muse-ui.org/#/index)、[vue-material](http://vuematerial.com/#/)、[vuetify ](https://vuetifyjs.com/) 等，导出项目中选用了 vuetify 组件库。
+Material Design UI 是指基于 Google 的 Material Design 全新设计语言的功能非常强大，界面却十分清新简洁、美观，交互更加立体友好的一些 CSS 框架。它们也提供了很多常用的UI组件，除了最基本的菜单、按钮、滑动杆、进度条、单选框/复选框外，另外还提供了一些很有趣的图标、layouts、主题等。使用这些框架，我们能够快速搭建出交互友好的网站效果。既然有了，为啥不用呢？其中基于 Vuejs 2.0 和 Material Design 的 UI 库也很多（[查看更多](https://www.awesomes.cn/subject/vue#Dom-框架)），如 [muse-ui](http://www.muse-ui.org/#/index)、[vue-material](http://vuematerial.com/#/)、[vuetify ](https://vuetifyjs.com/) 等，导出项目中选用了 vuetify 组件库。
 
 
 ## [ Vuetify ](https://vuetifyjs.com)
@@ -18,35 +18,35 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 
 **2、安装 Vuetify 通过 npm 或 yarn:**
 
-```js
-$  npm install vuetify --save-dev
+```npm
+$ npm install vuetify --save-dev
 
-$  yarn add vuetify --dev
+$ yarn add vuetify --dev
 ```
 
 
 **3、 使用**
 
-启用 Vuetify 在你的应用（项目中对应 src/app.js ）中通过 Vue.use( ) 导入即可，使用比较方便:
+启用 Vuetify 在你的应用（项目中对应 src/app.js）中通过 Vue.use( ) 导入即可，使用比较方便:
 
 
 ```js
 // 引入全部组件
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vue from 'vue';
+import Vuetify from 'vuetify';
 
-Vue.use(Vuetify)
+Vue.use(Vuetify);
 ```
 
 ```html
 <div>
-  <v-btn dark flat>Normal</v-btn>
+    <v-btn dark flat>Normal</v-btn>
 </div>
 ```
 
 可以在官网查看更多组件的使用和效果
 
-### 导出项目[修改主题](./06-how-to-change-theme.md)
+### 导出项目[修改主题](./03-how-to-change-theme.md)
 项目中修改主题的配置在 config/theme.js 中，详细可点击上面链接查看，此处不多赘述
 
 
