@@ -35,7 +35,8 @@ $color-green = #4caf50
     color $color-white
     text-align center
     overflow hidden
-    padding 60px 0 40px
+    padding-top 60px
+    padding-bottom 40px
 
     h1
         color $color-white
