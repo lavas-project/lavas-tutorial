@@ -47,11 +47,11 @@ module.exports = {
     * `primary` 主要颜色，vuetify 中大部分组件以及我们的 app shell 都会大量使用
     * `accent` 通常根据主要颜色调整明暗后生成，以显示层次感
     * `secondary` 次要颜色，通常与主要颜色形成对比
-    * `info/warning/error/success` 项目不同状态下定义的颜色，例如 vuetify 在 [Alerts](https://vuetifyjs.com/components/alerts)组件中会使用
+    * `info/warning/error/success` 项目不同状态下定义的颜色，例如 vuetify 在 [Alerts](https://vuetifyjs.com/components/alerts) 组件中会使用
 * materialDesign 包含了一系列 material 设计相关的变量
 
 > info
-> 
+>
 > 以上变量都有默认值，所以开发者无需定义每一个变量，通常只需要关心主要颜色和次要颜色即可。
 
 ### 使用预定义的颜色变量
@@ -69,7 +69,7 @@ module.exports = {
 * 使用 materialDesign 中的变量：`color: $material-theme.bg-color`
 
 > info
-> 
+>
 > 需要注意的是，使用主题相关的变量时，':' 不能够省略，原因是[省略冒号的情况下，stylus 编译器无法区分 hash 和选择器](https://github.com/stylus/stylus/issues/1405)
 
 

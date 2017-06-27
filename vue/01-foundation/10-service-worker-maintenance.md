@@ -140,7 +140,7 @@ self.addEventListener('activate', function(event) {
                             var currentClient = clients[0];
                             currentClient.postMessage('updateMessage');
                         }
-                    })
+                    });
             }
         })
     );
@@ -174,7 +174,7 @@ self.addEventListener('activate', function(event) {
             }
         });
 
-        var handlerUpdateMessage = function (e) {
+        function handlerUpdateMessage(e) {
             // 在这里可以检测到 service-worker.js 文件的更新，通常我们建议做页面的 reload，开发者也可自定义一些处理，可参照官方模版给用户更新提示
 
             location.reload();
