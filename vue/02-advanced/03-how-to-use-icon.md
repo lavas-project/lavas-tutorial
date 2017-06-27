@@ -21,18 +21,20 @@
 
 当 material 图标无法满足使用需求时，我们可以引入自定义的 svg 文件。
 
-在 config/icon.js 配置文件中定义前缀和存放 svg 的文件夹：
+在 `config/icon.js` 配置文件中定义前缀和存放 svg 的文件夹：
 
 ```js
 {
     // 前缀
     prefix: 'svg-',
+
     // 用户自定义的svg文件夹
     svgDir: path.resolve(__dirname, '../src/assets/svg')
 };
 ```
 
 我们使用[ vue-awesome ](https://github.com/Justineo/vue-awesome)注册自定义的 svg 图标，使用方法如下：
+
 1. 将 test.svg 放入配置文件中的指定文件夹下
 2. 在模版中使用 `<icon name="svg-test"></icon>` ，注意此处 name 需要加上配置文件中指定的前缀
 
@@ -47,12 +49,13 @@
 
 由于 vue-awesome 已经提供了 fontawesome 中全部 svg 格式的图标，如果想使用这些图标，方法如下：
 
-首先修改 config/icon.js 配置文件，在 icons 数组中添加需要的图标名称
+首先修改 `config/icon.js` 配置文件，在 icons 数组中添加需要的图标名称
 
 ```js
 {
     prefix: 'svg-',
     svgDir: path.resolve(__dirname, '../src/assets/svg'),
+
     // 项目中使用的fontawesome名
     icons: [
         'envelope'

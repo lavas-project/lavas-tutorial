@@ -8,11 +8,13 @@
 
 ## 配置文件
 
-主题相关的配置文件在 config/theme.js 中，结构如下：
+主题相关的配置文件在 `config/theme.js` 中，结构如下：
 
 ``` js
+
 // 定义主题列表
 const themeList = {
+
     // 定义主题名称
     myTheme: {
         themeColor: {
@@ -37,6 +39,7 @@ const themeList = {
         }
     }
 };
+
 module.exports = {
     theme: themeList.myTheme // 和主题列表中的主题名称对应
 };
@@ -56,7 +59,7 @@ module.exports = {
 
 ### 使用预定义的颜色变量
 
-在上面的配置文件示例中使用到了`accent: '$blue.lighten-2'`来定义颜色，原因是 vuetify 预先定义了一系列 [stylus 颜色变量](https://vuetifyjs.com/style/colors)。
+在上面的配置文件示例中使用到了 `accent: '$blue.lighten-2'` 来定义颜色，原因是 vuetify 预先定义了一系列 [stylus 颜色变量](https://vuetifyjs.com/style/colors)。
 
 ![vuetify 定义的颜色变量](./images/vuetify-color.png)
 
@@ -64,12 +67,12 @@ module.exports = {
 
 在开发自己的控件时，需要尽量关联以上主题变量。
 
-在具体使用时，不需要在每一个 '.vue' 文件的样式部分使用 @import 来引入这些变量，直接使用即可，方法如下：
+在具体使用时，不需要在每一个 `.vue` 文件的样式部分使用 @import 来引入这些变量，直接使用即可，方法如下：
 * 使用 themeColor 中的变量：`background: $theme.primary`
 * 使用 materialDesign 中的变量：`color: $material-theme.bg-color`
 
 > info
 >
-> 需要注意的是，使用主题相关的变量时，':' 不能够省略，原因是[省略冒号的情况下，stylus 编译器无法区分 hash 和选择器](https://github.com/stylus/stylus/issues/1405)
+> 需要注意的是，使用主题相关的变量时，`:` 不能够省略，原因是[省略冒号的情况下，stylus 编译器无法区分 hash 和选择器](https://github.com/stylus/stylus/issues/1405)
 
 

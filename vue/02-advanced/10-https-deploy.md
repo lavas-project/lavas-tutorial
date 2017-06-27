@@ -1,6 +1,6 @@
 # https 环境部署
 
-PWA 项目必须部署在 https 环境上才能够生效，主要是因为 server worker 只会在 https 环境下才能注册成功，我们不用担心在本地开发的时候 service worker 是否生效的问题，因为 service worker 在 localhost 和 127.0.0.1 的 host 下是能够注册成功的，这样可以确保我们在本地调试工作都是能够顺利进行的，我们这里讲述的是如何部署线上的 https 环境来确保我们的 PWA 应用成功运行。
+PWA 项目必须部署在 https 环境上才能够生效，主要是因为 server worker 只会在 https 环境下才能注册成功，我们不用担心在本地开发的时候 service worker 是否生效的问题，因为 service worker 在 `localhost` 和 `127.0.0.1` 的 host 下是能够注册成功的，这样可以确保我们在本地调试工作都是能够顺利进行的，我们这里讲述的是如何部署线上的 https 环境来确保我们的 PWA 应用成功运行。
 
 ## 什么是 https
 
@@ -8,7 +8,7 @@ PWA 项目必须部署在 https 环境上才能够生效，主要是因为 serve
 
 那么 https 是什么呢？
 
-https 是将 http 置于 ssl/tls 之上，其效果是加密 http 流量(traffic)，包括请求的 url、结果页面、cookies、媒体资源和其他通过 http 传输的内容。企图干扰 https 连接的人既无法监听流量，也无法更改其内容。除了加密，远程服务器的身份也要进行验证：毕竟，如果你都不知道另一端是谁，加密连接也就没什么用处了。这些措施将使拦截流量变得极其困难。虽然攻击者仍有可能知道用户正在访问哪个网站，但他所能知道的也就仅限于此了。
+https 是将 http 置于 SSL/TLS 之上，其效果是加密 http 流量( traffic )，包括请求的 url、结果页面、cookies、媒体资源和其他通过 http 传输的内容。企图干扰 https 连接的人既无法监听流量，也无法更改其内容。除了加密，远程服务器的身份也要进行验证：毕竟，如果你都不知道另一端是谁，加密连接也就没什么用处了。这些措施将使拦截流量变得极其困难。虽然攻击者仍有可能知道用户正在访问哪个网站，但他所能知道的也就仅限于此了。
 
 
 
@@ -51,8 +51,8 @@ server {
 
 ## nodejs server 部署 https
 
-在 nodejs 中我们如何部署 https 环境呢？假设我们使用 Let's Encrypt 已经拿到了 DV 证书。
-private.pem：私钥文件
+在 nodejs 中我们如何部署 https 环境呢？假设我们使用 `Let's Encrypt` 已经拿到了 DV 证书。
+private.pe: 私钥文件
 file.crt: 证书文件
 
 如果使用 express 作为 server 服务器的话：

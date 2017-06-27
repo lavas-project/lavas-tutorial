@@ -11,7 +11,7 @@ App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，�
 
 ## App Shell 管理和使用
 
-导出的 webshell 项目中，提供了部分的 Shell 组件， 单个 Shell 其实都是由不同组件组成，组件在 src/components 中管理。开发者可以在 App.vue 中根据需求自己定制 Shell，也可以在我们提供的组件基础上进行二次开发。每个 Shell 所需的输入都在一个集中状态管理的容器 store 中统一管理，它包含了 Shell 所需的state、 actions、 mutations 等。 具体 Shell 配置可查看 src/store/modules/app-shell.js，在 src/store/index.js 中统一引入管理，在主页面 src/App.vue 中导入 Shell 组件并使用。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档。
+导出的 webshell 项目中，提供了部分的 Shell 组件， 单个 Shell 其实都是由不同组件组成，组件在 `src/components` 中管理。开发者可以在 `App.vue` 中根据需求自己定制 Shell，也可以在我们提供的组件基础上进行二次开发。每个 Shell 所需的输入都在一个集中状态管理的容器 store 中统一管理，它包含了 Shell 所需的state、 actions、 mutations 等。 具体 Shell 配置可查看 `src/store/modules/app-shell.js`，在 `src/store/index.js` 中统一引入管理，在主页面 `src/App.vue` 中导入 Shell 组件并使用。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档。
 
 ``` html
 <template>
@@ -45,7 +45,7 @@ export default {
 
 ## Vuex store
 
-每一个 Vuex 应用的核心就是 store（仓库）。store 基本上就是一个容器，它包含着你的应用中大部分的状态(state)。所以我们在 Shell 或是组件开发时，都需要指定自己所需的 store, 并通过 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html)  来实现统一的管理（src/store/index.js）。
+每一个 Vuex 应用的核心就是 store（仓库）。store 基本上就是一个容器，它包含着你的应用中大部分的状态(state)。所以我们在 Shell 或是组件开发时，都需要指定自己所需的 store, 并通过 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html)  来实现统一的管理（`src/store/index.js`）。
 
 ``` js
 // 将 store 统一集中管理
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     getters: {},
     modules: {
         appShell, // 引入的 App Shell 的 store
-        // user // 其他组件
+        // ... 其他组件 Store module
     }
 });
 ```
@@ -72,7 +72,7 @@ store 和单纯的全局对象有以下两点不同：
 
 ## 小结
 
-大家结合 Lavas Github(https://github.com/lavas-project) 给出的 lavas-template-vue-webshell 可以加深对此处的理解。
+大家结合 [Lavas Github](https://github.com/lavas-project) 给出的 [lavas-template-vue-webshell](https://github.com/lavas-project/lavas-template-vue-webshell) 可以加深对此处的理解。
 
 
 

@@ -1,6 +1,6 @@
 # 快速开始 PWA 工程
 
-我们为开发 PWA 工程提供了一套 cli 脚手架工具，协助我们快速搭建一个 基于 Vue 的 PWA 工程，并且迅速体验 PWA 效果。
+我们为开发 PWA 工程提供了一套 CLI 脚手架工具，协助我们快速搭建一个 基于 Vue 的 PWA 工程，并且迅速体验 PWA 效果。
 
 ## 准备
 
@@ -42,28 +42,22 @@ $ lavas init
 
 ## 目录结构
 
-通过初始化命令，可以在 `项目存储目录` 下找到我们新建的项目 `pwa-demo` 文件夹。
+通过初始化命令，通过选择模版类型 basic，可以在当前目录下下找到我们新建的项目 `pwa-demo` 文件夹。
 
 ```
 pwa-demo/ (项目根目录)
     | - build/ (Webpack 和 dev-server 相关调试和构建配置文件)
     | - config/ (通用模块配置)
     | - src/ (源代码)
-        | - api/ (Ajax 异步请求接口)
-        | - app-shells/ (App-shells Components)
         | - assets/ (依赖的静态资源)
         | - components/ (业务开发的 Vue Component)
-        | - filters/
-        | - mixins/
         | - pages/ (具体业务开发的 Page 页面 Component)
         | - store/ (Vuex store)
         | - app.js (Vue 入口执行文件)
         | - App.vue (项目的根 Component)
-        | - client-entry.js (前端渲染入口文件)
-        | - event-bus.js
+        | - entry-client.js (前端渲染入口文件)
         | - router.js (Vue-router 路由配置文件)
-        | - skeleton-entry.js (skeleton 渲染入口)
-        | - svg.js (自定义 SVG 配置)
+        | - entry-skeleton.js(skeleton 渲染入口)
         | - sw-register.js (注册 service worker 文件入口)
     | - static/ (不需要经过构建的一些静态资源)
     | - index.html
@@ -77,15 +71,6 @@ pwa-demo/ (项目根目录)
 
 build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配置文件，我们默认采用的是 [webpack](http://webpack.github.io) 打包工具。
 内置 webpack 的 dev-server 可以帮助我们在本地调试项目。
-
-
-#### src/app-shells 文件夹
-
-首先我们需要学习 [Vue](https://cn.vuejs.org)，[Vuex](https://vuex.vuejs.org/zh-cn) 相关知识。
-
-该文件夹里面封装了多套 shell components, 我们在初始化工程时默认选择一种 app-shell component, 该 app-shell 封装的粒度为在不同 page 页面中抽离出来的相似或相同的逻辑，如果提供的 app-shell 在细节上不能满足我们具体的业务开发，我们可以通过修改 app-shell 来满足需求，详情可以参考[维护 app-shells](./05-define-app-shell.md)。app-shells 的 component 数据都和 Vuex store 绑定，这样我们通过在其他业务 component 需要修改 app shell 样式的时候直接通过调用 action 方法。
-
-参照 Vue 最佳实践，我们不建议操作 dom 直接控制 app-shell 内的某些元素的隐藏和展现或者相关的样式变更，通常我们建议将这些样式的变更和 Vuex 数据绑定，然后通过 action 方法暴露给其他 component 使用。
 
 
 

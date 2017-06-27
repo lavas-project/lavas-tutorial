@@ -12,7 +12,7 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 具体表现为打开新页面时左滑展示，返回之前的页面时右滑退出。
 下面简单介绍下实现原理。
 
-在 BottomNavigation 中，`<router-view>`对应的每一个路由页面组件在 DOM 中添加 ／ 移除时，都会被应用 pageTransitionName 对应的 CSS 类，在左/右滑对应的类名为 slide-left/right ：
+在 BottomNavigation 中，`<router-view>` 对应的每一个路由页面组件在 DOM 中添加 `／` 移除时，都会被应用 pageTransitionName 对应的 CSS 类，在左 `/` 右滑对应的类名为 `slide-left/right` ：
 
 ```html
 <transition
@@ -33,7 +33,7 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
         transform translate(-100%, 0)
 ```
 
-关于 v-enter，v-leave-active 这些 CSS 类的添加时机，可参阅[文档 Transition Classes 一节](https://vuejs.org/v2/guide/transitions.html#Transition-Classes)。
+关于 `v-enter`，`v-leave-active` 这些 CSS 类的添加时机，可参阅[文档 Transition Classes 一节](https://vuejs.org/v2/guide/transitions.html#Transition-Classes)。
 
 如果需要更换页面切换效果，例如想使用渐隐/渐显代替滑动，只需要简单修改上述 CSS 类的样式规则即可：
 
