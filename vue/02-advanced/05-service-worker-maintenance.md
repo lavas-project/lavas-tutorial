@@ -243,7 +243,7 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 ## 缓存更新难题及处理
 
-[查看 service worker 版本更新](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/02-how-to-use-service-worker#service-worker-版本更新)
+[查看 service worker 版本更新相关](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/02-how-to-use-service-worker#service-worker-版本更新)
 
 了解 service worker 基本的更新机制，导出项目中主要解决了两个问题：
 
