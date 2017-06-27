@@ -153,39 +153,27 @@ self.addEventListener('activate', function(event) {
 ## service worker 的注册
 
 
-注册部分在项目的 src/sw-register.js 文件中，并在 index.html 引入执行。上面内容提及的 sw.js 更新时 'updateMessage' 的信息监听和页面重载部分，也是在 src/sw-register.js 里完成的，开发者可根据需求做相应的扩展。
+注册部分在项目的 src/sw-register.js 文件中，并在项目 build 后在 dist/index.html 最后引入执行。上面内容提及的 sw.js 更新时 'updateMessage' 的信息监听和页面重载部分，也是在 src/sw-register.js 里完成的，开发者可根据需求做相应的扩展。
 
 
 ``` js
-// sw-register.js文件, handlerUpdateMessage 对更新做出重新加载的处理
-(function (window) {
+// src/sw-register.js 中注册，重载相关代码
+navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(() => {
+    navigator.serviceWorker.addEventListener('message', e => {
 
-    if ('serviceWorker' in navigator) {
+        // service-worker.js 如果更新成功会 postMessage 给页面，内容为 'updateMessage'
+        if (e.data === 'updateMessage') {
 
-        navigator.serviceWorker
-            .register('/service-worker.js')
-            .then(function (registration) {
-                // console.log('Service Worker Registered');
-            });
-
-        navigator.serviceWorker.addEventListener('message', function (e) {
-            // received the update message from sw
-            if (e.data === 'updateMessage') {
-                handlerUpdateMessage(e);
-            }
-        });
-
-        var handlerUpdateMessage = function (e) {
-            // 在这里可以检测到 service-worker.js 文件的更新，通常我们建议做页面的 reload，开发者也可自定义一些处理，可参照官方模版给用户更新提示
-
-            location.reload();
-        };
-    }
-})(window);
+            // 开发者这自定义处理函数，也可以使用默认提供的用户提示，引导用户刷新
+            // 这里建议引导用户 reload 处理，详细查看项目具体文件
+            // location.reload();
+        }
+    });
+});
 ```
 
 ``` js
-// index.html 中引入注册代码
+// build 后 index.html 中引入注册代码
 window.onload = function () {
     var script = document.createElement('script');
     var firstScript = document.getElementsByTagName('script')[0];
