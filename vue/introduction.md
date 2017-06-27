@@ -103,17 +103,17 @@
 <div class="get-start">
     <div class="title-wrapper">
         <h1>开始吧</h1>
-        <p>通过本教程，您将很快可以创建一个属于您的 PWA 框架。</p>
+        <p>通过本教程，您将很快可以创建一个属于您的 Lavas PWA 框架。</p>
     </div>
     <div class="fast-link-wrapper">
         <div class="fast-link-item">
-            <h3>开始探索 PWA 工程</h3>
-            <p>了解 PWA 框架提供了什么功能，以及如何使用框架进行快速开发。</p>
+            <h3>开始探索 Lavas PWA 工程</h3>
+            <p>了解 Lavas PWA 框架提供了什么功能，以及如何使用框架进行快速开发。</p>
             <a href="/guide/vue/doc/vue/01-foundation/01-get-start" class="md-a-btn">开始探索</a>
         </div>
         <div class="fast-link-item">
-            <h3>创建 PWA 框架</h3>
-            <p>立即开始使用最新版本的框架进行开发吧。您可以选择在线服务或者使用命令行工具创建 PWA 框架哦。</p>
+            <h3>创建 Lavas PWA 框架</h3>
+            <p>立即开始使用最新版本的框架进行开发吧。您可以选择在线服务或者使用命令行工具创建 Lavas PWA 框架哦。</p>
             <a href="/guide/vue/start" class="md-a-btn">在线创建</a>
         </div>
         <div class="fast-link-item">
@@ -131,7 +131,7 @@
 
 可以通过 `npm install` 方便快捷地安装 lavas-cli：
 
-```bash
+```npm
 [sudo] npm install -g lavas-cli
 lavas init
 ```

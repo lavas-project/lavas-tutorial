@@ -47,7 +47,6 @@ server {
 
     ...the rest of your config
 }
-
 ```
 
 ## nodejs server 部署 https
@@ -63,7 +62,7 @@ var app = require('express')();
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('/path/to/private.pem', 'utf8'),
+var privateKey  = fs.readFileSync('/path/to/private.pem', 'utf8');
 var certificate = fs.readFileSync('/path/to/file.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 

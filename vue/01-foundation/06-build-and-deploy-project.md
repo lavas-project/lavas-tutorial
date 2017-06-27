@@ -6,7 +6,7 @@
 
 生产环境构建出的所有静态资源默认输出在 /dist 文件夹下。
 
-```shell
+```npm
 npm run build
 ```
 

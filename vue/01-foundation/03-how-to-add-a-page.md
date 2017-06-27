@@ -24,15 +24,16 @@ routes: [
 这里有两点需要注意：
 1. 在开发环境下，[插件](https://github.com/lavas-project/vue-skeleton-webpack-plugin)会向文件中自动插入[ skeleton 路由](/guide/vue/doc/vue/01-foundation/14-skeleton)，便于开发调试。
 2. 路由组件默认使用了 [keep-alive](https://vuejs.org/v2/guide/components.html#keep-alive)，避免切换时重新渲染。但在某些情况下并不适用，例如详情页组件需要每次根据路由参数请求新数据渲染，此时可以通过路由对象的 meta.notKeepAlive 属性关闭。
+
 ```js
-    {
-        path: '/',
-        name: 'detail',
-        component: Detail,
-        meta: {
-            notKeepAlive: true
-        }
+{
+    path: '/',
+    name: 'detail',
+    component: Detail,
+    meta: {
+        notKeepAlive: true
     }
+}
 ```
 
 ## 页面组织结构
@@ -146,7 +147,7 @@ vue-router给出了两种[ 获取数据的时机](https://router.vuejs.org/zh-cn
 推荐使用[axios](https://github.com/mzabriskie/axios)与服务端通信。axios 基于 Promise，兼容浏览器端和node.js环境。
 
 > info
-> 
+>
 > 在组件中也可以通过 $loading 调用 start/finish 展示／隐藏进度条。但是这并不一定适合所有场景，例如无限滚动上拉加载更多，或者多 tab 切换加载数据。这些加载中的效果需要在具体组件中实现。
 
 关于请求数据的例子，可以参考我们的[ blog例子](https://github.com/lavas-project/lavas-demo-blog)。
