@@ -62,6 +62,7 @@
         width 33.33%
         float left
         padding 0 20px 0 0
+        box-sizing border-box
 
         h2
             text-align center
