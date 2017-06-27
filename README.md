@@ -186,7 +186,7 @@
 <div class="m-container m-blue">
     <div class="m-box m-def">
         <h1>Lavas</h1>
-        <p>PWA 脚手架工具</p>
+        <p>基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题。</p>
         <div class="btn-box">
             <a class="m-btn m-white" href="/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli">起步</a>
             <a class="m-btn m-grey" target="_blank" href="https://github.com/lavas-project/lavas-cli">Github</a>
