@@ -131,7 +131,7 @@
 
 可以通过 `npm install` 方便快捷地安装 lavas-cli：
 
-```shell
+```npm
 [sudo] npm install -g lavas-cli
 lavas init
 ```

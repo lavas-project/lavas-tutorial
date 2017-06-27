@@ -18,7 +18,7 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 
 **2、安装 Vuetify 通过 npm 或 yarn:**
 
-```shell
+```npm
 $  npm install vuetify --save-dev
 
 $  yarn add vuetify --dev

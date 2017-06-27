@@ -10,7 +10,7 @@
 
 我们的工程中，通过执行以下命令启动 dev-server
 
-```bash
+```npm
 npm run dev
 ```
 
