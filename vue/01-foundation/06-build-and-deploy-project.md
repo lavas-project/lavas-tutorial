@@ -7,7 +7,7 @@
 生产环境构建出的所有静态资源默认输出在 /dist 文件夹下。
 
 ```npm
-npm run build
+$ npm run build
 ```
 
 执行命令后，在控制台的输出主要分成两部分，第一部分是 sw-precache 缓存的静态资源列表。
