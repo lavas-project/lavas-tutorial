@@ -24,7 +24,6 @@
         }
     ],
     "ignore": [
-        "vue/工作分工",
         "vue/02-advanced/01-server-side-render",
         "vue/introduction"
     ]

@@ -11,7 +11,7 @@
 我们的工程中，通过执行以下命令启动 dev-server
 
 ```npm
-npm run dev
+$ npm run dev
 ```
 
 这个时候，如果代码没有问题，我们可以看到 server 启动成功的控制台信息。

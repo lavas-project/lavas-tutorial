@@ -14,19 +14,19 @@
 - Vuex: [https://vuex.vuejs.org/zh-cn](https://vuex.vuejs.org/zh-cn)
 - Vue-router: [https://router.vuejs.org/zh-cn](https://router.vuejs.org/zh-cn)
 
-学习 pwa 相关知识
+学习 PWA 相关知识
 
 - PWA: [https://pwa.baidu.com/doc](https://pwa.baidu.com/doc)
 
 
 ## 依赖工具
 
-如果想在本地开发 PWA 工程，从 0 开始开发一个基于 Vue 的 PWA 项目是非常困难的，我们还有很多除了业务实现之外的事情需要做。为了节省大家在业务之外减少开发时间，我们提供了一套命令行工具 --- lavas-cli。目前 lavas-cli 提供了脚手架初始化工作，能够帮助我们在正式开发之前做好充分准备。
+如果想在本地开发 PWA 工程，从 0 开始开发一个基于 Vue 的 PWA 项目是非常困难的，我们还有很多除了业务实现之外的事情需要做。为了节省大家在业务之外减少开发时间，我们提供了一套命令行工具 --- lavas。目前 lavas 提供了脚手架初始化工作，能够帮助我们在正式开发之前做好充分准备。
 
-可以通过以下方式 npm 安装 lavas-cli：
+可以通过以下方式 npm 安装 lavas 命令行工具：
 
 ```npm
-[sudo] npm install -g lavas-cli
+$ npm install -g lavas
 ```
 
 ## 初始化工程
@@ -34,7 +34,7 @@
 执行以下命令可以初始化 PWA 工程：
 
 ```npm
-lavas init
+$ lavas init
 ```
 
 ![cli init command](./images/cli-init.png)
@@ -96,13 +96,13 @@ build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配
 执行下列操作进行预览：
 
 ```npm
-cd pwa-demo
-npm install
-npm run dev
+$ cd pwa-demo
+$ npm install
+$ npm run dev
 ```
 
 
-完成系列操作后，我们可以看到浏览器默认打开了我们的工程预览页面. 这个时候我们进入 Chrome develop 模式(`windows： F12, mac: Command + Shift + I` ) 就能看到如下效果。
+完成系列操作后，我们可以看到浏览器默认打开了我们的工程预览页面. 这个时候我们进入 Chrome Develop 模式(`windows： F12, mac: Command + Shift + I` ) 就能看到如下效果。
 
 ![project preview](./images/preview.png)
 
