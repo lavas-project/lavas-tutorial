@@ -67,7 +67,7 @@ pwa-demo/ (项目根目录)
 
 项目目录结构我们参照的基础是 Vue 工程推荐使用的模版文件目录 [https://github.com/vuejs-templates](https://github.com/vuejs-templates)，在其基础上进行了 PWA 相关的集成封装。
 
-#### build 文件夹
+**build 文件夹**
 
 build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配置文件，我们默认采用的是 [webpack](http://webpack.github.io) 打包工具。
 内置 webpack 的 dev-server 可以帮助我们在本地调试项目。

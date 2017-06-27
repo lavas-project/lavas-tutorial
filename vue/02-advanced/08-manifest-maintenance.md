@@ -51,6 +51,7 @@ module.exports = {
 ## 如何自动生成 ？
 
 在 webpack 打包时，我们提供了一个 `build/plugins/manifest-webpack-plugin` 的插件来完成这个任务，生成规范的 `manifest.json` 文件。该插件干了几件事：
+
 * 将配置文件中的键名驼峰式转换成以 `_` 连接的形式，并替换原对象，得到符合规范的配置内容
 * 将整理好的配置内容 写入指定路径下的 `manifest.json` 中待引用
 * 替换 index.html 中的主题背景色 theme-color 为配置项中的主题色
