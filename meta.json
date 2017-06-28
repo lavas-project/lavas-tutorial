@@ -26,6 +26,7 @@
     "ignore": [
         "vue/02-advanced/11-server-side-render",
         "vue/introduction",
+        "vue/02-advanced/08-manifest-maintenance",
         "vue/工作分工"
     ]
 }
