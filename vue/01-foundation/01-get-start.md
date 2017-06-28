@@ -27,7 +27,7 @@ PWA 工程构建出的 App 是一个 Web App，我们需要做的是使这样的
 - 浏览器离线和弱网环境可极速访问。
 - 可以把 App icon 入口添加到桌面。
 - 点击 icon 入口有类似 Native App 的动画效果。
-- 灵活的热更新机制
+- 灵活的热更新
 - ...
 
 对于 PWA 的效果， Google 给出了 PWA 验证的系列 [checkList](https://developers.google.com/web/progressive-web-apps/checklist)， 我们可以参考比对，检验自己的 PWA 工程。
@@ -68,17 +68,17 @@ PWA 工程是一套渐进式的解决方案，我们通常需要架构在 SPA �
 
 App Shell 架构是构建 PWA 工程的一种方式，这种应用能可靠且即时地加载到您的用户屏幕上，与本地应用相似。
 
-App Shell 是支持用户界面所需的最小的 HTML、CSS 和 JavaScript，如果离线缓存，可确保在用户重复访问时提供即时、可靠的良好性能。这意味着并不是每次用户访问时都要从网络加载 App Shell。 只需要从网络中加载必要的内容。
+App Shell 是支持用户界面所需的最小的 HTML、CSS 和 javaScript，如果离线缓存，可确保在用户重复访问时提供即时、可靠的良好性能。这意味着并不是每次用户访问时都要从网络加载 App Shell。 只需要从网络中加载必要的内容。
 
-对于使用包含大量 JavaScript 的架构的 SPA 来说，App Shell 是一种常用方法。这种方法依赖渐进式缓存 Shell（使用 Service Worker 线程）让应用运行。接下来，为使用 JavaScript 的每个页面加载动态内容。App Shell 非常适合用于在没有网络的情况下将一些初始 HTML 快速加载到屏幕上。
+对于使用包含大量 javaScript 的架构的 SPA 来说，App Shell 是一种常用方法。这种方法依赖渐进式缓存 Shell（使用 Service Worker 线程）让应用运行。接下来，为使用 javaScript 的每个页面加载动态内容。App Shell 非常适合用于在没有网络的情况下将一些初始 HTML 快速加载到屏幕上。
 
 App Shell 通常是由服务端渲染，并不是在前端由数据驱动渲染的，所以在 SEO 方面也有着重要的作用。
 
 App Shell 在 PWA 工程化中扮演重要角色，Google 对 [App Shell 也有详细的描述](https://developers.google.com/web/fundamentals/architecture/app-shell)。
 
 
-## 工程化
+## Lavas 工程化
 
-本教程将一步一步的领着你进入 PWA 工程化之旅，我们通过一系列的解决方案帮助你完成一个完善的 PWA 应用。
+本教程将一步一步的领着你进入 Lavas 工程化之旅，我们通过 Lavas 提供的一系列解决方案帮助你完成一个完善的 PWA 应用。
 
-基本了解了 PWA 相关背景和介绍之后，可以开始阅读后面的工程化具体实践教程了，我们开始吧～
+基本了解了 PWA 相关背景和介绍之后，可以开始阅读后面的工程化具体实践教程了，让我们开始吧～
