@@ -49,7 +49,7 @@ server {
 }
 ```
 
-## nodejs server 部署 https
+## Node.js server 部署 https
 
 在 nodejs 中我们如何部署 https 环境呢？假设我们使用 `Let's Encrypt` 已经拿到了 DV 证书。
 private.pe: 私钥文件

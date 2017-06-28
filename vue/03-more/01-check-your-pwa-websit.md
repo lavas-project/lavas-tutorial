@@ -14,7 +14,7 @@ Chrome 有一个强大之处在于它的 Devtool 的强大，我们可以通过 
 **进入方式**
 
 - windows: `F12`
-- mac: `Command + Shift + I`
+- mac: `Command + Option + I`
 
 **NetWork**
 
@@ -45,6 +45,32 @@ Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。�
 运行 Lighthouse 的方式有两种：作为 Chrome 扩展程序运行，或作为命令行工具运行。 Chrome 扩展程序提供了一个对用户更友好的界面，方便读取报告。 命令行工具允许您将 Lighthouse 集成到持续集成系统。
 
 详细信息，可以去 [Lighthouse 官方文档](https://developers.google.com/web/tools/lighthouse) 查看
+
+
+由于 Lighthouse Chrome 插件由于某些墙的原因在国内无法下载。我们提供一套可以在国内安装插件的步骤如下： 
+
+**1、下载 lighthouse 插件**
+
+Lighthouse 浏览器插件 [下载地址](./downloads/lighthouse_2.1.0_0.zip)
+
+**2、将下载的 zip 包解压缩到某一个目录下**
+
+假设存放至 `/home/work/chrome/extensions`
+
+**3、在 Chome 地址栏输入 `chome://extentions` 打开浏览器应用程序**
+
+点击 `开发者模式` 进入开发者模式，点击 `加载已解压的扩展程序` 选择第 2 步下载的 zip 包解压的文件夹
+
+**4、安装成功**
+
+安装成功后可以看到浏览器右上角出现 Lighthouse 图标。
+
+- 通过 Chrome 访问任何页面。
+- 在访问的页面地址栏的右上角上点击 Lighthouse 插件的按钮。
+- 点击 `Generate report`。
+- 坐等出检测报告。
+- 根据报告的内容查看当前站点的优缺点，进而优化。
+
 
 ## 真机测试
 

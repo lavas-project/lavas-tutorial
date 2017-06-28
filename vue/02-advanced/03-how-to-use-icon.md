@@ -67,4 +67,4 @@
 
 > info
 >
-> 我们只会引入 icons 中指定的fontawesome svg，不用担心会引入全集。
+> 我们只会引入 icons 中指定的 fontawesome svg，不用担心会引入全集。
