@@ -211,7 +211,7 @@ $color-green = #4caf50
     </div>
     <div class="m-intro-box">
         <h2>查看示例</h2>
-        <p>基于 Lavas 命令行工具生成框架所开发的项目示例，直观感受 Lavas 的魅力。</p>
+        <p>基于 Lavas 命令行工具生成框架所开发的项目示例，直观感受 Lavas 的优点。</p>
         <a class="m-btn m-blue" href="/demo">查看示例</a>
     </div>
 </div>
@@ -226,7 +226,7 @@ $color-green = #4caf50
         <div class="m-code-box">
             <div class="m-code">
                 <h2>安装</h2>
-                <pre><code><span class="hljs-meta">$</span> <span class="hljs-built_in">npm</span> install -g <span class="hljs-keyword">lavas-cli</span></code></pre>
+                <pre><code><span class="hljs-meta">$</span> <span class="hljs-built_in">npm</span> install -g <span class="hljs-keyword">lavas</span></code></pre>
             </div>
             <div class="m-code">
                 <h2>使用</h2>
