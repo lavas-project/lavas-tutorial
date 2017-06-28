@@ -27,9 +27,9 @@ https 是将 http 置于 SSL/TLS 之上，其效果是加密 http 流量( traffi
 
 
 
-## nginx 部署 https
+## Nginx 部署 https
 
-参照： [https://foofish.net/https-free-for-lets-encrypt.html](https://foofish.net/https-free-for-lets-encrypt.html)
+参照：[https://foofish.net/https-free-for-lets-encrypt.html](https://foofish.net/https-free-for-lets-encrypt.html)
 在获取证书成功之后，通常做法我们只需要修改 Nginx 中有关证书的配置并 reload 服务即可：
 
 ```nginx
@@ -51,13 +51,14 @@ server {
 
 ## Node.js server 部署 https
 
-在 nodejs 中我们如何部署 https 环境呢？假设我们使用 `Let's Encrypt` 已经拿到了 DV 证书。
-private.pe: 私钥文件
-file.crt: 证书文件
+在 Node.js 中我们如何部署 https 环境呢？假设我们使用 `Let's Encrypt` 已经拿到了 DV 证书。
 
-如果使用 express 作为 server 服务器的话：
+* private.pe: 私钥文件
+* file.crt: 证书文件
 
-```javascript
+如果使用 express 作为 server 服务器：
+
+```js
 var app = require('express')();
 var fs = require('fs');
 var http = require('http');

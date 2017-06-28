@@ -2,11 +2,11 @@
 
 ## webpack dev-server
 
-> webpack-dev-server 是一个小型的 Node.js Express 服务器,它使用 webpack-dev-middleware 中间件来为通过 webpack 打包生成的资源文件提供 Web 服务。它还有一个通过 Socket IO 连接着 webpack-dev-server 服务器的小型运行时程序。webpack-dev-server 发送关于编译状态的消息到客户端，客户端根据消息作出响应。
+> webpack-dev-server 是一个小型的 Node.js Express 服务器,它使用 webpack-dev-middleware 中间件来为通过 Webpack 打包生成的资源文件提供 Web 服务。它还有一个通过 Socket IO 连接着 webpack-dev-server 服务器的小型运行时程序。webpack-dev-server 发送关于编译状态的消息到客户端，客户端根据消息作出响应。
 
-我们的导出工程中默认会集成安装 webpack dev-server, 主要用途是用于开发和调试 Vue 工程。
+我们的导出工程中默认会集成安装 Webpack dev-server, 主要用途是用于开发和调试 Vue 工程。
 
-详细了解 [webpack dev-server](http://webpack.github.io/docs/webpack-dev-server.html)。
+详细了解 [Webpack dev-server](http://webpack.github.io/docs/webpack-dev-server.html)。
 
 我们的工程中，通过执行以下命令启动 dev-server
 

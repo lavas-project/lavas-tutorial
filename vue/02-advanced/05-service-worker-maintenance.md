@@ -1,17 +1,20 @@
 # 维护 service-worker.js 文件
 
-开始之前，您可以查看 [service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。查看 service worker [ 浏览器支持情况](http://caniuse.com/#feat=serviceworkers)
+开始之前，您可以查看 [service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 相关内容，快速掌握相关基础。查看 service worker [浏览器支持情况](http://caniuse.com/#feat=serviceworkers)
 
-下文的 `service-worker.js` 简称 `sw.js`。
 
-sw.js 作为缓存管理的重要文件，在导出工程的时候我们默认给了一个能覆盖缓存需求的 `sw.js` 文件。
+service-worker.js 文件作为缓存管理的重要文件，在导出 Lavas 工程的时候我们默认给了一个能覆盖缓存需求的 `/dist/service-worker.js` 文件。
 但是我们默认提供的文件可能在后续您的开发过程中并不能完全覆盖您的需求，所以你需要对其进行一定的维护。
 
-## sw.js
+## service-worker.js
 
-导出项目中，使用了 [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) + [sw-precache](https://github.com/GoogleChrome/sw-precache) + [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin)( Webpack 插件)的方式，仅在 build 后自动生成可见的 `sw.js` 文件，可
-* 支持离线缓存静态资源能力，通过配置实现动态网络缓存，以及文件更新机制
-* 支持 `sw.js` 文件更新时，页面提示更新重载。
+导出项目中，使用了 [service worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) + [sw-precache](https://github.com/GoogleChrome/sw-precache) + [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) (Webpack 插件) 的方式，仅在 build 后自动生成可见的 `service-worker.js` 文件，该文件有如下特征：
+
+* 支持离线缓存静态资源能力
+
+* 通过配置实现动态网络请求和静态资源文件的缓存和更新机制
+
+* 支持 `service-worker.js` 文件更新时，页面提示更新重载。
 
 如果开发者没有特殊的缓存需求，可直接使用。如果开发者需要后续工程的定制化，就要再深入了解以下几方面内容：
 
@@ -20,8 +23,7 @@ sw.js 作为缓存管理的重要文件，在导出工程的时候我们默认�
 
 开发者可通过 `config/sw-precache.js` 文件进行缓存配置，根据配置为用户缓存网站静态与动态资源，并截获用户的所有网络请求，决定是从缓存还是网络获取相应资源，限制缓存大小等。对于无额外需求的开发者，一般仅需配置该文件就可满足项目需求，不配置默认缓存所有静态资源。
 
-下面来看一下，具体配置结构（此处给出了一些常用配置，更全面的配置可通过 [sw-precache](https://github.com/GoogleChrome/sw-precache) 查看），该配置在 `webpack.prod.conf.js` 中被 [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) 组件作为参数引入，build 时起作用，生成定制化 `sw.js` 文件。
-
+下面来看一下，具体配置结构（此处给出了一些常用配置，更全面的配置可通过 [sw-precache](https://github.com/GoogleChrome/sw-precache) 查看），该配置在 `webpack.prod.conf.js` 中被 [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) 组件作为参数引入，build 时起作用，生成定制化 `service-worker.js` 文件。
 
 
 ``` js
@@ -31,52 +33,52 @@ build: {
 
     cacheId: 'my-vue-app',
 
-    /* 生成的文件名称 */
+    // 生成的文件名称
     filename: 'service-worker.js',
 
-    /* 需缓存的文件配置, 可以逐项添加
-       需动态缓存的放到runtimeCaching中处理 */
+    // 需缓存的文件配置, 可以逐项添加, 需动态缓存的放到runtimeCaching中处理
     staticFileGlobs: [
         // 'dist/index.html',
         // 'dist/static/**/**.*'
     ],
 
-    /* webpack生成的静态资源全部缓存 */
+    // webpack生成的静态资源全部缓存
     mergeStaticsConfig: true,
 
-    /* 忽略的文件 */
+    // 忽略的文件
     staticFileGlobsIgnorePatterns: [
         /\.map$/ // map文件不需要缓存
     ],
 
-    /* 需要省略掉的前缀名 */
+    // 需要省略掉的前缀名
     stripPrefix: 'dist/',
 
-    /* 当请求路径不在缓存里的返回，对于单页应用来说，入口点是一样的 */
+    // 当请求路径不在缓存里的返回，对于单页应用来说，入口点是一样的
     navigateFallback: '/index.html',
 
-    /* 白名单包含所有的.html (for HTML imports) 和
-       路径中含’/data/’(for dynamically-loaded data). */
+    // 白名单包含所有的.html (for HTML imports) 和路径中含 `/data/`
     navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
+    
+    // 是否压缩，默认不压缩
+    minify: true,
+    
+    // 最大缓存大小
+    maximumFileSizeToCacheInBytes: 4194304,
 
-    minify: true, // 是否压缩，默认不压缩
-
-    maximumFileSizeToCacheInBytes: 4194304, // 最大缓存大小
-
-    /* 生成service-worker.js的文件配置模板，不配置时采用默认的配置
-        本demo做了sw的更新策略，所以在原有模板基础做了相应的修改 */
+    // 生成service-worker.js的文件配置模板，不配置时采用默认的配置
+    // 本demo做了sw的更新策略，所以在原有模板基础做了相应的修改
     templateFilePath: 'config/sw.tmpl.js',
 
     verbose: true,
 
-    /* 需要根据路由动态处理的文件 */
+    // 需要根据路由动态处理的文件
     runtimeCaching: [
         {
             urlPattern: /\/material-design-icon/,
             handler: 'networkFirst'
         },
 
-        /* 如果在staticFileGlobs中设置相同的缓存路径，可能导致此处不起作用 */
+        // 如果在staticFileGlobs中设置相同的缓存路径，可能导致此处不起作用
         {
             urlPattern: /\/fonts\//,
             handler: 'networkFirst',
@@ -91,22 +93,27 @@ build: {
 }
 
 
-// webpack.prod.conf.js中通过组件引入配置，生成文件
+// webpack.prod.conf.js 中通过组件引入配置，生成文件
 new SWPrecacheWebpackPlugin(config.swPrecache.build);
 ```
 
+> 更加详细的内容，可以参考 [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) 了解详情。
 
 
-## 如何修改 sw.js 文件内容
+## 如何修改 service-worker.js 文件内容
 
-**如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发?**
+**如果自动生成的文件无法满足需求，如何进行定制化开发?**
 
-要想找到答案，我们先要了解 sw-precache 工具是怎么生成了这个 sw.js 文件。要让 sw-precahce 工具生成 sw.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 `sw.js` 文件。**项目中将导入模板文件放在 `config/sw.tmpl.js` 下，便于开发者后期相应的维护开发。**
+我们先要了解 sw-precache 工具是怎么生成了这个 `service-worker.js` 文件。
+要让 sw-precahce 工具生成 `service-worker.js` 文件，需要给它提供一个模板文件。
+工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 `service-worker.js` 文件。
+
+**Lavas 导出项目中默认将导入模板文件放在 `config/sw.tmpl.js` 下，便于开发者后期相应的维护开发。**
 
 
-**导出项目中做了什么定制化呢 ？**
+**Lavas 导出项目中做了什么定制化呢 ？**
 
-这就来给大家介绍下，为了在 `sw.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'updateMessage' 字符串，在主页面中，注册了消息的监听，一旦接收到 'updateMessage' 消息，主页面给出相应的更新提示。
+为了在 `service-worker.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'updateMessage' 字符串，在主页面中，注册了 `onMessage` 消息的监听 (这种方式是 service worker 和 主页面进程通信的方式)，一旦接收到 'updateMessage' 字符串，主页面给出相应的更新提示。
 
 **注意：** 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
@@ -150,13 +157,15 @@ self.addEventListener('activate', function (event) {
 
 ## service worker 的注册
 
+我们默认在 Lavas 导出工程中引入了 [sw-register-webpack-plugin](https://github.com/lavas-project/sw-register-webpack-plugin)， 该插件专门用来做 service-worker.js 的注册。为了调试方便默认 develop 环境下不会注册 service worker, 只有在 production 环境下才会触发构建 `sw-register.js` 入口。
 
-注册部分在项目的 `src/sw-register.js` 文件中，并在项目 build 后在 `dist/index.html` 最后引入执行。上面内容提及的 `sw.js` 更新时 'updateMessage' 的信息监听和页面重载部分，也是在 `src/sw-register.js` 里完成的，开发者可根据需求做相应的扩展。
+项目的自定义注册部分在项目的 `src/sw-register.js` 文件中，并在项目 build 后在 `dist/index.html` 最后引入执行。上面内容提及的 `service-worker.js` 更新时 'updateMessage' 的信息监听和页面重载部分，也是在 `src/sw-register.js` 里完成的，开发者可根据需求做相应的扩展。
 
 
 ``` js
 // src/sw-register.js 中注册，重载相关代码
 navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(() => {
+    // 监听 service-worker.js 的 postMessage 事件
     navigator.serviceWorker.addEventListener('message', e => {
 
         // service-worker.js 如果更新成功会 postMessage 给页面，内容为 'updateMessage'
@@ -171,7 +180,7 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
 ```
 
 ``` js
-// build 后 index.html 中引入注册代码
+// build 后 sw-register-webpack-plugin 会在 index.html 中注入注册代码
 window.onload = function () {
     var script = document.createElement('script');
     var firstScript = document.getElementsByTagName('script')[0];
@@ -183,19 +192,30 @@ window.onload = function () {
 
 ```
 
+> Note:
+>
+> 通过代码可以看出，`sw-register-webpack-plugin` 只是帮助开发者解决 service-worker.js 本身会被 HTTP 缓存的问题，但是我们强行的默认增加了一个 `sw-register.js` 的静态资源请求来保证 `service-worker.js` 永远能够最新。
+> 如果服务端能够对 `service-worker.js` 做 no-cache 的处理，则不需要 sw-register-webpack-plugin, 只需要把 `sw-register.js` 中的内容直接写进 `src/app.js`就好了，不用单独请求。
 
-## 缓存补充
+
+## 动态缓存补充
+
+开发过程中，我们可能会对一些第三方的静态资源活着异步的请求进行动态的 service worker 缓存处理，Lavas 导出工程提供了这种动态配置机制：
 
 缓存内容及策略主要通过 `config/sw-precache.js` 配置文件来控制，常用配置的参数如下：
+
 * 配置项中有 `mergeStaticsConfig` 参数（定制化提供参数），默认是 true，即在没配置的情况下，默认缓存所有静态文件
+
 * 如果不想缓存所有的静态文件，需要配置 `staticFileGlobs` 参数，将需要缓存的静态文件，依次写入
-* 对于需要动态缓存的资源，可以通过配置文件中的 `runtimeCaching`  参数来配置，此时 sw-precache 模块就会帮我们引入 sw-toolbox 模块。所以在 sw-precache 中使用 runtimeCaching 配置选项可以参考 sw-toolbox 的配置规则，最终动态的路由规则会被添加到 `sw.js` 文件的最后。
+
+* 对于需要动态缓存的资源，可以通过配置文件中的 `runtimeCaching`  参数来配置，此时 sw-precache 模块就会帮我们引入 sw-toolbox 模块。所以在 sw-precache 中使用 runtimeCaching 配置选项可以参考 sw-toolbox 的配置规则，最终动态的路由规则会被添加到 `service-worker.js` 文件的最后。
+
 下面对 runtimeCaching 的具体配置也给出相应的介绍，后期开发应用还是比较广泛的。
 
 例如，下面的配置为两种不同URL模式定义了实时缓存行为。它对两种请求使用不同的处理程序，并为 `/fonts/` 模式相匹配的请求指定了最大可用缓存：
 
 ```js
-/* 需要根据路由动态处理的文件 */
+// 需要根据路由动态处理的文件
 runtimeCaching: [
     {
         urlPattern: /\/material-design-icon/,
@@ -245,14 +265,17 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 [查看 service worker 版本更新相关](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/02-how-to-use-service-worker#service-worker-版本更新)
 
-了解 service worker 基本的更新机制，导出项目中主要解决了两个问题：
+了解 service worker 基本的更新机制，Lavas 导出项目中默认主要解决了两个问题：
 
-* 当发布了新版本代码，`sw.js` 文件本身怎么保证能拿到最新，而不是从缓存中读取。如果 `sw.js` 不能及时更新，service worker 内的缓存的文件就不能更新，项目中怎么解决呢？
+* 当发布了新版本代码，`service-worker.js` 文件本身怎么保证能拿到最新，而不是从缓存中读取。如果 `service-worker.js` 不能及时更新，service worker 内的缓存的文件就不能更新，项目中怎么解决呢？
 
-我们在 `sw-rigester.js` 的请求中增加了一个时间戳[可参考上文示例](./05-service-worker-maintenance#service-worker-的注册)，保证每次 `sw-rigester.js` 文件请求都与服务器交互，获取最新的 `sw-register.js` 文件，且其中 sw.js 文件请求也带有最新的版本参数，保证每次 `sw.js` 文件请求的都是最新版本。您可在 build 后，在 `dist/index.html` 文件最后查看时间戳相关代码，包括版本参数等都是由 `sw-register-webpack-plugin` 插件完成，无需修改。
+我们在 `sw-rigester.js` 的请求中增加了一个时间戳[可参考上文示例](./05-service-worker-maintenance#service-worker-的注册)，保证每次 `sw-rigester.js` 文件请求都获取最新的 `sw-register.js` 文件，且其中被注册的 `service-worker.js` 文件请求也带有最新的版本参数，保证每次 `service-worker.js` 文件请求的都是最新版本。您可在 build 后，在 `dist/index.html` 文件最后查看时间戳相关代码，包括版本参数等都是由 `sw-register-webpack-plugin` 插件完成，无需修改。
 
-* 当 `sw.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `sw.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
+* 当 `service-worker.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `service-worker.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
 
+> Note
+>
+> 我们虽然提供了缓存及时更新的方案，但还是推荐使用服务器对 `service-worker.js` 做 no-cache 处理。
 
 ## service worker 容错降级方案
 
@@ -283,5 +306,5 @@ if (navigator.serviceWorker) {
 
 ## 小结
 
-了解上面的这些内容之后，大家可以通过 Lavas 快速导出一个项目，轻松的完成 service worker 调试啦！！！
+了解上面的这些内容之后，大家可以通过 Lavas 快速导出一个项目，轻松的完成 service worker 调试啦
 

@@ -21,7 +21,7 @@
 
 ## 依赖工具
 
-如果想在本地开发 PWA 工程，从 0 开始开发一个基于 Vue 的 PWA 项目是非常困难的，我们还有很多除了业务实现之外的事情需要做。为了节省大家在业务之外减少开发时间，我们提供了一套命令行工具 --- lavas。目前 lavas 提供了脚手架初始化工作，能够帮助我们在正式开发之前做好充分准备。
+如果想在本地开发 PWA 工程，从零开始开发一个基于 Vue 的 PWA 项目是非常困难的，我们还有很多除了业务实现之外的事情需要做。为了节省大家在业务之外减少开发时间，我们提供了一套命令行工具 -- Lavas。目前 Lavas 提供了脚手架初始化工作，能够帮助我们在正式开发之前做好充分准备。
 
 可以通过以下方式 npm 安装 lavas 命令行工具：
 
@@ -56,8 +56,8 @@ pwa-demo/ (项目根目录)
         | - app.js (Vue 入口执行文件)
         | - App.vue (项目的根 Component)
         | - entry-client.js (前端渲染入口文件)
-        | - router.js (Vue-router 路由配置文件)
         | - entry-skeleton.js(skeleton 渲染入口)
+        | - router.js (Vue-router 路由配置文件)
         | - sw-register.js (注册 service worker 文件入口)
     | - static/ (不需要经过构建的一些静态资源)
     | - index.html
@@ -69,7 +69,7 @@ pwa-demo/ (项目根目录)
 
 **build 文件夹**
 
-build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配置文件，我们默认采用的是 [webpack](http://webpack.github.io) 打包工具。
+build 文件夹内的文件都是 PWA 项目在调试和构建时候所需的配置文件，我们默认采用的是 [Webpack](http://webpack.github.io) 打包工具。
 内置 webpack 的 dev-server 可以帮助我们在本地调试项目。
 
 
@@ -87,7 +87,7 @@ $ npm run dev
 ```
 
 
-完成系列操作后，我们可以看到浏览器默认打开了我们的工程预览页面. 这个时候我们进入 Chrome Develop 模式(`windows： F12, mac: Command + Shift + I` ) 就能看到如下效果。
+完成系列操作后，我们可以看到浏览器默认打开了我们的工程预览页面. 这个时候我们进入 Chrome Develop 模式 (`windows： F12, mac: Command + Option + I` ) 就能看到如下效果。
 
 ![project preview](./images/preview.png)
 

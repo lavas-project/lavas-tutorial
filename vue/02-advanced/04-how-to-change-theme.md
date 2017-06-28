@@ -1,8 +1,8 @@
 # 修改项目主题
 
-项目使用[ vuetify ](https://vuetifyjs.com/) 作为组件库，根据 vuetify 的实现，主题配置分为两个部分：
-1. 项目中主要使用的颜色，其中主要颜色，次要颜色的选择和使用场景可参考[ material 设计中的颜色系统](https://material.io/guidelines/style/color.html#color-color-system)。
-2. [ material 设计中使用的常量](https://material.io/guidelines/style/color.html#color-themes)包含了通用的背景色，前景色，文字颜色。
+项目使用 [vuetify](https://vuetifyjs.com/) 作为组件库，根据 vuetify 的实现，主题配置分为两个部分：
+1. 项目中主要使用的颜色，其中主要颜色，次要颜色的选择和使用场景可参考 [material 设计中的颜色系统](https://material.io/guidelines/style/color.html#color-color-system)。
+2. [material 设计中使用的常量](https://material.io/guidelines/style/color.html#color-themes)包含了通用的背景色，前景色，文字颜色。
 
 开发者在配置文件中定义变量，在开发自身控件时使用，使得更换主题变得非常方便。
 
@@ -46,11 +46,17 @@ module.exports = {
 ```
 
 在 themeList 里可以定义多个主题，每个主题包含两部分：
+
 * themeColor
+
     * `primary` 主要颜色，vuetify 中大部分组件以及我们的 app shell 都会大量使用
+
     * `accent` 通常根据主要颜色调整明暗后生成，以显示层次感
+
     * `secondary` 次要颜色，通常与主要颜色形成对比
+
     * `info/warning/error/success` 项目不同状态下定义的颜色，例如 vuetify 在 [Alerts](https://vuetifyjs.com/components/alerts) 组件中会使用
+    
 * materialDesign 包含了一系列 material 设计相关的变量
 
 > info
