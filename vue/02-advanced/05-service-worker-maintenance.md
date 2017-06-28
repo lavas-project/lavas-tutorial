@@ -99,16 +99,14 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 ## 如何修改 sw.js 文件内容
 
-**如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发**
+**如果自动生成的文件实在无法满足项目需求，怎么进行定制化开发?**
 
-要想找到答案，我们就要先去看看 sw-precache 工具是怎么生成了这个 sw.js 文件。要让 sw-precahce 工具生成 sw.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 `sw.js` 文件。
-
-**项目中将导入模板文件放在 `config/sw.tmpl.js` 下，便于开发者后期相应的维护开发。**
+要想找到答案，我们先要了解 sw-precache 工具是怎么生成了这个 sw.js 文件。要让 sw-precahce 工具生成 sw.js 文件，需要给它提供一个模板文件。工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 `sw.js` 文件。**项目中将导入模板文件放在 `config/sw.tmpl.js` 下，便于开发者后期相应的维护开发。**
 
 
 **导出项目中做了什么定制化呢 ？**
 
-这就来给大家介绍下，为了在 `sw.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'updateMessage' 字符串，在 `sw-register.js` 中，注册了消息的监听，一旦接收到 'updateMessage' 消息，主页面给出相应的更新提示。
+这就来给大家介绍下，为了在 `sw.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'updateMessage' 字符串，在主页面中，注册了消息的监听，一旦接收到 'updateMessage' 消息，主页面给出相应的更新提示。
 
 **注意：** 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
@@ -245,15 +243,15 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 ## 缓存更新难题及处理
 
-[查看 service worker 版本更新](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/02-how-to-use-service-worker#service-worker-版本更新)
+[查看 service worker 版本更新相关](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/02-how-to-use-service-worker#service-worker-版本更新)
 
 了解 service worker 基本的更新机制，导出项目中主要解决了两个问题：
 
 * 当发布了新版本代码，`sw.js` 文件本身怎么保证能拿到最新，而不是从缓存中读取。如果 `sw.js` 不能及时更新，service worker 内的缓存的文件就不能更新，项目中怎么解决呢？
 
-我们在 `sw-rigester.js` 的请求中增加了一个时间戳，保证每次 `sw-rigester.js` 文件请求都与服务器交互，获取最新的 `sw-register.js` 文件，且其中 sw.js 文件请求也带有最新的版本参数，保证每次 `sw.js` 文件请求的都是最新版本。您可在 build 后，在 `dist/index.html` 文件最后查看时间戳相关代码，包括版本参数等都是由 `sw-register-webpack-plugin` 插件完成，无需修改。
+我们在 `sw-rigester.js` 的请求中增加了一个时间戳[可参考上文示例](./05-service-worker-maintenance#service-worker-的注册)，保证每次 `sw-rigester.js` 文件请求都与服务器交互，获取最新的 `sw-register.js` 文件，且其中 sw.js 文件请求也带有最新的版本参数，保证每次 `sw.js` 文件请求的都是最新版本。您可在 build 后，在 `dist/index.html` 文件最后查看时间戳相关代码，包括版本参数等都是由 `sw-register-webpack-plugin` 插件完成，无需修改。
 
-* 当 `sw.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `sw.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认让提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
+* 当 `sw.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `sw.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
 
 
 ## service worker 容错降级方案
@@ -285,5 +283,5 @@ if (navigator.serviceWorker) {
 
 ## 小结
 
-了解上面的这些内容之后，大家可以导出一份工程代码，轻松的完成 service worker 调试啦！！！
+了解上面的这些内容之后，大家可以通过 Lavas 快速导出一个项目，轻松的完成 service worker 调试啦！！！
 

@@ -48,8 +48,8 @@ Vue.use(Vuetify);
 
 可以在官网查看更多组件的使用和效果
 
-### 导出项目[修改主题](./03-how-to-change-theme.md)
-项目中修改主题的配置在 `config/theme.js` 中，详细可点击上面链接查看，此处不多赘述
+### 导出项目修改主题
+项目中修改主题的配置在 `config/theme.js` 中[详细可点击查看](./03-how-to-change-theme.md)，此处不多赘述
 
 
 
