@@ -211,7 +211,7 @@ $color-green = #4caf50
     </div>
     <div class="m-intro-box">
         <h2>查看示例</h2>
-        <p>基于 Lavas 命令行工具生成框架所开发的项目示例，直观感受 Lavas 的魅力。</p>
+        <p>基于 Lavas 命令行工具生成框架所开发的项目示例，直观感受 Lavas 的优点。</p>
         <a class="m-btn m-blue" href="/demo">查看示例</a>
     </div>
 </div>
