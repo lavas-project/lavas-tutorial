@@ -19,11 +19,10 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 **2、安装 Vuetify 通过 npm 或 yarn:**
 
 ```npm
-# npm 安装
-$ npm install vuetify --save-dev
 
-# yarn 安装
-$ yarn add vuetify --dev
+$ npm install --save vuetify 
+
+$ yarn add vuetify
 ```
 
 
@@ -49,7 +48,7 @@ Vue.use(Vuetify);
 可以在官网查看更多组件的使用和效果
 
 ### 导出项目修改主题
-项目中修改主题的配置在 `config/theme.js` 中[详细可点击查看](./03-how-to-change-theme.md)，此处不多赘述
+项目中修改主题的配置在 `config/theme.js` 中[详细可点击查看](./04-how-to-change-theme.md)，此处不多赘述
 
 
 
