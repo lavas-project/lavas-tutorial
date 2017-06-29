@@ -121,8 +121,9 @@ $color-green = #4caf50
 .icon-svg
     width 16px
     height 16px
-    vertical-align text-top
+    vertical-align middle
     fill $color-black
+    margin-top -3px
 
 .m-blue
     background $color-blue !important
