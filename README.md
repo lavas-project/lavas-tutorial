@@ -123,6 +123,7 @@ $color-green = #4caf50
     height 16px
     vertical-align text-top
     fill $color-black
+    margin-top -3px
 
 .m-blue
     background $color-blue !important
