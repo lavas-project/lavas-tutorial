@@ -57,7 +57,7 @@ $color-green = #4caf50
     max-width 1200px
     overflow hidden
     margin 0 auto
-    padding-bottom 20px
+    padding-bottom 30px
 
 .m-intro-box
     width 33.33%
