@@ -11,7 +11,7 @@ App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，�
 
 ## App Shell 管理和使用
 
-导出的 AppShell 项目中，提供了部分的 Shell 组件， 单个 Shell 其实都是由不同组件组成，组件在 `src/components` 中管理。开发者可以在 `App.vue` 中根据需求自己定制 Shell，也可以在我们提供的组件基础上进行二次开发。每个 Shell 所需的输入都在一个集中状态管理的容器 store 中统一管理，它包含了 Shell 所需的 state、 actions、 mutations 等。 具体 Shell 配置可查看 `src/store/modules/app-shell.js`，在 `src/store/index.js` 中统一引入管理，在主页面 `src/App.vue` 中导入 Shell 组件并使用。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档。
+Lavas 工具导出的 AppShell 模板项目中，提供了部分的 Shell 组件， 单个 Shell 其实都是由不同组件组成，组件在 `src/components` 中管理。开发者可以在 `App.vue` 中根据需求自己定制 Shell，也可以在我们提供的组件基础上进行二次开发。每个 Shell 所需的输入都在一个集中状态管理的容器 store 中统一管理，它包含了 Shell 所需的 state、 actions、 mutations 等。 具体 Shell 配置可查看 `src/store/modules/app-shell.js`，在 `src/store/index.js` 中统一引入管理，在主页面 `src/App.vue` 中导入 Shell 组件并使用。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档。
 
 ``` html
 <template>

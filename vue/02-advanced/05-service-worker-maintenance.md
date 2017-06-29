@@ -113,7 +113,7 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 **Lavas 导出项目中做了什么定制化呢 ？**
 
-为了在 `service-worker.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'updateMessage' 字符串，在主页面中，注册了 `onMessage` 消息的监听 (这种方式是 service worker 和 主页面进程通信的方式)，一旦接收到 'updateMessage' 字符串，主页面给出相应的更新提示。
+为了在 `service-worker.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'sw.update' 字符串，在主页面中，注册了 `onMessage` 消息的监听 (这种方式是 service worker 和 主页面进程通信的方式)，一旦接收到 'sw.update' 字符串，主页面给出相应的更新提示。
 
 **注意：** 在首次注册 service worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
@@ -144,7 +144,7 @@ self.addEventListener('activate', function (event) {
                     .then(function (clients) {
                         if (clients && clients.length) {
                             var currentClient = clients[0];
-                            currentClient.postMessage('updateMessage');
+                            currentClient.postMessage('sw.update');
                         }
                     })
             }
@@ -159,7 +159,7 @@ self.addEventListener('activate', function (event) {
 
 我们默认在 Lavas 导出工程中引入了 [sw-register-webpack-plugin](https://github.com/lavas-project/sw-register-webpack-plugin)， 该插件专门用来做 service-worker.js 的注册。为了调试方便默认 develop 环境下不会注册 service worker, 只有在 production 环境下才会触发构建 `sw-register.js` 入口。
 
-项目的自定义注册部分在项目的 `src/sw-register.js` 文件中，并在项目 build 后在 `dist/index.html` 最后引入执行。上面内容提及的 `service-worker.js` 更新时 'updateMessage' 的信息监听和页面重载部分，也是在 `src/sw-register.js` 里完成的，开发者可根据需求做相应的扩展。
+项目的自定义注册部分在项目的 `src/sw-register.js` 文件中，并在项目 build 后在 `dist/index.html` 最后引入执行。上面内容提及的 `service-worker.js` 更新时 'sw.update' 的信息监听和页面重载部分，也是在 `src/sw-register.js` 里完成的，开发者可根据需求做相应的扩展。
 
 
 ``` js
@@ -168,8 +168,8 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
     // 监听 service-worker.js 的 postMessage 事件
     navigator.serviceWorker.addEventListener('message', e => {
 
-        // service-worker.js 如果更新成功会 postMessage 给页面，内容为 'updateMessage'
-        if (e.data === 'updateMessage') {
+        // service-worker.js 如果更新成功会 postMessage 给页面，内容为 'sw.update'
+        if (e.data === 'sw.update') {
 
             // 开发者这自定义处理函数，也可以使用默认提供的用户提示，引导用户刷新
             // 这里建议引导用户 reload 处理，详细查看项目具体文件
