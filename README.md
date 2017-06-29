@@ -11,6 +11,9 @@ $color-grey = #ccc
 $color-grey-light = #f0f5f6
 $color-green = #4caf50
 
+.md-related-wrapper
+    display none
+
 .to-github
     display none
 
