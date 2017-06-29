@@ -194,7 +194,7 @@ $color-green = #4caf50
 <div class="m-container m-blue">
     <div class="m-box m-def">
         <h1>Lavas</h1>
-        <p>基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题。</p>
+        <p>基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题</p>
         <div class="btn-box">
             <a class="m-btn m-white" href="/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli">
                 <svg t="1498645229475" class="icon-svg" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3493" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
@@ -215,22 +215,22 @@ $color-green = #4caf50
 </div>
 <div class="m-box">
     <h1 class="m-title">开始吧</h1>
-    <p>通过本教程，您将很快可以创建一个属于您的 PWA 框架。</p>
+    <p>通过本教程，您将很快可以创建一个属于您的 PWA 框架</p>
 </div>
 <div class="m-intro m-box">
     <div class="m-intro-box">
         <h2>探索 Lavas</h2>
-        <p>了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的框架进行快速开发。</p>
+        <p>了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的框架进行快速开发</p>
         <a class="m-btn m-blue" href="/guide/vue/doc/vue/01-foundation/01-get-start">开始探索</a>
     </div>
     <div class="m-intro-box">
         <h2>了解 PWA</h2>
-        <p>学习 PWA，了解这项技术的创新点和要解决的问题，以及将会给您的项目带来的收益。</p>
+        <p>学习 PWA，了解这项技术的创新点和要解决的问题，以及将会给您的项目带来的收益</p>
         <a class="m-btn m-blue" href="/doc">点击了解</a>
     </div>
     <div class="m-intro-box">
         <h2>查看示例</h2>
-        <p>基于 Lavas 命令行工具生成框架所开发的项目示例，直观感受 Lavas 的优点。</p>
+        <p>基于 Lavas 命令行工具生成框架所开发的项目示例，直观感受 Lavas 的优点</p>
         <a class="m-btn m-blue" href="/demo">查看示例</a>
     </div>
 </div>
