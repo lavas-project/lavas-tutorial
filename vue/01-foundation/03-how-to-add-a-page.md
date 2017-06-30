@@ -147,13 +147,13 @@ EventBus.$on(`app-header:click-action`, ({actionIdx}) => {
 
 [vuetify](https://vuetifyjs.com) 提供了丰富的组件。
 
-开发自己的业务组件时，可参考[官方的组件开发指南](https://vuejs.org/v2/guide/components.html)。
+开发自己的业务组件时，可参考[官方的组件开发指南](https://cn.vuejs.org/v2/guide/components.html)。
 
 ## 异步请求数据
 
 vue-router 给出了两种[获取数据的时机](https://router.vuejs.org/zh-cn/advanced/data-fetching.html)。参考官方的 [hackernews 例子](https://github.com/vuejs/vue-hackernews-2.0)的例子，我们也采用在导航完成之前获取数据，同时停留在当前页面时，通过顶部的进度条提示用户。
 
-在 vuex 中，由于 mutation 必须是同步函数，异步请求可以放在 action 中执行，通过使用 [async/await 新特性](https://vuex.vuejs.org/zh-cn/actions.html)使代码变的简洁。
+在 vuex 中，由于 mutation 必须是同步函数，异步请求可以放在 [action](https://vuex.vuejs.org/zh-cn/actions.html) 中执行，通过使用 async/await 新特性使代码变的简洁。
 
 对于开发者而言，只需要在组件的 asyncData 方法中调用 action 操作即可。
 
