@@ -4,7 +4,7 @@
 
 App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，快速出现，避免甚至消除白屏时间过长，大大提升用户的体验。这里的简单一般是指不依赖JS框架，同时能够很好的诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。能够离线缓存，当用户再次进入时，可重复使用缓存提升体验。
 
-如果要开发一个 App Shell, 首先需要明确区分页面 Shell 和 动态内容部分。一般而言，您的应用应加载尽可能最简单的 Shell，如在给出 [lavas-demo-news](https://lavas.baidu.com/demo) 中，我们将头部导航作为 Shell，其余部分为动态内容，也就需要适时更新的部分。明确了之后，我们就可以着手开发这部分了。
+如果要开发一个 App Shell, 首先需要明确区分页面 Shell 和 动态内容部分。一般而言，您的应用应加载尽可能最简单的 Shell，如在给出 [lavas-demo-news](https://lavas-project.github.io/lavas-demo/news/index.html#/) 中，我们将头部导航作为 Shell，其余部分为动态内容，也就需要适时更新的部分。明确了之后，我们就可以着手开发这部分了。
 
 ![App Shell 示例](./images/app-shell-1.png)
 
