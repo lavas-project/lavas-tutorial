@@ -58,10 +58,10 @@ build: {
 
     // 白名单包含所有的.html (for HTML imports) 和路径中含 `/data/`
     navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
-    
+
     // 是否压缩，默认不压缩
     minify: true,
-    
+
     // 最大缓存大小
     maximumFileSizeToCacheInBytes: 4194304,
 
@@ -119,25 +119,12 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 
 ``` js
-// sw.tmpl文件中
+// sw.tmpl.js文件中
 self.addEventListener('activate', function (event) {
-    var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
 
     event.waitUntil(
         caches.open(cacheName).then(function (cache) {
-            return cache.keys().then(function (existingRequests) {
-                return Promise.all(
-                    existingRequests.map(function (existingRequest) {
-                        if (!setOfExpectedUrls.has(existingRequest.url)) {
-                            return cache.delete(existingRequest);
-                        }
-                    })
-                );
-            });
-        }).then(function () {
-            <% if (clientsClaim) { %>
-            return self.clients.claim();
-            <% } %>
+            // 省略
         }).then(function () {
             if (!firstRegister) {
                 return self.clients.matchAll()
@@ -165,10 +152,10 @@ self.addEventListener('activate', function (event) {
 ``` js
 // src/sw-register.js 中注册，重载相关代码
 navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(() => {
-    // 监听 service-worker.js 的 postMessage 事件
+    // 主页面监听 message 事件
     navigator.serviceWorker.addEventListener('message', e => {
 
-        // service-worker.js 如果更新成功会 postMessage 给页面，内容为 'sw.update'
+        // service worker 如果更新成功会 postMessage 给页面，内容为 'sw.update'
         if (e.data === 'sw.update') {
 
             // 开发者这自定义处理函数，也可以使用默认提供的用户提示，引导用户刷新
@@ -272,6 +259,8 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 我们在 `sw-rigester.js` 的请求中增加了一个时间戳[可参考上文示例](./05-service-worker-maintenance#service-worker-的注册)，保证每次 `sw-rigester.js` 文件请求都获取最新的 `sw-register.js` 文件，且其中被注册的 `service-worker.js` 文件请求也带有最新的版本参数，保证每次 `service-worker.js` 文件请求的都是最新版本。您可在 build 后，在 `dist/index.html` 文件最后查看时间戳相关代码，包括版本参数等都是由 `sw-register-webpack-plugin` 插件完成，无需修改。
 
 * 当 `service-worker.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `service-worker.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
+
+![版本更新提示引导](./images/refreshTip.png)
 
 > Note
 >

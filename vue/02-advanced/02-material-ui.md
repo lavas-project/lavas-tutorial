@@ -7,7 +7,7 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 
 **1、介绍**
 
-结合 Material 和 Vue 建立精美的app应用，提升用户的交互体验。官网也给出了该框架的一些优势：
+结合 Material 和 Vue 建立精美的 App 应用，提升用户的交互体验。官网也给出了该框架的一些优势：
 
 * 考虑到了 SSR (server side rendered) 服务端渲染的情况，这也是我们选择它的原因之一
 
@@ -20,7 +20,7 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 
 ```npm
 
-$ npm install --save vuetify 
+$ npm install --save vuetify
 
 $ yarn add vuetify
 ```
@@ -47,7 +47,7 @@ Vue.use(Vuetify);
 
 可以在官网查看更多组件的使用和效果
 
-### 导出项目修改主题
+**4、项目中主题修改**
 项目中修改主题的配置在 `config/theme.js` 中[详细可点击查看](./04-how-to-change-theme.md)，此处不多赘述
 
 
