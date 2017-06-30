@@ -1,4 +1,4 @@
-# Service Worker 与接管页面的通信
+# Service Worker 与页面通信
 
 通过前期学习，我们了解到 [Service Worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn) 没有直接操作页面DOM的权限，但是可以通过 postMessage 方法和 Web 页面进行通信，让页面操作DOM。而且这种通信是双向的，类似于 iframe 之间的通信。下面就给大家介绍 postMessage 的在项目中的一些使用场景。注意下面的前提是浏览器支持 service worker
 
