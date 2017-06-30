@@ -29,7 +29,7 @@ Chrome 有一个强大之处在于它的 Devtool 的强大，我们可以通过 
 
 ![chrome application](./images/chrome-application.png)
 
-对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://pwa.baidu.com/doc/offline-and-cache-loading/service-worker/04-service-worker-debug)
+对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/04-service-worker-debug)
 也可以深入了解 [Google Chrome Devtool](https://developers.google.com/web/tools/chrome-devtools)
 
 
@@ -47,7 +47,7 @@ Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。�
 详细信息，可以去 [Lighthouse 官方文档](https://developers.google.com/web/tools/lighthouse) 查看
 
 
-由于 Lighthouse Chrome 插件由于某些墙的原因在国内无法下载。我们提供一套可以在国内安装插件的步骤如下： 
+由于 Lighthouse Chrome 插件由于某些墙的原因在国内无法下载。我们提供一套可以在国内安装插件的步骤如下：
 
 **1、下载 lighthouse 插件**
 
