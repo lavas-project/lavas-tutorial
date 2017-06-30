@@ -16,7 +16,7 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 * 提供了必须可用的组件，且使用方便
 
 
-**2、安装 Vuetify 通过 npm 或 yarn:**
+**2、通过 npm 或 yarn 安装 Vuetify :**
 
 ```npm
 
@@ -28,7 +28,7 @@ $ yarn add vuetify
 
 **3、 使用**
 
-启用 Vuetify 在你的应用（项目中对应 `src/app.js` ）中通过 `Vue.use(Vuetify);` 导入即可，使用比较方便:
+首先在你的应用（项目中对应 `src/app.js` ）中通过 `Vue.use(Vuetify);` 导入:
 
 
 ```js
@@ -38,6 +38,8 @@ import Vuetify from 'vuetify';
 
 Vue.use(Vuetify);
 ```
+
+然后就可以直接在html(或者vue)文件中使用，如下定义了一个按钮:
 
 ```html
 <div>
