@@ -2,7 +2,7 @@
 
 开始之前，您可以查看 [App Shell](https://developers.google.cn/web/fundamentals/architecture/app-shell?hl=zh-cn) 相关内容，快速掌握相关基础。
 
-App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，快速出现，避免甚至消除白屏时间过长，大大提升用户的体验。这里的简单一般是指不依赖js框架，同时能够很好的诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。能够离线缓存，当用户再次进入时，可重复使用缓存提升体验。
+App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，快速出现，避免甚至消除白屏时间过长，大大提升用户的体验。这里的简单是指不依赖JS框架同时能够很好的诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。它们能够做到离线缓存，所以当用户再次进入时，可重复使用缓存提升体验。
 
 如果要开发一个 App Shell, 首先需要明确区分页面 Shell 和 动态内容部分。一般而言，您的应用应加载尽可能最简单的 Shell，如在给出 [lavas-demo-news](https://lavas-project.github.io/lavas-demo/news/index.html#/) 中，我们将头部导航作为 Shell，其余部分为动态内容，也就需要适时更新的部分。明确了之后，我们就可以着手开发这部分了。
 
@@ -45,7 +45,7 @@ export default {
 
 ## Vuex store
 
-每一个 Vuex 应用的核心就是 store（仓库）。store 基本上就是一个容器，它包含着你的应用中大部分的状态(state)。所以我们在 Shell 或是组件开发时，都需要指定自己所需的 store, 并通过 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 来实现统一的管理（`src/store/index.js`）。
+每一个 Vuex 应用的核心就是 store (仓库)。store 基本上就是一个容器，它包含着你的应用中大部分的状态 (state)。所以我们在 Shell 或是组件开发时，都需要指定自己所需的 store, 并通过 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 来实现统一的管理（`src/store/index.js`）。
 
 ``` js
 // 将 store 统一集中管理
