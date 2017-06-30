@@ -259,11 +259,11 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 * 当 `service-worker.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `service-worker.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
 
-![版本更新提示引导](./images/refreshTip.png)
-
 > Note
 >
 > 我们虽然提供了缓存及时更新的方案，但还是推荐使用服务器对 `service-worker.js` 做 no-cache 处理。
+
+![版本更新提示引导](./images/refreshTip.png)
 
 ## service worker 容错降级方案
 
