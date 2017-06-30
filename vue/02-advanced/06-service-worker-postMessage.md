@@ -1,6 +1,6 @@
 # service worker 与页面通信
 
-[service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn) 没有直接操作页面DOM的权限，但是可以通过 postMessage 方法和 Web 页面进行通信，让页面操作 DOM。而且这种通信可以是双向的，类似于 iframe 之间的通信。下面就给大家介绍 postMessage 在项目中的一些使用场景。注意下面的前提是浏览器支持 service worker。
+[service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn) 没有直接操作页面 DOM 的权限，但是可以通过 postMessage 方法和 Web 页面进行通信，让页面操作 DOM。而且这种通信可以是双向的，类似于 iframe 之间的通信。下面就给大家介绍 postMessage 在项目中的一些使用场景。注意下面的前提是浏览器支持 service worker。
 
 下文的 `service-worker.js` 文件，简称为 `sw.js`。
 
