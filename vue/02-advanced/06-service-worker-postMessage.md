@@ -1,13 +1,13 @@
 # service worker 与页面通信
 
-[service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn) 没有直接操作页面DOM的权限，但是可以通过 postMessage 方法和 Web 页面进行通信，让页面操作DOM。而且这种通信可以是双向的，类似于 iframe 之间的通信。下面就给大家介绍 postMessage 在项目中的一些使用场景。注意下面的前提是浏览器支持 service worker
+[service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers?hl=zh-cn) 没有直接操作页面DOM的权限，但是可以通过 postMessage 方法和 Web 页面进行通信，让页面操作 DOM。而且这种通信可以是双向的，类似于 iframe 之间的通信。下面就给大家介绍 postMessage 在项目中的一些使用场景。注意下面的前提是浏览器支持 service worker。
 
 下文的 `service-worker.js` 文件，简称为 `sw.js`。
 
 
 ## 如何使用 postMessage 方法发送信息 ？
 
-1、在 `sw.js` 中接管页面发信息，可以采用 client.postMessage() 方法，示例代码如下：
+1、在 `sw.js` 中向接管页面发信息，可以采用 client.postMessage() 方法，示例代码如下：
 
 ```js
 self.clients.matchAll()
@@ -22,7 +22,7 @@ self.clients.matchAll()
 ```
 
 
-2、在主页面给 service worker 发消息，可以采用 navigator.serviceWorker.controller.postMessage()方法，示例代码如下：
+2、在主页面给 service worker 发消息，可以采用 navigator.serviceWorker.controller.postMessage() 方法，示例代码如下：
 
 ```js
 // 点击指定 DOM 时就给service worker 发送消息
@@ -44,7 +44,7 @@ self.addEventListener('message', function (event) {
 });
 ```
 
-2、在主页面中接收 `sw.js` 发来的信息，示例代码如下，通过 event.data 来读取数据：
+2、在页面中接收 `sw.js` 发来的信息，示例代码如下，通过 event.data 来读取数据：
 
 ```js
 navigator.serviceWorker.addEventListener('message', event => {
@@ -69,7 +69,7 @@ self.addEventListener('activate', function (event) {
             // 省略
         }).then(function() {
 
-            // 如果非首次安装 service worker 或缓存中原先有缓存的静态资源，我们需要通知主页面，sw.js有更新，提示用户点击刷新页面
+            // 如果非首次安装 service worker 或缓存中原先有缓存的静态资源，我们需要通知接管页面，sw.js有更新，提示用户点击刷新页面
             if (!firstRegister) {
                 return self.clients.matchAll()
                     .then(function (clients) {
@@ -85,7 +85,7 @@ self.addEventListener('activate', function (event) {
 });
 ```
 
-在主页面中，接收到消息 service worker 的缓存更新消息后，在主页面增加提示（代码在导出项目中的 `src/sw-register.js` 文件）
+在页面中，接收到消息 service worker 的缓存更新消息后，在页面增加提示，如下图所示（代码在导出项目中的 `src/sw-register.js` 文件）
 
 ```js
 // src/sw-register.js 中注册，重载相关代码
@@ -114,7 +114,7 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
 
 **2、解决方法**
 
-解决上述问题的方法也并不复杂，需要利用浏览器的 visibilitychange 事件，这是浏览器新添加的一个事件，当浏览器的某个标签页切换到后台，或从后台切换到前台时就会触发该消息，现在主流的浏览器都支持该事件了，例如Chrome, Firefox, IE10等。当切换某个页面时，就会触发该事件，可通过判断 “有刷新提示条 & 用户点击刷新” 来决定是否刷新页面。
+解决上述问题的方法也并不复杂，需要利用浏览器的 visibilitychange 事件，这是浏览器新添加的一个事件，当浏览器的某个标签页切换到后台，或从后台切换到前台时就会触发该消息，现在主流的浏览器都支持该事件了，例如 Chrome, Firefox, IE10 等。当切换某个页面时，就会触发该事件，可通过判断 “有刷新提示条 & 用户点击刷新” 来决定是否重载页面。
 
 
 ```js
