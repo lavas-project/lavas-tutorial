@@ -102,16 +102,14 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 ## 如何修改 service-worker.js 文件内容
 
-**如果自动生成的文件无法满足需求，如何进行定制化开发?**
+**1、若自动生成的文件无法满足需求，如何进行定制化开发?**
 
 我们先要了解 sw-precache 工具是怎么生成了这个 `service-worker.js` 文件。
 要让 sw-precahce 工具生成 `service-worker.js` 文件，需要给它提供一个模板文件。
-工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 `service-worker.js` 文件。
-
-**Lavas 导出项目中默认将导入模板文件放在 `config/sw.tmpl.js` 下，便于开发者后期相应的维护开发。**
+工具默认使用插件默认模板，但是您也可以定制自己的模板（最好参考默认模板），通过配置 templateFilePath 导入模板，实现定制化开发。在上面文件示例中，是通过 `templateFilePath: 'config/sw.tmpl.js'` 导入定制化模板来生成 `service-worker.js` 文件。Lavas 导出项目中默认将导入模板文件放在 `config/sw.tmpl.js` 下，便于开发者后期相应的维护开发。
 
 
-**Lavas 导出项目中做了什么定制化呢 ？**
+**2、Lavas 导出项目中做了什么定制化呢 ？**
 
 为了在 `service-worker.js` 文件内容更新时，能够让主页面及时提醒用户更新，我们在 `config/sw.tmpl.js` 文件的 activate 监听事件中通过 postMessage 发送 'sw.update' 字符串，在主页面中，注册了 `onMessage` 消息的监听 (这种方式是 service worker 和 主页面进程通信的方式)，一旦接收到 'sw.update' 字符串，主页面给出相应的更新提示。
 
@@ -187,7 +185,7 @@ window.onload = function () {
 
 ## 动态缓存补充
 
-开发过程中，我们可能会对一些第三方的静态资源活着异步的请求进行动态的 service worker 缓存处理，Lavas 导出工程提供了这种动态配置机制：
+开发过程中，我们可能会对一些第三方的静态资源或者异步的请求进行动态的 service worker 缓存处理，Lavas 导出工程提供了这种动态配置机制：
 
 缓存内容及策略主要通过 `config/sw-precache.js` 配置文件来控制，常用配置的参数如下：
 
@@ -215,6 +213,7 @@ runtimeCaching: [
         options: {
             cache: {
                 maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 30, // 30天有效期
                 name: 'fonts-cache'
             }
         }
@@ -245,7 +244,7 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 * `cache.maxEntries[Number]`：对缓存的项目实施 least-recently 缓存过期策略，可以将此项用于动态资源缓存。例如，将 cache.maxEntries 设置为 10 意味着在第 11 个项目被缓存之后，最近最少使用的条目将被自动删除。缓存永远不会超过 cache.maxEntries 规定的最大数量。此选项将仅在同时设置了 cache.name 时生效，它可以单独使用或与 cache.maxAgeSeconds 一起使用。默认值为空。
 
-* `cache.maxAgeSeconds[Number]`：强制规定缓存项目的最大期限（以秒为单位),你可以用这个选项来存储没有自然过期策略的动态资源。例如，可以将 cache.maxAgeSeconds 设置为例如 60 * 60 * 24，这意味着任何超过一天之前的缓存都将被自动删除。此选项仅在同时设置了 cache.name 时生效，它也可以单独使用或与 cache.maxEntries 一起使用。默认值为空。
+* `cache.maxAgeSeconds[Number]`：强制规定缓存项目的最大期限（以秒为单位),你可以用这个选项来存储没有自然过期策略的动态资源。例如，可以将 cache.maxAgeSeconds 设置为例如 60 x 60 x 24，这意味着任何超过一天之前的缓存都将被自动删除。此选项仅在同时设置了 cache.name 时生效，它也可以单独使用或与 cache.maxEntries 一起使用。默认值为空。我们建议设定有效期，如果不设定有效期，一直到 service worker 下次安装更新时才会更新该缓存，否则一直生效。
 
 
 ## 缓存更新难题及处理
@@ -260,11 +259,11 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 
 * 当 `service-worker.js` 文件更新后，打开的旧页面并不能及时感知，要重新加载时才能得到更新，这在新版本上线时很容易导致出现问题，所以我们希望在 `service-worker.js` 检测到版本更新，重新安装后能够及时的通知主页面（这里不包括首次安装的情况），并做出相应的处理，项目中默认提示页面更新，进行 reload 处理（`src/sw-register.js`），您也可以开发扩展，如改为弹层交互，告知用户有新版本，需要重载更新等。
 
-![版本更新提示引导](./images/refreshTip.png)
-
 > Note
 >
 > 我们虽然提供了缓存及时更新的方案，但还是推荐使用服务器对 `service-worker.js` 做 no-cache 处理。
+
+![版本更新提示引导](./images/refreshTip.png)
 
 ## service worker 容错降级方案
 
