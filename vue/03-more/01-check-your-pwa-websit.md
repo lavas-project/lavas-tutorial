@@ -5,7 +5,7 @@
 
 对于 PWA 站点是否完善，Google 通过 PWA 所需要具备的一些特性和最佳实践给出了一个 Checklist, 该 Checklist 从多个方面来提供 PWA 站点检测的标准。如果我们对 PWA 工程的检测要求集成到持续集成系统的话(类似后面所提到的 Lighthouse)，我们可以参照 Checklist 进行一系列的检测。
 
-Checklist: [https://developers.google.com/web/progressive-web-apps/checklist](https://developers.google.com/web/progressive-web-apps/checklist)
+Checklist: [https://developers.google.cn/web/progressive-web-apps/checklist](https://developers.google.cn/web/progressive-web-apps/checklist)
 
 ## Chrome Devtool
 
@@ -29,8 +29,8 @@ Chrome 有一个强大之处在于它的 Devtool 的强大，我们可以通过 
 
 ![chrome application](./images/chrome-application.png)
 
-对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://pwa.baidu.com/doc/offline-and-cache-loading/service-worker/04-service-worker-debug)
-也可以深入了解 [Google Chrome Devtool](https://developers.google.com/web/tools/chrome-devtools)
+对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/04-service-worker-debug)
+也可以深入了解 [Google Chrome Devtool](https://developers.google.cn/web/tools/chrome-devtools)
 
 
 ## Lighthouse
@@ -44,10 +44,10 @@ Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。�
 
 运行 Lighthouse 的方式有两种：作为 Chrome 扩展程序运行，或作为命令行工具运行。 Chrome 扩展程序提供了一个对用户更友好的界面，方便读取报告。 命令行工具允许您将 Lighthouse 集成到持续集成系统。
 
-详细信息，可以去 [Lighthouse 官方文档](https://developers.google.com/web/tools/lighthouse) 查看
+详细信息，可以去 [Lighthouse 官方文档](https://developers.google.cn/web/tools/lighthouse) 查看
 
 
-由于 Lighthouse Chrome 插件由于某些墙的原因在国内无法下载。我们提供一套可以在国内安装插件的步骤如下： 
+由于 Lighthouse Chrome 插件由于某些墙的原因在国内无法下载。我们提供一套可以在国内安装插件的步骤如下：
 
 **1、下载 lighthouse 插件**
 

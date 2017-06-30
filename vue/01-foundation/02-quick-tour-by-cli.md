@@ -16,7 +16,7 @@
 
 学习 PWA 相关知识
 
-- PWA: [https://pwa.baidu.com/doc](https://pwa.baidu.com/doc)
+- PWA: [https://lavas.baidu.com/doc](https://lavas.baidu.com/doc)
 
 
 ## 依赖工具

@@ -1,6 +1,6 @@
 # App Shell 调整及扩展
 
-开始之前，您可以查看 [App Shell](https://developers.google.com/web/fundamentals/architecture/app-shell?hl=zh-cn) 相关内容，快速掌握相关基础。
+开始之前，您可以查看 [App Shell](https://developers.google.cn/web/fundamentals/architecture/app-shell?hl=zh-cn) 相关内容，快速掌握相关基础。
 
 App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，快速出现，避免甚至消除白屏时间过长，大大提升用户的体验。这里的简单一般是指不依赖js框架，同时能够很好的诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。能够离线缓存，当用户再次进入时，可重复使用缓存提升体验。
 
