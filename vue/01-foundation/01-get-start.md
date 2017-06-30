@@ -8,7 +8,7 @@ PWA (Progressive Web Apps) 是一种 Web App 新模型，并不是具体指某�
 
 PWA 工程的解决方案中借助了 service worker 的离线存储能力，消息推送能力以及系统的添加桌面能力，从而形成一个完善的 Web App 解决方案，帮助我们在 Web 端低成本的开发和维护一个逐步类 Native App 化的 Web App。
 
-我们看一下 [Google 对 PWA 全面介绍](https://developers.google.com/web/progressive-web-apps)。
+我们看一下 [Google 对 PWA 全面介绍](https://developers.google.cn/web/progressive-web-apps)。
 
 
 ## 什么站点适合改造成 PWA
@@ -30,7 +30,7 @@ PWA 工程构建出的 App 是一个 Web App，我们需要做的是使这样的
 - 灵活的热更新
 - ...
 
-对于 PWA 的效果， Google 给出了 PWA 验证的系列 [checkList](https://developers.google.com/web/progressive-web-apps/checklist)， 我们可以参考比对，检验自己的 PWA 工程。
+对于 PWA 的效果， Google 给出了 PWA 验证的系列 [checkList](https://developers.google.cn/web/progressive-web-apps/checklist)， 我们可以参考比对，检验自己的 PWA 工程。
 
 ## 离线缓存
 
@@ -45,7 +45,7 @@ Web 发展进程中，我们有过很多的方法来优化因为 http 请求的�
 
 Native App 有一大优势是流畅，交互流畅和切换的流畅，然而传统的 Web App 在这方面是劣势的缘由主要是因为我们的切换场景的做法仅仅是跳转刷新新页面，这样的交互会使得整个 Web App 用户操作极其不流畅并且浪费了多余的网络流量。
 
-为了实现流畅的 Web App 页面切换以及缩短页面打开和跳转的等待时长，业界在过去几年间进行了不断的探索，从 Ajax 开始，越来越多的单页富应用 (SPA)问世，并且在实现和体验上有着非常高效的解决方案，考虑到异步请求的可缓存性以及用户体验的流畅性，我们在 PWA 工程的实践中首选的工程架构模式是 SPA 模式
+为了实现流畅的 Web App 页面切换以及缩短页面打开和跳转的等待时长，业界在过去几年间进行了不断的探索，从 Ajax 开始，越来越多的单页富应用 (SPA) 问世，并且在实现和体验上有着非常高效的解决方案，考虑到异步请求的可缓存性以及用户体验的流畅性，我们在 PWA 工程的实践中首选的工程架构模式是 SPA 模式
 
 SPA 架构中我们聚焦的是异步请求，数据以及交互之间的关系。对于开发者来说，除了初始的 App 框架 Layout, Web App 就是由用户的一个个交互动作处罚的异步请求的数据驱动渲染成各个页面的各个模块的，然后展现给用户，用户进而进行新的交互操作。
 
@@ -74,7 +74,7 @@ App Shell 是支持用户界面所需的最小的 HTML、CSS 和 javaScript，�
 
 App Shell 通常是由服务端渲染，并不是在前端由数据驱动渲染的，所以在 SEO 方面也有着重要的作用。
 
-App Shell 在 PWA 工程化中扮演重要角色，Google 对 [App Shell 也有详细的描述](https://developers.google.com/web/fundamentals/architecture/app-shell)。
+App Shell 在 PWA 工程化中扮演重要角色，Google 对 [App Shell 也有详细的描述](https://developers.google.cn/web/fundamentals/architecture/app-shell)。
 
 
 ## Lavas 工程化
