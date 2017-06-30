@@ -8,7 +8,7 @@ PWA (Progressive Web Apps) 是一种 Web App 新模型，并不是具体指某�
 
 PWA 工程的解决方案中借助了 service worker 的离线存储能力，消息推送能力以及系统的添加桌面能力，从而形成一个完善的 Web App 解决方案，帮助我们在 Web 端低成本的开发和维护一个逐步类 Native App 化的 Web App。
 
-我们看一下 [Google 对 PWA 全面介绍](https://developers.google.com/web/progressive-web-apps)。
+我们看一下 [Google 对 PWA 全面介绍](https://developers.google.cn/web/progressive-web-apps)。
 
 
 ## 什么站点适合改造成 PWA
@@ -30,7 +30,7 @@ PWA 工程构建出的 App 是一个 Web App，我们需要做的是使这样的
 - 灵活的热更新
 - ...
 
-对于 PWA 的效果， Google 给出了 PWA 验证的系列 [checkList](https://developers.google.com/web/progressive-web-apps/checklist)， 我们可以参考比对，检验自己的 PWA 工程。
+对于 PWA 的效果， Google 给出了 PWA 验证的系列 [checkList](https://developers.google.cn/web/progressive-web-apps/checklist)， 我们可以参考比对，检验自己的 PWA 工程。
 
 ## 离线缓存
 
@@ -74,7 +74,7 @@ App Shell 是支持用户界面所需的最小的 HTML、CSS 和 javaScript，�
 
 App Shell 通常是由服务端渲染，并不是在前端由数据驱动渲染的，所以在 SEO 方面也有着重要的作用。
 
-App Shell 在 PWA 工程化中扮演重要角色，Google 对 [App Shell 也有详细的描述](https://developers.google.com/web/fundamentals/architecture/app-shell)。
+App Shell 在 PWA 工程化中扮演重要角色，Google 对 [App Shell 也有详细的描述](https://developers.google.cn/web/fundamentals/architecture/app-shell)。
 
 
 ## Lavas 工程化
