@@ -155,7 +155,12 @@ vue-router 给出了两种[获取数据的时机](https://router.vuejs.org/zh-cn
 
 在 vuex 中，由于 mutation 必须是同步函数，异步请求可以放在 [action](https://vuex.vuejs.org/zh-cn/actions.html) 中执行，通过使用 async/await 新特性使代码变的简洁。
 
-对于开发者而言，只需要在组件的 asyncData 方法中调用 action 操作即可。
+对于开发者而言，只需要在组件的 asyncData 方法中调用 action 操作即可。方法签名如下：
+```js
+asyncData({store, route}) {
+    store.dispatch('actionName');
+}
+```
 
 推荐使用 [axios](https://github.com/mzabriskie/axios)与服务端通信。axios 基于 Promise，兼容浏览器端和 Node.js 环境。
 
