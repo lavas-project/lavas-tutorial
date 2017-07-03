@@ -136,9 +136,13 @@ if (visibilityChangeEvent) {
     var onVisibilityChange = function(){
         // 在进入页面和离开页面均会触发该事件，所以我们这里需要判断是进入页面的情况才做处理
         if (!(document.hidden || document.wekitHidden || document.mozHidden)) {
+            // 刷新提示条显示类名，判断是否有刷新条，这里只是示例
+            var hasRefreshTip = document.getElementsByClassName('app-refresh-show').length;
+            // 刷新提示是否被用户点击刷新，这里仅示例
+            var userClickRefresh = document.getElementsByClassName('app-refresh-click').length;
 
-            // 这个条件哪里获取，可以继续阅读下文
-            if (有提示条 && 某个页面点击过刷新) {
+            // 有刷新提示条 && 某个页面点击过刷新
+            if (hasRefreshTip && userClickRefresh) {
 
                 // 这里的location.reload只能刷新当前打开的页面，后台的页面并不起作用
                 location.reload();
