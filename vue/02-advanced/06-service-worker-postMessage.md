@@ -62,28 +62,17 @@ navigator.serviceWorker.addEventListener('message', function (event) {
 `sw.js` 文件发现更新后，在 activate 事件最后 postMessage 事件（代码在导出项目中的 `sw.tmpl.js` 文件）
 
 ```js
-self.addEventListener('activate', function (event) {
-
-    event.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            // 省略
-        })
-        .then(function () {
-
-            // 如果非首次安装 service worker 或缓存中原先有缓存的静态资源，我们需要通知接管页面，sw.js有更新，提示用户点击刷新页面
-            if (!firstRegister) {
-                return self.clients.matchAll()
-                    .then(function (clients) {
-                        if (clients && clients.length) {
-                            clients.forEach(function (client) {
-                                client.postMessage('sw.update');
-                            })
-                        }
-                    });
+// 如果非首次安装 service worker 或缓存中原先有缓存的静态资源，我们需要通知接管页面，sw.js有更新，提示用户点击刷新页面
+if (!firstRegister) {
+    return self.clients.matchAll()
+        .then(function (clients) {
+            if (clients && clients.length) {
+                clients.forEach(function (client) {
+                    client.postMessage('sw.update');
+                })
             }
-        })
-    );
-});
+        });
+}
 ```
 
 在页面中，接收到消息 service worker 的缓存更新消息后，在页面增加提示，如下图所示（代码在导出项目中的 `src/sw-register.js` 文件）
