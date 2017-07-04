@@ -28,7 +28,7 @@ $ yarn add vuetify
 
 **3、 使用**
 
-首先在你的应用（项目中对应 `src/app.js` ）中通过 `Vue.use(Vuetify);` 导入:
+首先在你的应用（项目中对应 `src/app.js` ）中通过 `Vue.use(Vuetify)` 导入:
 
 
 ```js
