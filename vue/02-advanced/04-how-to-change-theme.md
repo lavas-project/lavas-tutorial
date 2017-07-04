@@ -1,6 +1,6 @@
 # 修改项目主题
 
-> [Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
+> 注：[Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
 
 项目使用 [vuetify](https://vuetifyjs.com/) 作为组件库，根据 vuetify 的实现，主题配置分为两个部分：
 1. 项目中主要使用的颜色，其中主要颜色，次要颜色的选择和使用场景可参考 [material 设计中的颜色系统](https://material.io/guidelines/style/color.html#color-color-system)。

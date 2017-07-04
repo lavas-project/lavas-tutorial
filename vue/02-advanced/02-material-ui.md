@@ -7,9 +7,9 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 
 **1、介绍**
 
-结合 Material 和 Vue 建立精美的 App 应用，提升用户的交互体验。官网也给出了该框架的一些优势：
+结合 Material Design 和 Vue 可以建立精美的应用，提升用户的交互体验。官网也给出了该框架的一些优势：
 
-* 考虑到了 SSR (server side rendered) 服务端渲染的情况，这也是我们选择它的原因之一
+* 考虑到了 SSR (Server-Side Rendering) 服务端渲染的情况，这也是我们选择它的原因之一
 
 * Layouts 结合 Material Design，提供了独一无二的交互体验，满足您的开发需求
 
