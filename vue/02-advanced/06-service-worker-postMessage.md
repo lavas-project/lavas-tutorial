@@ -125,7 +125,7 @@ var visibilityChangeEvent = '';
 if (document.hidden) {
     visibilityChangeEvent = 'visibilitychange';
 }
-if (document.wekitHidden) {
+else if (document.wekitHidden) {
     visibilityChangeEvent = 'wekitvisibilitychange';
 }
 else if (document.mozHidden) {
