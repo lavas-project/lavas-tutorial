@@ -174,10 +174,10 @@ var p1 = ch.port1;
 var p2 = ch.port2;
 p1.onmessage = function (e) {
     console.log("port1 receive " + e.data);
-}
+};
 p2.onmessage = function (e) {
     console.log("port2 receive " + e.data);
-}
+};
 p1.postMessage("你好世界");
 p2.postMessage("世界你好");
 
