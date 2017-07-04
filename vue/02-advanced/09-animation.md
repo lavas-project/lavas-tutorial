@@ -24,7 +24,7 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 以左滑为例，即将打开的新页面插入 DOM 时立即应用 slide-left-enter 将页面移动到屏幕右外侧，随即移除，页面表现为向左滑回到初始位置。
 而旧页面在整个离开过程中都应用 slide-left-leave-active，也向左滑动至屏幕左外侧。
 
-```css
+```stylus
 .app-view
     &.slide-left-enter
         transform translate(100%, 0)
@@ -37,7 +37,7 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 
 如果需要更换页面切换效果，例如想使用渐隐/渐显代替滑动，只需要简单修改上述 CSS 类的样式规则即可：
 
-```css
+```stylus
 .app-view
     opacity 1
     transition opacity 1s ease
