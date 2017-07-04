@@ -14,7 +14,36 @@
                 },
                 {
                     "name": "进阶教程",
-                    "key": "vue/02-advanced"
+                    "key": "vue/02-advanced",
+                    "children": [
+                        {
+                            "key": "05-service-worker-maintenance"
+                        },
+                        {
+                            "key": "06-service-worker-postMessage"
+                        },
+                        {
+                            "key": "01-define-app-shell",
+                        },
+                        {
+                            "key": "07-skeleton"
+                        },
+                        {
+                            "key": "09-animation"
+                        },
+                        {
+                            "key": "04-how-to-change-theme",
+                        },
+                        {
+                            "key": "03-how-to-use-icon"
+                        },
+                        {
+                            "key": "02-material-ui"
+                        },
+                        {
+                            "key": "10-https-deploy",
+                        }
+                    ]
                 },
                 {
                     "name": "更多",
