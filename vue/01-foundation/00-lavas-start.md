@@ -26,7 +26,7 @@ Lavas 是一个基于 Vue 的 PWA 解决方案。我们将 PWA 的工程实践�
 
 ## Lavas 教程索引
 
-Lavas 教程文档主要分为基础和进阶两部分，也是我们建议使用者浏览的顺序。基础部分可以帮助大家快速搭建项目并跑通，让您对项目结构和效果有一个初步的了解和体验。进阶部分可以为大家剖析一些项目中必要技术点的实现，包括配置使用方法、使用时注意的问题、如何避免一些曾经踩过的坑等等，能为使用者开发大型项目时提供更好的技术支持。
+Lavas 教程文档主要分为基础和进阶两部分，也是我们建议开发者浏览的顺序。基础部分可以帮助大家快速搭建项目并跑通，让您对项目结构和效果有一个初步的了解和体验。进阶部分可以为大家剖析一些项目中必要技术点的实现，包括配置使用方法、使用时注意的问题、如何避免一些曾经踩过的坑等等，能为开发者开发大型项目时提供更好的技术支持。
 
 ### 基础教程
 
@@ -47,7 +47,7 @@ Lavas 教程文档主要分为基础和进阶两部分，也是我们建议使�
 
 开发中，您还需要关注的一些技术点，该部分的阅读会让您的开发更加得心应手：
 
-- [ 添加到桌面功能 ](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)： 这是我们首先需要关注的一个内容，初始化项目模板中使用 `static/manifest.json` 的默认配置项，包括添加到桌面的图标、文案、打开方式、主题色等，使用者可以按需更换。
+- [ 添加到桌面功能 ](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)： 这是我们首先需要关注的一个内容，初始化项目模板中使用 `static/manifest.json` 的默认配置项，包括添加到桌面的图标、文案、打开方式、主题色等，开发者可以按需更换。
 
 
 - Service Worker：这部分需要我们重点关注，主要涉及离线资源缓存的配置管理与更新，项目默认缓存所有静态资源，并提供了简单的缓存更新机制。如果您想缓存指定内容，或配置部分动态缓存的内容及其他相关问题，均可参考[ 维护 service-worker.js 文件 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance) 和 [Service Worker 与页面通信 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/06-service-worker-postMessage)两部分内容来寻找解决方案。
@@ -59,9 +59,9 @@ Lavas 教程文档主要分为基础和进阶两部分，也是我们建议使�
 - [ skeleton 介绍 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)：同样是为了优化白屏的问题，skeleton 的使用，能实现在页面渲染过程中，先展示整个页面内容框架，待页面渲染完成后用真实内容替换。如果能结合 App Shell 一起使用，就能完美解决白屏的体验问题。
 
 
-- 除 basic 模板外，其他模板中还提供了一些比较实用的解决方案，方便使用者开发。
+- 除 basic 模板外，其他模板中还提供了一些比较实用的解决方案，方便开发者使用。
 
-    - [ 页面切换动画 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/09-animation)，使用者一般都需要考虑的问题，所以给出了具体实现方案，供大家参考。
+    - [ 页面切换动画 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/09-animation)，这是开发者一般都需考虑的问题，所以这里给出了具体实现方案，供大家参考。
 
     - [ 项目主题色修改 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/04-how-to-change-theme)，开发者可以通过统一配置，修改站点的主题色，方便统一组件、页面的主色调等。
 
