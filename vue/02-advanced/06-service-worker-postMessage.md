@@ -149,9 +149,9 @@ if (visibilityChangeEvent) {
 
 ## 扩展
 
-查看资料时，发现 [Polymer 示例](https://github.com/StartPolymer/progressive-web-app-template)使用了 [MessageChannel](https://developer.mozilla.org/zh-CN/docs/Web/API/MessageChannel) 的方式 postMessage，大家也可以了解下。
+查看资料时，发现 [Polymer 示例 ](https://github.com/StartPolymer/progressive-web-app-template)使用了 [MessageChannel ](https://developer.mozilla.org/zh-CN/docs/Web/API/MessageChannel) 的方式 postMessage，大家也可以了解下。
 
-MessageChannel 接口是信道通信API的一个接口，它允许我们创建一个新的信道并通过信道的两个 MessagePort 属性来传递数据
+MessageChannel 接口是信道通信 API 的一个接口，它允许我们创建一个新的信道并通过信道的两个 MessagePort 属性来传递数据
 
 简单来说，MessageChannel 创建了一个通信的管道，这个管道有两个口子，每个口子都可以通过 postMessage 发送数据，而一个口子只要绑定了 onmessage 回调方法，就可以接收从另一个口子传过来的数据。
 
