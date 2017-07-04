@@ -27,35 +27,35 @@ Lavas 教程文档主要分为基础和进阶两部分，也是我们建议使�
 
 #### 基础教程
 
-- 1、如果您对 PWA 本身还不是很了解，可以通过 [探索 PWA ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/01-get-start)来快速了解其一些特性，优势等，这会让您对项目的 PWA 化目标更加清晰。
+- 如果您对 PWA 本身还不是很了解，可以通过 [探索 PWA ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/01-get-start)来快速了解其一些特性，优势等，这会让您对项目的 PWA 化目标更加清晰。
 
-- 2、参考[ 快速开始 PWA 工程 ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli)，使用 Lavas 工具快速导出一个 PWA 工程，浏览项目结构，运行浏览模板效果。
+- 参考[ 快速开始 PWA 工程 ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli)，使用 Lavas 工具快速导出一个 PWA 工程，浏览项目结构，运行浏览模板效果。
 
     - Lavas 工具中提供了多种应用模板框架，既包括最轻量的 basic 模板，appshell 模板，也包括支持服务端渲染的 ssr 模板，支持多页应用的 mpa 模板，大家可以参考使用
     - 初始化项目模板预设了 manifest.json 文件和 Service Worker 相关插件，均有默认设置
     - 初始化的框架结构，遵循 UI 开发规范，可引导用户遵循一定的开发规则，更高效地进行项目管理
 
-- 3、其他几节让您快速掌握简单的开发、调试及构建部署技巧。
+- 其他几节让您快速掌握简单的开发、调试及构建部署技巧。
 
 
 #### 进阶教程
 
 开发中，您需要关注的一些技术点，该部分的阅读会让您的开发更加得心应手：
 
-- 1、[ 添加到桌面功能 ](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)： 这是我们首先需要关注的一个内容，初始化项目模板中默认使用 `static/manifest.json` 中配置的添加到桌面的图标、文案、打开方式、主题色等，使用者需要在管理更换。
+- [ 添加到桌面功能 ](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)： 这是我们首先需要关注的一个内容，初始化项目模板中默认使用 `static/manifest.json` 中配置的添加到桌面的图标、文案、打开方式、主题色等，使用者需要在管理更换。
 
-- 2、Service Worker：这是 PWA 中最关键的技术，需要我们重点关注。这部分主要介绍离线资源缓存配置管理与更新，项目默认缓存所有静态资源，并提供了简单的缓存更新机制，如果您想缓存指定内容，或配置部分动态缓存的内容及离线缓存相关问题，均可参考[ 维护 service-worker.js 文件 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance) 和 [Service Worker 与页面通信 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/06-service-worker-postMessage)两部分内容来寻找解决方案。
+- Service Worker：这是 PWA 中最关键的技术，需要我们重点关注。这部分主要介绍离线资源缓存配置管理与更新，项目默认缓存所有静态资源，并提供了简单的缓存更新机制，如果您想缓存指定内容，或配置部分动态缓存的内容及离线缓存相关问题，均可参考[ 维护 service-worker.js 文件 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance) 和 [Service Worker 与页面通信 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/06-service-worker-postMessage)两部分内容来寻找解决方案。
 
-- 3、App Shell：在解决了上面两个必须的关键问题后，您可以对页面渲染中的白屏问题做进一步的优化，App Shell 就是其中之一。简单说，它就是第一次渲染个壳、等异步数据来了再填充，避免用户长时间看到白屏。这部分可以在[ App Shell 调整及扩展 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/01-define-app-shell)中查看相关介绍，Lavas 工具在 basic 外的模板中增加了 App Shell 的使用示例，供您参考。
+- App Shell：在解决了上面两个必须的关键问题后，您可以对页面渲染中的白屏问题做进一步的优化，App Shell 就是其中之一。简单说，它就是第一次渲染个壳、等异步数据来了再填充，避免用户长时间看到白屏。这部分可以在[ App Shell 调整及扩展 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/01-define-app-shell)中查看相关介绍，Lavas 工具在 basic 外的模板中增加了 App Shell 的使用示例，供您参考。
 
-- 4、[ skeleton 介绍 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)：同样是为了优化白屏的问题，skeleton 的使用，能实现在页面渲染过程中，先展示整个页面内容框架，然后用真实内容替换。如果能结合 App Shell 一起使用，就能完美解决白屏的体验问题。
+- [ skeleton 介绍 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)：同样是为了优化白屏的问题，skeleton 的使用，能实现在页面渲染过程中，先展示整个页面内容框架，然后用真实内容替换。如果能结合 App Shell 一起使用，就能完美解决白屏的体验问题。
 
 
-- 5、除 basic 模板之外，还在其他模板中提供了一些比较实用的解决方案，方便使用者开发。
+- 除 basic 模板外，其他模板中还提供了一些比较实用的解决方案，方便使用者开发。
 
     - [ 页面切换动画 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/09-animation)，使用者一般都需要考虑这个问题，所以这里给出了具体实现方案，供大家参考。
 
-    - [ 项目主题色修改 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/04-how-to-change-theme)，可以通过配置，统一配置修改站点的主题色，开发中使用该配置，方便统一组件、页面的主色调。
+    - [ 项目主题色修改 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/04-how-to-change-theme)，开发可以通过统一配置修改站点的主题色，方便统一组件、页面的主色调。
 
     - [ 项目中 icon 图标使用 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/03-how-to-use-icon)，支持使用 material 图标、自定义 svg 图标、引入指定 fontawesome 图标等。
 
