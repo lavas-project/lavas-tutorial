@@ -119,21 +119,22 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 ``` js
 // sw.tmpl.js文件中
 self.addEventListener('activate', function (event) {
-
     event.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            // 省略
-        }).then(function () {
-            if (!firstRegister) {
-                return self.clients.matchAll()
-                    .then(function (clients) {
-                        if (clients && clients.length) {
-                            var currentClient = clients[0];
-                            currentClient.postMessage('sw.update');
-                        }
-                    })
-            }
-        })
+        caches.open(cacheName)
+            .then(function (cache) {
+                // 省略
+            })
+            .then(function () {
+                if (!firstRegister) {
+                    return self.clients.matchAll()
+                        .then(function (clients) {
+                            if (clients && clients.length) {
+                                var currentClient = clients[0];
+                                currentClient.postMessage('sw.update');
+                            }
+                        });
+                }
+            })
     );
 });
 
@@ -149,19 +150,20 @@ self.addEventListener('activate', function (event) {
 
 ``` js
 // src/sw-register.js 中注册，重载相关代码
-navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(() => {
-    // 主页面监听 message 事件
-    navigator.serviceWorker.addEventListener('message', e => {
+navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js')
+    .then(function () {
+        // 主页面监听 message 事件
+        navigator.serviceWorker.addEventListener('message', function (e) {
 
-        // service worker 如果更新成功会 postMessage 给页面，内容为 'sw.update'
-        if (e.data === 'sw.update') {
+            // service worker 如果更新成功会 postMessage 给页面，内容为 'sw.update'
+            if (e.data === 'sw.update') {
 
-            // 开发者这自定义处理函数，也可以使用默认提供的用户提示，引导用户刷新
-            // 这里建议引导用户 reload 处理，详细查看项目具体文件
-            // location.reload();
-        }
+                // 开发者这自定义处理函数，也可以使用默认提供的用户提示，引导用户刷新
+                // 这里建议引导用户 reload 处理，详细查看项目具体文件
+                // location.reload();
+            }
+        });
     });
-});
 ```
 
 ``` js
@@ -206,7 +208,6 @@ runtimeCaching: [
         urlPattern: /\/material-design-icon/,
         handler: 'fastest'
     },
-
     {
         urlPattern: /\/fonts\//,
         handler: 'networkFirst',
@@ -272,14 +273,14 @@ runtimeCaching 的配置选项数组中的每个对象都需要一个 urlPattern
 ```javascript
 if (navigator.serviceWorker) {
     fetch(开关的异步接口)
-    .then(status => {
-        if (status 是 表示降级处理) {
-            // 注销所有已安装的 service Worker
-        }
-        else {
-            // 注册 service worker
-        }
-    });
+        .then(function (status) {
+            if (status 是 表示降级处理) {
+                // 注销所有已安装的 service Worker
+            }
+            else {
+                // 注册 service worker
+            }
+        });
 }
 ```
 
