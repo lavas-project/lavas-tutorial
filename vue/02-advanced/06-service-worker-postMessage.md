@@ -122,13 +122,13 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
 // 可以监听的事件名称
 var visibilityChangeEvent = '';
 if (document.hidden) {
-    hiddenProperty = 'visibilitychange';
+    visibilityChangeEvent = 'visibilitychange';
 }
 if (document.wekitHidden) {
-    hiddenProperty = 'wekitvisibilitychange';
+    visibilityChangeEvent = 'wekitvisibilitychange';
 }
 else if (document.mozHidden) {
-    hiddenProperty = 'mozvisibilitychange';
+    visibilityChangeEvent = 'mozvisibilitychange';
 }
 
 // 如果支持该事件，就绑定并添加处理函数
