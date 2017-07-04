@@ -27,7 +27,7 @@
 
 **component 名**
 
-- 定义 Vue 组件名时统一使用驼峰命名
+- 定义 Vue 组件名时统一使用 Pascal 命名，如 AppHeader
 - 自定义 Component 标签时统一使用中划线分割命名
 - 表达意义要明确
 
