@@ -17,31 +17,31 @@
                     "key": "vue/02-advanced",
                     "children": [
                         {
-                            "key": "05-service-worker-maintenance"
+                            "key": "vue/02-advanced/05-service-worker-maintenance"
                         },
                         {
-                            "key": "06-service-worker-postMessage"
+                            "key": "vue/02-advanced/06-service-worker-postMessage"
                         },
                         {
-                            "key": "01-define-app-shell",
+                            "key": "vue/02-advanced/01-define-app-shell",
                         },
                         {
-                            "key": "07-skeleton"
+                            "key": "vue/02-advanced/07-skeleton"
                         },
                         {
-                            "key": "09-animation"
+                            "key": "vue/02-advanced/09-animation"
                         },
                         {
-                            "key": "04-how-to-change-theme",
+                            "key": "vue/02-advanced/04-how-to-change-theme",
                         },
                         {
-                            "key": "03-how-to-use-icon"
+                            "key": "vue/02-advanced/03-how-to-use-icon"
                         },
                         {
-                            "key": "02-material-ui"
+                            "key": "vue/02-advanced/02-material-ui"
                         },
                         {
-                            "key": "10-https-deploy",
+                            "key": "vue/02-advanced/10-https-deploy",
                         }
                     ]
                 },
