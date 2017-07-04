@@ -210,7 +210,7 @@ $color-green = #4caf50
     <div class="m-intro-box">
         <h2>探索 Lavas</h2>
         <p>了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的框架进行快速开发</p>
-        <a class="m-btn m-blue" href="/guide/vue/doc/vue/01-foundation/01-get-start"><div class="md-ripple"></div>开始探索</a>
+        <a class="m-btn m-blue" href="/guide/vue/doc/vue/01-foundation/00-lavas-start"><div class="md-ripple"></div>开始探索</a>
     </div>
     <div class="m-intro-box">
         <h2>了解 PWA</h2>

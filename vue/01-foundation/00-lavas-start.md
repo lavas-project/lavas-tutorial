@@ -9,51 +9,67 @@ Lavas 是一个基于 Vue 的 PWA 解决方案。我们将 PWA 的工程实践�
 
 简单来说，站点 PWA 化需要做什么，Lavas 就做了什么。它提供基于 Vue 框架站点 PWA 化的完整解决方案，让开发者能更多的关心业务需求本身。
 
-站点 PWA 化，就是要使站点具有类似原生应用的功能和体验，如站点可添加主屏幕、全屏方式运行、支持离线缓存、消息推送等。所以要实现站点的 PWA 改造，下面几个工作就必不可少：
+站点 PWA 化，就是要使站点具有类似原生应用的功能和体验，如站点可添加至主屏幕、全屏方式运行、支持离线缓存、消息推送等。所以要实现站点的 PWA 改造，下面几个工作就必不可少：
 
-1. 为了让站点能像原生应用那样安装到主屏幕，我们需要准备“图标”这些静态资源，需要准备一个清单文件 [manifest.json](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction) 去告知浏览器使用哪些图标，显示哪些应用名称等等；
+- 为了让站点能像原生应用那样安装到主屏幕，我们需要准备“图标”这些静态资源，需要准备一个清单文件 [manifest.json ](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction) 去告知浏览器使用哪些图标，显示哪些应用名称等等；
 
-2. 让站点具有更好的离线体验。PWA 提供了更好的缓存 API （详见[web 存储](https://lavas.baidu.com/doc/offline-and-cache-loading/web-storage/01-overview)）和缓存管理方式 [Service Worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction)，而具体的缓存策略仍然需要开发者根据项目的实际需要进行开发；
 
-3. 同样是为了让站点具有更好的离线体验，除了要在缓存策略上下功夫，站点 UI 设计上也需要遵循一定的规范（如[App Shell 模型](https://lavas.baidu.com/doc/architecture/the-app-shell-model)和[离线 UX 注意事项](https://lavas.baidu.com/doc/offline-and-cache-loading/offline-ux-considerations)），以至于站点在页面切换、内容加载、加载出错、弱网断网等等情况下不会给用户显示个大白屏。
+- 让站点具有更好的离线体验。PWA 提供了更好的缓存 API （详见[ web 存储](https://lavas.baidu.com/doc/offline-and-cache-loading/web-storage/01-overview)）和缓存管理方式 [Service Worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction)，而具体的缓存策略仍然需要开发者根据项目的实际需要进行开发；
 
-而上述这些工作，我们希望可以通过 Lavas 工具来解决，开发者只需要做一些简单的业务配置，即可实现，从而大大节约开发维护成本。
+
+- 同样是为了让站点具有更好的离线体验，除了要在缓存策略上下功夫，站点 UI 设计上也需要遵循一定的规范（如[ App Shell 模型 ](https://lavas.baidu.com/doc/architecture/the-app-shell-model)和[ 离线 UX 注意事项 ](https://lavas.baidu.com/doc/offline-and-cache-loading/offline-ux-considerations)），以至于站点在页面切换、内容加载、加载出错、弱网断网等等情况下不会给用户显示个大白屏。
+
+上述这些工作，我们希望可以通过 Lavas 来帮助开发者完成，开发者只需要做一些简单的业务配置即可，从而大大节约开发维护成本。
 
 
 
 ## Lavas 教程索引
 
-Lavas 教程文档主要分为基础和进阶两部分，也是我们引导使用者浏览的顺序。基础部分可以帮助大家快速搭建项目并跑通，让您对项目有一个初步的了解和体验。进阶部分可以为大家剖析一些项目中必要技术点的实现，包括配置使用方法、使用时注意的问题、如何避免一些曾经踩过的坑等等，能为使用者开发大型项目时提供更好的技术支持。
+Lavas 教程文档主要分为基础和进阶两部分，也是我们建议使用者浏览的顺序。基础部分可以帮助大家快速搭建项目并跑通，让您对项目结构和效果有一个初步的了解和体验。进阶部分可以为大家剖析一些项目中必要技术点的实现，包括配置使用方法、使用时注意的问题、如何避免一些曾经踩过的坑等等，能为使用者开发大型项目时提供更好的技术支持。
 
 ### 基础教程
 
-1、如果您对 PWA 本身还不是很了解，可以通过 [探索 PWA ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/01-get-start)来快速了解其一些特性，优势等，这会让您对项目的 PWA 化目标更加清晰。
+- 如果您对 PWA 本身还不是很了解，可以通过 [探索 PWA ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/01-get-start)来快速了解其一些特性，优势等，这会让您对项目的 PWA 化目标更加清晰。
 
-2、参考[快速开始 PWA 工程](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli)，使用 Lavas 工具快速导出一个 PWA 工程，浏览项目结构，运行浏览模板效果。
 
-- Lavas 工具中提供了多种应用模板框架，既包括最轻量的 basic 模板，appshell 模板，也包括多页应用的 MPA 模板，大家按需参考使用
-- 初始化项目模板预设了 manifest.json 文件和 Service Worker 相关插件，均有默认设置
-- 初始化的框架结构，遵循 UI 开发规范，可引导用户遵循一定的开发规则，更高效地进行项目管理
-- 其他几节帮助您快速掌握简单的开发、调试及部署技巧。
+- 参考[ 快速开始 PWA 工程 ](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli)，使用 Lavas 工具快速导出一个 PWA 工程，浏览项目结构，运行浏览模板效果。
+
+    - Lavas 工具中提供了多种应用模板框架，既包括最轻量的 basic 模板、appshell 模板，也包括支持服务端渲染的 ssr 模板、支持多页应用的 mpa 模板，大家可以参考使用
+    - 初始化项目模板预设了 manifest.json 文件和 Service Worker 相关插件，均有默认设置
+    - 初始化的框架结构，遵循 UI 开发规范，可引导用户遵循一定的开发规则，更高效地进行项目管理
+
+
+- 其他几节让您快速掌握简单的开发、调试及构建部署技巧。
 
 
 ### 进阶教程
 
-开发中，您需要关注的一些技术点，该部分的学习会让您的开发更加得心应手：
+您还需要关注的一些技术点，该部分的阅读会让您的开发更加得心应手：
 
-1、[添加到桌面功能](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)： 配置桌面的图标、文案、打开方式、主题色等，目前是在 `static/manifest.json` 目录下默认配置，使用者可以按需管理更换。
-
-2、Service Worker：该部分主要是介绍离线资源缓存管理与更新，项目默认缓存所有静态资源，如果您想缓存指定内容，或配置部分动态缓存的内容及相关问题，均可参考[维护 service-worker.js 文件](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance) 和 [Service Worker 与页面通信](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/06-service-worker-postMessage)两部分内容来寻找解决方案。
-
-3、App Shell：简单说，就是避免用户长时间看到白屏，第一次渲染个壳、等异步数据来了再填充。这部分可以在[App Shell 调整及扩展](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/01-define-app-shell) 中查看相关介绍。但是 App Shell 首先渲染出来后，Shell 内部依旧是白的，如果您想更深入去解决这个问题，可以参考[ skeleton 介绍](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)实现在项目渲染过程中，先看到页面框架，然后用真实内容替换，提升用户体验。
+- [ 添加到桌面功能 ](https://lavas.baidu.com/doc/engage-retain-users/add-to-home-screen/01-introduction)： 这是我们首先需要关注的一个内容，初始化项目模板中使用 `static/manifest.json` 中的默认配置项，包括添加到桌面的图标、文案、打开方式、主题色等，使用者可以按需更换。
 
 
-3、在除 basic 外的其他模板中，还提供了一些比较实用的功能，如[项目主题色修改](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/04-how-to-change-theme)、[项目中 icon 图标使用](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/03-how-to-use-icon)等。
+- Service Worker：这部分需要我们重点关注，主要涉及离线资源缓存的配置管理与更新，项目默认缓存所有静态资源，并提供了简单的缓存更新机制。如果您想缓存指定内容，或配置部分动态缓存的内容及其他相关问题，均可参考[ 维护 service-worker.js 文件 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance) 和 [Service Worker 与页面通信 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/06-service-worker-postMessage)两部分内容来寻找解决方案。
 
 
-4、进阶部分还对[页面切换动画](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/09-animation)、[https 部署](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/10-https-deploy)、[Material UI 使用](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/02-material-ui)等做了详细介绍。
+- App Shell：在解决了上面两个必须的关键问题后，您可以对页面渲染中的白屏问题做进一步的优化，App Shell 就是其中之一。简单说，它就是第一次渲染个壳，等异步数据来了再填充，避免用户长时间看到白屏。这部分可以在[ App Shell 调整及扩展 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/01-define-app-shell)中查看相关介绍，Lavas 工具在 basic 外的模板中增加了 App Shell 的使用示例，供您参考。
 
 
-使用 Lavas 让你的网页可以渐进式地变成 App，欢迎大家多多适用。
+- [ skeleton 介绍 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)：同样是为了优化白屏的问题，skeleton 的使用，能实现在页面渲染过程中，先展示整个页面内容框架，然后用真实内容替换。如果能结合 App Shell 一起使用，就能完美解决白屏的体验问题。
+
+
+- 除 basic 模板外，其他模板中还提供了一些比较实用的解决方案，方便使用者开发。
+
+    - [ 页面切换动画 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/09-animation)，使用者一般都需要考虑这个问题，所以这里给出了具体实现方案，供大家参考。
+
+    - [ 项目主题色修改 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/04-how-to-change-theme)，开发可以通过统一配置，修改站点的主题色，方便统一组件、页面的主色调。
+
+    - [ 项目中 icon 图标使用 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/03-how-to-use-icon)，支持使用 material 图标、自定义 svg 图标、引入指定 fontawesome 图标等。
+
+    - [ Material UI 使用 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/02-material-ui)，介绍 Material UI 及使用 ，以及开发一个简单组件。
+
+
+
+Lavas 让你的站点可以渐进式地拥有 App 的体验，欢迎大家多多试用。
 
 
