@@ -13,7 +13,6 @@
 主题相关的配置文件在 `config/theme.js` 中，结构如下：
 
 ``` js
-
 // 定义主题列表
 const themeList = {
 
@@ -58,7 +57,7 @@ module.exports = {
     * `secondary` 次要颜色，通常与主要颜色形成对比
 
     * `info/warning/error/success` 项目不同状态下定义的颜色，例如 vuetify 在 [Alerts](https://vuetifyjs.com/components/alerts) 组件中会使用
-    
+
 * materialDesign 包含了一系列 material 设计相关的变量
 
 > info

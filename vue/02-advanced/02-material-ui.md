@@ -19,7 +19,6 @@ Material Design UI 是指基于 Google 的 Material Design 全新设计语言的
 **2、通过 npm 或 yarn 安装 Vuetify :**
 
 ```npm
-
 $ npm install --save vuetify
 
 $ yarn add vuetify
@@ -69,9 +68,7 @@ Material Design UI 库的运用可以让我们快速的实现一些美观的展�
 <!-- 模板部分： 点击蒙层调用关闭方法 -->
 <template>
     <transition name="fade">
-        <div
-            v-show="show"
-            @click.stop="closeAppMask">
+        <div v-show="show" @click.stop="closeAppMask">
         </div>
     </transition>
 </template>
@@ -99,8 +96,7 @@ export default {
 <template>
     <div class="app-sidebar-wrapper">
         <!-- 使用app-mask组件，注意使用时驼转化成中划线 -->
-        <app-mask
-            :show="show"
+        <app-mask :show="show"
             @close-mask="closeAppSidebar"
         ></app-mask>
 
@@ -117,8 +113,8 @@ export default {
     },
     props: {
         show: {
-            type: Boolean,
-            default: true
+            'type': Boolean,
+            'default': true
         }
     },
     methods: {

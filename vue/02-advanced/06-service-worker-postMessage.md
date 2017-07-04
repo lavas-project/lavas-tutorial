@@ -26,7 +26,7 @@ self.clients.matchAll()
 
 ```js
 // 点击指定 DOM 时就给service worker 发送消息
-document.getElementById('app-refresh').addEventListener('click', () => {
+document.getElementById('app-refresh').addEventListener('click', function () {
     navigator.serviceWorker.controller && navigator.serviceWorker.controller.postMessage('sw.updatedone');
 });
 ```
@@ -47,7 +47,7 @@ self.addEventListener('message', function (event) {
 2、在页面中接收 `sw.js` 发来的信息，示例代码如下，通过 event.data 来读取数据：
 
 ```js
-navigator.serviceWorker.addEventListener('message', event => {
+navigator.serviceWorker.addEventListener('message', function (event) {
     if (e.data === 'sw.update') {
         // 此处可以操作页面的 DOM 元素啦
     }
@@ -67,7 +67,8 @@ self.addEventListener('activate', function (event) {
     event.waitUntil(
         caches.open(cacheName).then(function (cache) {
             // 省略
-        }).then(function () {
+        })
+        .then(function () {
 
             // 如果非首次安装 service worker 或缓存中原先有缓存的静态资源，我们需要通知接管页面，sw.js有更新，提示用户点击刷新页面
             if (!firstRegister) {
@@ -78,7 +79,7 @@ self.addEventListener('activate', function (event) {
                                 client.postMessage('sw.update');
                             })
                         }
-                    })
+                    });
             }
         })
     );
@@ -89,19 +90,20 @@ self.addEventListener('activate', function (event) {
 
 ```js
 // src/sw-register.js 中注册，重载相关代码
-navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js').then(() => {
-    // 监听 message 事件，并处理
-    navigator.serviceWorker.addEventListener('message', e => {
+navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js')
+    .then(function () {
+        // 监听 message 事件，并处理
+        navigator.serviceWorker.addEventListener('message', function (e) {
 
-        // service worker 如果更新成功会 postMessage 给页面，内容为 'sw.update'
-        if (e.data === 'sw.update') {
+            // service worker 如果更新成功会 postMessage 给页面，内容为 'sw.update'
+            if (e.data === 'sw.update') {
 
-            // 开发者可以使用默认提供的用户提示，引导用户刷新
-            // 也可以自定义处理函数，这里建议引导用户 reload 处理，详细查看项目具体文件
-            // location.reload();
-        }
+                // 开发者可以使用默认提供的用户提示，引导用户刷新
+                // 也可以自定义处理函数，这里建议引导用户 reload 处理，详细查看项目具体文件
+                // location.reload();
+            }
+        });
     });
-});
 ```
 ![版本更新提示引导](./images/refreshTip.png)
 
@@ -118,7 +120,6 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
 
 
 ```js
-
 // 可以监听的事件名称
 var visibilityChangeEvent = '';
 if (document.hidden) {

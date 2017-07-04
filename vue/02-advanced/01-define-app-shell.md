@@ -20,7 +20,8 @@ Lavas 工具导出的 AppShell 模板项目中，提供了部分的 Shell 组件
             <app-header
                 class="app-shell-header"
                 @click-menu="handleClickHeaderMenu"
-                @click-back="handleClickHeaderBack">
+                @click-back="handleClickHeaderBack"
+            >
                 <template slot="logo"></template>
             </app-header>
         </div>
