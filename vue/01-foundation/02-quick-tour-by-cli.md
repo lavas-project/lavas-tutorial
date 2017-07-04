@@ -87,7 +87,7 @@ $ npm run dev
 ```
 
 
-完成系列操作后，我们可以看到浏览器默认打开了我们的工程预览页面. 这个时候我们进入 Chrome Develop 模式 (`windows： F12, mac: Command + Option + I` ) 就能看到如下效果。
+完成系列操作后，我们可以看到浏览器默认打开了我们的工程预览页面。 这个时候我们进入 Chrome Develop 模式 (`windows： F12, mac: Command + Option + I` ) 就能看到如下效果。
 
 ![project preview](./images/preview.png)
 
