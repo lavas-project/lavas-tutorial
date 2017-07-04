@@ -11,7 +11,7 @@
 - CSS 代码规范：https://github.com/ecomfe/spec/blob/master/css-style-guide.md
 - 更多代码规范：https://github.com/ecomfe/spec
 
-针对百度前端代码规范的 lint 工具，推荐使用 [Fecs](http://fecs.baidu.com) 来验证代码规范。
+针对百度前端代码规范的 lint 工具，推荐使用 [FECS](http://fecs.baidu.com) 来验证代码规范。
 
 
 ## 命名规范
@@ -36,7 +36,7 @@
 
 通过对 vue 的学习，我们都知道在编写 Vue 代码的过程中需要慎用 dom 操作。
 
-- 用户的操作行为统一通过 Component 事件或 Vuex action 处理
+- 用户的操作行为统一通过 Vuex action 或 Component 事件处理
 - action 内做的操作的只是通过调用 mutation 对 store 数据进行操作，不涉及任何 dom 操作
 - 了解 Vue 生命周期，在不同的生命周期 hook method 中做恰当的操作
 - 合理封装 Component，减少重复开发工作
@@ -44,8 +44,8 @@
 
 ## 业务代码实现原则
 
-- 保证 Web App 可访问是最低准则。
-- 以页面为粗粒度的按需加载静态资源。
-- 以功能组件和业务组件为粒度来开发维护组件。
-- 控制 service worker precache 的文件内容和数量 (CacheStorage 容量有限)。
+- 保证 Web App 可访问是最低准则
+- 以页面为粗粒度的按需加载静态资源
+- 以功能组件和业务组件为粒度来开发维护组件
+- 控制 service worker precache 的文件内容和数量 (CacheStorage 容量有限)
 
