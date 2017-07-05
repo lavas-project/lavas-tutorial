@@ -42,10 +42,10 @@ $ lavas init
 
 ## 目录结构
 
-通过初始化命令，通过选择模版类型 basic，可以在当前目录下下找到我们新建的项目 `pwa-demo` 文件夹。
+通过初始化命令，通过选择模版类型 App Shell (这里有 4 种模板类型，供您选择)，可以在当前目录下下找到我们新建的项目 `pwa-project` 文件夹。
 
 ```
-pwa-demo/ (项目根目录)
+pwa-project/ (项目根目录)
     | - build/ (Webpack 和 dev-server 相关调试和构建配置文件)
     | - config/ (通用模块配置)
     | - src/ (源代码)
