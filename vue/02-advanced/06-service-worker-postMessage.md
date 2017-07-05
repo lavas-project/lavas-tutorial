@@ -59,7 +59,7 @@ navigator.serviceWorker.addEventListener('message', function (event) {
 
 我们利用这种通信，为您在导出项目中做了一些简单的 `sw.js` 缓存更新，在上一节中的[缓存更新及处理](./05-service-worker-maintenance#缓存更新难题及处理)中有相应的阐述，这里具体展开一些实现，以及您后期可进行的升级：
 
-`sw.js` 文件发现更新后，在 activate 事件最后 postMessage 事件（代码在导出项目中的 `sw.tmpl.js` 文件）
+`sw.js` 文件发现更新后，在 activate 事件最后 postMessage 事件（代码默认在导出项目中的 `config/sw.tmpl.js` 文件中）
 
 ```js
 // 如果非首次安装 service worker 或缓存中原先有缓存的静态资源，我们需要通知接管页面，sw.js有更新，提示用户点击刷新页面
@@ -75,7 +75,7 @@ if (!firstRegister) {
 }
 ```
 
-在页面中，接收到消息 service worker 的缓存更新消息后，在页面增加提示，如下图所示（代码在导出项目中的 `src/sw-register.js` 文件）
+在页面中，接收到消息 service worker 的缓存更新消息后，在页面增加提示，如下图所示（代码默认在导出项目中的 `src/sw-register.js` 文件中）
 
 ```js
 // src/sw-register.js 中注册，重载相关代码

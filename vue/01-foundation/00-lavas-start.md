@@ -56,7 +56,7 @@ Lavas 教程文档主要分为基础和进阶两部分，也是我们建议开�
 - App Shell：在解决了上面两个必须的关键问题后，您可以对页面渲染中的白屏问题做进一步的优化，App Shell 就是其中之一。简单说，它就是第一次渲染个壳，等异步数据来了再填充，避免用户长时间看到白屏。这部分可以在[ App Shell 调整及扩展 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/01-define-app-shell)中查看相关介绍，Lavas 工具在 basic 外的模板中增加了 App Shell 的使用示例，供您参考。
 
 
-- [ skeleton 介绍 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)：同样是为了优化白屏的问题，skeleton 的使用，能实现在页面渲染过程中，先展示整个页面内容框架，待页面渲染完成后用真实内容替换。如果能结合 App Shell 一起使用，就能完美解决白屏的体验问题。
+- [ App Skeleton 介绍 ](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)：同样是为了优化白屏的问题，skeleton 的使用，能实现在页面渲染过程中，先展示整个页面内容框架，待页面渲染完成后用真实内容替换。如果能结合 App Shell 一起使用，就能完美解决白屏的体验问题。
 
 
 - 除 basic 模板外，其他模板中还提供了一些比较实用的解决方案，方便开发者使用。

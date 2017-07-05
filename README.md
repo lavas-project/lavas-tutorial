@@ -204,12 +204,12 @@ $color-green = #4caf50
 </div>
 <div class="m-box">
     <h1 class="m-title">开始吧</h1>
-    <p>通过本教程，您将很快可以创建一个属于您的 PWA 框架</p>
+    <p>通过本教程，您将很快可以创建一个属于您的 PWA 应用</p>
 </div>
 <div class="m-intro m-box">
     <div class="m-intro-box">
         <h2>探索 Lavas</h2>
-        <p>了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的框架进行快速开发</p>
+        <p>了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的工程进行快速开发</p>
         <a class="m-btn m-blue" href="/guide/vue/doc/vue/01-foundation/00-lavas-start"><div class="md-ripple"></div>开始探索</a>
     </div>
     <div class="m-intro-box">
