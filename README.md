@@ -243,3 +243,98 @@ $color-green = #4caf50
         </div>
     </div>
 </div>
+
+<style lang="stylus">
+$color-black = #263238
+$color-blue = rgb(40, 116, 240)
+$color-white = #fff
+$color-grey = #ccc
+$color-grey-light = #f0f5f6
+$color-green = #4caf50
+
+.m-contact
+    padding-bottom 40px
+.contact-wrapper
+    padding-top 40px
+    width 460px
+    display flex
+    margin 0 auto
+
+.qrcode-wrapper
+    text-align center
+    img
+        display block
+        margin 0 auto
+        width 200px
+        height 200px
+.other-contact-wrapper
+    padding-top 40px
+    margin-left 60px
+
+.contact-item
+    margin-bottom 20px
+    padding 10px 20px
+    border-radius 4px
+    display block
+    position relative
+    overflow hidden
+    &:hover
+        text-decoration none
+
+    &.github
+        color #fff
+        background $color-blue
+        .icon-svg
+            fill #fff
+    &.email
+        color $color-black
+        background $color-grey
+    .icon-svg
+        width 1em
+        height 1em
+    .material-icons
+        vertical-align middle
+        margin-top -3px
+        font-size 1em
+
+@media screen and (max-width: 600px)
+    .contact-wrapper
+        display block
+        width auto
+    .other-contact-wrapper
+        margin-left 0
+    .contact-item
+        width 200px
+        margin 20px auto
+
+</style>
+
+<div class="m-container">
+    <div class="m-box m-contact">
+        <h1 class="m-title">关注我们</h1>
+        <div class="contact-wrapper">
+            <div class="qrcode-wrapper">
+                <img src="http://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qrcode-dfd284c4.png">
+                <p>Lavas 官方微信群</p>
+            </div>
+            <div class="other-contact-wrapper">
+                <a class="contact-item github ui-dep-2" target="_blank"
+                    href="https://www.github.com/lavas-project"
+                >
+                    <div class="md-ripple"></div>
+                    <svg t="1498641781602" class="icon-svg" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2360" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+                        <path d="M950.857143 512q0 143.428571-83.714286 258t-216.285714 158.571429q-15.428571 2.857143-22.571429-4t-7.142857-17.142857l0-120.571429q0-55.428571-29.714286-81.142857 32.571429-3.428571 58.571429-10.285714t53.714286-22.285714 46.285714-38 30.285714-60 11.714286-86q0-69.142857-45.142857-117.714286 21.142857-52-4.571429-116.571429-16-5.142857-46.285714 6.285714t-52.571429 25.142857l-21.714286 13.714286q-53.142857-14.857143-109.714286-14.857143t-109.714286 14.857143q-9.142857-6.285714-24.285714-15.428571t-47.714286-22-49.142857-7.714286q-25.142857 64.571429-4 116.571429-45.142857 48.571429-45.142857 117.714286 0 48.571429 11.714286 85.714286t30 60 46 38.285714 53.714286 22.285714 58.571429 10.285714q-22.857143 20.571429-28 58.857143-12 5.714286-25.714286 8.571429t-32.571429 2.857143-37.428571-12.285714-31.714286-35.714286q-10.857143-18.285714-27.714286-29.714286t-28.285714-13.714286l-11.428571-1.714286q-12 0-16.571429 2.571429t-2.857143 6.571429 5.142857 8 7.428571 6.857143l4 2.857143q12.571429 5.714286 24.857143 21.714286t18 29.142857l5.714286 13.142857q7.428571 21.714286 25.142857 35.142857t38.285714 17.142857 39.714286 4 31.714286-2l13.142857-2.285714q0 21.714286 2.857143 50.857143t2.857143 30.857143q0 10.285714-7.428571 17.142857t-22.857143 4q-132.571429-44-216.285714-158.571429t-83.714286-258q0-119.428571 58.857143-220.285714t159.714286-159.714286 220.285714-58.857143 220.285714 58.857143 159.714286 159.714286 58.857143 220.285714z" p-id="2361"></path>
+                    </svg>
+                    Github
+                </a>
+                <a class="contact-item email ui-dep-2"
+                    href="mailto:lavas@baidu.com"
+                >
+                    <div class="md-ripple"></div>
+                    <i class="material-icons">mail</i>
+                    lavas@baidu.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
