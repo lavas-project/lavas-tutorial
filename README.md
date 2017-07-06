@@ -44,7 +44,7 @@ lavas init
 
 Lavas 官方微信群
 
-![Lavas 官方微信群](https//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qrcode-dfd284c4.png)
+![Lavas 官方微信群](https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qrcode-dfd284c4.png)
 
 Github: [https://www.github.com/lavas-project](https://www.github.com/lavas-project)
 
