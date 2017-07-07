@@ -7,7 +7,7 @@
 本地安装最新版本的 Node.js
 
 - Node.js：[https://nodejs.org/](https://nodejs.org/en/)
-- Git [https://git-scm.com/downloads](https://git-scm.com/downloads)
+- Git：[https://git-scm.com/downloads](https://git-scm.com/downloads)
 
 学习 Vue 相关知识
 
