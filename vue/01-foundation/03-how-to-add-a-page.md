@@ -125,7 +125,7 @@ app shell 组件触发的事件如下，为了避免重复，在事件名之前�
     
     * `app-header:click-logo` 点击 Logo 图标
     
-    * a`pp-header:click-action` 点击右侧动作图标，事件对象中包含当前动作序号
+    * `app-header:click-action` 点击右侧动作图标，事件对象中包含当前动作序号
 
 * AppBottomNavigator 底部导航条
     
