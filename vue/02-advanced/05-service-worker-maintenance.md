@@ -113,26 +113,15 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 
 ``` js
 // sw.tmpl.js文件中
-self.addEventListener('activate', function (event) {
-    event.waitUntil(
-        caches.open(cacheName)
-            .then(function (cache) {
-                // 省略
-            })
-            .then(function () {
-                if (!firstRegister) {
-                    return self.clients.matchAll()
-                        .then(function (clients) {
-                            if (clients && clients.length) {
-                                var currentClient = clients[0];
-                                currentClient.postMessage('sw.update');
-                            }
-                        });
-                }
-            })
-    );
-});
-
+if (!firstRegister) {
+    return self.clients.matchAll()
+        .then(function (clients) {
+            if (clients && clients.length) {
+                var currentClient = clients[0];
+                currentClient.postMessage('sw.update');
+            }
+        });
+}
 ```
 
 
