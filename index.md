@@ -267,6 +267,8 @@ $color-green = #4caf50
         margin 0 auto
         width 200px
         height 200px
+    p
+        margin-bottom 5px
 .other-contact-wrapper
     padding-top 40px
     margin-left 60px
@@ -314,8 +316,9 @@ $color-green = #4caf50
         <h1 class="m-title">关注我们</h1>
         <div class="contact-wrapper">
             <div class="qrcode-wrapper">
-                <img src="//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qrcode-dfd284c4.png">
-                <p>Lavas 官方微信群</p>
+                <img src="//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qq-8f7c8330.png">
+                <p>Lavas 官方QQ群</p>
+                <p>群号：655433298</p>
             </div>
             <div class="other-contact-wrapper">
                 <a class="contact-item github ui-dep-2" target="_blank"
