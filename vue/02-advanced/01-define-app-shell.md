@@ -1,19 +1,106 @@
 # App Shell 调整及扩展
 
-开始之前，您可以查看 [App Shell](https://developers.google.cn/web/fundamentals/architecture/app-shell?hl=zh-cn) 相关内容，快速掌握相关基础。
+## App shell 模型
 
-App Shell 就是一个简单的页面框架结构，在用户首屏渲染时快速展现，避免白屏时间过长，大大提升用户的体验。这里的简单是指不依赖 JavaScript 框架的同时能够很好地诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。它们能够做到离线缓存，所以当用户再次进入时，可重复使用缓存提升体验。
+App Shell 架构是构建 PWA 应用的一种方式，它通常提供了一个最基本的 WebApp 框架，包括应用的头部、底部、菜单栏等结构。顾名思义，我们可以把它理解成应用的一个「空壳」，这个「空壳」仅包含页面框架所需的最基本的 HTML 片段，CSS 和 JavaScript，这样一来，用户重复打开应用时就能迅速地看到 WebApp 的基本界面，只需要从网络中请求、加载必要的内容。我们使用 service worker 对 App Shell 做离线缓存，以便它可以在离线时正常展现，达到类似 Native App 的体验。
 
-如果要开发一个 App Shell, 首先需要明确区分页面 Shell 和 动态内容部分。一般而言，您的应用应加载尽可能最简单的 Shell，如在给出 [lavas-demo-news](https://lavas-project.github.io/lavas-demo/news/index.html#/) 中，我们将头部导航作为 Shell，其余部分为动态内容，也就需要适时更新的部分。明确了之后，我们就可以着手开发这部分了。
+譬如项目的简单示例 [lavas-demo-news](https://lavas-project.github.io/lavas-demo/news/index.html#/) ，就演示了这一架构，我们将头部及导航栏作为 Shell，其余部分为动态更新的内容，如下图。
 
 ![App Shell 示例](./images/app-shell-1.png)
 
+开发一个 App Shell, 我们通常要注意以下几点：
 
-## App Shell 管理和使用
+- 将动态内容与 Shell 分离
+- 尽可能使用较少的数据，实现快速加载
+- 使用本地缓存中的静态资源
 
-Lavas 工具导出的 AppShell 模板项目中，提供了部分的 Shell 组件， 单个 Shell 其实都是由不同组件组成，组件在 `src/components` 中管理。开发者可以在 `App.vue` 中根据需求自己定制 Shell，也可以在我们提供的组件基础上进行二次开发。每个 Shell 所需的输入都在一个集中状态管理的容器 store 中统一管理，它包含了 Shell 所需的 state、 actions、 mutations 等。 具体 Shell 配置可查看 `src/store/modules/app-shell.js`，在 `src/store/index.js` 中统一引入管理，在主页面 `src/App.vue` 中导入 Shell 组件并使用。如果您对 store 的概念还不是很熟悉，可以翻阅 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 的状态管理模式文档。
+明确以上内容之后，我们就可以着手开发、定制自己的 App Shell 了。
+
+
+## 调整及扩展 App Shell
+
+你可以从零开始开发自己的 App Shell，但为了降低开发成本，Lavas 已经为你准备好了一个比较通用的 App Shell，你可以直接使用它，也可以在它的基础上进行调整及扩展。
+
+在 [Lavas 的命令行工具](https://github.com/lavas-project/lavas) 提供的多种类型模板中，我们选择 `App Shell` 模板，
+它集成的 App Shell 包含了典型的页面头部、页面底部导航、侧边展开栏等基本结构，如下图所示。
+
+![appshell1](./images/app-shell-3.png)
+
+![appshell2](./images/app-shell-4.png)
+
+整个 App Shell 结构由不同的组件组成，在 `src/components` 目录中进行管理。
+
+```
+src/components
+    ├── AppBottomNavigator.vue
+    ├── AppHeader.vue
+    ├── AppMask.vue
+    ├── AppSidebar.vue
+    ├── ProgressBar.vue
+    └── Sidebar.vue
+```
+
+为了方便 App Shell 与页面之间的交互，我们将 App shell 各组件的状态放在 vuex 的 store 中统一管理，具体实现在 `src/store/modules/app-shell.js`， 它将 Shell 各组件划分成不同的 modules，包含了组件的 state, actions, mutations 等信息。这样一来，页面组件可以通过 `mapStates/mapActions` 访问当前 store 的状态及提交修改操作。
+
+``` javascript
+// 页面组件中
+import {mapActions} from 'vuex';
+
+export default {
+    name: 'detail',
+    methods: {
+        ...mapActions('appShell/appHeader', [
+            'setAppHeader'
+        ]),
+        ...mapActions('appShell/appBottomNavigator', [
+            'hideBottomNav'
+        ])
+    },
+    created() {
+        this.setAppHeader({
+            show: true,
+            title: 'Lavas',
+            showMenu: false,
+            showBack: true,
+            showLogo: false,
+            actions: [
+                {
+                    icon: 'home',
+                    route: {
+                        name: 'home'
+                    }
+                }
+            ]
+        });
+        this.hideBottomNav();
+    }
+};
+```
+
+App Shell 和页面路由组件之间的通信是通过全局事件总线 EventBus 来实现的，具体实现中，App Shell 组件使用不同的命名空间触发事件，各页面路由组件在 activated 函数中进行监听，并处理自己的页面逻辑。
+
+``` javascript
+// App shell 组件中，发送全局事件，便于非父子关系的路由组件监听
+EventBus.$emit(`app-header:click-menu`, eventData);
+```
+
+``` javascript
+// 页面路由组件，在 activated 钩子中注册
+activated() {
+    EventBus.$on(`app-header:click-menu`, ({data}) => {
+        // 处理点击按钮事件
+        // ...
+    });
+}
+
+```
+
+关于这部分内容，在 [开发一个页面](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/03-how-to-add-a-page#与-app-shell-的交互) 中也有介绍。
+
+App Shell 的组件在主页面 `src/App.vue` 中导入使用，如果要对 App Shell 进行扩展，需要在这里引用新增组件。
 
 ``` html
+<!--> src/App.vue <-->
 <template>
     <div id="app">
         <div class="app-shell">
@@ -42,38 +129,9 @@ export default {
 </script>
 ```
 
-
-
-## Vuex store
-
-每一个 Vuex 应用的核心就是 store (仓库)。store 基本上就是一个容器，它包含着你的应用中大部分的状态 (state)。所以我们在 Shell 或是组件开发时，都需要指定自己所需的 store, 并通过 [Vuex](https://vuex.vuejs.org/zh-cn/getting-started.html) 来实现统一的管理（`src/store/index.js`）。
-
-``` js
-// 将 store 统一集中管理
-export default new Vuex.Store({
-    getters: {},
-    modules: {
-        appShell, // 引入的 App Shell 的 store
-        // ... 其他组件 Store module
-    }
-});
-```
-
-store 和单纯的全局对象有以下两点不同：
-
-* Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。
-
-* 您不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地提交( commit ) mutations 。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。
-
-
-再次强调，我们通过提交 mutation 的方式，而非直接改变 `store.state` 的变量，是因为我们想要更明确地追踪到状态的变化。这个简单的约定能够让你的意图更加明显，这样你在阅读代码的时候能更容易地解读应用内部的状态改变。此外，这样也让我们有机会去实现一些能记录每次状态改变，保存状态快照的调试工具。有了它，我们甚至可以实现如时间穿梭般的调试体验。
-
-由于 store 中的状态是响应式的，在组件中调用 store 中的状态简单到仅需要在计算属性中返回即可。触发变化也仅仅是在组件的 methods 中提交 mutations。
-
-
 ## 小结
 
-大家结合 [Lavas Github](https://github.com/lavas-project) 给出的 [lavas-template-vue-appshell](https://github.com/lavas-project/lavas-template-vue-appshell) 可以加深对此处的理解。
+你可以结合 [Lavas Github](https://github.com/lavas-project) 给出的 [lavas-template-vue-appshell](https://github.com/lavas-project/lavas-template-vue-appshell) 更清晰地了解 Lavas 模板提供的 App Shell 结构。
 
 
 
