@@ -43,6 +43,7 @@ lavas init
 ## 关注我们
 
 Lavas 官方 QQ 群
+
 群号：655433298
 
 ![Lavas 官方 QQ 群](https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qq-8f7c8330.png)
