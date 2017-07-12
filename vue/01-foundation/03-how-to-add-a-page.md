@@ -22,7 +22,7 @@ routes: [
 
 这里有两点需要注意：
 
-1. 在开发环境下，[插件](https://github.com/lavas-project/vue-skeleton-webpack-plugin)会向文件中自动插入 [skeleton 路由](/guide/vue/doc/vue/01-foundation/04-skeleton)，便于开发调试。
+1. 在开发环境下，[插件](https://github.com/lavas-project/vue-skeleton-webpack-plugin)会向文件中自动插入 [skeleton 路由](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/07-skeleton)，便于开发调试。
 
 2. 路由组件默认使用了 [keep-alive](https://cn.vuejs.org/v2/guide/components.html#keep-alive)，避免切换时重新渲染。但在某些情况下并不适用，例如详情页组件需要每次根据路由参数请求新数据渲染，此时可以通过路由对象的 `meta.notKeepAlive` 属性关闭。
 
@@ -125,7 +125,7 @@ app shell 组件触发的事件如下，为了避免重复，在事件名之前�
     
     * `app-header:click-logo` 点击 Logo 图标
     
-    * a`pp-header:click-action` 点击右侧动作图标，事件对象中包含当前动作序号
+    * `app-header:click-action` 点击右侧动作图标，事件对象中包含当前动作序号
 
 * AppBottomNavigator 底部导航条
     

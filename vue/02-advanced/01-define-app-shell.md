@@ -2,7 +2,7 @@
 
 开始之前，您可以查看 [App Shell](https://developers.google.cn/web/fundamentals/architecture/app-shell?hl=zh-cn) 相关内容，快速掌握相关基础。
 
-App Shell 就是一个简单的页面框架结构，在用户首屏渲染时，快速出现，避免甚至消除白屏时间过长，大大提升用户的体验。这里的简单是指不依赖JS框架同时能够很好的诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。它们能够做到离线缓存，所以当用户再次进入时，可重复使用缓存提升体验。
+App Shell 就是一个简单的页面框架结构，在用户首屏渲染时快速展现，避免白屏时间过长，大大提升用户的体验。这里的简单是指不依赖 JavaScript 框架的同时能够很好地诠释页面的结构，一般仅包括了HTML片段、CSS样式及必要的图片等。它们能够做到离线缓存，所以当用户再次进入时，可重复使用缓存提升体验。
 
 如果要开发一个 App Shell, 首先需要明确区分页面 Shell 和 动态内容部分。一般而言，您的应用应加载尽可能最简单的 Shell，如在给出 [lavas-demo-news](https://lavas-project.github.io/lavas-demo/news/index.html#/) 中，我们将头部导航作为 Shell，其余部分为动态内容，也就需要适时更新的部分。明确了之后，我们就可以着手开发这部分了。
 
@@ -20,7 +20,8 @@ Lavas 工具导出的 AppShell 模板项目中，提供了部分的 Shell 组件
             <app-header
                 class="app-shell-header"
                 @click-menu="handleClickHeaderMenu"
-                @click-back="handleClickHeaderBack">
+                @click-back="handleClickHeaderBack"
+            >
                 <template slot="logo"></template>
             </app-header>
         </div>

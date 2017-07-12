@@ -12,11 +12,10 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 具体表现为打开新页面时左滑展示，返回之前的页面时右滑退出。
 下面简单介绍下实现原理。
 
-在 BottomNavigation 中，`<router-view>` 对应的每一个路由页面组件在 DOM 中添加/移除时，都会被应用 pageTransitionName 对应的 CSS 类，在左/右滑对应的类名为 `slide-left/slide-right` ：
+在项目中，`<router-view>` 对应的每一个路由页面组件在 DOM 中添加/移除时，都会被应用 pageTransitionName 对应的 CSS 类，在左/右滑对应的类名为 `slide-left/slide-right` ：
 
 ```html
-<transition
-    :name="pageTransitionName">
+<transition :name="pageTransitionName">
     <router-view></router-view>
 </transition>
 ```

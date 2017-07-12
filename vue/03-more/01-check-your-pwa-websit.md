@@ -81,3 +81,5 @@ Lighthouse 浏览器插件 [下载地址](./downloads/lighthouse_2.1.0_0.zip)
 - UC 浏览器
 - 360 浏览器
 - 猎豹浏览器
+
+PWA 效果可以通过 Andorid 机器体验，iOS暂不具备添加到桌面和离线打开功能
