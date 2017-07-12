@@ -334,7 +334,7 @@ self.addEventListener('activate', function(event) {
 
 我们看一下当 `service-worker.js` 更新完成之后，使用插件默认的解决方案的话，是一个什么样的效果：
 
-![提醒用户 Service Worker 已更新](../images/sw-update.png)
+![提醒用户 Service Worker 已更新](./images/sw-update.png)
 
 ### 构建效果
 
