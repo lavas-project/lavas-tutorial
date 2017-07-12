@@ -10,51 +10,22 @@
                 },
                 {
                     "name": "基础教程",
-                    "key": "vue/01-foundation"
+                    "key": "vue/foundation"
                 },
                 {
                     "name": "进阶教程",
-                    "key": "vue/02-advanced",
-                    "children": [
-                        {
-                            "key": "05-service-worker-maintenance"
-                        },
-                        {
-                            "key": "06-service-worker-postMessage"
-                        },
-                        {
-                            "key": "01-define-app-shell"
-                        },
-                        {
-                            "key": "07-skeleton"
-                        },
-                        {
-                            "key": "09-animation"
-                        },
-                        {
-                            "key": "04-how-to-change-theme"
-                        },
-                        {
-                            "key": "03-how-to-use-icon"
-                        },
-                        {
-                            "key": "02-material-ui"
-                        },
-                        {
-                            "key": "10-https-deploy"
-                        }
-                    ]
+                    "key": "vue/advanced"
                 },
                 {
                     "name": "更多",
-                    "key": "vue/03-more"
+                    "key": "vue/more"
                 }
             ]
         }
     ],
     "ignore": [
-        "vue/02-advanced/11-server-side-render",
+        "vue/advanced/11-server-side-render",
         "vue/introduction",
-        "vue/02-advanced/08-manifest-maintenance"
+        "vue/advanced/08-manifest-maintenance"
     ]
 }
