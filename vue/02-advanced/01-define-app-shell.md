@@ -1,10 +1,10 @@
 # App Shell 调整及扩展
 
-## App shell 模型
+## App Shell 模型
 
 App Shell 架构是构建 PWA 应用的一种方式，它通常提供了一个最基本的 WebApp 框架，包括应用的头部、底部、菜单栏等结构。顾名思义，我们可以把它理解成应用的一个「空壳」，这个「空壳」仅包含页面框架所需的最基本的 HTML 片段，CSS 和 JavaScript，这样一来，用户重复打开应用时就能迅速地看到 WebApp 的基本界面，只需要从网络中请求、加载必要的内容。我们使用 service worker 对 App Shell 做离线缓存，以便它可以在离线时正常展现，达到类似 Native App 的体验。
 
-譬如项目的简单示例 [lavas-demo-news](https://lavas-project.github.io/lavas-demo/news/index.html#/) ，就演示了这一架构，我们将头部及导航栏作为 Shell，其余部分为动态更新的内容，如下图。
+譬如项目的简单示例：新闻 Demo，就演示了这一架构，我们将头部及导航栏作为 Shell，其余部分为动态更新的内容，如下图。
 
 ![App Shell 示例](./images/app-shell-1.png)
 
@@ -40,7 +40,7 @@ src/components
     └── Sidebar.vue
 ```
 
-为了方便 App Shell 与页面之间的交互，我们将 App shell 各组件的状态放在 vuex 的 store 中统一管理，具体实现在 `src/store/modules/app-shell.js`， 它将 Shell 各组件划分成不同的 modules，包含了组件的 state, actions, mutations 等信息。这样一来，页面组件可以通过 `mapStates/mapActions` 访问当前 store 的状态及提交修改操作。
+为了方便 App Shell 与页面之间的交互，我们将 App Shell 各组件的状态放在 vuex 的 store 中统一管理，具体实现在 `src/store/modules/app-shell.js`， 它将 Shell 各组件划分成不同的 modules，包含了组件的 state, actions, mutations 等信息。这样一来，页面组件可以通过 `mapStates/mapActions` 访问当前 store 的状态及提交修改操作。
 
 ``` javascript
 // 页面组件中
@@ -132,6 +132,8 @@ export default {
 ## 小结
 
 你可以结合 [Lavas Github](https://github.com/lavas-project) 给出的 [lavas-template-vue-appshell](https://github.com/lavas-project/lavas-template-vue-appshell) 更清晰地了解 Lavas 模板提供的 App Shell 结构。
+
+
 
 
 
