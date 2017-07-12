@@ -6,7 +6,7 @@ PWA (Progressive Web Apps) 是一种 Web App 新模型，并不是具体指某�
 
 用户的手机现在几乎被各种大大小小形形色色的 App 给攻占了，手机的容量是有上限的，用户的时间成本也是有上限的，我们如何让 App 做到用户需要就能立马得到，用户不需要不占用手机资源呢？显然 Native App 是根本做不到这点的，用户能做的只会在抱怨和留舍纠结中一遍一遍的重复着安装和卸载。而另一方面 Native App 没法做到平台兼容，对于企业和开发者来说相对于 Web App 的平台兼容性以及可维护行来说 Native App 的开发运维成本太高。
 
-PWA 工程的解决方案中借助了 [service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/01-service-worker-introduction) 的离线存储能力，消息推送能力以及系统的添加桌面能力，从而形成一个完善的 Web App 解决方案，帮助我们在 Web 端低成本的开发和维护一个逐步类 Native App 化的 Web App。
+PWA 工程的解决方案中借助了 [service worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction) 的离线存储能力，消息推送能力以及系统的添加桌面能力，从而形成一个完善的 Web App 解决方案，帮助我们在 Web 端低成本的开发和维护一个逐步类 Native App 化的 Web App。
 
 我们看一下 [Google 对 PWA 全面介绍](https://developers.google.cn/web/progressive-web-apps)。
 

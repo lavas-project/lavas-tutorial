@@ -50,7 +50,7 @@ Vue.use(Vuetify);
 
 **4、项目中主题修改**
 
-项目中修改主题的配置在 `config/theme.js` 中[详细可点击查看](./04-how-to-change-theme.md)，此处不多赘述
+项目中修改主题的配置在 `config/theme.js` 中[详细可点击查看](./how-to-change-theme.md)，此处不多赘述
 
 
 

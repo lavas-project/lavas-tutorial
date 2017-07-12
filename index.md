@@ -183,7 +183,7 @@ $color-green = #4caf50
         <h1>Lavas</h1>
         <p>基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题</p>
         <div class="btn-box">
-            <a class="m-btn m-white" href="/guide/vue/doc/vue/01-foundation/02-quick-tour-by-cli">
+            <a class="m-btn m-white" href="/guide/vue/doc/vue/foundation/quick-tour-by-cli">
                 <div class="md-ripple"></div>
                 <svg t="1498645229475" class="icon-svg" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3493" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
                     <path d="M951.975936 107.853824c-2.75968-2.184192-6.536192-2.57024-9.614336-0.944128L74.161152 550.883328c-3.231744 1.659904-5.136384 5.085184-4.855808 8.702976 0.318464 3.615744 2.761728 6.690816 6.221824 7.794688l290.622464 92.377088c3.057664 0.959488 6.360064 0.242688 8.704-1.88928L776.901632 295.631872 455.88992 675.607552c-1.941504 2.28864-2.604032 5.41696-1.747968 8.29952 0.854016 2.884608 3.09248 5.157888 5.971968 6.030336l322.486272 98.23232c0.833536 0.263168 1.714176 0.384 2.5856 0.384 1.533952 0 3.072-0.402432 4.438016-1.17248 2.12992-1.220608 3.6864-3.265536 4.261888-5.661696L955.117568 116.992C955.943936 113.586176 954.715136 110.021632 951.975936 107.853824z" p-id="3494"></path>
@@ -210,7 +210,7 @@ $color-green = #4caf50
     <div class="m-intro-box">
         <h2>探索 Lavas</h2>
         <p>了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的工程进行快速开发</p>
-        <a class="m-btn m-blue" href="/guide/vue/doc/vue/01-foundation/00-lavas-start"><div class="md-ripple"></div>开始探索</a>
+        <a class="m-btn m-blue" href="/guide/vue/doc/vue/foundation/lavas-start"><div class="md-ripple"></div>开始探索</a>
     </div>
     <div class="m-intro-box">
         <h2>了解 PWA</h2>
@@ -267,6 +267,8 @@ $color-green = #4caf50
         margin 0 auto
         width 200px
         height 200px
+    p
+        margin-bottom 5px
 .other-contact-wrapper
     padding-top 40px
     margin-left 60px
@@ -314,8 +316,9 @@ $color-green = #4caf50
         <h1 class="m-title">关注我们</h1>
         <div class="contact-wrapper">
             <div class="qrcode-wrapper">
-                <img src="//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qrcode-dfd284c4.png">
-                <p>Lavas 官方微信群</p>
+                <img src="//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qq-8f7c8330.png">
+                <p>Lavas 官方QQ群</p>
+                <p>群号：655433298</p>
             </div>
             <div class="other-contact-wrapper">
                 <a class="contact-item github ui-dep-2" target="_blank"
