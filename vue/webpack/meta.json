@@ -2,6 +2,9 @@
     "menu": [
         {
             "key": "sw-register-webpack-plugin"
+        },
+        {
+            "key": "svg-loader"
         }
     ]
 }
