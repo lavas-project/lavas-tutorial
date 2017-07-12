@@ -24,8 +24,7 @@
         }
     ],
     "ignore": [
-        "vue/advanced/11-server-side-render",
         "vue/introduction",
-        "vue/advanced/08-manifest-maintenance"
+        "vue/advanced/manifest-maintenance"
     ]
 }
