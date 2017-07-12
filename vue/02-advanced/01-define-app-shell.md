@@ -131,7 +131,7 @@ export default {
 
 ## 小结
 
-你可以结合 [Lavas Github](https://github.com/lavas-project) 给出的 [lavas-template-vue-appshell](https://github.com/lavas-project/lavas-template-vue-appshell) 更清晰地了解 Lavas 模板提供的 App Shell 结构。
+你可以结合 [Lavas Github](https://github.com/lavas-project) 给出的 [lavas-template-vue-appshell](https://github.com/lavas-project/lavas-template-vue-appshell) 更清晰地了解 Lavas 模板提供的 App Shell 结构。或者，通过 [架构-App Shell 模型](https://lavas.baidu.com/doc/architecture/the-app-shell-model) 这篇文章，了解更多有关 App Shell 的知识。
 
 
 
