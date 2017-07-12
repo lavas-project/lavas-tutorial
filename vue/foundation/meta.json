@@ -1,0 +1,22 @@
+{
+    "menu": [
+        {
+            "key": "lavas-start"
+        },
+        {
+            "key": "get-start"
+        },
+        {
+            "key": "quick-tour-by-cli"
+        },
+        {
+            "key": "how-to-add-a-page"
+        },
+        {
+            "key": "how-tp-debug-project"
+        },
+        {
+            "key": "build-and-deploy-project"
+        }
+    ]
+}

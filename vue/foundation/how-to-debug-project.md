@@ -31,5 +31,5 @@ $ npm run dev
 Chrome DevTools 提供了强大的调试能力，网络，资源，错误监控，缓存等调试都可以在 Chrome DevTools 进行绝大部分的调试。可以在初期的时候帮助我们避免掉很多问题。详见 [Chrome DevTools 官方文档](https://developers.google.cn/web/tools/chrome-devtools/)。
 
 **service worker 调试**
-我们可以通过 Chrome DevTools 进行 service worker 的调试。具体做法请看 [service worker 调试](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/04-service-worker-debug)
+我们可以通过 Chrome DevTools 进行 service worker 的调试。具体做法请看 [service worker 调试](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-debug)
 

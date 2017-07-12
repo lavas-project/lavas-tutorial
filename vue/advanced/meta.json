@@ -1,0 +1,31 @@
+{
+    "menu": [
+        {
+            "key": "service-worker-maintenance"
+        },
+        {
+            "key": "service-worker-postMessage"
+        },
+        {
+            "key": "define-app-shell"
+        },
+        {
+            "key": "skeleton"
+        },
+        {
+            "key": "animation"
+        },
+        {
+            "key": "how-to-change-theme"
+        },
+        {
+            "key": "how-to-use-icon"
+        },
+        {
+            "key": "material-ui"
+        },
+        {
+            "key": "https-deploy"
+        }
+    ]
+}
