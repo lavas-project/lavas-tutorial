@@ -2,7 +2,7 @@
 
 在使用 Native APP 时我们经常可以看到在实际内容加载出来之前会有一些“占位图片”，因为其结构和实际加载内容相似(如新闻页面加载之前也会有一个纵向列表)，因此让用户感知到自己的页面正在加载中，体验较好。而传统的WEB站点因为无法实现这一点，在加载前统一为白屏，我们能优化的仅仅是缩短这个“白屏时间”，这就决定了 WEB APP 相较于 Native APP 在用户体验上的先天劣势。
 
-我们把这个“占位图片”称为 `skeleton` 。通过 PWA 的缓存机制，我们现在已经有能力让 skeleton 也出现在 WEB APP 上取代白屏。在了解具体细节之前，我们先观察一个由 lavas 生成的[线上示例](https://lavas-project.github.io/lavas-demo/news/#/)，效果如下图。
+我们把这个“占位图片”称为 `skeleton` 。通过 PWA 的缓存机制，我们现在已经有能力让 skeleton 也出现在 WEB APP 上取代白屏。在了解具体细节之前，我们先观察一个由 lavas 生成的示例的效果图。
 
 ![lavas 中的 skeleton](./images/news-skeleton.png)
 
