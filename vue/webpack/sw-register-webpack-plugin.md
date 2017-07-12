@@ -238,7 +238,7 @@ const path = require('path');
 // ... balabala
 
 new SwRegisterWebpackPlugin({
-     filePath: path.resolve('../src/sw-register')
+     filePath: path.resolve(__dirname, '../src/sw-register')
 })
 ```
 

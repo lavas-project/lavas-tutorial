@@ -317,7 +317,7 @@ $color-green = #4caf50
         <div class="contact-wrapper">
             <div class="qrcode-wrapper">
                 <img src="//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qq-8f7c8330.png">
-                <p>Lavas 官方QQ群</p>
+                <p>Lavas 官方 QQ 群</p>
                 <p>群号：655433298</p>
             </div>
             <div class="other-contact-wrapper">

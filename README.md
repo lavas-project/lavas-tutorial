@@ -10,7 +10,7 @@
 
 了解 Lavas 解决方案提供了什么功能，学习如何使用命令行工具生成的工程进行快速开发
 
-[开始探索](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/00-lavas-start)
+[开始探索](https://lavas.baidu.com/guide/vue/doc/vue/foundation/lavas-start)
 
 ### 了解 PWA
 
@@ -42,9 +42,10 @@ lavas init
 
 ## 关注我们
 
-Lavas 官方微信群
+Lavas 官方 QQ 群
+群号：655433298
 
-![Lavas 官方微信群](https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qrcode-dfd284c4.png)
+![Lavas 官方 QQ 群](https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qq-8f7c8330.png)
 
 Github: [https://www.github.com/lavas-project](https://www.github.com/lavas-project)
 

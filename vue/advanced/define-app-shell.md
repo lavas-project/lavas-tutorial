@@ -95,7 +95,7 @@ activated() {
 
 ```
 
-关于这部分内容，在 [开发一个页面](https://lavas.baidu.com/guide/vue/doc/vue/01-foundation/03-how-to-add-a-page#与-app-shell-的交互) 中也有介绍。
+关于这部分内容，在 [开发一个页面](https://lavas.baidu.com/guide/vue/doc/vue/foundation/how-to-add-a-page#与-app-shell-的交互) 中也有介绍。
 
 App Shell 的组件在主页面 `src/App.vue` 中导入使用，如果要对 App Shell 进行扩展，需要在这里引用新增组件。
 
