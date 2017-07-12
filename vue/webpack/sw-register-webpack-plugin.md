@@ -1,5 +1,7 @@
 # sw-register-webpack-plugin 插件
 
+> info
+>
 > 一个 webpack 插件，解决 service-worker.js 的注册和更新问题。
 > Lavas 解决方案默认集成该插件用来实现 Service Worker 文件的注册及缓存更新机制，默认只在 build 生产环境下构建生效。
 >
@@ -148,9 +150,9 @@ if (navigator.serviceWorker) {
 - 自动添加构建版本号，解决 `service-worker.js` 的缓存问题
 - 默认默认提供 `service-worker.js` 更新之后的提示方案
 
-> Note:
+> warn
 >
-> 这里需要说明的是：
+> **这里需要说明的是：**
 >
 > 1.`sw-resgiter-webpack-plugin` 使用的前提是，我们的 webpack 工程中已经含有 `service-worker.js` 文件，并且保证能被访问到。Lavas 解决方案默认提供了 `service-worker.js` [生成方案](https://lavas.baidu.com/guide/vue/doc/vue/advanced/service-worker-maintenance)
 >
@@ -222,7 +224,7 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js?
 
 ```
 
-> Note:
+> info
 >
 > 所以在维护 `sw-register.js` 源代码的时候，`service-worker.js` 不用指定任何版本号。
 
