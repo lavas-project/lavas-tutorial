@@ -17,8 +17,8 @@
                     "key": "vue/advanced"
                 },
                 {
-                    "name": "开发工具",
-                    "key": "vue/devtools"
+                    "name": "webpack 相关",
+                    "key": "vue/webpack"
                 },
                 {
                     "name": "更多",
