@@ -1,7 +1,7 @@
 # sw-register-webpack-plugin 插件
 
 > 一个 webpack 插件，解决 service-worker.js 的注册和更新问题。
-> Lavas 解决方案默认集成该插件用来实现 service worker 文件的注册及缓存更新机制，默认只在 build 生产环境下构建生效。
+> Lavas 解决方案默认集成该插件用来实现 Service Worker 文件的注册及缓存更新机制，默认只在 build 生产环境下构建生效。
 >
 > github: [https://github.com/lavas-project/sw-register-webpack-plugin.git](https://github.com/lavas-project/sw-register-webpack-plugin.git)
 
@@ -9,7 +9,7 @@
 
 PWA 工程需要注册 `service-worker.js`，`service-worker.js` 通过注册，安装，激活等系列步骤后，会对当前页面的静态资源和静态页面等资源进行持久缓存。
 
-如果在 web 站点上线之后运行了一段时间之后，需要进行第二次上线的话，我们预期的是将 service worker 文件替换成最新上线的文件，将所有被缓存的资源都替换成新上线的资源，并且用户能够即时的更新我们新上线的内容。
+如果在 web 站点上线之后运行了一段时间之后，需要进行第二次上线的话，我们预期的是将 Service Worker 文件替换成最新上线的文件，将所有被缓存的资源都替换成新上线的资源，并且用户能够即时的更新我们新上线的内容。
 
 这个时候问题就显现出来了，再讨论具体问题之前首先我们需要明确以下事情：
 
@@ -17,7 +17,7 @@ PWA 工程需要注册 `service-worker.js`，`service-worker.js` 通过注册，
 - 任何静态资源包括 `service-worker.js` 都会被 HTTP 缓存
 - 服务器对某个资源进行 `no-cache` 设置可以避免 HTTP 缓存
 
-通常我们仅仅在页面的某个 `<script></script>` 中或者页面的某个 `xxx.js` 中以下面这种方式实现 service worker 文件注册。
+通常我们仅仅在页面的某个 `<script></script>` 中或者页面的某个 `xxx.js` 中以下面这种方式实现 Service Worker 文件注册。
 
 ```js
 if (navigator.serviceWorker) {
@@ -31,19 +31,19 @@ if (navigator.serviceWorker) {
 
 **可怕的事情发生了!**
 
-就算此时开发者上线了最新的 `service-worker.js` 和其他若干新静态资源代码，但是此时 `service-worker.js` 并不会更新，并不会产生 diff, 从而导致并不会有 service worker 缓存更新，如果缓存不更新，那浏览器请求并执行的就是老的代码（包括 web app 入口的 `.html` 文件），用户就无法感知到 web app 的升级。
+就算此时开发者上线了最新的 `service-worker.js` 和其他若干新静态资源代码，但是此时 `service-worker.js` 并不会更新，并不会产生 diff, 从而导致并不会有 Service Worker 缓存更新，如果缓存不更新，那浏览器请求并执行的就是老的代码（包括 Web App 入口的 `.html` 文件），用户就无法感知到 Web App 的升级。
 
-这种 `service-worker.js` 的注册方式会导致更新机制的不可用，直接影响 web app 的维护和用户体验。这种深刻的痛点也是为何有 `sw-register-webpack-plugin` 这个插件的主要原因。
+这种 `service-worker.js` 的注册方式会导致更新机制的不可用，直接影响 Web App 的维护和用户体验。这种深刻的痛点也是为何有 `sw-register-webpack-plugin` 这个插件的主要原因。
 
 ## 解决缓存更新痛点
 
 我们已经对 `service-wroker.js` 在更新机制方面的痛点有所了解了。
 
-现在我们的核心问题是，当我们上线了一套新的资源到线上去之后，没有一个突破口让我们可以打开整个 web app 更新机制的口子，如果 `service-worker.js` 能够保证每次请求都是线上最新的内容，那么浏览器的 diff 机制就会生效，如果 diff 机制生效，那么缓存更新的问题就会解决，浏览器就能拿到最新的静态资源和静态页面进行执行渲染等一系列操作。
+现在我们的核心问题是，当我们上线了一套新的资源到线上去之后，没有一个突破口让我们可以打开整个 Web App 更新机制的口子，如果 `service-worker.js` 能够保证每次请求都是线上最新的内容，那么浏览器的 diff 机制就会生效，如果 diff 机制生效，那么缓存更新的问题就会解决，浏览器就能拿到最新的静态资源和静态页面进行执行渲染等一系列操作。
 
-所以我们整套 web app 实时更新机制的核心问题变成了 **如何解决 `service-worker.js` 的实时更新问题** 。
+所以我们整套 Web App 实时更新机制的核心问题变成了 **如何解决 `service-worker.js` 的实时更新问题** 。
 
-### 服务器 `Cache-control: no-cache` 处理
+### 服务器 Cache-control: no-cache 处理
 
 对于浏览器 HTTP 缓存，我们不进行深入讲解，我们的目标是需要浏览器不对 `service-worker.js` 进行缓存处理，需要每次请求的时候返回的都是最新的内容。
 
@@ -58,7 +58,7 @@ location ~ \/service\-worker\.js$ {
 }
 ```
 
-通过配置服务器这种方式的好处是：只要做好了 `service-worker.js` 缓存实时更新问题之后，就可以不用关系整个 web app 的实时更新问题，浏览器都会自行搞定。
+通过配置服务器这种方式的好处是：只要做好了 `service-worker.js` 缓存实时更新问题之后，就可以不用关系整个 Web App 的实时更新问题，浏览器都会自行搞定。
 当然，这种处理方式也有很大的局限性，如果您将静态资源都部署在第三方的 cdn 静态资源服务器，单独针对某一个文件进行服务器设置非常不现实。
 
 ### 版本控制
@@ -111,7 +111,7 @@ if (navigator.serviceWorker) {
 - 每次浏览器渲染执行页面逻辑的时候，都会去请求最新的 `sw-register.js` 文件
 - 由于 `sw-register.js` 是异步的请求，不会对页面渲染造成 block
 
-等等。。 惊奇的发现，我们还是没解决核心问题，`sw-register.js` 里面的 service worker 注册的 `service-worker.js` 的浏览器 HTTP 缓存还是没有解决呀。
+等等。。 惊奇的发现，我们还是没解决核心问题，`sw-register.js` 里面的 Service Worker 注册的 `service-worker.js` 的浏览器 HTTP 缓存还是没有解决呀。
 
 那我们再多打一个套路，对 `sw-register.js` 做一些小的升级：
 
@@ -124,7 +124,7 @@ if (navigator.serviceWorker) {
 }
 ```
 
-这里的 `build 的版本号` 是跟随上线的版本，也就是说，这个版本号之后上线之后才会有效，这个版本号和我们之前提到的 `Data.now()` 形式的版本号有本质区别，这个版本号的意义在于只有上线之后我们需要更新 web app 版本的时候才更改 `service-worke.js` 的版本号，从而出发浏览器的 diff 机制，完成 `service-worker.js` 的更新，从而完成整个 web app 缓存的更新，最终达到实时更新的目的。
+这里的 `build 的版本号` 是跟随上线的版本，也就是说，这个版本号之后上线之后才会有效，这个版本号和我们之前提到的 `Data.now()` 形式的版本号有本质区别，这个版本号的意义在于只有上线之后我们需要更新 Web App 版本的时候才更改 `service-worker.js` 的版本号，从而触发浏览器的 diff 机制，完成 `service-worker.js` 的更新，然后完成整个 Web App 缓存的更新，最终达到实时更新的目的。
 
 看起来这是个不错的解决方案，如果从这个方案中挑一点缺点的话，就是我们凭空多出来一个静态资源 `sw-register.js` 的请求, 而且是无缓存的请求。
 
@@ -152,7 +152,7 @@ if (navigator.serviceWorker) {
 >
 > 这里需要说明的是：
 >
-> 1.`sw-resgiter-webpack-plugin` 使用的前提是，我们的 webpack 工程中已经含有 `service-worker.js` 文件，并且保证能被访问到。Lavas 解决方案默认提供了 `service-worker.js` 文件生成方案。[https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance)
+> 1.`sw-resgiter-webpack-plugin` 使用的前提是，我们的 webpack 工程中已经含有 `service-worker.js` 文件，并且保证能被访问到。Lavas 解决方案默认提供了 `service-worker.js` [生成方案](https://lavas.baidu.com/guide/vue/doc/vue/advanced/service-worker-maintenance)
 >
 > 2.工程中所有的 `.html` 文件都会被注入异步请求 `sw-register.js` 的代码
 >
@@ -160,7 +160,7 @@ if (navigator.serviceWorker) {
 
 ### 安装
 
-```bash
+```npm
 npm install --save-dev sw-register-webpack-plugin
 ```
 
