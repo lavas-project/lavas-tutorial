@@ -262,6 +262,7 @@ $color-green = #4caf50
 
 .qrcode-wrapper
     text-align center
+
     img
         display block
         margin 0 auto
@@ -269,6 +270,12 @@ $color-green = #4caf50
         height 200px
     p
         margin-bottom 5px
+
+    .mip-element
+        img
+            width auto
+            height auto
+
 .other-contact-wrapper
     padding-top 40px
     margin-left 60px
@@ -280,20 +287,25 @@ $color-green = #4caf50
     display block
     position relative
     overflow hidden
+
     &:hover
         text-decoration none
 
     &.github
         color #fff
         background $color-blue
+
         .icon-svg
             fill #fff
+
     &.email
         color $color-black
         background $color-grey
+
     .icon-svg
         width 1em
         height 1em
+
     .material-icons
         vertical-align middle
         margin-top -3px
@@ -303,8 +315,10 @@ $color-green = #4caf50
     .contact-wrapper
         display block
         width auto
+
     .other-contact-wrapper
         margin-left 0
+
     .contact-item
         width 200px
         margin 20px auto
@@ -316,7 +330,7 @@ $color-green = #4caf50
         <h1 class="m-title">关注我们</h1>
         <div class="contact-wrapper">
             <div class="qrcode-wrapper">
-                <img src="//gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/assets/lavas-web/qq-8f7c8330.png">
+                <img src="./images/qq.png">
                 <p>Lavas 官方 QQ 群</p>
                 <p>群号：655433298</p>
             </div>
