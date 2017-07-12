@@ -6,8 +6,6 @@
 
 ![lavas 中的 skeleton](./images/news-skeleton.png)
 
-虽然在加载过程中，顶部栏的各类按钮还不能对点击进行响应，但不至于面对白屏迅速失去耐心，比起单纯的白屏已经有明显的提升。
-
 受 [Ele.me 升级至 PWA](http://geek.csdn.net/news/detail/210535) 一文启发，我们采取的实现方法大致是：
 
 1. 在构建时将一个固定的 skeleton 路由组件的渲染结果插入 HTML 模版中
