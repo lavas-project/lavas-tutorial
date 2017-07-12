@@ -17,6 +17,10 @@
                     "key": "vue/advanced"
                 },
                 {
+                    "name": "开发工具",
+                    "key": "vue/devtools"
+                },
+                {
                     "name": "更多",
                     "key": "vue/more"
                 }
