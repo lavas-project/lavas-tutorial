@@ -22,7 +22,7 @@ $ npm run build
 
 ### Nginx 配置
 
-（1）为了避免在单页面项目中出现 404 情况，就要保证将所有 URL 指向 index.html，服务器端需要进行这一配置（目前的 basic、AppShell 模板均为单页项目）。以 nginx 为例，安装好 nginx 后，可以在 nginx.conf 文件中增加一个 server, 配置好端口，启动项目路径 root (即 build 后的 dist 文件夹地址)，配置下面的 location，启动 nginx 即可。
+（1）为了避免在单页面项目中出现 404 情况，就要保证将所有 URL 指向 `index.html`，服务器端需要进行这一配置（目前的 basic、AppShell 模板均为单页项目）。以 nginx 为例，安装好 nginx 后，可以在 `nginx.conf` 文件中增加一个 server, 配置好端口，启动项目路径 root (即 build 后的 dist 文件夹地址)，配置下面的 location，启动 nginx 即可。
 
 ```js
 listen       8848;
@@ -36,7 +36,7 @@ location / {
 
 > 注意
 >
-> 因为这么做以后，你的服务器就不再返回 404 错误页面，因为对于所有路径都会返回 index.html 文件。为了避免这种情况，你应该在 Vue 应用里面覆盖所有的路由情况，然后在给出一个 404 页面。
+> 这么做以后，你的服务器就不再返回 404 错误页面，因为对于所有路径都会返回 `index.html` 文件。为了避免这种情况，可以在 Vue 应用里面最后覆盖所有的路由情况，然后给出一个 404 页面。
 
 ```js
 const router = new VueRouter({
@@ -50,7 +50,7 @@ const router = new VueRouter({
 })
 ```
 
-(2) 同理，多页项目模板中，我们需要在后端服务器配置多个路由指定到不同的页面(目前的 mpa 模板为多页)，才能正常的访问。同样以 nginx 为例，可以在 nginx.conf 文件中配置多条 location，其他同上，启动 nginx 即可。
+(2) 同理，多页项目模板中，我们需要在后端服务器配置多个路由指定到不同的页面(即 mpa 模板)，才能正常的访问多页。同样以 nginx 为例，可以在 `nginx.conf` 文件中配置多条 location，其他同上，启动 nginx 即可。
 
 ```js
 listen       8848;
@@ -97,12 +97,12 @@ const router = new VueRouter({
 
 ### Node.js (Express)
 
-在 Lavas 导出的 模板中，我们的在开发模式下就是采用的 Express 的配置方式，所以具体可以参考 `build/dev-server.js` 中的处理方法来处理，主要是利用了 [connect-history-api-fallback 插件](https://github.com/bripkens/connect-history-api-fallback)
+在 Lavas 导出的模板中，在开发模式下就是采用的 Express 的配置方式，所以具体可以参考 `build/dev-server.js` 中的处理方法来处理，主要是利用了 [connect-history-api-fallback 插件](https://github.com/bripkens/connect-history-api-fallback)，如果您是在线上环境中使用，也需要服务器做相应处理
 
 （1）单页项目模板中，默认都指向 `index.html`
 
 ```js
-// 处理 history API 的回退情况（如果在线上环境中，也需要服务器做相应处理）
+// 处理 history API 的回退情况
 app.use(require('connect-history-api-fallback')());
 ```
 
