@@ -1,5 +1,7 @@
 # svg-loader 介绍
 
+> [Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
+
 在[ 如何在项目中使用图标 ](https://lavas.baidu.com/guide/vue/doc/vue/advanced/how-to-use-icon)一节中，我们介绍了开发时引入自定义 svg 图标的方法，例如：
 
 1. 将自定义 svg 文件放入指定文件夹下，自动完成注册
@@ -39,14 +41,13 @@ resolveLoader: {
 
 > info
 >
-> 在`module.rules`规则中，使用了`enforce: 'pre'`，这是为了保证 svg-loader 的执行时机在所有 loader 之前。例如待修改的`src/app.js`，也满足下面 babel-loader 的规则，将在 svg-loader 处理之后（注入了使用ES6语法的代码）执行。
+> 在`module.rules`规则中，使用了`enforce: 'pre'`，这是为了保证 svg-loader 的执行时机在所有 loader 之前。例如待修改的`src/app.js`，也满足下面 babel-loader 的规则，将在 svg-loader 处理（注入了使用ES6语法的代码）之后执行。
 
 ## 处理流程
 
 现在我们已经完成了 svg-loader 的注册，下面将涉及内部具体的处理流程。
 
 首先要明确我们需要注入的代码内容。之前在[ 如何在项目中使用图标 ](https://lavas.baidu.com/guide/vue/doc/vue/advanced/how-to-use-icon)一节中提到过，我们使用[ vue-awesome](https://github.com/Justineo/vue-awesome)注册自定义 svg 以及使用 svg 格式的 fontawesome 图标。所以以下两类代码就是我们需要注入的：
-
 ```js
 // 使用 svg 格式的 fontawesome 图标
 import 'vue-awesome/icons/envelope';
@@ -90,11 +91,11 @@ module.exports = function (source) {
 
 至此 svg-loader 中的主要流程已经介绍完了，下面我们将关注开发中的文件更新问题。
 
-## 处理文件更新
+## 监听文件更新
 
-在开发中，有两类文件更新需要我们关注：
-1. 向 svg 文件夹中放入新文件，引入自定义 svg
-2. 修改`config/icon.js`文件的`icons`，引入／删除 fontawesome 图标
+在开发模式下使用 svg 图标的场景中，会出现两种文件更新情况：
+1. 向自定义 svg 文件夹中放入新文件，此时文件夹内容发生更新
+2. 添加 fontawesome 图标，此时`config/icon.js`文件内容发生更新
 
 在发生以上两类文件更新时，如果能够自动触发 webpack 重新编译，不需要手动重启服务器，将节省宝贵的开发时间。
 
