@@ -2,9 +2,9 @@
 ============
 
 > 如果您能了解下面这些技术，能加快您对本文的了解
->     1. [vuex](https://vuex.vuejs.org/zh-cn/intro.html) -  Vue.js 应用程序开发的状态管理模式
->     2. [Vue.js SSR](https://ssr.vuejs.org/zh/) - Vue.js 服务器端渲染
->     3. [webpack](https://webpack.js.org/configuration/) - 编译构建工具
+>   1. [vuex](https://vuex.vuejs.org/zh-cn/intro.html) -  Vue.js 应用程序开发的状态管理模式
+>   2. [Vue.js SSR](https://ssr.vuejs.org/zh/) - Vue.js 服务器端渲染
+>   3. [webpack](https://webpack.js.org/configuration/) - 编译构建工具
 
 Lavas 服务器端渲染模板参考了 [vue-hackernews](https://github.com/vuejs/vue-hackernews-2.0) 的渲染和开发机制，并且结合了 Lavas 的 App Shell 模板，导出的工程中会有 App Shell 等
 
