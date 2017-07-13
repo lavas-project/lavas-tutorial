@@ -20,7 +20,7 @@ App Shell 架构是构建 PWA 应用的一种方式，它通常提供了一个�
 
 ## 调整及扩展 App Shell
 
-你可以从零开始开发自己的 App Shell，但为了降低开发成本，Lavas 已经为你准备好了一个比较通用的 App Shell，你可以直接使用它，也可以在它的基础上进行调整及扩展。
+我们可以从零开始开发自己的 App Shell，但为了降低开发成本，Lavas 已经准备好了一个比较通用的 App Shell，我们可以直接使用它，也可以在它的基础上进行调整及扩展。
 
 在 [Lavas 的命令行工具](https://github.com/lavas-project/lavas) 提供的多种类型模板中，我们选择 `App Shell` 模板，
 它集成的 App Shell 包含了典型的页面头部、页面底部导航、侧边展开栏等基本结构，如下图所示。
@@ -41,7 +41,23 @@ src/components
     └── Sidebar.vue
 ```
 
-为了方便 App Shell 与页面之间的交互，我们将 App Shell 各组件的状态放在 vuex 的 store 中统一管理，具体实现在 `src/store/modules/app-shell.js`， 它将 Shell 各组件划分成不同的 modules，包含了组件的 state, actions, mutations 等信息。这样一来，页面组件可以通过 `mapStates/mapActions` 访问当前 store 的状态及提交修改操作。
+### 状态管理
+
+为了方便 App Shell 与页面之间的交互，我们将 App Shell 各组件的状态放在 [vuex](https://vuex.vuejs.org/zh-cn/intro.html) 的 store 中统一管理，具体实现在 `src/store/modules/app-shell.js`， 它将 Shell 各组件划分成不同的 modules，包含了组件的 state, actions, mutations 等信息。这样一来，页面组件可以通过 `mapStates/mapActions` 访问当前 store 的状态及提交修改操作。
+
+以 `AppHeader` （页面头部）组件举例，我们在 store 中已经给头部定义了一些状态：
+
+| state    | @type   | 含义             |
+| :---:    | :-----: | :-------------: |
+| show     | boolean | 是否展示顶部导航栏 |
+| title    | string  | 标题内容 |
+| logoIcon | string  | logo图标名称 |
+| showMenu | boolean | 是否展示左侧菜单图标 |
+| showBack | boolean | 是否展示左侧返回图标 |
+| showLogo | boolean | 是否展示左侧logo |
+| actions  | Array   | 右侧操作按钮数组 |
+
+通常各个的路由组件页面对头部都有定制化需求，例如在详情页，我们需要将头部原有的`菜单`、`搜索` ，分别替换成`后退`、`首页` ，只需要调用 `AppHeader` store 中定义的 `setAppHeader` action 去改变相应状态即可。
 
 ```js
 // 页面组件中
@@ -60,7 +76,7 @@ export default {
     created() {
         this.setAppHeader({
             show: true,
-            title: 'Lavas',
+            title: 'Lavas Detail',
             showMenu: false,
             showBack: true,
             showLogo: false,
@@ -77,6 +93,10 @@ export default {
     }
 };
 ```
+
+其他 Shell 组件的情况也大同小异，我们可以根据自己的需求进行类似的调整和修改。
+
+### 与路由组件通信
 
 App Shell 和页面路由组件之间的通信是通过全局事件总线 EventBus 来实现的，具体实现中，App Shell 组件使用不同的命名空间触发事件，各页面路由组件在 activated 函数中进行监听，并处理自己的页面逻辑。
 
@@ -98,7 +118,9 @@ activated() {
 
 关于这部分内容，在 [开发一个页面](https://lavas.baidu.com/guide/vue/doc/vue/foundation/how-to-add-a-page#与-app-shell-的交互) 中也有介绍。
 
-App Shell 的组件在主页面 `src/App.vue` 中导入使用，如果要对 App Shell 进行扩展，需要在这里引用新增组件。
+### 扩展 Shell
+
+如果要对 App Shell 进行扩展，我们首先要在 `src/components` 目录下新增组件的内容。如果有必要，还要在 `app-shell` 状态树下增加相应的 module 进行管理。同时别忘了，App Shell 的组件都在主页面 `src/App.vue` 中导入使用，我们需要在这里引用新增的组件。
 
 ```html
 <!--> src/App.vue <-->
