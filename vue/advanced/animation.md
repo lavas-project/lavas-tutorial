@@ -2,7 +2,7 @@
 
 Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段应用 CSS 类，提供钩子函数使用 JS 操作 DOM，使用第三方 CSS/JS 动画库等。
 
-如果对 Vue 中内置的 transition 机制还不了解，可以阅读[官方的介绍](https://cn.vuejs.org/v2/guide/transitions.html)。
+如果对 Vue 中内置的 transition 机制还不了解，可以阅读 [官方的介绍](https://cn.vuejs.org/v2/guide/transitions.html)。
 
 在模版项目中，主要使用了最简单的应用 CSS 类的方式完成动画效果。
 
@@ -20,8 +20,8 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
 </transition>
 ```
 
-以左滑为例，即将打开的新页面插入 DOM 时立即应用 slide-left-enter 将页面移动到屏幕右外侧，随即移除，页面表现为向左滑回到初始位置。
-而旧页面在整个离开过程中都应用 slide-left-leave-active，也向左滑动至屏幕左外侧。
+以左滑为例，即将打开的新页面插入 DOM 时立即应用 `slide-left-enter` 将页面移动到屏幕右外侧，随即移除，页面表现为向左滑回到初始位置。
+而旧页面在整个离开过程中都应用 `slide-left-leave-active`，也向左滑动至屏幕左外侧。
 
 ```stylus
 .app-view
@@ -32,7 +32,7 @@ Vue 提供了多种方式支持动画过渡效果。例如在各个过渡阶段�
         transform translate(-100%, 0)
 ```
 
-关于 `v-enter`，`v-leave-active` 这些 CSS 类的添加时机，可参阅[文档 Transition Classes 一节](https://cn.vuejs.org/v2/guide/transitions.html#Transition-Classes)。
+关于 `v-enter`，`v-leave-active` 这些 CSS 类的添加时机，可参阅 [文档 Transition Classes 一节](https://cn.vuejs.org/v2/guide/transitions.html#Transition-Classes)。
 
 如果需要更换页面切换效果，例如想使用渐隐/渐显代替滑动，只需要简单修改上述 CSS 类的样式规则即可：
 

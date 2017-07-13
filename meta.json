@@ -17,6 +17,10 @@
                     "key": "vue/advanced"
                 },
                 {
+                    "name": "webpack 相关",
+                    "key": "vue/webpack"
+                },
+                {
                     "name": "更多",
                     "key": "vue/more"
                 }
