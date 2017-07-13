@@ -45,7 +45,7 @@
 
 > info
 >
-> 如果在开发时向 svg 文件夹中添加图标，需要重启开发服务器才能完成注册工作。后续会添加热重载支持。
+> 在开发时向 svg 文件夹中添加图标并不需要重启开发服务器。了解更多实现原理，可以参考[ svg loader 介绍](https://lavas.baidu.com/guide/vue/doc/vue/webpack/svg-loader)。
 
 ### 可选的 fontawesome 图标
 
