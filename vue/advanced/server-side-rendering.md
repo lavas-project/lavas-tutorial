@@ -35,7 +35,7 @@ Lavas 提供的 SSR 模板导出通过
 ```bash
 $ lavas init
 
-$ 选择一个模版类型 (按上下键选择):
+? 选择一个模版类型 (按上下键选择):
   Basic
     简易单页应用模版，包含 PWA 工程化相关必需内容。
   App Shell
@@ -48,17 +48,14 @@ $ 选择一个模版类型 (按上下键选择):
 
 完成上面的步骤之后，会在当前目录生成项目目录，其中有几个文件需要和 SSR 开发调试强相关，需要大家关注
 
-```bash
-./
-    | - server.js （development 和 production 的启动入口文件）
-    | - build/ （Webpack 调试和构建文件目录）
-        | - setup-dev-server.js （调试环境下启动的调试服务器）
-        | - webpack.server.conf.js （服务器端渲染的 Webpack 配置文件）
-    | - src/
-        | - entry-server.js （服务器端渲染的入口文件）
-        | - index.template.html （服务器端渲染的 layout）
-
-```
+    ./
+        | - server.js （development 和 production 的启动入口文件）
+        | - build/ （Webpack 调试和构建文件目录）
+            | - setup-dev-server.js （调试环境下启动的调试服务器）
+            | - webpack.server.conf.js （服务器端渲染的 Webpack 配置文件）
+        | - src/
+            | - entry-server.js （服务器端渲染的入口文件）
+            | - index.template.html （服务器端渲染的 layout）
 
 ### 启动
 
