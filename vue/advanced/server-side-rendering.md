@@ -1,6 +1,7 @@
-服务器端渲染
-============
+# 服务器端渲染
 
+> info
+>
 > 如果您能了解下面这些技术，能加快您对本文的了解
 >   1. [vuex](https://vuex.vuejs.org/zh-cn/intro.html) -  Vue.js 应用程序开发的状态管理模式
 >   2. [Vue.js SSR](https://ssr.vuejs.org/zh/) - Vue.js 服务器端渲染
@@ -13,9 +14,9 @@ Lavas 服务器端渲染模板参考了 [vue-hackernews](https://github.com/vuej
 Lavas 服务器端渲染模板除了服务器端渲染的机制和 vue 本身的代码之外，还包括以下：
 
 - App Shell + 组件库 [vuetify](https://vuetifyjs.com/vuetify/quick-start)
-- [图标解决方案](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/03-how-to-use-icon)
-- [主题解决方案](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/04-how-to-change-theme)，和 vuetify 绑定
-- [service worker 解决方案](https://lavas.baidu.com/guide/vue/doc/vue/02-advanced/05-service-worker-maintenance)
+- [图标解决方案](https://lavas.baidu.com/guide/vue/doc/vue/advanced/how-to-use-icon)
+- [主题解决方案](https://lavas.baidu.com/guide/vue/doc/vue/advanced/how-to-change-theme)，和 vuetify 绑定
+- [Service Worker 解决方案](https://lavas.baidu.com/guide/vue/doc/vue/advanced/service-worker-maintenance)
 
 如果不做一些定制化的修改，开发者基本上不需要关心上面这些问题。
 
@@ -28,13 +29,13 @@ Lavas 服务器端渲染模板除了服务器端渲染的机制和 vue 本身的
 Lavas 提供的 SSR 模板导出通过
 
 - 安装 lavas 的命令行工具，`npm install -g lavas`
-- 通过 `lavas init ` 创建项目
+- 通过 `lavas init` 创建项目
 - 选择 Server Side Rendering 模板，输入基本信息确认导出
 
 ```bash
 $ lavas init
 
-? 选择一个模版类型 (按上下键选择):
+$ 选择一个模版类型 (按上下键选择):
   Basic
     简易单页应用模版，包含 PWA 工程化相关必需内容。
   App Shell
@@ -47,15 +48,17 @@ $ lavas init
 
 完成上面的步骤之后，会在当前目录生成项目目录，其中有几个文件需要和 SSR 开发调试强相关，需要大家关注
 
-	./
-		| - server.js （development 和 production 的启动入口文件）
-		| - build/ （Webpack 调试和构建文件目录）
-			| - setup-dev-server.js （调试环境下启动的调试服务器）
-			| - webpack.server.conf.js （服务器端渲染的 Webpack 配置文件）
-		| - src/
-			| - entry-server.js （服务器端渲染的入口文件）
-			| - index.template.html （服务器端渲染的 layout）
+```bash
+./
+    | - server.js （development 和 production 的启动入口文件）
+    | - build/ （Webpack 调试和构建文件目录）
+        | - setup-dev-server.js （调试环境下启动的调试服务器）
+        | - webpack.server.conf.js （服务器端渲染的 Webpack 配置文件）
+    | - src/
+        | - entry-server.js （服务器端渲染的入口文件）
+        | - index.template.html （服务器端渲染的 layout）
 
+```
 
 ### 启动
 
@@ -72,15 +75,15 @@ $ lavas init
 
 这个章节，我们了解一下 SSR 模板如何运作的。
 
-首先，来看一下入口文件[ `server.js`](https://github.com/lavas-project/lavas-template-vue-ssr/blob/master/server.js)，在这个文件中，通过 express 启动了一个服务器，在这个文件中，是通过 `renderer.renderToString` 来完成渲染的，我们可以看看这个 `renderer` 是怎么生成的
+首先，来看一下入口文件 [`server.js`](https://github.com/lavas-project/lavas-template-vue-ssr/blob/master/server.js)，在这个文件中，通过 express 启动了一个服务器，在这个文件中，是通过 `renderer.renderToString` 来完成渲染的，我们可以看看这个 `renderer` 是怎么生成的
 
-```javascript
+```js
 if (isProd) {
-	// 在生产环境中，通过 vue-ssr-server-bundle.json 文件创建 renderer
-	// 这个文件是通过 vue-ssr-webpack-plugin 生成的
+    // 在生产环境中，通过 vue-ssr-server-bundle.json 文件创建 renderer
+    // 这个文件是通过 vue-ssr-webpack-plugin 生成的
     const bundle = require('./dist/vue-ssr-server-bundle.json');
 
-	// vue-ssr-client-manifest.json 文件是可选的
+    // vue-ssr-client-manifest.json 文件是可选的
     const clientManifest = require('./dist/vue-ssr-client-manifest.json');
 
     renderer = createRenderer(bundle, {
@@ -88,7 +91,7 @@ if (isProd) {
     });
 }
 else {
-	// 开发环境中，setup-dev-server 会热重载 vue-ssr-server-bundle.json 文件，所以，需要重新创建 renderer
+    // 开发环境中，setup-dev-server 会热重载 vue-ssr-server-bundle.json 文件，所以，需要重新创建 renderer
     readyPromise = require('./build/setup-dev-server')(app, (bundle, options) => {
         renderer = createRenderer(bundle, options);
     });
@@ -97,7 +100,7 @@ else {
 
 这里区分了生产环境和开发环境，在开发环境中，会实时编译生成 `vue-ssr-server-bundle.json` 文件。
 
-熟悉 vue 的 SSR 的开发者知道，vue SSR 依赖的文件有三个
+熟悉 vue SSR 的开发者知道，vue SSR 依赖的文件有三个
 
 - `vue-ssr-server-bundle.json` - 包含打包好的所有代码
 - `vue-ssr-client-manifest.json` - 可选，静态文件清单
@@ -112,7 +115,6 @@ else {
 在这个文件中，我们指定的 entry 是 `entry-server.js`文件，而不是 `entry-client.js`，这两个文件虽然运行在不同的环境之中的，但是做的事情却很相似：获取当前匹配的组件，调用组件的 `asyncData` 方法，在 `asyncData` 方法中，请求异步数据，设置 `state`，最后再将 `store.state` 赋值给 `context`，服务器端渲染之后，输出到页面中。
 
 关于服务器端渲染中的数据预取，请看 [vue 官方提供的文档](https://ssr.vuejs.org/zh/data.html)。
-
 
 ### 如何生成 vue-ssr-client-manifest.json
 
@@ -130,11 +132,11 @@ else {
 
 当编写纯客户端(client-only)代码时，我们习惯于每次在新的上下文中对代码进行取值。但是，Node.js 服务器是一个长期运行的进程。当我们的代码进入该进程时，它将进行一次取值并留存在内存中。这意味着如果创建一个单例对象，它将在每个传入的请求之间共享。
 
-如基本示例所示，我们为每个请求创建一个新的根 Vue 实例。这与每个用户在自己的浏览器中使用新应用程序的实例类似。如果我们在多个请求之间使用一个共享的实例，很容易导致交叉请求状态污染(cross-request state pollution)。
+如基本示例所示，我们为每个请求创建一个新的根 Vue 实例。这与每个用户在自己的浏览器中使用新应用程序的实例类似。如果我们在多个请求之间使用一个共享的实例，很容易导致交叉请求状态污染 (cross-request state pollution)。
 
 因此，我们不应该直接创建一个应用程序实例，而是应该暴露一个可以重复执行的工厂函数，为每个请求创建新的应用程序实例。
 
-```javascript
+```js
 // app.js
 export function createApp (context) {
     return new Vue({
@@ -146,7 +148,7 @@ export function createApp (context) {
 }
 ```
 
-```javascript
+```js
 // app.js
 export function createApp() {
     let router = createRouter();
@@ -167,9 +169,9 @@ export function createApp() {
 
 ## 不想用默认的 server.js
 
-SSR 模板提供了在开发环境和生产环境都能使用的 server.js 文件，基于 express，但是这不一定能满足所有开发者的需求，如果我想在生产环境中使用 koa 呢。
+SSR 模板提供了在开发环境和生产环境都能使用的 server.js 文件，基于 express，但是这不一定能满足所有开发者的需求，如果我想在生产环境中使用 Koa 呢。
 
-既然我们已经知道 vue SSR 的关键部分，那我们编写关键部分代码即可，这个例子用的是 koa next 支持 es2017 的版本，如果 Node.js 版本过低，还得升级，请看 [koa 官网](http://koajs.com/)中的 Installation 章节。
+既然我们已经知道 vue SSR 的关键部分，那我们编写关键部分代码即可，这个例子用的是 Koa next 支持 es2017 的版本，如果 Node.js 版本过低，还得升级，请看 [Koa 官网](http://koajs.com/) 中的 Installation 章节。
 
 这里是一个使用 Koa 的完整的一个例子，完整可运行，代码的关键之处只有两处
 
@@ -178,7 +180,7 @@ SSR 模板提供了在开发环境和生产环境都能使用的 server.js 文�
 
 将这两处掌握了，自定义服务器端渲染就轻而易举了。
 
-```javascript
+```js
 const fs = require('fs');
 const Koa = require('koa');
 const Router = require('koa-router');
@@ -239,36 +241,37 @@ app.listen(3000);
 
 **第一步**，新增一个 [iscroll-ssr.js](https://github.com/lavas-project/lavas-template-vue-ssr/blob/master/src/iscroll-ssr.js)，可以参考 Lavas SSR 中的实现方式，这个文件并不需要什么内容。
 
-```javascript
+```js
 // iscroll-ssr.js
 export default class IScroll {}
 ```
 
-**第二步**，配置 [webpack.server.conf.js](https://github.com/lavas-project/lavas-template-vue-ssr/blob/master/build/webpack.server.conf.js#L31) 文件，增加 alias，将服务器端渲染使用的 iscroll 映射到新增的 iscroll-ssr.js 文件。
+**第二步**，配置 [webpack.server.conf.js](https://github.com/lavas-project/lavas-template-vue-ssr/blob/master/build/webpack.server.conf.js#L31) 文件，增加 alias，将服务器端渲染使用的 iscroll 映射到新增的 `iscroll-ssr.js` 文件。
 
-```javascript
+```js
 // webpack.server.conf.js
 
 alias: {
     'iscroll/build/iscroll-lite$': resolve('./src/iscroll-ssr.js')
 }
 ```
+
 配置了这一步之后，在 vue 和 js 文件中 `import IScroll from 'iscroll/build/iscroll-lite'` 会被替换为 `iscroll-ssr.js` 文件。
 
 但是光这一步还不够，这里有一个深坑，开发者需要避开。
 
 大家都知道，在 Node.js 中通过 `require('iscroll')` 来引入 iscroll，Node.js 会从 `node_modules` 目录中查找，同理在 vue SSR 使用的 `vue-ssr-server-bundle.json` 文件也是一样的从 `node_modules` 中查找 iscroll，那么我们设置的 alias 就不起作用了，默认情况下，我们是将 `node_modules` 目录中的文件通过 [webpack-node-externals](https://github.com/liady/webpack-node-externals) 排除在 `vue-ssr-server-bundle.json` 文件之外的，看下面的 webpack 的配置。我们通过第三步来避开这个深坑。
 
-```javascript
+```js
 // webpack.server.conf.js
 externals: nodeExternals({
     whitelist: [/\.(css|vue)$/]
 })
 ```
 
-**第三步**，把 iscroll 加入 nodeExternals 的白名单，把 iscroll-ssr.js 文件打包进 `vue-ssr-server-bundle.json` 文件，这样 Node.js 就不会再去 node_modules 目录中查找 iscroll 了。
+**第三步**，把 iscroll 加入 nodeExternals 的白名单，把 `iscroll-ssr.js` 文件打包进 `vue-ssr-server-bundle.json` 文件，这样 Node.js 就不会再去 node_modules 目录中查找 iscroll 了。
 
-```javascript
+```js
 // webpack.server.conf.js
 externals: nodeExternals({
     whitelist: [/\.(css|vue)$/, /iscroll/]
@@ -279,7 +282,7 @@ externals: nodeExternals({
 
 **第四步**，由于 iscroll-ssr.js 提供的是一个空的 IScroll，那么必然就无法使用，所以在使用的地方要判断当前是否在客户端环境，通过 vue 提供的变量 `$vm.isServer` 或者  `process.env.VUE_ENV` 判断当前运行的环境
 
-```javascript
+```js
 if (!$vm.isServer) {
     let iscroll = new IScroll();
 }
