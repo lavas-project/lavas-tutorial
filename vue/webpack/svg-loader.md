@@ -111,7 +111,7 @@ webpack 的文件监听机制比较复杂，简单来说就是在 [Compiler](htt
 >
 > 在开发模式中，webpack-dev-middleware 已经默认 [开启了监听模式](https://doc.webpack-china.org/configuration/watch/)。
 
-在 loader 执行方法中，`this` 指向 [loader 上下文](https://doc.webpack-china.org/api/loaders/)，其中包含了许多重要的属性和方法，这里只关心两个：
+在 loader 执行方法中，`this` 指向 [loader 上下文](https://doc.webpack-china.org/api/loaders/#the-loader-context)，其中包含了许多重要的属性和方法，这里只关心两个：
 
 - `addDependency()`，向 `compilation.fileDependencies` 中添加监听文件
 - `addContextDependency()`，向 `compilation.contextDependencies` 中添加监听文件夹

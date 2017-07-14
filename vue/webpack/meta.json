@@ -4,6 +4,9 @@
             "key": "sw-register-webpack-plugin"
         },
         {
+            "key": "vue-skeleton-webpack-plugin"
+        },
+        {
             "key": "svg-loader"
         },
         {
