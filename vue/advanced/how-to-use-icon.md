@@ -6,7 +6,7 @@
 
 1. 使用 material 字体文件
 
-2. 引入自定义的 svg 文件
+2. 引入自定义的 SVG 文件
 
 ## 字体文件
 
@@ -21,11 +21,11 @@
 
 更多使用方式请参考 [Icons](https://vuetifyjs.com/components/icons) 组件文档。
 
-## 自定义 svg
+## 自定义 SVG
 
-当 material 图标无法满足使用需求时，我们可以引入自定义的 svg 文件。
+当 material 图标无法满足使用需求时，我们可以引入自定义的 SVG 文件。
 
-在 `config/icon.js` 配置文件中定义前缀和存放 svg 的文件夹：
+在 `config/icon.js` 配置文件中定义前缀和存放 SVG 的文件夹：
 
 ```js
 {
@@ -37,22 +37,22 @@
 };
 ```
 
-我们使用 [vue-awesome](https://github.com/Justineo/vue-awesome) 注册自定义的 svg 图标，使用方法如下：
+我们使用 [vue-awesome](https://github.com/Justineo/vue-awesome) 注册自定义的 SVG 图标，使用方法如下：
 
-1. 将 test.svg 放入配置文件中的指定文件夹下
+1. 将 `test.svg` 放入配置文件中的指定文件夹下
 
 2. 在模版中使用 `<icon name="svg-test"></icon>` ，注意此处 name 需要加上配置文件中指定的前缀
 
 > info
 >
-> 在开发时向 svg 文件夹中添加图标并不需要重启开发服务器。了解更多实现原理，可以参考[ svg loader 介绍](https://lavas.baidu.com/guide/vue/doc/vue/webpack/svg-loader)。
+> 在开发时向 SVG 文件夹中添加图标并不需要重启开发服务器。了解更多实现原理，可以参考 [SVG loader 介绍](https://lavas.baidu.com/guide/vue/doc/vue/webpack/svg-loader)。
 
 ### 可选的 fontawesome 图标
 
 和 material 图标库一样，[fontawesome](http://fontawesome.io/icons/) 包含了大量丰富的图标：
 ![fontawesome 图标](./images/fontawesome-icons.png)
 
-由于 vue-awesome 已经提供了 fontawesome 中全部 svg 格式的图标，如果想使用这些图标，方法如下：
+由于 vue-awesome 已经提供了 fontawesome 中全部 SVG 格式的图标，如果想使用这些图标，方法如下：
 
 首先修改 `config/icon.js` 配置文件，在 icons 数组中添加需要的图标名称
 
@@ -68,8 +68,8 @@
 }
 ```
 
-然后使用方法与自定义 svg 相同，只是不需要加前缀：`<icon name="envelope"></icon>`。
+然后使用方法与自定义 SVG 相同，只是不需要加前缀：`<icon name="envelope"></icon>`。
 
 > info
 >
-> 我们只会引入 icons 中指定的 fontawesome svg，不用担心会引入全集。
+> 我们只会引入 icons 中指定的 fontawesome SVG，不用担心会引入全集。
