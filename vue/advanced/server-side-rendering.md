@@ -290,3 +290,97 @@ if (process.env.VUE_ENV === 'client') {
 ```
 
 通过这四步，就能解决这个问题。
+
+### 有些页面不想走 SSR 怎么办
+
+在这个 [ISSUE: 支持 SSR 应用在指定的 Route 上](https://github.com/lavas-project/lavas/issues/6) 中，有一位开发者: **liamwang** 提到想指定某些特定的 URL 不应用服务器端渲染，比如用户中心，这个想法非常好，有些页面进行 SSR 有些浪费服务器资源，那么在现有的 Lavas SSR 模板中怎样做到呢，下面我给大家分析一下。
+
+现在 Lavas SSR 模板默认不提供这个功能，需要开发者自己补充，但是却很简单。
+
+首先，我们来想一下，如果其他页面不需要 SSR，那这些页面就需要通过前端渲染，前端渲染需要一个入口文件，我们从 App Shell 模板中拷贝这个入口文件 [index.html](https://github.com/lavas-project/lavas-template-vue-appshell/blob/master/index.html) 到项目根目录下。
+
+```html
+<!DOCTYPE html>
+<html lang="zh_CN">
+    <head>
+        <meta charset="utf-8">
+        <title>Title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Add to home screen for Android and modern mobile browsers -->
+        <link rel="manifest" href="/static/manifest.json">
+        <meta name="theme-color" content="#2874f0">
+        <!-- Add to home screen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Title">
+        <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+        <!-- Add to home screen for Windows -->
+        <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
+        <meta name="msapplication-TileColor" content="#000000">
+        <% for (var jsFilePath of htmlWebpackPlugin.files.js) { %>
+            <link rel="preload" href="<%= jsFilePath %>" as="script">
+        <% } %>
+        <% for (var cssFilePath of htmlWebpackPlugin.files.css) { %>
+            <link rel="preload" href="<%= cssFilePath %>" as="style">
+        <% } %>
+    </head>
+    <body>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+    </body>
+</html>
+```
+
+然后，我们进行下一步。
+
+这个 index.html 文件需要进行编译，将静态文件注入，这里，我们同样从 [AppShell 模板](https://github.com/lavas-project/lavas-template-vue-appshell) 中拷贝了部分代码。
+
+修改 `build/webpack.client.conf.js` 文件，在生产环境中增加 `HtmlWebpackPlugin` 插件的配置，如下：
+
+```js
+// webpack.client.conf.js
+if (process.env.NODE_ENV === 'production') {
+    webpackConfig.plugins = [
+        ...webpackConfig.plugins,
+
+        // generate dist index.html with correct asset hash for caching.
+        // you can customize output by editing /index.html
+        // see https://github.com/ampedandwired/html-webpack-plugin
+        new HtmlWebpackPlugin({
+            filename: config.build.index,
+            template: 'index.html',
+            inject: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true
+
+                // more options:
+                // https://github.com/kangax/html-minifier#options-quick-reference
+            },
+            favicon: utils.assetsPath('img/icons/favicon.ico'),
+            // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+            chunksSortMode: 'dependency'
+        })
+    ];
+}
+```
+
+除此之外呢，还需要修改 `config/index.js` 文件，增加 `config.build.index` 表示编译后 index.html 所处路径。
+
+```js
+// config/index.js
+build: {
+    index: path.resolve(__dirname, '../dist/index.html'),
+}
+```
+
+最后，我们需要在 `server.js` 中配置哪些链接不走服务器端渲染
+
+```js
+// server.js
+app.use('/user', serve('./dist/index.html'));
+```
+
+做完上面的这些步骤，这个问题就解决了，如果不用 `server.js` 在生产环境，配置也差不多，融会贯通。
