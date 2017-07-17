@@ -340,6 +340,8 @@ if (process.env.VUE_ENV === 'client') {
 
 ```js
 // webpack.client.conf.js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 if (process.env.NODE_ENV === 'production') {
     webpackConfig.plugins = [
         ...webpackConfig.plugins,
