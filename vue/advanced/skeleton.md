@@ -26,7 +26,7 @@
 
 ### 代码位置和路由规则
 
-在通过 Lavas 初始化的项目中，skeleton 是以 Vue 组件的形式存在的。以 Basic 模板为例，skeleton 位于 `pages/Skeleton.vue` 。我们可以通过路由规则 `/skeleton` 在开发模式下访问到这个组件。如果用户需要根据实际项目的不同需求(如需要区别于纵向排列的其他 Skeleton )，也可进行修改并通过路由规则预览并确认效果。__另外开发者也不用担心，在构建后的生产模式代码中是不会包含这条路由规则的。__多页应用有多个 Skeleton ，因此路由规则会包含每个页面，详情可见 [多页应用的模板介绍]()
+在通过 Lavas 初始化的项目中，skeleton 是以 Vue 组件的形式存在的。以 Basic 模板为例，skeleton 位于 `pages/Skeleton.vue` 。我们可以通过路由规则 `/skeleton` 在开发模式下访问到这个组件。如果用户需要根据实际项目的不同需求(如需要区别于纵向排列的其他 Skeleton )，也可进行修改并通过路由规则预览并确认效果。__另外开发者也不用担心在构建后的生产模式代码中是不会包含这条路由规则的。__多页应用有多个 Skeleton ，因此路由规则会包含每个页面，详情可见 [多页应用的模板介绍]()
 
 ### 运行方式
 
@@ -85,4 +85,4 @@ module.exports = merge(baseWebpackConfig, {
 
 2. Skeleton.vue 中已经引入了 [normalize.css](https://github.com/necolas/normalize.css/)，这就意味着在全局样式或者其他组件中都不需要重复引入了。
 
-3. 虽然 Skeleton 本身也是个 Vue 控件，但因为采用了服务端渲染，因此省略了很多声明周期，只有 `beforeCreate` 和 `create` 会被调用。此外我们也应当避免在这两个周期钩子函数中使用全局代码，如 `setInterval` 等等。详细情况可以参考 [Vue 官网关于 SSR 的介绍](https://ssr.vuejs.org/zh/universal.html)
+3. 虽然 Skeleton 本身也是个 Vue 控件，但因为采用了服务端渲染，因此省略了很多生命周期，只有 `beforeCreate` 和 `create` 会被调用。此外我们也应当避免在这两个周期钩子函数中使用全局代码，如 `setInterval` 等等。详细情况可以参考 [Vue 官网关于 SSR 的介绍](https://ssr.vuejs.org/zh/universal.html)
