@@ -106,13 +106,13 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
 ```js
 // 可以监听的事件名称
 var visibilityChangeEvent = '';
-if (document.hidden) {
+if (typeof document.hidden !== 'undefined' ) {
     visibilityChangeEvent = 'visibilitychange';
 }
-else if (document.wekitHidden) {
+else if (typeof document.webkitHidden !== 'undefined') {
     visibilityChangeEvent = 'wekitvisibilitychange';
 }
-else if (document.mozHidden) {
+else if (typeof document.mozHidden !== 'undefined') {
     visibilityChangeEvent = 'mozvisibilitychange';
 }
 
