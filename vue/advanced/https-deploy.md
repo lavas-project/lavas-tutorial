@@ -41,7 +41,7 @@ server {
     ssl_session_cache shared:SSL:50m;
     ssl_prefer_server_ciphers on;
 
-    ...the rest of your config
+    # ...the rest of your config
 }
 ```
 

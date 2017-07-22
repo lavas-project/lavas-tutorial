@@ -25,7 +25,7 @@ service-worker.js 文件作为缓存管理的重要文件，在导出 Lavas 工�
 下面来看一下，具体配置结构（此处给出了一些常用配置，更全面的配置可通过 [sw-precache](https://github.com/GoogleChrome/sw-precache) 查看），该配置在 `webpack.prod.conf.js` 中被 [sw-precache-webpack-plugin](https://www.npmjs.com/package/sw-precache-webpack-plugin) 组件作为参数引入，build 时起作用，生成定制化 `service-worker.js` 文件。
 
 
-``` js
+```js
 /* sw-precache.js中的配置 */
 
 build: {
@@ -108,7 +108,7 @@ new SWPrecacheWebpackPlugin(config.swPrecache.build);
 **注意：** 在首次注册 Service Worker 时不发送更新信息，避免用户在首次进入页面时，就会再次重载，影响用户体验。
 
 
-``` js
+```js
 // sw.tmpl.js文件中
 if (!firstRegister) {
     return self.clients.matchAll()
@@ -127,7 +127,7 @@ if (!firstRegister) {
 
 项目的自定义注册部分在项目的 `src/sw-register.js` 文件中，并在项目 build 后在 `dist/index.html` 最后引入执行。上面内容提及的 `service-worker.js` 更新时 'sw.update' 的信息监听和页面重载部分，也是在 `src/sw-register.js` 里完成的，开发者可根据需求做相应的扩展。
 
-``` js
+```js
 // src/sw-register.js 中注册，重载相关代码
 navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js')
     .then(function () {
@@ -145,7 +145,7 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js'
     });
 ```
 
-``` js
+```js
 // build 后 sw-register-webpack-plugin 会在 index.html 中注入注册代码
 window.onload = function () {
     var script = document.createElement('script');

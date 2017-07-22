@@ -1,5 +1,7 @@
 # 在项目中使用图标
 
+> info
+>
 > [Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
 
 在项目中有两种使用图标的方式，可以同时使用：
