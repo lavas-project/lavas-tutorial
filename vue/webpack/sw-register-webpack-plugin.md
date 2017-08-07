@@ -136,7 +136,7 @@ if (navigator.serviceWorker) {
 
 在这个小节，我们介绍一下 `sw-register-webpack-plugin` 这个插件。我们通过之前的文章了解过相关背景和痛点之后，都了解了 `service-worker.js` 在维护过程中的版本更新问题，这个插件是用前文所提到的**版本控制**方案来解决这个痛点问题的。
 
-`sw-register-webpack-pligin` 是一个 webpack 插件。如果在工程构件中使用 webpack 做为打包工具的话，都可以使用此插件。
+`sw-register-webpack-plugin` 是一个 webpack 插件。如果在工程构件中使用 webpack 做为打包工具的话，都可以使用此插件。
 
 ### 解决的问题
 
