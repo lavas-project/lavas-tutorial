@@ -17,7 +17,7 @@ Lavas 提供了将 PWA 站点打包成安卓 App 的功能，欢迎 [前往体�
 提供的 PWA 站点需要满足以下几个条件
 
 - https 协议的 URL
-- PWA 的 [lighthouse](https://lavas.baidu.com/guide/vue/doc/vue/more/check-your-pwa-websit#Lighthouse) 评分 70 分以上
+- PWA 的 [lighthouse](https://lavas.baidu.com/guide/vue/doc/vue/more/check-your-pwa-website#Lighthouse) 评分 70 分以上
 - 站点首屏渲染时间较短（Lavas App 暂时没有做具体限制）
 
 ### 提供 email
