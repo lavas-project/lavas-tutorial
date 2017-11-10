@@ -57,7 +57,7 @@ Lighthouse 浏览器插件 [下载地址](./downloads/lighthouse_2.1.0_0.zip)
 
 假设存放至 `/home/work/chrome/extensions`
 
-**3、在 Chome 地址栏输入 `chome://extentions` 打开浏览器应用程序**
+**3、在 Chrome 地址栏输入 `chrome://extentions` 打开浏览器应用程序**
 
 点击 `开发者模式` 进入开发者模式，点击 `加载已解压的扩展程序` 选择第 2 步下载的 zip 包解压的文件夹
 
