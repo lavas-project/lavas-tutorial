@@ -13,7 +13,7 @@
 ## advanced
 
 * build (config/build 如何写) (PAN YUQI)
-* 错误处理 (WANG YISHENG)
+* 错误处理 (WANG YISHENG) (OK)
 * middleware (PAN YUQI)
 * router (PAN YUQI)
 * entry (WANG YISHENG)
