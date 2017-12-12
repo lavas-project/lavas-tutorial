@@ -1,0 +1,28 @@
+{
+    "menu": [
+        {
+            "name": "功能概述",
+            "key": "introduction"
+        },
+        {
+            "name": "基础教程",
+            "key": "foundation"
+        },
+        {
+            "name": "进阶教程",
+            "key": "advanced"
+        },
+        {
+            "name": "webpack 相关",
+            "key": "webpack"
+        },
+        {
+            "name": "更多",
+            "key": "more"
+        }
+    ],
+    "ignore": [
+        "introduction",
+        "advanced/manifest-maintenance"
+    ]
+}

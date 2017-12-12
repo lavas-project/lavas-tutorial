@@ -1,34 +1,12 @@
 {
     "menu": [
         {
-            "name": "vue",
-            "key": "vue",
-            "children": [
-                {
-                    "name": "功能概述",
-                    "key": "vue/introduction"
-                },
-                {
-                    "name": "基础教程",
-                    "key": "vue/foundation"
-                },
-                {
-                    "name": "进阶教程",
-                    "key": "vue/advanced"
-                },
-                {
-                    "name": "webpack 相关",
-                    "key": "vue/webpack"
-                },
-                {
-                    "name": "更多",
-                    "key": "vue/more"
-                }
-            ]
+            "name": "v2",
+            "key": "v2"
+        },
+        {
+            "name": "v1",
+            "key": "vue"
         }
-    ],
-    "ignore": [
-        "vue/introduction",
-        "vue/advanced/manifest-maintenance"
     ]
 }
