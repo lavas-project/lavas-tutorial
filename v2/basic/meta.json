@@ -7,6 +7,10 @@
         {
             "name": "基本功能",
             "key": "init"
+        },
+        {
+            "name": "Lavas 命令介绍",
+            "key": "cli"
         }
     ]
 }

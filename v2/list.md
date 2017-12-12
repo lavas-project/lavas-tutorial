@@ -6,7 +6,8 @@
 * lavas 基本用法，init pages 自动生成路由，目录的作用，.lavas 等等 (OK)
     ? core/middleware.js 补充
     ? /v2/advanced/entry  链接地址
-* lavas 的命令介绍 (WANG YISHENG)
+* lavas 的命令介绍 (WANG YISHENG) (OK)
+    ? /v2/basic/build 链接未定
 * 构建部署工程 (如何上线) (PAN YUQI)
 
 ## advanced
