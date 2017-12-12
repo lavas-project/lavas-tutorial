@@ -38,4 +38,6 @@ Lavas 解决方案能够帮助开发者完成：
 * 自动生成路由规则，避免重复代码
 * 针对 SSR 提供了更加合理的 AppShell 支持，享受更加顺滑和健壮的浏览体验
 
-为了开发者快速上手，我们还提供了一个 [codelab](/codelab/get-started/introduction) 帮助开发者搭建第一个 Lavas 2.0 应用，您可以按照步骤逐步学习。
+为了开发者快速上手，我们还提供了一套 Codelab 帮助开发者熟悉 Lavas 2.0 的各种特性，您可以按照步骤逐步学习。
+
+如果您从未接触过 Lavas 2.0，我们推荐您先从[开发第一个 Lavas 应用](/codelab/get-started/introduction)开始。

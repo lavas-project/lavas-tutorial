@@ -3,6 +3,10 @@
         {
             "name": "简介",
             "key": "introduction"
+        },
+        {
+            "name": "基本功能",
+            "key": "init"
         }
     ]
 }
