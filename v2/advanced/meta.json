@@ -3,6 +3,10 @@
         {
             "name": "错误处理",
             "key": "error-handler"
+        },
+        {
+            "name": "入口 (entry)",
+            "key": "entry"
         }
     ]
 }

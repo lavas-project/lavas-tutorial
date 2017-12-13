@@ -68,7 +68,7 @@ entry: [
             transitionClass: 'fade'
         }
     }
-    // other entry config
+    // other entries
 ],
 // ...
 ```
