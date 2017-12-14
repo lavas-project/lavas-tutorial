@@ -16,7 +16,8 @@
 * 错误处理 (WANG YISHENG) (OK)
 * middleware (PAN YUQI)
 * router (PAN YUQI)
-* entry (WANG YISHENG)
+* entry (WANG YISHENG) (OK)
+    ? pageTransition
 * store (PAN YUQI)
 * service worker (WANG YISHENG)
 * app shell (WANG YISHENG)

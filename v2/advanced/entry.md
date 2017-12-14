@@ -100,6 +100,12 @@ Lavas 提供的内置方法有这么几个：
 </html>
 ```
 
+开发者可能注意到了，`index.html.tmpl` 和 `App.vue` 都可以充当布局框架使用，在这方面他们有什么区别呢？
+
+从纯粹技术实现上来说，`index.html.tmpl` 可以处理整个 HTML，即包括 `head` 和 `body`；而 `App.vue` 只是 `body` 的一部分，控制范围小了一些。因此如果需要在 `head` 中进行修改，就必须使用 `index.html.tmpl`，而在 `body` 中的话，两者都能实现。
+
+从代码风格和编程习惯来看，如果是在 `body` 中的修改(最常见的就是增加顶栏、侧边栏、菜单栏或者修改显示样式等)，一般也倾向于放在 `App.vue` 中，毕竟是个 vue 文件，可以使用的方法，变量，判断等都更为丰富。
+
 ### Skeleton.vue
 
 Lavas 在知乎专栏上发表过一篇文章：[为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)，详细讲述了什么是 skeleton 及其优势。这里的 `Skeleton.vue` 就是用作渲染骨架屏的 Vue 组件。开发者只需要将符合自身站点显示风格的图片替换进去，即可在 MPA/SPA 等纯前端渲染模式下看到骨架屏，提升用户体验。
@@ -154,13 +160,15 @@ SSR 的首屏渲染性能问题可以通过 Service Worker 的 App Shell 模型�
 
 这两个其实都是 vue-router 的配置项，分别用来定义路由模式和路由基础路径。
 
-`mode` 可选值有 `'hash'` 和 `'history'` (`'abstract'` 只用作服务端使用，这里并没有使用的必要)。注意的是在 SSR 模式下__不支持__ `hash`。
+`mode` 可选值有 `'hash'` 和 `'history'` (`'abstract'` 只作用于服务端，这里并没有使用的必要)。注意的是在 SSR 模式下__不支持__ `hash`。
 
+`base` 用以定义整个项目的的基础路径，正常情况为 `/`。如果开发者希望将整个服务部署在 `https://some.domain/app/`， 那么这里就应该填写 `/app/`。注意最后的 `/` __不能遗漏__。
 
-
-更多信息可以参考 vue-router 的文档中 [mode](https://router.vuejs.org/zh-cn/api/options.html#mode) 和 [base](https://router.vuejs.org/zh-cn/api/options.html#base) 部分。
+这两个配置项也可以参考 vue-router 的文档中 [mode](https://router.vuejs.org/zh-cn/api/options.html#mode) 和 [base](https://router.vuejs.org/zh-cn/api/options.html#base) 部分。
 
 ### pageTransition
+
+TODO
 
 ## 创建入口
 
@@ -172,9 +180,9 @@ lavas addEntry user
 
 ![lavas-addEntry](http://boscdn.bpc.baidu.com/assets/lavas/codelab/lavas-addEntry.png)
 
-Lavas 帮助我们快速在 `/entries/` 目录下创建了 user 目录，并创建了一整套入口需要的文件。
+Lavas 帮助我们快速在 `/entries/` 目录下创建了 user 目录，并创建了上述一整套文件。
 
-下一步是在 `/lavas.config.js` 的 entry 配置数组增加导流配置。这个数组的作用是根据用户请求(通常为 URL ) 来判断哪些请求属于哪个入口，因此我们需要在这里建立新入口的 URL 规则，从而将请求导流到新的入口上。
+下一步是在 `/lavas.config.js` 的 entry 数组增加导流配置。
 
 ```javascript
 // ...
@@ -184,14 +192,19 @@ entry: [
         ssr: true,
         mode: 'history',
         base: '/',
-        routes: /^\/user/,
-        pageTransition: {
-            type: 'fade',
-            transitionClass: 'fade'
-        }
+        routes: /^\/user/
     }
     // other entries
 ],
 // ...
 ```
 
+经过这样两步，我们成功地把 `/user/` 开头的路由规则(域名和端口号不计入匹配范围，合法例子如 `/user/login`, `/user/register`等等)成功导流到新增加的 user 入口。接着我们在 `/pages/` 中创建 user 目录，并创建多个 vue 文件作为页面组件即可。
+
+默认创建的入口的所有配置和初始状态的 main 是相同的，我们可以修改 user 相关的入口配置来体现多入口的价值。例如我们将 main 的 `ssr` 设置为 `false` 可以让 user 成为一个 SPA/MPA 模块；将 `mode` 改为 `hash` 可以让 user 内部的路由规则使用 `#` 隔断等等；更常用的页面样式方面，我们也可以修改 `/entries/user/App.vue` 来使得 user 获得和其他入口不同的页面样式布局。
+
+## 删除入口
+
+删除入口同样需要两个步骤：删除入口本身并删除入口配置。
+
+同样以刚才建立的 user 入口举例，我们可以直接将 `/entries/user/` 目录删除，同样我们也可以使用命令 `lavas removeEntry user`，两者效果是相同的。之后再到 `/lavas.config.js` 配置中将 user 相关的配置删除即可。如果有需要的话，不要忘记继续删除 `/pages/` 目录中的相关页面。
