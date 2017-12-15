@@ -1,0 +1,8 @@
+{
+    "menu": [
+        {
+            "name": "构建配置",
+            "key": "build-config"
+        }
+    ]
+}
