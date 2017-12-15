@@ -1,0 +1,12 @@
+{
+    "menu": [
+        {
+            "name": "基础教程",
+            "key": "basic"
+        },
+        {
+            "name": "进阶教程",
+            "key": "advanced"
+        }
+    ]
+}
