@@ -68,18 +68,23 @@ Vue SSR 要求我们建立 `entry-client.js` 和 `entry-server.js` 分别作为 
 Lavas 提供的内置方法有这么几个：
 
 * `renderMeta()`
+
     使用 [vue-meta](https://github.com/declandewet/vue-meta) 进行 meta 信息的渲染，包括 title, titleTemplate 等等，详见 vue-meta 的使用方法。
 
 * `renderManifest()`
+
     给浏览器提供 `manifest.json` 以激活“添加到手机桌面”的功能。这同时要求开发者配置合法的 `/static/manifest.json`。关于 JSON 的配置可以参考 [Codelab](/codelab/get-started/manifest)。
 
 * `renderEntry()`
+
     渲染 HTML 入口。上面提过，对于服务端渲染来说，就是 `<!--vue-ssr-outlet-->` 这个标签，而对于客户端来说则是 `<div id="app"></div>`。 一般情况这个方法__必须__要有，否则 Vue 将会因为找不到入口而无法渲染 HTML。
 
 * `baseUrl`
+
     输出配置在入口中的 baseUrl。在开发者需要使用相对路径引用项目内的资源时，添加 `<%= baseUrl%>some/path` 可以和入口的路由配置同步。注意 `baseUrl` 一般最后都已经包含了 `/`。
 
 * `useCustomOnly()`
+
     如果开发者希望使用自定义的模板(例如某些特别的框架，不需要生成完整的 HTML 结构)，可以使用这个方法来屏蔽所有 Lavas 做的预处理，直接使用用户编写的内容。
 
 除了调用以上几个方法，在其他任何位置插入 HTML 标签__都是允许__的，从而最大限度的为开发者提供灵活性。因此如下模板也是合法的：

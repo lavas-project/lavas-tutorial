@@ -134,12 +134,15 @@ Lavas 提供了许多配置项，方便开发者进行各种自定义的灵活�
 除了上述目录，还有其他一些散落的文件。但因为修改的可能性较小，因此放在这里统一简述一下：
 
 * server.dev.js, server.prod.js
+
     这两个文件作用于用户输入命令 `lavas dev` 和 `lavas start` 时配合 Lavas 使用的，用户一般不需要修改。Lavas 集成的命令简介将在[ Lavas 命令](/v2/basic/cli)中介绍。
 
 * .babelrc, .editorconfig, .fecsignore, .fecsrc, .gitignore
+
     这些文件实际上并不属于 Lavas，而是项目通用文件，分别处理 babel 对 es6/7 的转码规则，IDE 的配置，fecs 代码风格检查的配置和 git 的忽略文件，开发者一般不需要修改。
 
 * LINCENSE, package.json, README.md
+
     这些文件也不属于 Lavas，开发者可以根据自己情况自行修改。
 
 ### .lavas

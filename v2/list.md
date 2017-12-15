@@ -13,12 +13,13 @@
 ## advanced
 
 * build (config/build 如何写) (PAN YUQI)
-* 错误处理 (WANG YISHENG) (OK)
-* middleware (PAN YUQI)
+* 错误处理 (WANG YISHENG) (OK) error-handler
+* middleware (PAN YUQI) middleware
 * router (PAN YUQI)
-* entry (WANG YISHENG) (OK)
+* entry (WANG YISHENG) (OK) entry
     ? pageTransition
 * store (PAN YUQI)
-* service worker (WANG YISHENG)
-* app shell (WANG YISHENG)
+* service worker (WANG YISHENG) (OK) service-worker
+    ? workbox 版本号锁定？
+* app shell (WANG YISHENG) appshell
 * 最佳实践，需要有一个实例的 demo 在 github 上
