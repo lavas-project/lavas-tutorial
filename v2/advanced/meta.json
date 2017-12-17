@@ -11,6 +11,14 @@
         {
             "name": "入口 (entry)",
             "key": "entry"
+        },
+        {
+            "name": "中间件",
+            "key": "middleware"
+        },
+        {
+            "name": "路由",
+            "key": "router"
         }
     ]
 }
