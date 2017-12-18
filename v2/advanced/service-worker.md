@@ -177,3 +177,78 @@ workboxSW.router.registerRoute(/^https:\/\/.*\.baidu\.com/i,
 ```
 
 这种配置下，访问 `*.baidu.com` 的所有请求都会命中第二条规则，从而使用 networkOnly 规则，所以__不会__缓存任何文件。更换两者的注册顺序可以解决这个问题。
+
+## 注册 Service Worker
+
+Lavas 会自动注册生成的 Service Worker，所以一般情况下不需要开发者额外关注。如果您有兴趣了解注册方式，这一部分会大概介绍一下。
+
+Lavas 内部使用 webpack 进行构建，其中处理 Service Worker 的注册问题时使用一个名为 [sw-register-webpack-plugin](https://github.com/lavas-project/sw-register-webpack-plugin) 的插件(也由 Lavas 开发组进行开发)。这款插件的作用有两个：
+
+1. 在生成目录(默认 `/dist`) 生成 `sw-register.js`，用以注册 Service Worker
+
+2. 是在编译时找到 HTML 文件，在 `</body>` 标签之前插入一段代码，用来引入 `sw-register.js`
+
+我们从这两步分别了解一下这个插件。
+
+### sw-register.js
+
+生成的 `sw-register.js` 大致内容如下，其中的参数 `v` 以编译的时间生成时间戳，保证获取的 `service-worker.js` 不受浏览器缓存的影响。
+
+```javascript
+if ('serviceWorker' in navigator) {
+    // 例如v=20171205175126
+    navigator.serviceWorker.register('/service-worker.js?v=xxxx').then(function(reg) {
+        reg.onupdatefound = function() {
+            var installingWorker = reg.installing;
+            installingWorker.onstatechange = function() {
+                switch (installingWorker.state) {
+                    case 'installed':
+                        if (navigator.serviceWorker.controller) {
+                            var event = document.createEvent('Event');
+                            event.initEvent('sw.update', true, true);
+                            window.dispatchEvent(event);
+                        }
+                        break;
+                }
+            };
+        };
+    }).catch(function(e) {
+        console.error('Error during service worker registration:', e);
+    });
+}
+```
+
+从这个文件内容来看，它的主要工作包括：
+
+1. 调用 `navigator.serviceWorker.register` 注册 Service Worker
+
+2. 注册 `updatefound` 事件并监听 Service Worker 的更新，并在更新时分发 `'sw.update'` 事件
+
+补充说明：这个 `'sw.update'` 事件在 Lavas 项目下 `/components/UpdateToast.vue` 组件进行监听，并在更新时弹出提示，引导用户刷新页面。
+
+### 引入 sw-register.js
+
+上面提过，sw-register-webpack-plugin 会在 HTML 文件中寻找 `</body>` 标签并插入内容，因此这里需要明确，只有 SPA/MPA 模式才会生成 HTML 入口文件，也就是说：__插件只在 SPA/MPA 模式下插入内容__，SSR 因为没有独立的入口 HTML 文件生成，因此采用别的方案，这个将在后面讨论。
+
+插件插入的内容大致如下：
+
+```
+<script>
+window.onload = function () {
+    var script = document.createElement('script');
+    var firstScript = document.getElementsByTagName('script')[0];
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = '/sw-register.js?v=' + Date.now();
+    firstScript.parentNode.insertBefore(script, firstScript);
+};
+</script>
+```
+
+作用也很明显，在整个 HTML 的第一个 `<script>` 之前插入新的 `<script>` 引用 `sw-register.js`，同样通过时间戳来屏蔽浏览器的缓存。但这里的 `v` 和 `sw-register.js` 里的 `v` 有区别，`sw-register.js` 中的 `v` 在编译一次之后就确定并写入文件(如果有兴趣你可以查看 `/dist/sw-register.js`)，之后不会再改变；而这里的值是 `Date.now()`，所以每次都请求新的 `sw-register.js`。依靠这种模式，可以以较小的代价在第一时间更新到最新的 Service Worker。
+
+### SSR 模式下引入 sw-register.js
+
+因为 SSR 没有单独的入口 HTML 文件生成，因此 Lavas 需要完成插件的一部分工作，即引入 `sw-register.js`。SSR 需要给 renderer 提供一个 index.html 作为服务端模板，在这个 index.html 的底部，额外加上代码即可。
+
+最后重申一点，所有和注册 Service Worker 相关的工作都已经由 Lavas 自动完成，这里仅仅是表述内部的做法，并不需要开发者额外进行任何配置或者开发。
