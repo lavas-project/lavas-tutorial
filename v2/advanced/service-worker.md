@@ -8,11 +8,9 @@ Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的
 
 * __动态缓存__ 用户在运行过程中实际发送请求后再进行缓存的内容，通常是动态的接口，因为含有动态参数所以不可能全部预缓存。动态缓存通常还有各类策略，如 networkFirst, cacheFirst 等等
 
-* __appshell__  __只在 SSR 下生效__ 首次打开站点时，额外请求一个路由将每个页面的框架 (或称 shell) 缓存住。之后每次请求页面，只要缓存中有这个框架，都直接返回并配上浏览器端渲染页面，用以提升渲染速度。这部分将在 [App Shell 模型](/v2/advanced/appshell)中详细讨论。
+* __appshell__  缓存页面的外部框架，在切换页面时先从缓存取出框架显示，再逐步渲染核心内容，从而提升加载性能和体验。这部分将在 [App Shell 模型](/v2/advanced/appshell)中详细讨论。
 
-如果您是一个对 PWA 非常熟悉且拥有相当经验的开发者，您可以在 `/static/` 目录下自己编写一个 `service-worker.js`， Lavas 会在构建后将其复制到生成目录中去。但 Lavas 依然为开发者提供了便捷方式，这里将重点介绍一下。
-
-以初始项目的配置为例，打开 `/lavas.config.js` 能看到 `serviceWorker` 这一段，如下：
+Lavas 提供了配置 + 模板的便捷方式帮助开发者生成 Serice Worker。以初始项目的配置为例，打开 `/lavas.config.js` 能看到 `serviceWorker` 这一段，如下：
 
 ```javascript
 module.exports = {
