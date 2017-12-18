@@ -17,7 +17,7 @@
             "key": "middleware"
         },
         {
-            "name": "路由",
+            "name": "重写路由对象",
             "key": "router"
         }
     ]

@@ -1,7 +1,7 @@
 # 构建配置
 
 从本篇文档开始，我们将介绍 Lavas 构建、运行中使用的配置项。开发者可以在项目根目录下的 `lavas.config.js` 中定义这些配置项。配置对象的结构大致如下：
-```
+```javascript
 // lavas.config.js
 
 {
@@ -15,7 +15,7 @@
 Lavas 内部使用 [Webpack](https://doc.webpack-china.org/concepts/) 进行构建，众所周知 Webpack 功能强大但是配置非常复杂，我们隐藏了大部分构建细节，将构建流程中部分常用特性以配置项的形式暴露给用户，便于快速上手。同时，对于高级开发者，也能通过特殊的配置项将自定义的 Loader 和 Plugin 加入构建流程。
 
 这些在构建过程中使用的 Webpack 相关配置项将放在 `build` 下，下面我们将依次介绍这些配置项。
-```
+```javascript
 // lavas.config.js
 
 build: {
@@ -28,7 +28,7 @@ build: {
 ## path
 
 最终构建产物的输出地址，必须为绝对路径。如下配置将输出构建产物到 `dist` 文件夹下：
-```
+```javascript
 path: path.resolve(__dirname, 'dist')
 ```
 等同于 Webpack 配置中的 [output.path](https://doc.webpack-china.org/configuration/output/#output-path)。
@@ -36,12 +36,12 @@ path: path.resolve(__dirname, 'dist')
 ## publicPath
 
 在静态资源路径之前添加的前缀。默认值为 `'/'`。
-```
+```javascript
 publicPath: '/'
 ```
 
 例如在使用 CDN 场景下，可以使用如下配置：
-```
+```javascript
 publicPath: '//cdn.example.com/assets/'
 ```
 
@@ -51,7 +51,7 @@ publicPath: '//cdn.example.com/assets/'
 
 Webpack 可以指定输出静态资源（JS CSS FONT IMG）的文件名，其中可以使用例如 `[hash]` 这样的模板字符串。
 Lavas 中使用的默认值如下：
-```
+```javascript
 filenames: {
     entry: 'js/[name].[chunkhash:8].js',
     vue: 'js/vue.[chunkhash:8].js',
@@ -78,20 +78,20 @@ filenames: {
 ## cssExtract
 
 在使用 [ExtractTextWebpackPlugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin)从 JS 中提取样式时，需要设置 Loader 和 Plugin。由于分离样式会造成额外的编译开销，Lavas 默认在开发模式中关闭这一特性，在生产环境打开。
-```
+```javascript
 cssExtract: true
 ```
 
 ## cssMinimize & cssSourceMap
 
 是否需要对 CSS 文件进行压缩以及生成 source-map。
-```
+```javascript
 cssMinimize: true,
 cssSourceMap: true
 ```
 
 这两个参数最终将传递给 [css-loader](https://github.com/webpack-contrib/css-loader)。
-```
+```javascript
 loader: 'css-loader',
 options: {
     minimize: true,
@@ -102,7 +102,7 @@ options: {
 ## jsSourceMap
 
 是否需要对 JS 文件生成 source-map，便于开发模式调试以及生产环境排查错误，默认开启。
-```
+```javascript
 jsSourceMap: true
 ```
 
@@ -117,7 +117,7 @@ Webpack 支持通过 `devtool` 配置项生成多种 [source-map](https://doc.we
 ## bundleAnalyzerReport
 
 [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 提供了可视化图表这样的直观方式，帮助开发者分析构建产物中可能出现的问题，例如重复引入、不必要的依赖。
-```
+```javascript
 // 默认配置，启动 localhost:8888 服务器展示网页
 bundleAnalyzerReport: true
 
@@ -136,7 +136,7 @@ Lavas 默认关闭这一配置。开启后，运行 `lavas build`，将自动启
 ## defines
 
 在构建时我们常常需要使用全局常量，在 Webpack 中可以通过 [DefinePlugin](https://doc.webpack-china.org/plugins/define-plugin/) 插件定义这些常量。Lavas 提供三组命名空间，分别是 SSR 中服务端使用的 `server`，客户端使用的 `client` 以及两者共用的 `base`。另外需要注意的是常量的值必须包含字符串本身内的实际引号，可以使用单引号包含双引号或者 `JSON.stringify()`。
-```
+```javascript
 defines: {
     base: {
         'MY_CONSTANT': '"VALUE"'
@@ -147,7 +147,7 @@ defines: {
 ```
 
 一个常见的使用场景是，需要根据开发环境和生产环境定义不同的 URL。由于在启动 Lavas 时已经设置了环境变量 `process.env.NODE_ENV`，在 `lavas.config.js` 中可以这样做：
-```
+```javascript
 // lavas.config.js
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -163,7 +163,7 @@ module.exports = {
 ```
 
 另外，Lavas 已经内置了以下两组全局常量 `process.env.VUE_ENV` 和 `process.env.NODE_ENV`，可以直接在项目中使用，不需要开发者重复定义：
-```
+```javascript
 // 在同构应用当前处于 client 或者 server 端
 'process.env.VUE_ENV': '"client"',
 
@@ -176,7 +176,7 @@ module.exports = {
 在 Webpack 中解析模块时，我们常常使用 alias 定义路径的[简写别名](https://doc.webpack-china.org/configuration/resolve/#resolve-alias)，便于更加简便地引用模块。
 
 Lavas 提供了 `alias` 下三组命名空间，分别是 SSR 中服务端使用的 `server`，客户端使用的 `client` 以及两者共用的 `base`。
-```
+```javascript
 alias: {
     base: {},
     client: {},
@@ -185,15 +185,15 @@ alias: {
 ```
 
 另外，Lavas 已经内置了两组别名，开发者不需要重复定义。例如如果想引用项目根目录下 `components` 文件夹中的组件，只需要使用 `import MyComponent from '@/components/MyComponent'`：
-```
-    '@': 指向项目根目录,
-    '$': 指向 .lavas 目录
+```javascript
+'@': '' // 指向项目根目录,
+'$': '' // 指向 .lavas 目录
 ```
 
 ## plugins
 
 在使用 Webpack 构建时，各种插件是必不可少的，对于开发者自定义的插件，Lavas 提供了 `plugins` 下三组命名空间，分别是 SSR 中服务端使用的 `server`，客户端使用的 `client` 以及两者共用的 `base`。有一点需要注意，自定义插件将添加到 Lavas 已有插件列表之后，如果对于插件添加顺序有要求，可以参考 `extend` 配置项，进行更精确的添加。
-```
+```javascript
 plugins: {
     base: [],
     client: [],
@@ -210,7 +210,7 @@ plugins: {
 * `options.env` 当前构建环境变量，取值有两种：`development|production`。
 
 例如我们想增加 `vue-style-variables-loader` 来处理 `.vue` 文件，可以这么做：
-```
+```javascript
 extend(config, {type, env}) {
     if (type === 'base') {
         let vueRule = config.module.rules[0];
@@ -228,19 +228,19 @@ extend(config, {type, env}) {
 
 ## compress
 
-注意：该配置项只有 SSR 模式下生效，MPA 模式下可以忽略。
+注意：该配置项只有 SSR 模式下生效，SPA/MPA 模式下可以忽略。
 
 在 SSR 模式下是否启用 gzip，通过内置的 [compress 中间件](https://github.com/expressjs/compression)实现。Lavas 默认在开发模式中关闭这一特性，在生产环境打开。
-```
+```javascript
 compress: false
 ```
 
 ## nodeExternalsWhitelist
 
-注意：该配置项只有 SSR 模式下生效，MPA 模式下可以忽略。
+注意：该配置项只有 SSR 模式下生效，SPA/MPA 模式下可以忽略。
 
 在 SSR 模式下，通常我们不希望将 `node_modules` 中的依赖打包进 server bundle 中，因此需要使用 Webpack [externals](https://doc.webpack-china.org/configuration/externals/) 配置项。Lavas 已经通过 [Webpack node modules externals](https://github.com/liady/webpack-node-externals) 将 `node_modules` 全部排除。但是在某些场景下，我们还是需要将部分特定的依赖打包进来，这时就需要使用[白名单](https://github.com/liady/webpack-node-externals#optionswhitelist-)了：
-```
+```javascript
 nodeExternalsWhitelist: []
 ```
 
@@ -248,10 +248,10 @@ nodeExternalsWhitelist: []
 
 ## ssrCopy
 
-注意：该配置项只有 SSR 模式下生效，MPA 模式下可以忽略。
+注意：该配置项只有 SSR 模式下生效，SPA/MPA 模式下可以忽略。
 
 在 SSR 模式下，Lavas 除了将构建产物输出到例如 `dist` 文件夹中，还可以将例如 `node_modules`，线上脚本等文件拷贝到里面。这样 `dist` 文件夹可以作为一个可单独运行的包，移动到任意位置：
-```
+```javascript
 ssrCopy: isDev ? [] : [
     {
         src: 'server.prod.js'
@@ -276,7 +276,7 @@ Lavas 在开发模式下使用了 webpack-dev-middleware。得益于自带的热
 * SSR 模式下模板内容发生修改。
 
 整个重新编译过程中不需要开发者关闭重启服务，也就是说从 MPA 模式切换到 SSR 模式也只需要修改配置后等待编译完成。另外，如果想监控自定义文件、文件夹，在它们发生修改时也触发重新编译，可以通过 `watch` 配置项传入文件列表：
-```
+```javascript
 watch: [
     '/foo/bar' // 自定义文件
 ]
@@ -286,7 +286,7 @@ watch: [
 
 对于以上配置项，如果需要在开发模式和生产环境启用不同的值，可以使用两个特殊的配置项 `development` 和 `production`。
 例如想在开发模式关闭 `cssExtract` 分离样式而在生产环境开启，可以这么做：
-```
+```javascript
 build: {
     // 省略其他配置项
 },

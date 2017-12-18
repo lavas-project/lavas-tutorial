@@ -14,7 +14,7 @@
 ## 中间件方法说明
 
 编写中间件十分简单，需要创建一个单独文件，放在 `/middlewares` 文件夹下，其中暴露的中间件方法签名如下：
-```
+```javascript
 // middlewares/my-first-middleware.js
 
 export default function (context) {
@@ -46,15 +46,15 @@ export default function (context) {
 
 中间件编写完毕，我们需要通过配置，声明实际想要使用的中间件。中间件的名称可以声明在以下两个地方：
 
-1. 全局性的中间件，即所有路由组件都会执行的。定义在 `lavas.config.js` 中的 `middlewares` 配置项内
+1. 全局性的中间件，即所有路由组件都会执行的。定义在 `lavas.config.js` 中的 `middleware` 配置项内
 2. 路由组件级别的中间件。定义在组件的 `middleware` 属性中
 
 对于全局性的中间件，可以在 `lavas.config.js` 配置文件中配置运行环境：客户端、服务端还是两者兼具。以上面例子中的 `my-first-middleware` 为例，如果想让这个中间件仅在客户端运行，可以这样配置：
-```
+```javascript
 // lavas.config.js
 
 {
-    middlewares: {
+    middleware: {
         all: [], // 同时运行在客户端和服务端
         client: ['my-first-middleware'], // 仅客户端
         server: [] // 仅服务端
@@ -63,7 +63,7 @@ export default function (context) {
 ```
 
 而对于路由组件级别的中间件，只需要定义在组件实例属性中就行了。这样只有这个路由组件会运行这个中间件。如果需要像全局中间件一样指定运行环境，可以通过中间件上下文对象中的 `isClient|isServer` 在中间件内部进行区别处理。
-```
+```javascript
 // MyComponent.vue
 
 {
