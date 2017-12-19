@@ -181,4 +181,4 @@ __注意：__ 如 `/pages/Index.vue` 时依然采用 `/index` 是__无法__访�
 
 有些页面需要一个动态参数来进行访问。例如某博客站点需要展现某篇博客的内容详情，它的路由规则就很可能是 `/detail/[id]`， 其中 `[id]` 可能是数字，用来标识博客文章的 ID。这种情况我们需要用到 Lavas 动态参数功能。
 
-我们可以在 `/pages/detail/` 目录中建立一个 vue 文件并命名为 `_id.vue` (下划线开头表示动态参数)。在这个 vue 文件中，我们可以通过 `this.route.params.id`( script 中 )或者 `{{$route.params.id}}`( template 中 ) 获取这个参数。
+我们可以在 `/pages/detail/` 目录中建立一个 vue 文件并命名为 `_id.vue` (下划线开头表示动态参数)。在这个 vue 文件中，我们可以通过 `this.$route.params.id`( script 中 )或者 `{{$route.params.id}}`( template 中 ) 获取这个参数。
