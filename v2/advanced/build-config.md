@@ -75,6 +75,38 @@ filenames: {
 
 更多模板字符串示例及其使用场景可以参考 Webpack [output.filename](https://doc.webpack-china.org/configuration/output/#output-filename)。
 
+## babel
+
+Lavas 内部配置 Webpack 规则，使用 `babel-loader` 处理 JS 文件。通过 `babel` 这个配置项可以指定包括 babel preset 和 plugin 在内的很多属性，更多可配置属性可以参考 [`babel-loader options`](https://github.com/babel/babel-loader#options)。
+
+Lavas 默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) 这个 preset，其中已经包含了一系列 babel 插件，在大多数情况下已经能满足 Vue 项目的开发：
+```javascript
+babel: {
+    presets: ['vue-app']
+}
+```
+
+但有时我们也需要进行额外的配置，例如在下面使用 [vuetify](https://vuetifyjs.com/) 的场景中，我们需要配置一系列 plugins 以支持组件的按需加载功能：
+```javascript
+babel: {
+    presets: ['vue-app'],
+    plugins: [
+        "transform-runtime",
+        ["transform-imports",
+            {
+                "vuetify": {
+                    "transform": "vuetify/es5/components/${member}",
+                    "preventFullImport": true
+                }
+            }
+        ]
+    ],
+    babelrc: false
+}
+```
+
+注意，虽然我们能够通过 `babel` 配置项对 `babel-loader` 进行配置，按说项目根目录下的 `.babelrc` 就不再需要了，但我们仍然要保留这个文件，原因是 `vue-loader` 必须要通过 `.babelrc` 才能进行配置。
+
 ## cssExtract
 
 在使用 [ExtractTextWebpackPlugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin)从 JS 中提取样式时，需要设置 Loader 和 Plugin。由于分离样式会造成额外的编译开销，Lavas 默认在开发模式中关闭这一特性，在生产环境打开。
@@ -151,15 +183,13 @@ defines: {
 // lavas.config.js
 const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = {
-    build: {
-        defines: {
-            base: {
-                PASSPORT_URL: isProd
-                    ? JSON.stringify('https://wappass.example.com/passport')
-                    : JSON.stringify('https://wappass.qatest.example.com/passport')
-            }
-        },
+defines: {
+    base: {
+        PASSPORT_URL: isProd
+            ? JSON.stringify('https://wappass.example.com/passport')
+            : JSON.stringify('https://wappass.qatest.example.com/passport')
+    }
+}
 ```
 
 另外，Lavas 已经内置了以下两组全局常量 `process.env.VUE_ENV` 和 `process.env.NODE_ENV`，可以直接在项目中使用，不需要开发者重复定义：
