@@ -8,5 +8,8 @@
             "name": "进阶教程",
             "key": "advanced"
         }
+    ],
+    "ignore": [
+        "list"
     ]
 }
