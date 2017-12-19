@@ -16,11 +16,11 @@ App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让�
 
 我们的思路是：把每个入口 HTML 添加到 Service Worker 的预缓存列表中，并且告知 Service Worker在请求某个页面时，从缓存中把对应的 HTML 返回出来供前端直接展现。后续的加载和替换 Skeleton 由 js 继续走正常流程完成，就无需我们额外关心了。
 
-在 [Lavas 的入口](/v2/advanced/entry)章节我们已经介绍过修改入口中的 Skeleton.vue 完成骨架本身的样式编写。因此这里我们主要聚焦在 Service Worker 的相关部分。
+在 [Lavas 的入口](/guide/v2/advanced/entry)章节我们已经介绍过修改入口中的 Skeleton.vue 完成骨架本身的样式编写。因此这里我们主要聚焦在 Service Worker 的相关部分。
 
 ### SPA 下 Service Worker 的配置方式
 
-在 SPA/MPA 的模式下，构建生成的最终目录中会显式地存在入口 HTML 文件，其中也包括了 Skeleton 的内容。我们假设我们的项目仅有一个入口 `main`，因此它是一个 SPA。在构建完成后的目录中应该存在一个 `main.html`。我们先把它加到 Service Worker 的预缓存列表中去，参照 [Lavas 中的 Service Worker](/v2/advanced/service-worker) 章节，在 `/lavas.config.js` 中的 `serviceWorker` 部分作如下配置：
+在 SPA/MPA 的模式下，构建生成的最终目录中会显式地存在入口 HTML 文件，其中也包括了 Skeleton 的内容。我们假设我们的项目仅有一个入口 `main`，因此它是一个 SPA。在构建完成后的目录中应该存在一个 `main.html`。我们先把它加到 Service Worker 的预缓存列表中去，参照 [Lavas 中的 Service Worker](/guide/v2/advanced/service-worker) 章节，在 `/lavas.config.js` 中的 `serviceWorker` 部分作如下配置：
 
 ```javascript
 serviceWorker: {

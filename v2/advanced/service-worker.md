@@ -8,7 +8,7 @@ Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的
 
 * __动态缓存__ 用户在运行过程中实际发送请求后再进行缓存的内容，通常是动态的接口，因为含有动态参数所以不可能全部预缓存。动态缓存通常还有各类策略，如 networkFirst, cacheFirst 等等
 
-* __appshell__  缓存页面的外部框架，在切换页面时先从缓存取出框架显示，再逐步渲染核心内容，从而提升加载性能和体验。这部分将在 [App Shell 模型](/v2/advanced/appshell)中详细讨论。
+* __appshell__  缓存页面的外部框架，在切换页面时先从缓存取出框架显示，再逐步渲染核心内容，从而提升加载性能和体验。这部分将在 [App Shell 模型](/guide/v2/advanced/appshell)中详细讨论。
 
 初始化生成的项目默认已经带有 Service Worker。Lavas 的 Service Worker 可以分为两部分：__配置部分__和__模板部分__。
 
@@ -64,7 +64,7 @@ module.exports = {
 
 * __appshellUrls__
 
-    [App Shell 模型](/v2/advanced/appshell)文中会详细提及，这里先跳过
+    [App Shell 模型](/guide/v2/advanced/appshell)文中会详细提及，这里先跳过
 
 * __dontCacheBustUrlsMatching__
 

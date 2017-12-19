@@ -115,7 +115,7 @@ Lavas 提供的内置方法有这么几个：
 
 Lavas 在知乎专栏上发表过一篇文章：[为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)，详细讲述了什么是 skeleton 及其优势。这里的 `Skeleton.vue` 就是用作渲染骨架屏的 Vue 组件。开发者只需要将符合自身站点显示风格的图片替换进去，即可在 MPA/SPA 等纯前端渲染模式下看到骨架屏，提升用户体验。
 
-骨架屏在服务端渲染的情况下__并不生效__。为了解决这个问题，Lavas 探索并实现了另外一种实现方案，这部分将在 [App Shell](/v2/advanced/appshell) 进行介绍。
+骨架屏在服务端渲染的情况下__并不生效__。为了解决这个问题，Lavas 探索并实现了另外一种实现方案，这部分将在 [App Shell](/guide/v2/advanced/appshell) 进行介绍。
 
 ## 入口的配置项
 
@@ -159,7 +159,7 @@ entry: [
 
 如果为 `true`，则采用 [Vue SSR](https://ssr.vuejs.org/) 进行服务端渲染。在这种模式下，首屏请求的内容会由服务器渲染后直接给出，而不是像 SPA 或者 MPA 那样，服务器给出页面框架，由前端填充内容。因此从 SEO 角度来说有比较明显的提升，当然复出的代价就是首屏渲染速度较客户端渲染慢一些。不过这个差别只存在于首屏请求，在后续的页面跳转依然采用客户端渲染。
 
-SSR 的首屏渲染性能问题可以通过 Service Worker 的 App Shell 模型大幅改善，如有兴趣可以参考[这里](/v2/advanced/appshell)。
+SSR 的首屏渲染性能问题可以通过 Service Worker 的 App Shell 模型大幅改善，如有兴趣可以参考[这里](/guide/v2/advanced/appshell)。
 
 ### mode, base
 

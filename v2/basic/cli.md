@@ -22,7 +22,7 @@ npm install lavas@lavas2 -g
 
 ![lavas-build](http://boscdn.bpc.baidu.com/assets/lavas/codelab/lavas-build-2.png)
 
-更多关于构建的信息可以参见[构建部署工程](/v2/basic/build)和[Lavas 中的 build 配置](/v2/advanced/build)
+更多关于构建的信息可以参见[构建部署工程](/guide/v2/basic/build)和[Lavas 中的 build 配置](/guide/v2/advanced/build)
 
 ## lavas dev
 
@@ -36,7 +36,7 @@ npm install lavas@lavas2 -g
 
 ![lavas-start](http://boscdn.bpc.baidu.com/assets/lavas/codelab/lavas-start-2.png)
 
-关于如何在正式环境上线 Lavas 项目还可以参见[构建部署工程](/v2/basic/build)
+关于如何在正式环境上线 Lavas 项目还可以参见[构建部署工程](/guide/v2/basic/build)
 
 ## lavas addEntry
 
@@ -73,7 +73,7 @@ entry: [
 // ...
 ```
 
-这样我们就成功地创建了新的入口。更多的关于入口的信息可以参见 [Lavas 中的 entry 配置](/v2/advanced/entry)。
+这样我们就成功地创建了新的入口。更多的关于入口的信息可以参见 [Lavas 中的 entry 配置](/guide/v2/advanced/entry)。
 
 ## lavas removeEntry
 
