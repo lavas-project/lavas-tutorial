@@ -1,6 +1,6 @@
 # Lavas 中的 Service Worker
 
-Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的部分。有关 Service Worker 本身的介绍可以移步 Lavas 官网的[相关章节](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)。
+Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的部分。有关 Service Worker 本身的介绍可以移步 Lavas 官网的[什么是 Service Worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)。
 
 大体来说，在实际项目中，Service Worker 主要完成三个工作：
 
@@ -10,7 +10,11 @@ Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的
 
 * __appshell__  缓存页面的外部框架，在切换页面时先从缓存取出框架显示，再逐步渲染核心内容，从而提升加载性能和体验。这部分将在 [App Shell 模型](/v2/advanced/appshell)中详细讨论。
 
-Lavas 提供了配置 + 模板的便捷方式帮助开发者生成 Serice Worker。以初始项目的配置为例，打开 `/lavas.config.js` 能看到 `serviceWorker` 这一段，如下：
+初始化生成的项目默认已经带有 Service Worker。Lavas 的 Service Worker 可以分为两部分：__配置部分__和__模板部分__。
+
+## Service Worker 配置项
+
+以初始项目的配置为例，打开 `/lavas.config.js` 能看到 `serviceWorker` 这一段，如下：
 
 ```javascript
 module.exports = {
@@ -35,7 +39,6 @@ module.exports = {
 
 这些基本都是提供给 Lavas 内置的 WorkboxWebpackPlugin 使用的配置项。[WorkBox](https://github.com/GoogleChrome/workbox) 是 Google 推出的 sw-toolbox 和 sw-precache 的升级版，封装了一些常用的 API (如预缓存，动态缓存及常用策略等)，帮助开发者更简单快速地开发 Service Worker。而 WorkboxWebpackPlugin 则是 Workbox 的 webpack 插件，通过配置项和模板两部分来生成 service-worker.js。
 
-## Service Worker 配置项
 
 我们来看一下例子中使用的配置项(这些配置项基本都是必选的)。其余的可以参考 Workbox 的[官网](https://developers.google.com/web/tools/workbox/)
 
