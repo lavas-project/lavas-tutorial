@@ -19,6 +19,10 @@
         {
             "name": "重写路由对象",
             "key": "router"
+        },
+        {
+            "name": "Vuex 状态树",
+            "key": "store"
         }
     ]
 }
