@@ -8,5 +8,8 @@
             "name": "v1",
             "key": "vue"
         }
-    ]
+    ],
+    "info": {
+        "name": "LAVAS 教程"
+    }
 }
