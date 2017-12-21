@@ -65,7 +65,7 @@ Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么几个：
 
 我们虽然无法像 SPA/MPA 那样把所有有限的入口 HTML 都缓存起来，但我们可以把他们共同的外壳 (App Shell) 剥离出来并缓存起来，之后每次请求都返回这个外壳，再进行前端渲染，就可以实现和 SPA/MPA 相同的效果了。
 
-![SSR App Shell](https://pic1.zhimg.com/50/v2-40cf9fd1ad096a6458b9a54f33b580ff_hd.jpg)
+![SSR App Shell](http://boscdn.bpc.baidu.com/assets/lavas/codelab/appshell.png)
 
 在这种模式下，只要缓存中存在这个外壳，程序就没有请求服务端 HTML 的必要，只需要请求 API 接口获取数据即可。如果开发者的应用对于 API 的实时性要求不高，甚至 API 请求也可以进行缓存。无论 API 如何处理，对服务端来说，使用 Vue SSR 流程处理 navigation 请求仅限于浏览器缓存中不存在外壳时，也就是第一次访问时。后续访问即便是刷新页面，因为外壳的存在也不会再走 SSR 流程了，这和传统的 SSR 模式是不同的。
 

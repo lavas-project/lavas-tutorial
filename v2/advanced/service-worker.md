@@ -10,7 +10,15 @@ Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的
 
 * __appshell__  缓存页面的外部框架，在切换页面时先从缓存取出框架显示，再逐步渲染核心内容，从而提升加载性能和体验。这部分将在 [App Shell 模型](/guide/v2/advanced/appshell)中详细讨论。
 
-初始化生成的项目默认已经带有 Service Worker。Lavas 的 Service Worker 可以分为两部分：__配置部分__和__模板部分__。
+初始化生成的项目默认已经带有 Service Worker。Lavas 的 Service Worker 可以分为两部分：
+
+1. __配置部分__
+
+    负责一些基本项的配置，如模板位置，生成位置等等。__静态预缓存文件列表__也在这里配置。
+
+2. __模板部分__
+
+    主要处理__动态缓存__和 __appshell__。
 
 ## Service Worker 配置项
 

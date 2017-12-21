@@ -23,6 +23,14 @@
         {
             "name": "Vuex 状态树",
             "key": "store"
+        },
+        {
+            "name": "Service Worker",
+            "key": "service-worker"
+        },
+        {
+            "name": "App Shell 模型",
+            "key": "appshell"
         }
     ]
 }
