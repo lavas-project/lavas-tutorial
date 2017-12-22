@@ -189,9 +189,9 @@ workboxSW.router.registerRoute(/^https:\/\/.*\.baidu\.com/i,
 
 这种配置下，访问 `*.baidu.com` 的所有请求都会命中第二条规则，从而使用 networkOnly 规则，所以__不会__缓存任何文件。更换两者的注册顺序可以解决这个问题。
 
-## 注册 Service Worker
+## 注册 Service Worker (扩展)
 
-Lavas 会自动注册生成的 Service Worker，所以一般情况下不需要开发者额外关注。如果您有兴趣了解注册方式，这一部分会大概介绍一下。
+*提示：这部分内容由 Lavas 内部处理，并不需要开发者进行参与，仅仅作为解答开发者疑问的扩展阅读存在。*
 
 Lavas 内部使用 webpack 进行构建，其中处理 Service Worker 的注册问题时使用一个名为 [sw-register-webpack-plugin](https://github.com/lavas-project/sw-register-webpack-plugin) 的插件(也由 Lavas 开发组进行开发)。这款插件的作用有两个：
 
