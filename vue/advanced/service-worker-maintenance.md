@@ -192,7 +192,7 @@ runtimeCaching: [
         options: {
             cache: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 30, // 30天有效期
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30天有效期
                 name: 'fonts-cache'
             }
         }
