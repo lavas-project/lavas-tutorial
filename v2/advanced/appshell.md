@@ -28,7 +28,7 @@ App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让�
 
 在 [Lavas 的入口](/guide/v2/advanced/entry)章节介绍入口包含内容时我们也大致介绍过，每个入口中的 Skeleton.vue 就是骨架本身。因此我们关注其中一个 (如 `/pages/main/Skeleton.vue`) 即可。
 
-```
+```html
 <template>
     <div class="skeleton-wrapper">
         <!-- skeleton content -->
@@ -44,7 +44,6 @@ export default {
 <style lang="stylus" scoped>
 // skeleton content style rules
 </style>
-
 ```
 
 `Skeleton.vue` 按照普通 Vue 页面组件的开发方式进行开发即可。一般情况在 `<template>` 中我们会使用一些与实际页面布局和颜色接近的图片来充当 Skeleton 的内容，替代加载时的白屏。如果图片尺寸不太大的话，这里尤其推荐使用 base64 编码直接写入，避免再进行网络请求，保证离线可用。
@@ -114,7 +113,7 @@ Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么几个：
 
 首先我们需要为入口开发一个 App Shell。我们创建一个 `/pages/appshell/Main.vue`，并编写如下内容：
 
-```
+```html
 <template>
 </template>
 
