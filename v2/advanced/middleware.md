@@ -66,13 +66,12 @@ export default function (context) {
 ```javascript
 // MyComponent.vue
 <script>
-export default
-    {
-        name: 'my-component',
-        data() {},
-        middleware: ['my-first-middleware'],
-        // 省略其他属性
-    }
+export default {
+    name: 'my-component',
+    data() {},
+    middleware: ['my-first-middleware'],
+    // 省略其他属性
+};
 </script>
 ```
 
