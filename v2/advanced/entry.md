@@ -113,9 +113,9 @@ Lavas 提供的内置方法有这么几个：
 
 ### Skeleton.vue
 
-Lavas 在知乎专栏上发表过一篇文章：[为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)，详细讲述了什么是 skeleton 及其优势。这里的 `Skeleton.vue` 就是用作渲染骨架屏的 Vue 组件。开发者只需要将符合自身站点显示风格的图片替换进去，即可在 MPA/SPA 等纯前端渲染模式下看到骨架屏，提升用户体验。
+`Skeleton.vue` 是用作渲染骨架屏的 Vue 组件。Lavas 在知乎专栏上发表过一篇文章：[为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)，详细讲述了什么是骨架屏及其优势。这里开发者只需要将符合自身站点显示风格的图片替换进去，即可在 MPA/SPA 等纯前端渲染模式下看到骨架屏，提升用户体验。
 
-骨架屏在服务端渲染的情况下__并不生效__。为了解决这个问题，Lavas 探索并实现了另外一种实现方案，这部分将在 [App Shell](/guide/v2/advanced/appshell) 进行介绍。
+骨架屏在服务端渲染的情况下__并不生效__。为了解决这个问题，Lavas 探索并实现了另外一种实现方案，这部分将在 [Skeleton 和 App Shell模型](/guide/v2/advanced/appshell) 中进行介绍。
 
 ## 入口的配置项
 

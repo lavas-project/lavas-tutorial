@@ -29,7 +29,7 @@
             "key": "service-worker"
         },
         {
-            "name": "App Shell 模型",
+            "name": "Skeleton 和 App Shell 模型",
             "key": "appshell"
         }
     ]

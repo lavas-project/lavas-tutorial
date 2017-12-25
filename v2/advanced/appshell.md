@@ -1,4 +1,4 @@
-# Lavas 的 App Shell 模型
+# Skeleton 和 App Shell 模型
 
 App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让站点快速加载到用户屏幕上，获得与本地 APP 相似的体验。
 
