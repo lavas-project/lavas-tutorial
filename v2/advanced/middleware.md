@@ -65,13 +65,15 @@ export default function (context) {
 而对于路由组件级别的中间件，只需要定义在组件实例属性中就行了。这样只有这个路由组件会运行这个中间件。如果需要像全局中间件一样指定运行环境，可以通过中间件上下文对象中的 `isClient|isServer` 在中间件内部进行区别处理。
 ```javascript
 // MyComponent.vue
-
-{
-    name: 'my-component',
-    data() {},
-    middleware: ['my-first-middleware'],
-    // 省略其他属性
-}
+<script>
+export default
+    {
+        name: 'my-component',
+        data() {},
+        middleware: ['my-first-middleware'],
+        // 省略其他属性
+    }
+</script>
 ```
 
 注意：Lavas 只会引用用户配置声明的中间件，将其打包在最终构建产物中，并不是 `/middlewares` 下的中间件都会被引用。同样，也不会引用无关的中间件，例如配置仅运行在服务端的中间件及其依赖，并不会被打包进客户端代码中。
