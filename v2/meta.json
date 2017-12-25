@@ -7,9 +7,14 @@
         {
             "name": "进阶教程",
             "key": "advanced"
+        },
+        {
+            "name": "webpack 相关",
+            "key": "webpack"
+        },
+        {
+            "name": "更多",
+            "key": "more"
         }
-    ],
-    "ignore": [
-        "list"
     ]
 }

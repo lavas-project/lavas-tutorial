@@ -4,7 +4,12 @@ Lavas 是一套基于 Vue 的 PWA 解决方案，能够帮助开发者快速搭�
 
 如果您对 PWA 的概念还不熟悉，可以参考 Lavas 官网中关于 PWA 的[介绍](https://lavas.baidu.com/doc)。简而言之，PWA 的目标是让移动端的 H5 站点拥有可以媲美本地 APP 的体验，包括离线可访问，添加桌面图标以快速启动等等特性。加之移动站点无须频繁安装升级的优势，进而挑战现有 APP 的用户习惯，建立 WEB 新生态。
 
-Vue 是时下非常流行的前端开发框架，易于上手并且拥有相对完备的社区，也便于和第三方库和既有项目整合。Lavas 是基于 Vue 的解决方案，其中页面和控件都是需要开发者使用 Vue 进行编写的。如果您对 Vue 还不太熟悉，请参阅 Vue 的[教程](https://cn.vuejs.org/v2/guide/)和 [API 文档](https://cn.vuejs.org/v2/api/)，快速学习起来并享受 Lavas 带来的便捷和体验的提升吧！
+## 学习本教程前您应该掌握
+
+* HTML, CSS(less或stylus), JavaScript 等前端编程基础
+* ES6/7 部分常用语法，如 Promise, import/export 等
+* Vue, Vuex, Vue-router 等基本的开发知识 ([教程](https://cn.vuejs.org/v2/guide/)、[API 文档](https://cn.vuejs.org/v2/api/) 和 [编程风格指南](https://cn.vuejs.org/v2/style-guide/))
+* Webpack, Node.js 等基本知识 （__推荐__）
 
 Lavas 后续的开发计划也已经将支持其他主流前端框架 (如 react) 纳入其中，如果您持续关注我们([Github](https://github.com/lavas-project/lavas))，给我们多提意见甚至代码，我们将会非常感谢！
 
