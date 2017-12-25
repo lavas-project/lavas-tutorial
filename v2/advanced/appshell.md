@@ -187,6 +187,6 @@ workboxSW.router.registerNavigationRoute('/appshell/main');
 
 * App Shell
 
-    和 Skeleton 相同，Skeleton 也以 Vue 页面组件存在于源码。但因为处于 `/pages` 目录下，因此不但拥有单独路由，编译过后也能以独立文件存在。
+    和 Skeleton 相同，App Shell 也以 Vue 页面组件存在于源码。但因为处于 `/pages` 目录下，因此不但拥有单独路由，编译过后也能以独立文件存在。
 
     在 Vue 渲染时，它作为 `App.vue` 中 `<router-view>` 内部的内容被替换，而头尾是在 `App.vue` 中，`<router-view>` 之外的，因此 App Shell 不需要包含头尾。而因为页面未加载，数据请求也未发送，所以 App Shell 通常就是空的。
