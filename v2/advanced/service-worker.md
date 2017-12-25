@@ -247,7 +247,7 @@ if ('serviceWorker' in navigator) {
 
 插件插入的内容大致如下：
 
-```
+```javascript
 <script>
 window.onload = function () {
     var script = document.createElement('script');
