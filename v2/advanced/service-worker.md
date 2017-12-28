@@ -38,7 +38,7 @@ module.exports = {
             'sw-register.js',
             '**/*.map'
         ],
-        appshellUrls: ['/appshell/index'],
+        appshellUrls: ['/appshell'],
         dontCacheBustUrlsMatching: /\.\w{8}\./
     },
     // ...

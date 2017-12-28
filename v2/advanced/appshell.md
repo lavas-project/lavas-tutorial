@@ -97,7 +97,7 @@ Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
 
 ### 编写 App Shell
 
-首先我们需要开发一个 App Shell。我们创建一个 `/pages/appshell/Index.vue`，并编写如下内容：
+首先我们需要开发一个 App Shell。我们创建一个 `/pages/Appshell.vue`，并编写如下内容：
 
 ```html
 <template>
@@ -105,7 +105,7 @@ Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
 
 <script>
 export default {
-    name: 'appshell-index',
+    name: 'appshell',
     metaInfo: {
         title: 'Lavas',
         meta: [
@@ -126,13 +126,13 @@ export default {
 
 ### 配置 Service Worker
 
-和 Skeleton 不同，这里要添加的预缓存并不是一个独立的文件，而是一个路由 (如 `/appshell/index`)。我们使用 `/lavas.config.js` 中 `serviceWorker` 段的 `appshellUrls` 配置项先进行声明，之后才可以正常使用。
+和 Skeleton 不同，这里要添加的预缓存并不是一个独立的文件，而是一个路由 (如 `/appshell`)。我们使用 `/lavas.config.js` 中 `serviceWorker` 段的 `appshellUrls` 配置项先进行声明，之后才可以正常使用。
 
 ```javascript
 // ...
 serviceWorker: {
     // swSrc, swDest, globDirectory, globPatterns, globIgnores, dontCacheBustUrlsMatching..
-    appshellUrls: ['/appshell/index']
+    appshellUrls: ['/appshell']
 }
 // ...
 ```
@@ -141,7 +141,7 @@ serviceWorker: {
 
 ```javascript
 // core/service-worker.js
-workboxSW.router.registerNavigationRoute('/appshell/index');
+workboxSW.router.registerNavigationRoute('/appshell');
 ```
 
 ## Skeleton 和 App Shell 的差异 (扩展)

@@ -54,7 +54,7 @@ lavas-project
 
 `/pages/` 目录存放每个页面的 vue 组件。我们在开发实际站点的时候，可能大部分的工作都在这个目录中进行。每个页面组件都是一个标准的 Vue 组件，包含 `<template>`, `<script>` 和 `<style>` 三部分，开发方式也和 Vue 一模一样，这里就不再多做介绍了。
 
-值得注意的是，`/pages/` 目录中的所有页面都会__自动生成__一条路由规则，无需用户再行配置。举例来说，在初始项目中我们看到一个 `/pages/appshell/Main.vue`，则 Lavas 自动生成的路由将会是 `/appshell/main`。更多生成规则可以参考本文下半部分的“ Lavas 自动路由生成方法” 部分。
+值得注意的是，`/pages/` 目录中的所有页面都会__自动生成__一条路由规则，无需用户再行配置。举例来说，在初始项目中我们看到一个 `/pages/Appshell.vue`，则 Lavas 自动生成的路由将会是 `/appshell`。更多生成规则可以参考本文下半部分的“ Lavas 自动路由生成方法” 部分。
 
 当然如果开发者对自动生成的路由并不满意，或者有其他特殊需求需要自定义路由规则的，也可以通过 `router` 配置项进行修改，这部分将在[文档的路由部分](/guide/v2/advanced/router)进行说明。
 
@@ -127,12 +127,12 @@ Lavas 2.0 的一大功能点是能够根据 `/pages/` 目录的 vue 文件和层
 
 ### 普通情况
 
-绝大部分情况下，Lavas 会直接根据 `/pages/` 中的 vue 文件层级生成对应的路由规则。此外因为 vue 建议的命名规范，一般 vue 文件都会命名为首字母大写的形式(如 `/pages/appshell/Main.vue` )，而路由规则一般均采用小写，所以这里 Lavas 会将 vue 文件名的首字母__改为小写__处理，但__不会__处理中间目录的大小写。
+绝大部分情况下，Lavas 会直接根据 `/pages/` 中的 vue 文件层级生成对应的路由规则。此外因为 vue 建议的命名规范，一般 vue 文件都会命名为首字母大写的形式(如 `/pages/Appshell.vue` )，而路由规则一般均采用小写，所以这里 Lavas 会将 vue 文件名的首字母__改为小写__处理，但__不会__处理中间目录的大小写。
 
 举例来说
 
 ```
-/pages/appshell/Main.vue => /appshell/main
+/pages/Appshell.vue => /appshell
 /pages/Error.vue => /error
 ```
 
@@ -144,7 +144,6 @@ Lavas 2.0 的一大功能点是能够根据 `/pages/` 目录的 vue 文件和层
 
 ```
 /pages/Index.vue => /
-/pages/detail/Index.vue => /detail/
 ```
 
 __注意：__ 如 `/pages/Index.vue` 时依然采用 `/index` 是__无法__访问到目标页面的！
