@@ -9,8 +9,8 @@
             "key": "error-handler"
         },
         {
-            "name": "入口 (entry)",
-            "key": "entry"
+            "name": "core 目录",
+            "key": "core"
         },
         {
             "name": "中间件",
