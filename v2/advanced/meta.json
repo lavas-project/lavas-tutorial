@@ -31,7 +31,10 @@
         {
             "name": "Skeleton 和 App Shell 模型",
             "key": "appshell"
+        },
+        {
+            "name": "多个 Lavas 项目整合",
+            "key": "multi-lavas"
         }
-    ],
-    "ignore": ["multi-lavas"]
+    ]
 }
