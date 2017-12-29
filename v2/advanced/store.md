@@ -48,7 +48,7 @@ export const mutations = {
 
 下面我们来看看如何在组件中访问定义好的状态。
 
-我们以模板项目中 `/entries/main/App.vue` 为例，由于创建了 `pageTransition` 这个命名空间，我们需要把模块的空间名称字符串，也就是 `pageTransition` 作为第一个参数传递给 `mapState` 函数，这样所有绑定都会自动将该模块作为上下文，使用 `mapActions` 同理。
+我们以模板项目中 `/core/App.vue` 为例，由于创建了 `pageTransition` 这个命名空间，我们需要把模块的空间名称字符串，也就是 `pageTransition` 作为第一个参数传递给 `mapState` 函数，这样所有绑定都会自动将该模块作为上下文，使用 `mapActions` 同理。
 ```javascript
 import {mapState} from 'vuex';
 
