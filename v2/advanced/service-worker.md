@@ -38,7 +38,7 @@ module.exports = {
             'sw-register.js',
             '**/*.map'
         ],
-        appshellUrls: ['/appshell/main'],
+        appshellUrls: ['/appshell'],
         dontCacheBustUrlsMatching: /\.\w{8}\./
     },
     // ...
@@ -197,6 +197,22 @@ workboxSW.router.registerRoute(/^https:\/\/.*\.baidu\.com/i,
 
 *提示：这部分内容由 Lavas 内部处理，并不需要开发者进行参与，仅仅作为解答开发者疑问的扩展阅读存在。*
 
+Service Worker 编写完成后，还需要进行注册才能真正生效。常规的注册代码能够在各类 Service Worker 教程或文章中找到，但在实际项目中有一个不得不考虑的问题，使得我们必须对注册代码进行一些改动，那就是 __Service Worker 更新__ 的问题。
+
+### 解决思路
+
+为了最大化利用浏览器缓存 `service-worker.js`，但又保证一旦项目更新时浏览器能够及时更新之，Lavas 的解决思路是：
+
+1. 将注册代码单独放置在 `sw-register.js` 中
+
+2. `sw-register.js` 中实际注册 `service-worker.js` 的部分，在后面添加 `?v=xxxx`，取值为编译时间。因此一次编译后不会修改，`service-worker.js` __可以__ 被浏览器缓存。
+
+3. 在 HTML 中引用 `sw-register.js`，同样在后面添加 `?v=xxxx`，但这里取值为当前时间，因此每次请求都在变化，__避免__ 浏览器对 `sw-register.js` 进行缓存。
+
+这样每次浏览器都会重新请求 `sw-register.js`。如果重新编译，`sw-register.js` 中注册的 `service-worker.js?v=xxxx` 的 `v` 会变化，迫使浏览器重新请求；如果未重新编译，那么这个 `v` 不会变化，浏览器可以直接使用缓存中的 `service-worker.js`。
+
+### 实现方式
+
 Lavas 内部使用 webpack 进行构建，其中处理 Service Worker 的注册问题时使用一个名为 [sw-register-webpack-plugin](https://github.com/lavas-project/sw-register-webpack-plugin) 的插件(也由 Lavas 开发组进行开发)。这款插件的作用有两个：
 
 1. 在生成目录(默认 `/dist`) 生成 `sw-register.js`，用以注册 Service Worker
@@ -205,7 +221,7 @@ Lavas 内部使用 webpack 进行构建，其中处理 Service Worker 的注册�
 
 我们从这两步分别了解一下这个插件。
 
-### sw-register.js
+#### sw-register.js
 
 生成的 `sw-register.js` 大致内容如下，其中的参数 `v` 以编译的时间生成时间戳，保证获取的 `service-worker.js` 不受浏览器缓存的影响。
 
@@ -241,13 +257,13 @@ if ('serviceWorker' in navigator) {
 
 补充说明：这个 `'sw.update'` 事件在 Lavas 项目下 `/components/UpdateToast.vue` 组件进行监听，并在更新时弹出提示，引导用户刷新页面。
 
-### 引入 sw-register.js
+#### 引入 sw-register.js
 
-上面提过，sw-register-webpack-plugin 会在 HTML 文件中寻找 `</body>` 标签并插入内容，因此这里需要明确，只有 SPA/MPA 模式才会生成 HTML 入口文件，也就是说：__插件只在 SPA/MPA 模式下插入内容__，SSR 因为没有独立的入口 HTML 文件生成，因此采用别的方案，这个将在后面讨论。
+上面提过，sw-register-webpack-plugin 会在 HTML 文件中寻找 `</body>` 标签并插入内容，因此这里需要明确，只有 SPA 模式才会生成 HTML 文件，也就是说：__插件只在 SPA 模式下插入内容__，SSR 因为没有独立的 HTML 文件生成，因此采用别的方案，这个将在后面讨论。
 
 插件插入的内容大致如下：
 
-```javascript
+```html
 <script>
 window.onload = function () {
     var script = document.createElement('script');
@@ -264,6 +280,6 @@ window.onload = function () {
 
 ### SSR 模式下引入 sw-register.js
 
-因为 SSR 没有单独的入口 HTML 文件生成，因此 Lavas 需要完成插件的一部分工作，即引入 `sw-register.js`。SSR 需要给 renderer 提供一个 index.html 作为服务端模板，在这个 index.html 的底部，额外加上代码即可。
+因为 SSR 没有单独的 HTML 文件生成，因此 Lavas 需要完成插件的一部分工作，即引入 `sw-register.js`。SSR 需要给 renderer 提供一个 index.html 作为服务端模板，在这个 index.html 的底部，额外加上代码即可。
 
 最后重申一点，所有和注册 Service Worker 相关的工作都已经由 Lavas 自动完成，这里仅仅是表述内部的做法，并不需要开发者额外进行任何配置或者开发。
