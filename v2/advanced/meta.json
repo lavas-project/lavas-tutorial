@@ -32,5 +32,6 @@
             "name": "Skeleton 和 App Shell 模型",
             "key": "appshell"
         }
-    ]
+    ],
+    "ignore": ["multi-lavas"]
 }
