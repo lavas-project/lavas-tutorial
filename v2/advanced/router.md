@@ -28,9 +28,11 @@ router: {
 
 ## 页面切换动画
 
-Lavas 使用了 [vue-router 的过渡动效](https://router.vuejs.org/zh-cn/advanced/transitions.html) 实现页面切换动画。我们内置了两种切换动画，渐隐渐现和左右滑动。
+Lavas 使用了 [vue-router 的过渡动效](https://router.vuejs.org/zh-cn/advanced/transitions.html) 实现页面切换动画。我们内置了两种切换动画：渐隐渐现和左右滑动。同时也提供了自定义动画的配置方式。
 
 ### 渐隐渐现
+
+效果表现为打开新页面渐显，返回旧页面时渐隐。
 
 在 `pageTransition` 中有两个可配置项：
 * `type` 必填项，渐隐渐现效果必须填写 `fade`
@@ -61,12 +63,12 @@ router: {
 
 页面左右滑动效果具体表现为：打开新页面时左滑展示，返回之前的页面时右滑退出。
 
-在 `pageTransition` 中有两个可配置项：
+在 `pageTransition` 中有以下可配置项：
 * `type` 必填项，左右切换效果必须填写 `slide`
-* `slideLeftClass` 选填，默认值为 `slide-left`。可以指定 Vue Transition 的类名，例如默认会应用 `slide-left-enter` 样式类。
-* `slideRightClass` 选填，默认值为 `slide-right`。可以指定 Vue Transition 的类名，例如默认会应用 `slide-right-enter` 样式类。
-* `alwaysBackPages` 选填，访问以下路径永远右滑后退。
-* `alwaysForwardPages` 选填，访问以下路径永远左滑前进。
+* `slideLeftClass` 选填，默认值为 `slide-left`。可以指定左滑 Vue Transition 的类名，例如默认会应用 `slide-left-enter` 样式类。
+* `slideRightClass` 选填，默认值为 `slide-right`。可以指定右滑 Vue Transition 的类名，例如默认会应用 `slide-right-enter` 样式类。
+* `alwaysBackPages` 选填，访问以下路由路径永远右滑后退。例如在切换到主页的场景下，通常希望表现为后退。
+* `alwaysForwardPages` 选填，访问以下路由路径永远左滑前进。
 ```javascript
 router: {
     pageTransition: {
@@ -95,8 +97,7 @@ router: {
 
 ### 自定义动画
 
-除了以上两种内置的切换效果，开发者还可以自己定义
-在 `pageTransition` 中有两个可配置项：
+除了以上两种内置的切换效果，开发者还可以通过 `pageTransition` 自定义动画：
 * `type` 必填项，可填写自定义效果。
 * `transitionClass` 必填项。可以指定 Vue Transition 的类名，例如填写 `myeffect` 将应用 `myeffect-enter/myeffect-leave-active` 样式类。
 ```javascript
