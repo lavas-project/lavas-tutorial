@@ -11,7 +11,7 @@
 1. 安装/升级 Lavas 命令行工具
 
     ```bash
-    npm install lavas@lavas2 -g
+    npm install lavas -g
     ```
 
 2. 在合适的目录新建项目并命名，例如 "lavas-2-sample"
