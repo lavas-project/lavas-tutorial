@@ -6,7 +6,7 @@
 
 对于开发者，如果想要使用中间件，需要完成以下两步：
 
-1. 将编写的中间件放在项目根目录 `/middlewares` 文件夹下
+1. 将编写的中间件放在项目根目录 `/middlewares` 文件夹下，如果开发者不需要中间件可以删除该文件夹
 2. 声明所要使用的中间件名称
 
 下面我们将介绍中间件的具体编写方法。
@@ -39,8 +39,8 @@ export default function (context) {
 
 利用这个上下文对象，开发者能够实现所需业务逻辑。另外，中间件的实现全都在 Lavas 项目内，其中：
 
-* 上下文对象定义在项目 `core/middleware.js` 文件中的 `getClientContext/getServerContext` 方法内。这意味着开发者可以自由扩展这个上下文对象，挂载任意自定义属性在上面。
-* 具体调用这些中间件顺序运行的代码在客户端(`entry-client.js`)和服务端(`entry-server.js`)入口文件中。
+* 上下文对象定义在项目 `.lavas/middleware.js` 文件中的 `getClientContext/getServerContext` 方法内。这意味着开发者可以自由扩展这个上下文对象，挂载任意自定义属性在上面。
+* 具体调用这些中间件顺序运行的代码在客户端(`entry-client.js`)和服务端(`entry-server.js`)入口文件中。如果开发者需要扩展挂载的属性，可以这两处单独引入自定义的文件（注意只需基于 `.lavas/middleware.js` 文件，在 `getClientContext/getServerContext` 方法内添加即可）。
 
 ## 中间件的声明
 

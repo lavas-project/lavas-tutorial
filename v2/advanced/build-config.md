@@ -19,10 +19,18 @@ Lavas 内部使用 [Webpack](https://doc.webpack-china.org/concepts/) 进行构�
 // lavas.config.js
 
 build: {
+    ssr: true,
     path: '',
     publicPath: '',
     // 省略其他配置项
 }
+```
+
+## ssr
+
+切换 SPA 单页应用和 SSR 服务端渲染两种编译模式。
+```javascript
+ssr: true // SSR 模式
 ```
 
 ## path
@@ -258,7 +266,9 @@ extend(config, {type, env}) {
 
 ## compress
 
-注意：该配置项只有 SSR 模式下生效，SPA 模式下可以忽略。
+> info
+>
+> 该配置项只有 SSR 模式下生效，SPA 模式下可以忽略。
 
 在 SSR 模式下是否启用 gzip，通过内置的 [compress 中间件](https://github.com/expressjs/compression)实现。Lavas 默认在开发模式中关闭这一特性，在生产环境打开。
 ```javascript
@@ -267,7 +277,9 @@ compress: false
 
 ## nodeExternalsWhitelist
 
-注意：该配置项只有 SSR 模式下生效，SPA 模式下可以忽略。
+> info
+>
+> 该配置项只有 SSR 模式下生效，SPA 模式下可以忽略。
 
 在 SSR 模式下，通常我们不希望将 `node_modules` 中的依赖打包进 server bundle 中，因此需要使用 Webpack [externals](https://doc.webpack-china.org/configuration/externals/) 配置项。Lavas 已经通过 [Webpack node modules externals](https://github.com/liady/webpack-node-externals) 将 `node_modules` 全部排除。但是在某些场景下，我们还是需要将部分特定的依赖打包进来，这时就需要使用[白名单](https://github.com/liady/webpack-node-externals#optionswhitelist-)了：
 ```javascript
@@ -278,7 +290,9 @@ nodeExternalsWhitelist: []
 
 ## ssrCopy
 
-注意：该配置项只有 SSR 模式下生效，SPA 模式下可以忽略。
+> info
+>
+> 该配置项只有 SSR 模式下生效，SPA 模式下可以忽略。
 
 在 SSR 模式下，Lavas 除了将构建产物输出到例如 `dist` 文件夹中，还可以将例如 `node_modules`，线上脚本等文件拷贝到里面。这样 `dist` 文件夹可以作为一个可单独运行的包，移动到任意位置：
 ```javascript
