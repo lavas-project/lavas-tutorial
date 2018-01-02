@@ -2,7 +2,7 @@
 
 App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让站点快速加载到用户屏幕上，获得与本地 APP 相似的体验。
 
-![appshell](http://boscdn.bpc.baidu.com/assets/lavas/codelab/appshell-general.png)
+![appshell](https://boscdn.baidu.com/assets/lavas/codelab/appshell-general.png)
 
 关于 App Shell 本身的概念和优势可以参考 Lavas 官网的[文章](https://lavas.baidu.com/doc/architecture/the-app-shell-model)，这里不作展开。
 
