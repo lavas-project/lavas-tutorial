@@ -2,7 +2,7 @@
 
 App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让站点快速加载到用户屏幕上，获得与本地 APP 相似的体验。
 
-![appshell](https://lavas.baidu.com/doc-assets/pwa-doc/architecture/images/appshell.png)
+![appshell](http://boscdn.bpc.baidu.com/assets/lavas/codelab/appshell-general.png)
 
 关于 App Shell 本身的概念和优势可以参考 Lavas 官网的[文章](https://lavas.baidu.com/doc/architecture/the-app-shell-model)，这里不作展开。
 
@@ -83,7 +83,7 @@ Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
 
 我们虽然无法像 SPA 那样把 `index.html` 缓存起来，但我们可以把他们共同的外壳 (App Shell) 剥离成独立路由，由 Service Worker 请求并缓存。之后拦截每次 HTML 请求都返回这个外壳，再进行前端渲染，就可以实现和 Skeleton 相同的效果了。
 
-![SSR App Shell](http://boscdn.bpc.baidu.com/assets/lavas/codelab/appshell.png)
+![SSR App Shell](https://boscdn.baidu.com/assets/lavas/codelab/appshell.png)
 
 在这种模式下，只要缓存中存在这个外壳，程序就没有请求服务端 HTML 的必要，只需要请求 API 接口获取数据即可。(如果开发者的应用对于 API 的实时性要求不高，甚至 API 请求也可以进行缓存。) 无论 API 如何处理，对服务端来说，使用 Vue SSR 流程处理 HTML 请求仅限于浏览器缓存中不存在外壳时，也就是第一次访问时。后续访问即便是刷新页面，因为外壳的存在也不会再走 SSR 流程了，这和传统的 SSR 模式是不同的。
 
