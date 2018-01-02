@@ -42,6 +42,8 @@ Lavas 目前支持两种渲染模式，分别是服务端渲染 (SSR) 和 浏览
 
 3. 配置流量分发服务器
 
+*提示：多端口方案是目前阶段 Lavas 推荐的临时方案，我们正在研发更简洁的方案避免启动多个端口，后续会更新到这篇文档，敬请期待*
+
 ### 修改基础路由和端口号
 
 打开 `/lavas.config.js` 配置文件的 `router` 段，可以找到 `base` 配置项
@@ -116,8 +118,8 @@ build: {
 
 ```
 server {
-    listen          80
-    server_name     localhost
+    listen          80;
+    server_name     localhost;
 
     location /user/ {
         proxy_pass                  http://localhost:8001;
