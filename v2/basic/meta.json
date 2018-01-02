@@ -20,5 +20,6 @@
             "name": "Lavas 命令介绍",
             "key": "cli"
         }
-    ]
+    ],
+    "ignore": ["lavas-static"]
 }
