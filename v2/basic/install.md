@@ -20,7 +20,7 @@
     lavas init
     ```
 
-    ![lava init](https://boscdn.baidu.com/assets/lavas/codelab/lavas-init-3.png)
+    ![lava init](./images/lavas-init.png)
 
 3. 进入目录并安装依赖
 
