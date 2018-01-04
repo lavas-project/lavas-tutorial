@@ -16,11 +16,10 @@ App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让�
 
 因此我们的思路是：__把 index.html 添加到 Service Worker 的预缓存列表中，并且告知 Service Worker在请求某个页面时，从缓存中把 HTML 返回出来供前端直接展现__。后续的加载和替换 Skeleton 由 js 继续走正常流程完成，就无需我们额外关心了。
 
-为了实现思路，我们需要进行的操作有三个步骤：
+为了实现思路，我们需要进行的操作有两个步骤：
 
 1. Skeleton 本身的编写
 2. 配置 Service Worker，添加预缓存文件列表
-3. 编写 Service Worker 模板
 
 ### 编写 Skeleton
 
@@ -64,16 +63,6 @@ serviceWorker: {
 
 将 `*.html` 包括其中，即可让 `index.html` 包含在预缓存列表中了。
 
-### 编写 Service Worker 模板
-
-最后一步我们需要告知 Service Worker 在切换页面 (或称 navigation 请求) 时使用 `index.html` 作为响应。在 `/core/service-worker.js` 最后添加
-
-```javascript
-workboxSW.router.registerNavigationRoute('/index.html');
-```
-
-`registerNavigationRoute` 方法是 WorkBox 提供的一个快捷方法 ([API](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.Router#registerNavigationRoute))，它的作用是在 HTML 请求 (`request.mode === 'navigate'`) 时使用参数内容 (`/index.html`) 作为响应返回，而不真正发起网络请求。因此现在所有页面加载之前都会由 Service Worker 返回 `index.html`，而其中包含的 Skeleton 则替代了白屏，成为提升体验的关键。
-
 ## SSR 模式的 App Shell
 
 Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
@@ -89,11 +78,10 @@ Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
 
 关于这个模式，Lavas 在知乎专栏的文章 [SSR 架构项目实现离线可用（思路&案例）](https://zhuanlan.zhihu.com/p/30791448) 和 [在 Vue SSR 中使用 Service Worker](https://zhuanlan.zhihu.com/p/31630322) 有更详细的介绍。
 
-实现方式方面，和 Skeleton 模式类似，我们同样需要完成三个步骤：
+实现方式方面，和 Skeleton 模式类似，我们同样需要完成两个步骤：
 
 1. App Shell 本身的编写
 2. 配置 Service Worker，添加预缓存文件列表
-3. 编写 Service Worker 模板，注册缓存 App Shell
 
 ### 编写 App Shell
 
@@ -132,17 +120,48 @@ export default {
 // ...
 serviceWorker: {
     // swSrc, swDest, globDirectory, globPatterns, globIgnores, dontCacheBustUrlsMatching..
-    appshellUrls: ['/appshell']
+    appshellUrl: '/appshell'
 }
 // ...
 ```
 
-接下来的注册动态缓存步骤和 SPA 是类似的，使用到的仍然是 `registerNavigationRoute` 方法，如下：
+### 多个 App Shell 的支持 (扩展)
+
+默认情况 Lavas 会帮助开发者完成一个 App Shell 的注册。如果开发者有需求要支持多个 App Shell，需要额外进行一些操作。
+
+相比单个 App Shell 的开发，多个 App Shell 的开发步骤有三个：
+
+1. 多个 App Shell 本身的编写
+
+    和单个 App Shell 基本相同，不再复述。
+
+2. 配置 Service Worker，添加预缓存文件列表
+
+    `appShellUrl` 参数 __只需要__ 填写适用面最广的 App Shell 路径。
+
+    举例来说，存在两个 App Shell，A 适用于 `/user` 开头的路由，B 适用于剩余的路由。那么 B 就是适用面广的 App Shell，它的访问地址 (如 `/appshell/B` ) 应该被填入 `appShellUrl`
+
+3. 编写 Service Worker 模板
+
+Service Worker 模板位于 `/core/service-worker.js`，注册 App Shell 我们需要使用 WorkBox 的 `registerNavigationRoute` 方法，如下：
 
 ```javascript
-// core/service-worker.js
-workboxSW.router.registerNavigationRoute('/appshell');
+workboxSW.router.registerNavigationRoute('/appshell/B', {
+    whitelist: /^\/user/
+});
 ```
+
+`registerNavigationRoute` 方法是 WorkBox 提供的一个快捷方法 ([API](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.Router#registerNavigationRoute))，它的作用是在 HTML 请求 (`request.mode === 'navigate'`) 时使用参数内容 (`/appshell/B`) 作为响应返回，而不真正发起网络请求。因此现在所有页面加载之前都会由 Service Worker 返回 `index.html`，而其中包含的 Skeleton 则替代了白屏，成为提升体验的关键。
+
+那为什么单个 App Shell 时不需要编写这句代码呢？
+
+很简单，因为 Lavas 帮助开发者自动生成了这句代码。Lavas 获取 `appShellUrl` 参数并自动生成调用，如下：
+
+```javascript
+workboxSW.router.registerNavigationRoute('/appshell/A')
+```
+
+综上，开发者只需要把普适的 `/appshell/A` 编写在 `appShellUrl` 配置项中，再自行编写 `/appshell/B` 的注册即可。
 
 ## Skeleton 和 App Shell 的差异 (扩展)
 

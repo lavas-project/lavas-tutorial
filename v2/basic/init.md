@@ -95,7 +95,7 @@ computed: mapState('namespace/someStore', [
 
 Lavas 提供了许多配置项，方便开发者进行各种自定义的灵活配置。所有的配置项都集中在 `lavas.config.js` 中，并提供一套默认配置，适用于大部分普通开发者快速上手。配置总共分为以下几个部分，您都可以在文档的进阶部分找到对应的章节进行详述：
 
-* __build__ 构建相关，详见[这里](/guide/v2/advanced/build)
+* __build__ 构建相关，详见[这里](/guide/v2/advanced/build-config)
 * __errorHandler__ 错误处理相关，详见[这里](/guide/v2/advanced/error-handler)
 * __middleware__ 中间件相关，详见[这里](/guide/v2/advanced/middleware)
 * __router__ 路由规则相关，详见[这里](/guide/v2/advanced/router)
