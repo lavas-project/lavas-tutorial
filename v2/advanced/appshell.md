@@ -137,9 +137,9 @@ serviceWorker: {
 
 2. 配置 Service Worker，添加预缓存文件列表
 
-    `appShellUrl` 参数 __只需要__ 填写适用面最广的 App Shell 路径。
+    `appshellUrl` 参数 __只需要__ 填写适用面最广的 App Shell 路径。
 
-    举例来说，存在两个 App Shell，A 适用于 `/user` 开头的路由，B 适用于剩余的路由。那么 B 就是适用面广的 App Shell，它的访问地址 (如 `/appshell/B` ) 应该被填入 `appShellUrl`
+    举例来说，存在两个 App Shell，A 适用于 `/user` 开头的路由，B 适用于剩余的路由。那么 B 就是适用面广的 App Shell，它的访问地址 (如 `/appshell/B` ) 应该被填入 `appshellUrl`
 
 3. 编写 Service Worker 模板
 
@@ -155,13 +155,13 @@ workboxSW.router.registerNavigationRoute('/appshell/B', {
 
 那为什么单个 App Shell 时不需要编写这句代码呢？
 
-很简单，因为 Lavas 帮助开发者自动生成了这句代码。Lavas 获取 `appShellUrl` 参数并自动生成调用，如下：
+很简单，因为 Lavas 帮助开发者自动生成了这句代码。Lavas 获取 `appshellUrl` 参数并自动生成调用，如下：
 
 ```javascript
 workboxSW.router.registerNavigationRoute('/appshell/A')
 ```
 
-综上，开发者只需要把普适的 `/appshell/A` 编写在 `appShellUrl` 配置项中，再自行编写 `/appshell/B` 的注册即可。
+综上，开发者只需要把普适的 `/appshell/A` 编写在 `appshellUrl` 配置项中，再自行编写 `/appshell/B` 的注册即可。
 
 ## Skeleton 和 App Shell 的差异 (扩展)
 

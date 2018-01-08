@@ -229,7 +229,9 @@ lavas-project
 
 这应该是上线需求的最小集合了，为了适应这样的修改，还需要对 `server.js` 中的引用路径进行改动，这里就不重复了。
 
-### express 处理 SPA 路由的小问题
+### express 处理 SPA 路由的小问题 (扩展)
+
+*提示：这部分内容由 Lavas 内部处理，并不需要开发者进行参与，仅仅作为解答开发者疑问的扩展阅读存在。*
 
 在 `server.js` 中，我们能够发现存在一段代码：
 
@@ -245,3 +247,25 @@ app.use('/', function (req, res, next) {
     next();
 });
 ```
+
+这段代码是用来处理一个 express 的路由问题的。Vue 官方推荐开发者在上线 Vue SPA 项目时使用 [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback)，这个中间件的核心是修改 express 的 `req.url`，让我们看看如下代码(截取自该中间件)：
+
+```javascript
+rewriteTarget = options.index || '/index.html';
+logger('Rewriting', req.method, req.url, 'to', rewriteTarget);
+req.url = rewriteTarget;
+next();
+```
+
+然后我们使用方式如下：
+
+```javascript
+app.use('/user', historyMiddleware({
+    htmlAcceptHeaders: ['text/html'],
+    disableDotRule: false // ignore paths with dot inside
+}))
+```
+
+在这种配置下，当我们访问 `/user/`，经过中间件之后 `req.url` 会被设置为 `/user/index.html`，再进入 `express.static`，一切正常。但当访问 `/user` 时(没有后面那个 `/`)，经过中间件之后会变成 `/userindex.html`，这样是无法被 `express.static` 识别的，当然落到 SSR 之后也无法匹配，因此会报出 404 错误。
+
+因此我们在使用中间件之前还增加了一段修复代码，在访问 `/user` 的时候自动添加最后的 `/`。我们也考虑过 express 的 strict routing，但似乎也没法生效。如果开发者有更好的方法，欢迎告诉我们！
