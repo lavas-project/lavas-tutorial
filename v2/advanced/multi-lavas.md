@@ -22,6 +22,8 @@ Lavas 目前支持两种渲染模式，分别是服务端渲染 (SSR) 和 浏览
 
 因此，我们把问题归结为：多个 Lavas 项目如何整合到一起？
 
+在 Lavas 构建完成后，SPA 项目本质上是一些静态页面，包含一个入口 `index.html` 和其他静态资源；SSR 项目本质上是一个 express (也可以是 koa )中间件。因此通过架设一个 express 服务器可以很方便分别对两者进行整合。
+
 ## 实现方式
 
 为了表述方便，我们来创建一个简单但可能很实用的需求，通过解决这个需求来学习如何整合。
@@ -36,23 +38,29 @@ Lavas 目前支持两种渲染模式，分别是服务端渲染 (SSR) 和 浏览
 
 我们假设开发者已经分别为两者开发了单独的 Lavas 应用。前者名为 lavas-user，后者名为 lavas-main。我们需要这么几个步骤：
 
-1. 修改基础路由和端口号互相区分
+1. 修改基础路由互相区分
 
 2. 提取共享模块避免重复 (可选)
 
-3. 配置流量分发服务器
+3. 配置服务器
 
-*提示：多端口方案是目前阶段 Lavas 推荐的临时方案，我们正在研发更简洁的方案避免启动多个端口，后续会更新到这篇文档，敬请期待*
+4. 构建
 
-### 修改基础路由和端口号
+### 修改基础路由
 
-打开 `/lavas.config.js` 配置文件的 `router` 段，可以找到 `base` 配置项
+观察示例需求的两个模块，lavas-user 拥有明显的 URL 特征 ( `/user` 开头)，而 lavas-main 没有。因此我们修改 lavas-user 的 `base`，lavas-main 不作修改。
+
+打开 `lavas-user/lavas.config.js` 配置文件的`build` 段的 `publicPath` 以及 `router` 段的 `base`，均修改为 `/user/` (__不要遗漏最后的 `/` ！__)，如下：
 
 ```javascript
 // ...
+build: {
+    // ...
+    publicPath: '/user/'
+},
 router: {
     mode: 'history',
-    base: '/',
+    base: '/user/',
     pageTransition: {
         enable: false
     }
@@ -60,24 +68,11 @@ router: {
 // ...
 ```
 
-观察示例需求的两个模块，lavas-user 拥有明显的 URL 特征 ( /user 开头)，而 lavas-main 没有。因此我们修改 lavas-user 的 `base` 为 `/user/` (__不要遗漏最后的 `/` ！__)，lavas-main 不作修改。
-
-`base` 配置项是 vue-router 的一个配置项，用以设定基准路由。修改后的 lavas-main，原本使用 `/view` 的路由就变成了 `/user/view`， 原本使用 `/register` 就变成了 `/user/register`，以此类推。
+>info
+>`base` 配置项是 vue-router 的一个配置项，用以设定基准路由。修改后的 lavas-main，原本使用 `/view` 的路由就变成了 `/user/view`， 原本使用 `/register` 就变成了 `/user/register`，以此类推。
+>为了配合 `base`， 用以管理静态资源路径前缀的配置项 `publicPath` 也应做相同的修改，否则会导致系统找不到静态资源而报错。
 
 因为路由发生了变化，如果项目中有使用相对路径引用静态资源，也需要一并修改。例如如果在 `/core/index.html.tmpl` 中引用了 `/static/some-script.js`，那么这里就要改成 `<%=baseUrl%>static/some-script.js`。这部分可以参考[index.html.tmpl 相关文档](/guide/v2/advanced/core#index.html.tmpl)
-
-为了同时启动两个 Lavas 项目，必须保证他们启动在不同的端口号。因此我们还需要修改 `/server.prod.js`，如下：
-
-```javascript
-const LavasCore = require('lavas');
-const express = require('express');
-const app = express();
-
-let port = 8001;
-// 省略其他内容
-```
-
-通过这个配置我们使两个项目启动在不同端口。例如将 lavas-user 启动在 8001，lavas-main 启动在 8002。
 
 ### 提取共享模块 (可选)
 
@@ -112,27 +107,141 @@ build: {
 
 在实际引用时 (如 `App.vue` 中)，采用的引用路径是 `@/components/xxx.vue`，因此将 `'@'` 路径配置成 `path.resolve(__dirname, '../')` 可以避免修改这些引用处，比较方便。
 
-### 配置流量分发服务器
+### 配置服务器
 
-最后一步是在两个 Lavas 服务之前搭建一个分发服务器，对不同的 URL 转发到不同的 Lavas 服务。以 nginx 为例，我们使用如下配置：
+最后一步是在两个 Lavas 服务之前搭建一个分发服务器，对不同的 URL 转发到不同的 Lavas 服务。以 express 为例，我们新建 `server.js`，内容如下：
 
-```
-server {
-    listen          80;
-    server_name     localhost;
+```javascript
+const path = require('path');
+const express = require('express');
+const app = express();
+const historyMiddleware = require('connect-history-api-fallback');
+const LavasCore = require('lavas');
+const port = 8080; // 对外端口
 
-    location /user/ {
-        proxy_pass                  http://localhost:8001;
-        proxy_set_header Host       $host;
-        proxy_set_header X-Real-IP  $remote_addr;
+function registerSPA(url, dirPath) {
+    if (url.endsWith('/')) {
+        url = url.substring(0, url.length - 1);
     }
 
-    location / {
-        proxy_pass                  http://localhost:8002;
-        proxy_set_header Host       $host;
-        proxy_set_header X-Real-IP  $remote_addr;
-    }
+    // fix trailing slash (/user -> /user/)
+    app.use('/', function (req, res, next) {
+        let requestUrl = req.url.replace(/\?.+?$/, '');
+
+        if (requestUrl === url) {
+            req.url = url + '/';
+        }
+
+        next();
+    });
+
+    app.use(url, historyMiddleware({
+        htmlAcceptHeaders: ['text/html'],
+        disableDotRule: false // ignore paths with dot inside
+    }));
+
+
+    app.use(url, express.static(dirPath));
 }
+
+// SPA
+registerSPA('/user', 'lavas-user/dist');
+
+// NOT required when SSR is enabled
+// app.listen(port, () => {
+//     console.log('server started at localhost:' + port);
+// });
+
+// SSR
+let core = new LavasCore(path.resolve(__dirname, 'lavas-main/dist'));
+
+core.init('production')
+    .then(() => core.runAfterBuild())
+    .then(() => {
+        app.use(core.expressMiddleware());
+        app.listen(port, () => {
+            console.log('server started at localhost:' + port);
+        });
+    }).catch(err => {
+        console.log(err);
+    });
+
+// catch promise error
+process.on('unhandledRejection', (err, promise) => {
+    console.log('in unhandledRejection');
+    console.log(err);
+    // cannot redirect without ctx!
+});
+
 ```
 
-就可以成功将流量转发到两个 Lavas 服务上了。
+文件中的所有项目文件路径(如 `lavas-user/dist`)以及启动端口号(如 `8080`)都可以根据项目实际情况进行修改。
+
+文件的上半部分对 SPA 进行处理，核心是把 `/user` 开头的路由转发到 lavas-user 的入口 `lavas-user/dist/index.html` 上。其中还涉及到一个 URL 结尾 `/` 的小问题，我们在[最后](/guide/v2/advanced/multi-lavas#TODO)进行叙述。SPA 部分的最后是启动 express 服务器并监听端口，但因为 SSR 部分包含异步操作，因此 __如果项目包含 SSR 部分，则这里可以注释，由 SSR 部分负责启动__。
+
+文件后半部分是对 SSR 进行处理，这部分和 `lavas-main/server.prod.js` 比较类似，就不再赘述了。
+
+### 构建
+
+1. 分别对两个项目使用 `lavas build` 命令进行构建
+
+2. 复制任意一个项目的 `node_modules` 目录到根目录，供上述 `server.js` 使用
+
+3. 如果想精简项目内容，可以只将两个项目的 `dist` 目录移动出来，其余源码部分和 `node_modules` 都可以去除 __(可选)__
+
+### 最终目录结构
+
+如果按照文档上列出的 `server.js` 中的配置，最终目录应该如下：
+
+```
+lavas-project
+├── lavas-user/
+│   ├── dist
+│   │   ├── index.html
+│   │   └── something else (favicon.ico, lavas/, static/...)
+│   └── something else (node_modules/, .lavas/, pages/, store/...)
+│
+├── lavas-main/
+│   ├── dist
+│   │   ├── server.prod.js
+│   │   └── something else (lavas/, node_modules/, static/...)
+│   └── something else (node_modules/, .lavas/, pages/, store/...)
+│
+├── node_modules/
+└── server.js
+```
+
+更进一步，精简后的代码结构可以是：
+
+```
+lavas-project
+├── lavas-user-dist/
+│   ├── index.html
+│   └── something else (favicon.ico, lavas/, static/...)
+│
+├── lavas-main-dist/
+│   ├── server.prod.js
+│   └── something else (lavas/, node_modules/, static/...)
+│
+├── node_modules/
+└── server.js
+```
+
+这应该是上线需求的最小集合了，为了适应这样的修改，还需要对 `server.js` 中的引用路径进行改动，这里就不重复了。
+
+### express 处理 SPA 路由的小问题
+
+在 `server.js` 中，我们能够发现存在一段代码：
+
+```javascript
+// fix trailing slash (/user -> /user/)
+app.use('/', function (req, res, next) {
+    let requestUrl = req.url.replace(/\?.+?$/, '');
+
+    if (requestUrl === url) {
+        req.url = url + '/';
+    }
+
+    next();
+});
+```

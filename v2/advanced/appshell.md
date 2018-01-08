@@ -114,7 +114,7 @@ export default {
 
 ### 配置 Service Worker
 
-和 Skeleton 不同，这里要添加的预缓存并不是一个独立的文件，而是一个路由 (如 `/appshell`)。我们使用 `/lavas.config.js` 中 `serviceWorker` 段的 `appshellUrls` 配置项先进行声明，之后才可以正常使用。
+和 Skeleton 不同，这里要添加的预缓存并不是一个独立的文件，而是一个路由 (如 `/appshell`)。我们使用 `/lavas.config.js` 中 `serviceWorker` 段的 `appshellUrl` 配置项先进行声明，之后才可以正常使用。
 
 ```javascript
 // ...

@@ -38,7 +38,7 @@ module.exports = {
             'sw-register.js',
             '**/*.map'
         ],
-        appshellUrls: ['/appshell'],
+        appshellUrl: '/appshell',
         dontCacheBustUrlsMatching: /\.\w{8}\./
     },
     // ...
@@ -72,7 +72,7 @@ module.exports = {
 
     相对于 globDirectory 指定的目录，指出哪些文件__不需要__被预缓存。和 globPatterns 一样，也可以使用通配符。service-worker.js 本身会被自动排除
 
-* __appshellUrls__
+* __appshellUrl__
 
     [Skeleton 和 App Shell 模型](/guide/v2/advanced/appshell)文中会详细提及，这里先跳过
 
