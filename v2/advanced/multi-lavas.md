@@ -177,7 +177,7 @@ process.on('unhandledRejection', (err, promise) => {
 
 文件中的所有项目文件路径(如 `lavas-user/dist`)以及启动端口号(如 `8080`)都可以根据项目实际情况进行修改。
 
-文件的上半部分对 SPA 进行处理，核心是把 `/user` 开头的路由转发到 lavas-user 的入口 `lavas-user/dist/index.html` 上。其中还涉及到一个 URL 结尾 `/` 的小问题，我们在[最后](/guide/v2/advanced/multi-lavas#TODO)进行叙述。SPA 部分的最后是启动 express 服务器并监听端口，但因为 SSR 部分包含异步操作，因此 __如果项目包含 SSR 部分，则这里可以注释，由 SSR 部分负责启动__。
+文件的上半部分对 SPA 进行处理，核心是把 `/user` 开头的路由转发到 lavas-user 的入口 `lavas-user/dist/index.html` 上。其中还涉及到一个 URL 结尾 `/` 的小问题，我们在[最后](/guide/v2/advanced/multi-lavas#express-%E5%A4%84%E7%90%86-spa-%E8%B7%AF%E7%94%B1%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98-%E6%89%A9%E5%B1%95)进行叙述。SPA 部分的最后是启动 express 服务器并监听端口，但因为 SSR 部分包含异步操作，因此 __如果项目包含 SSR 部分，则这里可以注释，由 SSR 部分负责启动__。
 
 文件后半部分是对 SSR 进行处理，这部分和 `lavas-main/server.prod.js` 比较类似，就不再赘述了。
 
