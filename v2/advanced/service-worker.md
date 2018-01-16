@@ -62,7 +62,7 @@ module.exports = {
 
 * __swPath__
 
-    生成的 service-worker.js 在 sw-register.js 中默认会使用 publicPath 进行完整可访问路径拼接，如果您需要指定一个专有的 service-worker.js 文件的可访问 path，可以通过 `swPath` 配置指定。
+    生成的 service-worker.js 在 sw-register.js 中默认会使用 publicPath 进行完整可访问路径拼接，如果您需要指定一个专有的 service-worker.js 文件的可访问 path，可以通过 `swPath` 配置指定，该配置字段默认不开启。
 
 * __globDirectory__
 
