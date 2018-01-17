@@ -72,8 +72,6 @@ router: {
 >`base` 配置项是 vue-router 的一个配置项，用以设定基准路由。修改后的 lavas-main，原本使用 `/view` 的路由就变成了 `/user/view`， 原本使用 `/register` 就变成了 `/user/register`，以此类推。
 >为了配合 `base`， 用以管理静态资源路径前缀的配置项 `publicPath` 也应做相同的修改，否则会导致系统找不到静态资源而报错。
 
-因为路由发生了变化，如果项目中有使用相对路径引用静态资源，也需要一并修改。例如如果在 `/core/index.html.tmpl` 中引用了 `/static/some-script.js`，那么这里就要改成 `<%=baseUrl%>static/some-script.js`。这部分可以参考[index.html.tmpl 相关文档](/guide/v2/advanced/core#index.html.tmpl)
-
 ### 提取共享模块 (可选)
 
 如果 lavas-main 和 lavas-user 两个模块都引用了相同的内容，开发者又对重复代码无法接受，可以考虑将共同的代码抽离出来。
