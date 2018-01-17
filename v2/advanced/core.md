@@ -45,61 +45,39 @@ Vue SSR 要求我们建立 `entry-client.js` 和 `entry-server.js` 分别作为 
 
 在服务器端渲染模式下，Vue SSR 要求开发者提供一份 HTML 模板文件作为页面基本框架。其中最重要的 `<!--vue-ssr-outlet-->` 将作为 HTML 注入标记。在浏览器端渲染模式下，我们也需要提供一个类似的模板文件。虽然不需要 HTML 注入点，但也需要一个 `<div id="app">` 从而在 Vue 的 `app.$mount('#app')` 时使用。
 
-一般来说，这就是这两个模板的唯一差别，因此 Lavas 在它们的基础上进行优化，开发者只需要编写一份模板，由 Lavas 分别生成两份供不同的模式使用，这就是 `index.html.tmpl`
+为了开发的方便性考虑，不必准备两个模板文件或者频繁修改内容，Lavas 将两种渲染模式下的模板统一到了 `index.html.tmpl` 中。
 
-一个简单的示例模板如下：
-
-```
-<html>
-    <head>
-        <%= renderMeta() %>
-        <%= renderManifest() %>
-    </head>
-    <body>
-        <%= renderEntry() %>
-    </body>
-</html>
-```
-
-Lavas 提供的内置方法有这么几个：
-
-* `renderMeta()`
-
-    使用 [vue-meta](https://github.com/declandewet/vue-meta) 进行 meta 信息的渲染，包括 title, titleTemplate 等等，详见 vue-meta 的使用方法。
-
-* `renderManifest()`
-
-    给浏览器提供 `manifest.json` 以激活“添加到手机桌面”的功能。这同时要求开发者配置合法的 `/static/manifest.json`。关于 JSON 的配置可以参考 [Codelab](/codelab/get-started/manifest)。
-
-* `renderEntry()`
-
-    渲染 HTML 入口。上面提过，对于服务端渲染来说，就是 `<!--vue-ssr-outlet-->` 这个标签，而对于客户端来说则是 `<div id="app"></div>`。 一般情况这个方法__必须__要有，否则 Vue 将会因为找不到入口而无法渲染 HTML。
-
-* `baseUrl`
-
-    输出配置在 `lavas.config.js` 中 `router` 的 `base`。在开发者需要使用相对路径引用项目内的资源时，添加 `<%= baseUrl%>some/path` 可以保证路径一致。注意 `baseUrl` 一般最后都已经包含了 `/`。
-
-* `useCustomOnly()`
-
-    如果开发者希望使用自定义的模板(例如某些特别的框架，不需要生成完整的 HTML 结构)，可以使用这个方法来屏蔽所有 Lavas 做的预处理，直接使用用户编写的内容。
-
-除了调用以上几个方法，在其他任何位置插入 HTML 标签__都是允许__的，从而最大限度的为开发者提供灵活性。因此如下模板也是合法的：
+在使用 `lavas init` 命令生成的项目中，初始状态的模板文件结构如下：
 
 ```
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-        <%= renderMeta() %>
-        <link rel="shortcut icon" href="<%= baseUrl %>static/img/icons/favicon.ico">
-        <%= renderManifest() %>
-    </head>
-    <body>
-        <div class="main-entry">
-            <%= renderEntry() %>
-        </div>
-    </body>
-</html>
+<!DOCTYPE html>
+
+<% if (ssr) { %>
+<!-- ssr content with vue-ssr-outlet -->
+<% } else { %>
+<!-- spa content with <div id="app"></div> -->
+<% } %>
 ```
+
+两种模式都包含在内，并且 `ssr` 变量是由 Lavas 内部注入的，可以自行判断，所以 __在开发者切换渲染模式时，不需要对模板进行额外的处理__。
+
+在 SSR 模式下，Lavas 还支持开发者传入变量并使用。具体方式如下：
+
+1. 在 `core/entry-server.js` 中，将需要使用的变量挂载到 `context` 对象上。如
+
+    ```javascript
+    context.author = {name: 'wangyisheng'};
+    ```
+
+2. 在 `index.html.tmpl` 中，使用 `{{}}` 的样式使用这个变量。__一定在 SSR 的分支中使用！__ 如
+
+    ```
+    <div class="author">{{ author.name }}</div>
+    <!-- 或者 -->
+    <input value="{{ author.name }}"></input>
+    ```
+
+在 SPA 模式下，这种方式并不能奏效。原因也很简单，我们可以从 SPA 和 SSR 的原理上进行考虑。SSR 模式下，由服务器(中间件)获取请求，并把创建的 Vue app 和 context 交给 `renderToString` 方法进行渲染，因此可以进行模板变量的注入和替换；而 SPA 模式下，服务器只负责使用 webpack 进行构建，构建时并不真正运行代码 (entry-client.js)，因此无法获取变量，也就无法替换了。
 
 ### index.html.tmpl 和 App.vue
 
