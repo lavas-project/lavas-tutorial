@@ -60,6 +60,10 @@ module.exports = {
 
     生成的 service-worker.js 的存放位置。例子中放在了整体构建目录 (`/dist`) 的下面，即 `/dist/service-worker.js`
 
+* __swPath__
+
+    生成的 service-worker.js 在 sw-register.js 中默认会使用 publicPath 进行完整可访问路径拼接，如果您需要指定一个专有的 service-worker.js 文件的可访问 path，可以通过 `swPath` 配置指定，该配置字段默认不开启。
+
 * __globDirectory__
 
     指定需要预缓存的静态文件的目录。例子设定为整体构建目录 (`/dist`)
