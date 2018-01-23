@@ -22,7 +22,7 @@ lavas build config/lavas.another.config.js
 
 config 参数为额外配置文件的路径，从运行命令的当前路径开始计算。
 
-更多关于构建的信息可以参见[构建部署工程](/guide/v2/basic/build)和[Lavas 中的 build 配置](/guide/v2/advanced/build)
+更多关于构建的信息可以参见[构建配置](/guide/v2/advanced/build-config)。
 
 ## lavas dev
 
@@ -31,6 +31,8 @@ config 参数为额外配置文件的路径，从运行命令的当前路径开�
 ![lavas-dev](./images/lavas-dev.png)
 
 为了防止 Service Worker 的缓存对频繁改动的开发调试阶段产生影响，使用 `lavas dev` 启动的调试服务器__不会__注册 Service Worker。
+
+*config 参数从 Lavas 2.2.3 版本开始支持*
 
 开发者可以在 `lavas dev` 之后加入第三个参数以使用特定的配置文件进行构建，用以取代默认的 `/lavas.config.js`。这主要用于开发者不想频繁修改配置文件，又想频繁预览不同配置下 Lavas 项目的表现时。示例如下：
 
@@ -59,6 +61,8 @@ config 参数为额外配置文件的路径，从运行命令的当前路径开�
     指定端口启动正式服务器(默认 3000)。如 `lavas dev --port 8000`
 
 ## lavas static
+
+*lavas static 从 Lavas 2.2.4 版本开始支持*
 
 使用 Lavas 内置的静态服务器以当前目录为基准启动。用法有两种：
 
