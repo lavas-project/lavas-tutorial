@@ -63,6 +63,45 @@ serviceWorker: {
 
 将 `*.html` 包括其中，即可让 `index.html` 包含在预缓存列表中了。
 
+### 按照路由路径显示独立 Skeleton
+
+之前我们展示了 SPA 下如何使用唯一的一个 Skeleton。但是在实际使用过程中，多个页面很难抽象出一个统一的 Skeleton，只能用类似 loading 的方式兼顾。
+
+lavas-core-vue@1.0.6 支持 SPA 下每个按照不同路由路径展示不同 Skeleton，同时兼容老版本。所以如果想体验这一特性，可以升级已有 Lavas 模版项目中的 lavas-core-vue 依赖。
+
+在 `lavas.config.js` 中新增配置项 `skeleton`，包含如下属性：
+- `enable` 布尔值，可以关闭整个 Skeleton 特性
+- `routes` 数组，路由路径和多个 Skeleton 的对应关系，每个对象如下：
+    - `path` 必填，字符串或者正则，路由路径
+    - `componentPath` 必填，Skeleton 组件路径
+    - `skeletonId` 选填，默认按照 Skeleton 组件名生成 DOM 元素 id。可以指定以避免和页面已有元素 id 重复
+
+例如使用如下配置，在构建时将向 HTML 中插入三个 Skeleton 内容，包含各自样式，DOM 结构以及一段按照路由显示对应 Skeleton 的 JS 代码。
+实际运行时，访问 `/test` 将展示 `TestSkeleton.vue` 的内容，访问 `/test2` 将展示 `TestSkeleton2.vue` 的内容，其余路由将展示默认的 `Skeleton.vue` 内容。
+```javascript
+// lavas.config.js
+
+skeleton: {
+    routes: [
+        {
+            path: '/test',
+            skeletonId: 'my-skeleton',
+            componentPath: 'core/TestSkeleton.vue'
+        },
+        {
+            path: '/test2',
+            componentPath: 'core/TestSkeleton2.vue'
+        },
+        {
+            path: '*',
+            componentPath: 'core/Skeleton.vue'
+        }
+    ]
+}
+```
+
+实际可运行例子可以参考 [Codelab](/codelab/multi-skeleton)。
+
 ## SSR 模式的 App Shell
 
 Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
