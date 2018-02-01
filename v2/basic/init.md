@@ -34,11 +34,9 @@ lavas-project
 
 `/components` 存放 Vue 的组件，供其他页面复用。在 Lavas 中，初始状态下提供了三个组件，均在一些页面框架中使用，因此会作用于整个项目的所有页面。
 
-1. `OfflineToast.vue` 在 `/core/App.vue` 中被引用，用于在用户网络离线/恢复时提示用户
+1. `UpdateToast.vue` 也在 `/core/App.vue` 中被引用，用于 Service Worker 更新时提示用户
 
-2. `UpdateToast.vue` 也在 `/core/App.vue` 中被引用，用于 Service Worker 更新时提示用户
-
-3. `ProgressBar.vue` 在 `/core/entry-client.js` 中被引用，在页面切换时在顶部展示加载的进度条
+2. `ProgressBar.vue` 在 `/core/entry-client.js` 中被引用，在页面切换时在顶部展示加载的进度条
 
 如果开发者有其他多个页面需要复用的组件，也可以放在 `/components` 目录中。
 
