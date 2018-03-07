@@ -244,13 +244,14 @@ plugins: {
 为了给予开发者更大的灵活度，能自由修改 Webpack 配置对象，Lavas 提供了 `extend` 方法。
 该方法参数说明如下：
 * `config` Webpack 配置对象。
-* `options.type` Webpack 配置对象类型，一共有三种：`client` 供客户端使用，`server` 供服务端使用，而 `base` 为两者所共用。
+* `options.type` Webpack 配置对象类型，一共有两种：`client` 供客户端使用，`server` 供服务端使用。**注意**，旧版本中的 `base` 不再支持，如果想在客户端与服务端同时生效，可以使用 `type === 'client' || type === 'server'` 进行判断。
 * `options.env` 当前构建环境变量，取值有两种：`development|production`。
 
 例如我们想增加 `vue-style-variables-loader` 来处理 `.vue` 文件，可以这么做：
 ```javascript
 extend(config, {type, env}) {
-    if (type === 'base') {
+    // 在客户端和服务端同时生效
+    if (type === 'client' || type === 'server') {
         let vueRule = config.module.rules[0];
         vueRule.use.push({
             loader: 'vue-style-variables-loader',
@@ -263,6 +264,86 @@ extend(config, {type, env}) {
     }
 }
 ```
+
+> info
+>
+> `extend` 方法适合对于 Webpack 配置对象进行简单扩展的场景，例如添加插件。如果需要对 Lavas 内置的规则和插件进行修改，可以参考下面的 `extendByWebpackChain` 方法。
+
+## extendByWebpackChain
+
+> info
+>
+> 该方法在 lavas-core-vue@1.0.8 版本引入，同时由于使用了 webpack-chain 依赖，要求 Node 版本 > 6.9.0。
+
+使用上面提到的 `extend` 方法直接修改 Webpack 配置对象，对于熟悉 Webpack 文档的开发者会比较直观。但是在以下场景下存在局限性：
+1. **修改 Lavas 已有规则**。由于 Webpack 配置对象层次很深，尤其是访问数组类型的配置项时只能以索引方式。例如 Lavas 内置了 vue-loader 处理 `.vue` 文件，如果使用 `extend` 方法试图访问并修改，只能通过 `config.module.rules[0].use[0].options.loader` 这样的方法，十分繁琐。
+2. **控制自定义插件的顺序**。开发者对于 Lavas 内部使用的插件缺少便捷的引用方式，因此无法插入新插件到某个特定插件前后。另外，如果想删除 Lavas 内置的某个插件，也只能通过索引方式访问插件数组。
+3. **干预 Lavas 内置插件的初始化创建**。对于 Lavas 内置的插件，一旦用户希望修改传入这个插件构造函数的参数，使用 `extend` 是无法做到的，因为调用 `extend` 时插件已经由 Lavas 初始化完成。
+
+而使用 `extendWithWebpackChain` 可以解决上述三个问题。
+
+### 扩展 Lavas 内置规则及 Loader
+
+首先，我们给 Lavas 内置的所有规则设置了名称，某条规则应用的任何一个 Loader 都可以通过 `config.rule(规则名称).use(Loader 名称)` 方式引用：
+```javascript
+extendWithWebpackChain: (config, {type, env}) => {
+    // 扩展 babel-loader，添加一个 babel 插件
+    config.module
+        .rule('js')
+            .use('babel')
+            .tap(options => merge(options, { plugins: ['babel-plugin-syntax-object-rest-spread'] }));
+}
+```
+
+Lavas 内置的全部规则及对应 Loader 如下：
+| 规则 | Loader 名称 | 说明 |
+| --- | --- | --- |
+| vue | vue |  |
+| js | babel | 默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) preset |
+| img | url |  |
+| font | url |  |
+| style-css | css |  |
+| style-postcss | css |  |
+| style-less | css less vue-style | 依次通过 css less 和 vue-style 这三个 Loader 处理，下同 |
+| style-sass | css sass vue-style |  |
+| style-scss | css sass vue-style |  |
+| style-stylus | css stylus vue-style |  |
+| style-styl | css stylus vue-style |  |
+
+### 扩展 Lavas 内置插件
+
+其次，我们给 Lavas 内部使用的所有插件也设置了名称，可以通过 `config.plugin(name)` 方式访问：
+```javascript
+extendWithWebpackChain: (config, {type, env}) => {
+    // 在 friendly-error 插件创建时扩展自定义参数
+    config.plugin('friendly-error').init((Plugin, args) => {
+        let customParams = {}; // 扩展传入插件构造函数的参数
+        return new Plugin(...args, customParams)
+    });
+
+    // 添加第三方插件到指定 Lavas 内置 html 插件之后
+    config.plugin('my-plugin').after('html').use(MyPlugin);
+}
+```
+
+以下是 Lavas 内置的部分插件列表：
+| 插件名称 | client/server | 开发/生产环境 | 说明 |
+| --- | --- | --- | --- |
+| define | client & server | 开发 & 生产 | [DefinePlugin](https://doc.webpack-china.org/plugins/define-plugin/)，可以通过 [`build.defines`](https://lavas.baidu.com/guide/v2/advanced/build-config#defines) 进行扩展。 |
+| extract-css | client & server | 开发 | [ExtractTextWebpackPlugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/)，默认在开发模式开启，生产环境关闭。可以通过[`build.cssExtract`](https://lavas.baidu.com/guide/v2/advanced/build-config#cssextract)配置。 |
+| html | client | 开发 & 生产 | [HtmlWebpackPlugin](https://doc.webpack-china.org/plugins/html-webpack-plugin/)，用于在 SPA 模式下生成 HTML。 |
+| skeleton | client | 开发 & 生产 | [VueSkeletonWebpackPlugin](https://github.com/lavas-project/vue-skeleton-webpack-plugin)，用于在 SPA 模式下向 HTML 中注入 Skeleton。 |
+| chunk-vendor | client | 开发 & 生产 | [CommonsChunkPlugin](https://doc.webpack-china.org/plugins/commons-chunk-plugin/)，创建包含第三方依赖的 chunk |
+| chunk-vue | client | 开发 & 生产 | 包含 vue，vuex，vue-router 和 vue-meta |
+| chunk-manifest | client | 开发 & 生产 | 仅包含 Webpack 运行时代码 |
+| hot-module-replacement | client | 开发 | 代码热更新相关 |
+| no-emit-on-errors | client | 开发 | 代码热更新相关 |
+| progress-bar | client | 开发 | [ProgressBarWebpackPlugin](https://github.com/clessg/progress-bar-webpack-plugin)，展示构建进度条 |
+| friendly-error | client | 开发 | |
+
+### 其余 Webpack 配置项
+
+上面列出了最常用的对于 Webpack 的扩展，其余配置项的使用方法，可以参考 [webpack-chain API](https://github.com/mozilla-neutrino/webpack-chain)。
 
 ## compress
 
