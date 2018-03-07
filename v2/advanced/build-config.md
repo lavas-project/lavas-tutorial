@@ -296,19 +296,20 @@ extendWithWebpackChain: (config, {type, env}) => {
 ```
 
 Lavas 内置的全部规则及对应 Loader 如下：
+
 | 规则 | Loader 名称 | 说明 |
 | --- | --- | --- |
-| vue | vue |  |
-| js | babel | 默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) preset |
-| img | url |  |
-| font | url |  |
-| style-css | css |  |
+| vue | vue | 匹配 `/\.vue$/` 规则 |
+| js | babel | 匹配 `/\.js$/ 规则，默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) preset |
+| img | url | 匹配 `/\.(png|jpe?g|gif|svg)(\?.*)?$/` 规则 |
+| font | url | 匹配 `/\.(woff2?|eot|ttf|otf)(\?.*)?$/` 规则 |
+| style-css | css | 匹配 `/\.css$/` 规则 |
 | style-postcss | css |  |
-| style-less | css less vue-style | 依次通过 css less 和 vue-style 这三个 Loader 处理，下同 |
-| style-sass | css sass vue-style |  |
-| style-scss | css sass vue-style |  |
-| style-stylus | css stylus vue-style |  |
-| style-styl | css stylus vue-style |  |
+| style-less | css less vue-style | 匹配 `/\.less$/` 规则，依次通过 css less 和 vue-style 这三个 Loader 处理，下同 |
+| style-sass | css sass vue-style | 匹配 `/\.sass$/` 规则 |
+| style-scss | css sass vue-style | 匹配 `/\.scss$/` 规则 |
+| style-stylus | css stylus vue-style | 匹配 `/\.stylus$/` 规则 |
+| style-styl | css stylus vue-style | 匹配 `/\.styl$/` 规则 |
 
 ### 扩展 Lavas 内置插件
 
@@ -327,6 +328,7 @@ extendWithWebpackChain: (config, {type, env}) => {
 ```
 
 以下是 Lavas 内置的部分插件列表：
+
 | 插件名称 | client/server | 开发/生产环境 | 说明 |
 | --- | --- | --- | --- |
 | define | client & server | 开发 & 生产 | [DefinePlugin](https://doc.webpack-china.org/plugins/define-plugin/)，可以通过 [`build.defines`](https://lavas.baidu.com/guide/v2/advanced/build-config#defines) 进行扩展。 |
