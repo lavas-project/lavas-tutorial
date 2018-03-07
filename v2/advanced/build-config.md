@@ -300,11 +300,11 @@ Lavas 内置的全部规则及对应 Loader 如下：
 | 规则 | Loader 名称 | 说明 |
 | --- | --- | --- |
 | vue | vue | 匹配 `/\.vue$/` 规则 |
-| js | babel | 匹配 `/\.js$/ 规则，默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) preset |
-| img | url | 匹配 `/\.(png|jpe?g|gif|svg)(\?.*)?$/` 规则 |
-| font | url | 匹配 `/\.(woff2?|eot|ttf|otf)(\?.*)?$/` 规则 |
+| js | babel | 匹配 `/\.js$/` 规则，默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) preset |
+| img | url | 匹配 `/\.png\|jpe?g\|gif\|svg$/` 规则 |
+| font | url | 匹配 `/\.(woff2?\|eot\|ttf\|otf)(\?.*)?$/` 规则 |
 | style-css | css | 匹配 `/\.css$/` 规则 |
-| style-postcss | css |  |
+| style-postcss | css | --- |
 | style-less | css less vue-style | 匹配 `/\.less$/` 规则，依次通过 css less 和 vue-style 这三个 Loader 处理，下同 |
 | style-sass | css sass vue-style | 匹配 `/\.sass$/` 规则 |
 | style-scss | css sass vue-style | 匹配 `/\.scss$/` 规则 |
@@ -345,7 +345,7 @@ extendWithWebpackChain: (config, {type, env}) => {
 
 ### 其余 Webpack 配置项
 
-上面列出了最常用的对于 Webpack 的扩展，其余配置项的使用方法，可以参考 [webpack-chain API](https://github.com/mozilla-neutrino/webpack-chain)。
+上面列出了最常用的对于 Webpack 的扩展，即修改 Loader 和 插件，其余配置项的使用方法，可以参考 [webpack-chain API](https://github.com/mozilla-neutrino/webpack-chain)。
 
 ## compress
 
