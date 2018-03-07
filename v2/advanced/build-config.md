@@ -301,8 +301,8 @@ Lavas 内置的全部规则及对应 Loader 如下：
 | --- | --- | --- |
 | vue | vue | 匹配 `/\.vue$/` 规则 |
 | js | babel | 匹配 `/\.js$/` 规则，默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) preset |
-| img | url | 匹配 `/\.png\|jpe?g\|gif\|svg$/` 规则 |
-| font | url | 匹配 `/\.(woff2?\|eot\|ttf\|otf)(\?.*)?$/` 规则 |
+| img | url | 处理 `.png .jpe?g .gif .svg` |
+| font | url | 处理 `.woff2 .eot .ttf .otf` |
 | style-css | css | 匹配 `/\.css$/` 规则 |
 | style-postcss | css | --- |
 | style-less | css less vue-style | 匹配 `/\.less$/` 规则，依次通过 css less 和 vue-style 这三个 Loader 处理，下同 |
@@ -341,11 +341,13 @@ extendWithWebpackChain: (config, {type, env}) => {
 | hot-module-replacement | client | 开发 | 代码热更新相关 |
 | no-emit-on-errors | client | 开发 | 代码热更新相关 |
 | progress-bar | client | 开发 | [ProgressBarWebpackPlugin](https://github.com/clessg/progress-bar-webpack-plugin)，展示构建进度条 |
-| friendly-error | client | 开发 | |
+| friendly-error | client | 开发 | [FriendlyErrorsWebpackPlugin](https://github.com/geowarin/friendly-errors-webpack-plugin)，友好地展示错误信息 |
 
-### 其余 Webpack 配置项
+### 更多示例
 
 上面列出了最常用的对于 Webpack 的扩展，即修改 Loader 和 插件，其余配置项的使用方法，可以参考 [webpack-chain API](https://github.com/mozilla-neutrino/webpack-chain)。
+
+另外，我们编写了一个简单的 [Codelab](https://lavas.baidu.com/codelab/eslint/)，使用 `extendWithWebpackChain` 方法配合 ESlint 为 Lavas 项目增加代码检查。
 
 ## compress
 
