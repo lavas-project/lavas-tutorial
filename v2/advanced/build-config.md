@@ -332,16 +332,22 @@ extendWithWebpackChain: (config, {type, env}) => {
 | 插件名称 | client/server | 开发/生产环境 | 说明 |
 | --- | --- | --- | --- |
 | define | client & server | 开发 & 生产 | [DefinePlugin](https://doc.webpack-china.org/plugins/define-plugin/)，可以通过 [`build.defines`](https://lavas.baidu.com/guide/v2/advanced/build-config#defines) 进行扩展。 |
-| extract-css | client & server | 开发 | [ExtractTextWebpackPlugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/)，默认在开发模式开启，生产环境关闭。可以通过[`build.cssExtract`](https://lavas.baidu.com/guide/v2/advanced/build-config#cssextract)配置。 |
 | html | client | 开发 & 生产 | [HtmlWebpackPlugin](https://doc.webpack-china.org/plugins/html-webpack-plugin/)，用于在 SPA 模式下生成 HTML。 |
 | skeleton | client | 开发 & 生产 | [VueSkeletonWebpackPlugin](https://github.com/lavas-project/vue-skeleton-webpack-plugin)，用于在 SPA 模式下向 HTML 中注入 Skeleton。 |
 | chunk-vendor | client | 开发 & 生产 | [CommonsChunkPlugin](https://doc.webpack-china.org/plugins/commons-chunk-plugin/)，创建包含第三方依赖的 chunk |
 | chunk-vue | client | 开发 & 生产 | 包含 vue，vuex，vue-router 和 vue-meta |
 | chunk-manifest | client | 开发 & 生产 | 仅包含 Webpack 运行时代码 |
 | hot-module-replacement | client | 开发 | 代码热更新相关 |
-| no-emit-on-errors | client | 开发 | 代码热更新相关 |
+| no-emit-on-errors | client | 开发 | 出错时终止编译流程 |
 | progress-bar | client | 开发 | [ProgressBarWebpackPlugin](https://github.com/clessg/progress-bar-webpack-plugin)，展示构建进度条 |
 | friendly-error | client | 开发 | [FriendlyErrorsWebpackPlugin](https://github.com/geowarin/friendly-errors-webpack-plugin)，友好地展示错误信息 |
+| extract-css | client & server | 生产 | [ExtractTextWebpackPlugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/)，默认在开发模式关闭，生产环境开启。可以通过[`build.cssExtract`](https://lavas.baidu.com/guide/v2/advanced/build-config#cssextract)配置。 |
+| module-concatenation | client & server | 生产 | [ModuleConcatenationWebpackPlugin](https://doc.webpack-china.org/plugins/module-concatenation-plugin/)，实现预编译功能 |
+| hashed-module-ids | client & server | 生产 | [HashedModuleIdsWebpackPlugin](https://doc.webpack-china.org/plugins/hashed-module-ids-plugin/)，根据模块的相对路径生成模块 id |
+| optimize-css | client & server | 生产 | [OptimizeCSSPlugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)，样式去重压缩 |
+| uglify-js | client & server | 生产 | [UglifyjsWebpackPlugin](https://doc.webpack-china.org/plugins/uglifyjs-webpack-plugin/)，JS 压缩 |
+| workbox | client | 生产 | [WorkboxWebpackPlugin](https://github.com/GoogleChrome/workbox)，使用 2.x 版本，用于生成 ServiceWorker 文件 |
+| sw-register | client | 生产 | [SWRegisterWebpackPlugin](https://github.com/lavas-project/sw-register-webpack-plugin)，用于向 HTML 中注入 ServiceWorker 注册代码 |
 
 ### 更多示例
 
