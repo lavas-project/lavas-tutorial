@@ -244,14 +244,14 @@ plugins: {
 为了给予开发者更大的灵活度，能自由修改 Webpack 配置对象，Lavas 提供了 `extend` 方法。
 该方法参数说明如下：
 * `config` Webpack 配置对象。
-* `options.type` Webpack 配置对象类型，一共有两种：`client` 供客户端使用，`server` 供服务端使用。**注意**，旧版本中的 `base` 不再支持，如果想在客户端与服务端同时生效，可以使用 `type === 'client' || type === 'server'` 进行判断。
+* `options.type` Webpack 配置对象类型，一共有三种：`client` 供客户端使用，`server` 供服务端使用，`base` 使两者同时生效。
 * `options.env` 当前构建环境变量，取值有两种：`development|production`。
 
 例如我们想增加 `vue-style-variables-loader` 来处理 `.vue` 文件，可以这么做：
 ```javascript
 extend(config, {type, env}) {
-    // 在客户端和服务端同时生效
-    if (type === 'client' || type === 'server') {
+    // 在客户端和服务端同时生效，等同于 type === 'client' || type === 'server'
+    if (type === 'base') {
         let vueRule = config.module.rules[0];
         vueRule.use.push({
             loader: 'vue-style-variables-loader',
@@ -280,11 +280,11 @@ extend(config, {type, env}) {
 2. **控制自定义插件的顺序**。开发者对于 Lavas 内部使用的插件缺少便捷的引用方式，因此无法插入新插件到某个特定插件前后。另外，如果想删除 Lavas 内置的某个插件，也只能通过索引方式访问插件数组。
 3. **干预 Lavas 内置插件的初始化创建**。对于 Lavas 内置的插件，一旦用户希望修改传入这个插件构造函数的参数，使用 `extend` 是无法做到的，因为调用 `extend` 时插件已经由 Lavas 初始化完成。
 
-而使用 `extendWithWebpackChain` 可以解决上述三个问题。
+而使用 `extendWithWebpackChain` 可以解决上述三个问题，方法参数和 `extend` 相同。
 
 ### 扩展 Lavas 内置规则及 Loader
 
-首先，我们给 Lavas 内置的所有规则设置了名称，某条规则应用的任何一个 Loader 都可以通过 `config.rule(规则名称).use(Loader 名称)` 方式引用：
+首先，我们给 Lavas 内置的所有规则设置了名称，某条规则应用的任何一个 Loader 都可以通过 `config.rule(规则名称).use(Loader 名称)` 方式引用，并使用 [tap](https://github.com/mozilla-neutrino/webpack-chain#config-module-rules-uses-loaders-modifying-options) 方法对传入 Loader 的参数进行扩展：
 ```javascript
 extendWithWebpackChain: (config, {type, env}) => {
     // 扩展 babel-loader，添加一个 babel 插件
@@ -313,7 +313,11 @@ Lavas 内置的全部规则及对应 Loader 如下：
 
 ### 扩展 Lavas 内置插件
 
-其次，我们给 Lavas 内部使用的所有插件也设置了名称，可以通过 `config.plugin(name)` 方式访问：
+其次，我们给 Lavas 内部使用的所有插件也设置了名称，可以通过 `config.plugin(name)` 方式访问，通过以下方法可以对插件进行便捷地修改：
+* [init](https://github.com/mozilla-neutrino/webpack-chain#config-plugins-modify-instantiation) 扩展已有插件初始化参数
+* [use](https://github.com/mozilla-neutrino/webpack-chain#config-plugins-adding) 添加新插件
+* [after/before](https://github.com/mozilla-neutrino/webpack-chain#config-plugins-ordering-after) 控制新插件添加到已有插件前后
+
 ```javascript
 extendWithWebpackChain: (config, {type, env}) => {
     // 在 friendly-error 插件创建时扩展自定义参数
