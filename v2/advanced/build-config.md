@@ -269,7 +269,7 @@ extend(config, {type, env}) {
 >
 > `extend` 方法适合对于 Webpack 配置对象进行简单扩展的场景，例如添加插件。如果需要对 Lavas 内置的规则和插件进行修改，可以参考下面的 `extendByWebpackChain` 方法。
 
-## extendByWebpackChain
+## extendWithWebpackChain
 
 > info
 >
