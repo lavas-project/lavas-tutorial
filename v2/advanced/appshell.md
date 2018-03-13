@@ -67,7 +67,7 @@ serviceWorker: {
 
 之前我们展示了 SPA 下如何使用唯一的一个 Skeleton。但是在实际使用过程中，多个页面很难抽象出一个统一的 Skeleton，只能用类似 loading 的方式兼顾。
 
-lavas-core-vue@1.0.6 支持 SPA 下每个按照不同路由路径展示不同 Skeleton，同时兼容老版本。所以如果想体验这一特性，可以升级已有 Lavas 模版项目中的 lavas-core-vue 依赖。
+`lavas-core-vue@1.0.6` 支持 SPA 下每个按照不同路由路径展示不同 Skeleton，同时兼容老版本。所以如果想体验这一特性，可以升级已有 Lavas 模版项目中的 lavas-core-vue 依赖。
 
 在 `lavas.config.js` 中新增配置项 `skeleton`，包含如下属性：
 - `enable` 布尔值，可以关闭整个 Skeleton 特性
@@ -101,6 +101,30 @@ skeleton: {
 ```
 
 实际可运行例子可以参考 [Codelab](/codelab/multi-skeleton)。
+
+### 加快 Skeleton 的渲染
+
+如果我们打开 Chrome 的性能面板，观察 SPA 的时间线：
+
+![](https://boscdn.baidu.com/assets/lavas/codelab/skeleton.png)
+
+可以看出尽管已经将 Skeleton 所需的样式内联到了 HTML 中，HTML 解析完成后仍然不能立即开始渲染 Skeleton，必须等到样式表（index.css）加载之后才开始渲染。
+
+**样式表阻塞渲染**在大部分场景下都是合理的，浏览器为了避免用户看到内容在样式加载前后的闪烁 (FOUC)。但是既然使用了 Skeleton，这样做就显得多余了。而且如果样式表体积很大，白屏时间将大大增加，Skeleton 并没有发挥理想中的作用。
+
+为此，在 `lavas-core-vue@1.1.5` 中，我们使用了异步加载样式表加快 Skeleton 的展现。更多细节可查看 [ISSUE](https://github.com/lavas-project/lavas/issues/73)，其中也包含了老版本模板的升级指导。
+
+可以看到效果十分明显：
+![image](https://user-images.githubusercontent.com/3608471/36834922-6e99d466-1d6f-11e8-8364-b73bc7a9dbb5.png)
+
+最后，如果想关闭这个特性，可以在 `lavas.config.js` 中：
+```javascript
+// lavas.config.js
+
+skeleton: {
+    asyncCSS: false // 关闭异步加载样式表
+}
+```
 
 ## SSR 模式的 App Shell
 
