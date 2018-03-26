@@ -2,7 +2,7 @@
 
 ## 环境要求
 
-* 一台可以正常联网的计算机并已安装较新版本的 Node.js (≥ 5.0) 和 npm (≥ 3.0)
+* 一台可以正常联网的计算机并已安装较新版本的 Node.js (≥ 6.9) 和 npm (≥ 3.0)
 * 一个方便调试并支持 Service Worker 的浏览器，推荐使用 Google Chrome
 * 一个自己习惯的文本编辑器，如 Sublime Text, Web Storm 等等
 
