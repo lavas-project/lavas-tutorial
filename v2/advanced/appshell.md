@@ -4,7 +4,7 @@ App Shell 模型是架构 PWA 的一种方式，它能够可靠且即时地让�
 
 ![appshell](https://boscdn.baidu.com/assets/lavas/codelab/appshell-general.png)
 
-关于 App Shell 本身的概念和优势可以参考 Lavas 官网的[文章](https://lavas.baidu.com/doc/architecture/the-app-shell-model)，这里不作展开。
+关于 App Shell 本身的概念和优势可以参考 PWA 文档中的[这篇文章](https://lavas.baidu.com/doc/architecture/the-app-shell-model)，这里不作展开。
 
 如果您阅读过[为 Vue 项目添加骨架屏](https://zhuanlan.zhihu.com/p/28465598)一文，可能已经了解了骨架屏 (Skeleton)的作用其实和 App Shell 非常类似，解决的都是在页面加载时尽量缩短白屏，给用户提供更好的页面切换体验。
 
