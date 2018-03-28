@@ -63,6 +63,69 @@ serviceWorker: {
 
 将 `*.html` 包括其中，即可让 `index.html` 包含在预缓存列表中了。
 
+### 按照路由路径显示独立 Skeleton
+
+之前我们展示了 SPA 下如何使用唯一的一个 Skeleton。但是在实际使用过程中，多个页面很难抽象出一个统一的 Skeleton，只能用类似 loading 的方式兼顾。
+
+`lavas-core-vue@1.0.6` 支持 SPA 下每个按照不同路由路径展示不同 Skeleton，同时兼容老版本。所以如果想体验这一特性，可以升级已有 Lavas 模版项目中的 lavas-core-vue 依赖。
+
+在 `lavas.config.js` 中新增配置项 `skeleton`，包含如下属性：
+- `enable` 布尔值，可以关闭整个 Skeleton 特性
+- `routes` 数组，路由路径和多个 Skeleton 的对应关系，每个对象如下：
+    - `path` 必填，字符串或者正则，路由路径
+    - `componentPath` 必填，Skeleton 组件路径
+    - `skeletonId` 选填，默认按照 Skeleton 组件名生成 DOM 元素 id。可以指定以避免和页面已有元素 id 重复
+
+例如使用如下配置，在构建时将向 HTML 中插入三个 Skeleton 内容，包含各自样式，DOM 结构以及一段按照路由显示对应 Skeleton 的 JS 代码。
+实际运行时，访问 `/test` 将展示 `TestSkeleton.vue` 的内容，访问 `/test2` 将展示 `TestSkeleton2.vue` 的内容，其余路由将展示默认的 `Skeleton.vue` 内容。
+```javascript
+// lavas.config.js
+
+skeleton: {
+    routes: [
+        {
+            path: '/test',
+            skeletonId: 'my-skeleton',
+            componentPath: 'core/TestSkeleton.vue'
+        },
+        {
+            path: '/test2',
+            componentPath: 'core/TestSkeleton2.vue'
+        },
+        {
+            path: '*',
+            componentPath: 'core/Skeleton.vue'
+        }
+    ]
+}
+```
+
+实际可运行例子可以参考 [Codelab](/codelab/multi-skeleton)。
+
+### 加快 Skeleton 的渲染
+
+如果我们打开 Chrome 的性能面板，观察 SPA 的时间线：
+
+![](https://boscdn.baidu.com/assets/lavas/codelab/skeleton.png)
+
+可以看出尽管已经将 Skeleton 所需的样式内联到了 HTML 中，HTML 解析完成后仍然不能立即开始渲染 Skeleton，必须等到样式表（index.css）加载之后才开始渲染。
+
+**样式表阻塞渲染**在大部分场景下都是合理的，浏览器为了避免用户看到内容在样式加载前后的闪烁 (FOUC)。但是既然使用了 Skeleton，这样做就显得多余了。而且如果样式表体积很大，白屏时间将大大增加，Skeleton 并没有发挥理想中的作用。
+
+为此，在 `lavas-core-vue@1.1.5` 中，我们使用了异步加载样式表加快 Skeleton 的展现。更多细节可查看 [ISSUE](https://github.com/lavas-project/lavas/issues/73)，其中也包含了老版本模板的升级指导。
+
+可以看到效果十分明显：
+![image](https://user-images.githubusercontent.com/3608471/36834922-6e99d466-1d6f-11e8-8364-b73bc7a9dbb5.png)
+
+最后，如果想关闭这个特性，可以在 `lavas.config.js` 中：
+```javascript
+// lavas.config.js
+
+skeleton: {
+    asyncCSS: false // 关闭异步加载样式表
+}
+```
+
 ## SSR 模式的 App Shell
 
 Skeleton 之所以没法在 SSR 模式下生效，原因主要有这么两个：
