@@ -114,7 +114,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const historyMiddleware = require('connect-history-api-fallback');
-const LavasCore = require('lavas');
+const LavasCore = require('lavas-core-vue');
 const port = 8080; // 对外端口
 
 function registerSPA(url, dirPath) {
