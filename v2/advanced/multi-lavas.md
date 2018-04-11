@@ -97,13 +97,19 @@ Lavas 为开发者提供了 `alias` 配置项([文档](/guide/v2/advanced/build-
 build: {
     alias: {
         base: {
-            '@': path.resolve(__dirname, '../')
+            'common': path.resolve(__dirname, '../')
         }
     }
 }
 ```
 
-在实际引用时 (如 `App.vue` 中)，采用的引用路径是 `@/components/xxx.vue`，因此将 `'@'` 路径配置成 `path.resolve(__dirname, '../')` 可以避免修改这些引用处，比较方便。
+将项目中使用到公共目录 `components` 中组件的地方改为以 `common` 开头 ，如下，如果我们将 UpdateToast 移到公共目录下
+
+```javascript
+import UpdateToast from 'common/components/UpdateToast';
+```
+
+除了 `components`，其他的公用内容也可以提出到公共目录，同样使用 `common` 为前缀来引用，非常方便，并且项目会清晰。
 
 ### 配置服务器
 
