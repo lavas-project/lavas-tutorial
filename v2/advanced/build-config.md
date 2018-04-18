@@ -87,17 +87,10 @@ filenames: {
 
 Lavas 内部配置 Webpack 规则，使用 `babel-loader` 处理 JS 文件。通过 `babel` 这个配置项可以指定包括 babel preset 和 plugin 在内的很多属性，更多可配置属性可以参考 [`babel-loader options`](https://github.com/babel/babel-loader#options)。
 
-Lavas 默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) 这个 preset，其中已经包含了一系列 babel 插件，在大多数情况下已经能满足 Vue 项目的开发：
-```javascript
-babel: {
-    presets: ['vue-app']
-}
-```
-
+Lavas 默认使用 [vue-app](https://github.com/vuejs/babel-preset-vue-app) 这个 preset，其中已经包含了一系列 babel 插件，在大多数情况下已经能满足 Vue 项目的开发。
 但有时我们也需要进行额外的配置，例如在下面使用 [vuetify](https://vuetifyjs.com/) 的场景中，我们需要配置一系列 plugins 以支持组件的按需加载功能：
 ```javascript
 babel: {
-    presets: ['vue-app'],
     plugins: [
         "transform-runtime",
         ["transform-imports",
@@ -108,12 +101,31 @@ babel: {
                 }
             }
         ]
-    ],
-    babelrc: false
+    ]
 }
 ```
 
-注意，虽然我们能够通过 `babel` 配置项对 `babel-loader` 进行配置，按说项目根目录下的 `.babelrc` 就不再需要了，但我们仍然要保留这个文件，原因是 `vue-loader` 必须要通过 `.babelrc` 才能进行配置。
+### 使用 `.babelrc`
+
+如果您更习惯使用根目录下的 `.babelrc` 来配置 `babel-loader`，您可以手动开启：
+```javascript
+babel: {
+    babelrc: true
+}
+```
+
+然后在 `.babelrc` 中进行配置，例如对于一个 SPA 项目：
+```json
+{
+    "presets": [
+        "vue-app",
+        {
+            "targets": {"ie": 9, "uglify": true}
+        }
+    ],
+    "plugins": []
+}
+```
 
 ## cssExtract
 
