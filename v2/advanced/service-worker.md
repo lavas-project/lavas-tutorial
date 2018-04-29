@@ -92,10 +92,9 @@ module.exports = {
 
 ## Service Worker 模板
 
-Service Worker 的模板位于 `/config/service-worker.js`。观察初始状态下的代码，我们可以发现在定义动态路由和 appshell 之前还有一些内容，如下：
+Service Worker 的模板位于 `/core/service-worker.js`。观察初始状态下的代码，我们可以发现在定义动态路由和 appshell 之前还有一些内容，如下：
 
 ```javascript
-importScripts('/static/js/workbox-sw.prod.v2.1.2.js');
 
 const workboxSW = new WorkboxSW({
     cacheId: 'lavas-cache',
@@ -110,9 +109,7 @@ workboxSW.precache([]);
 // doing something else ...
 ```
 
-第一行的 `importScripts` 是引用 Workbox 的 API，这里的版本号是一个定制，由依赖的 WorkBox 版本决定。Lavas 已经进行了版本号锁定，所以开发者不必过于关注这里，维持原状即可。
-
-第二段创建 WorkboxSW 实例的代码中，涉及到一些配置项。
+第一段创建 WorkboxSW 实例的代码中，涉及到一些配置项。
 
 * __cacheId__
 
@@ -136,7 +133,7 @@ workboxSW.precache([]);
 
 初始化 WorkboxSW 这个类的其他参数可以参考[WorkBox 文档](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.WorkboxSW)。
 
-第三段的 `workboxSW.precache([]);` 看似是一句空语句，其实是一个代码插入点，刚才提过的预缓存的文件会经过 WorkboxWebpackPlugin 自动插入到这里，如果你感兴趣的话可以尝试看看构建后的 `/dist/service-worker.js`。
+第二段的 `workboxSW.precache([]);` 看似是一句空语句，其实是一个代码插入点，刚才提过的预缓存的文件会经过 WorkboxWebpackPlugin 自动插入到这里，如果你感兴趣的话可以尝试看看构建后的 `/dist/service-worker.js`。
 
 在这些准备工作之后，下面就是开发者发挥的空间了。
 
@@ -150,11 +147,11 @@ workboxSW.router.registerRoute(new RegExp('https://query\.yahooapis\.com/v1/publ
 
 > info
 >
->Workbox 提供的 `resigerRoute` 方法接受两个参数，第一个是匹配请求 URL 的正则表达式，第二个是内置的缓存策略。除了例子中的 networkFirst，Workbox 还提供了 networkOnly, cacheFirst, cacheOnly, staleWhileRevalidate等等。关于这个方法的详细情况请参见 [API](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.Router#registerRoute)
+> Workbox 提供的 `resigerRoute` 方法接受两个参数，第一个是匹配请求 URL 的正则表达式，第二个是内置的缓存策略。除了例子中的 networkFirst，Workbox 还提供了 networkOnly, cacheFirst, cacheOnly, staleWhileRevalidate等等。关于这个方法的详细情况请参见 [API](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.Router#registerRoute)
 
->经过这条配置，每次请求的 URL 如果匹配这个正则(其实是雅虎天气获取接口)， 在返回数据时会将数据进行缓存。如果网络连接故障，则返回缓存内容。配合预缓存了所有静态文件，站点就拥有了离线访问能力！
+> 经过这条配置，每次请求的 URL 如果匹配这个正则(其实是雅虎天气获取接口)， 在返回数据时会将数据进行缓存。如果网络连接故障，则返回缓存内容。配合预缓存了所有静态文件，站点就拥有了离线访问能力！
 
->如果开发者对于每个缓存策略的含义还不清楚，可以参考 [The Offline Cookbook](https://jakearchibald.com/2014/offline-cookbook/#serving-suggestions-responding-to-requests), 也可以逐个参考 WorkBox 的策略 API，如 [CacheFirst](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-runtime-caching.CacheFirst) 等。
+> 如果开发者对于每个缓存策略的含义还不清楚，可以参考 [The Offline Cookbook](https://jakearchibald.com/2014/offline-cookbook/#serving-suggestions-responding-to-requests), 也可以逐个参考 WorkBox 的策略 API，如 [CacheFirst](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-runtime-caching.CacheFirst) 等。
 
 ### 跨域资源的小坑
 
