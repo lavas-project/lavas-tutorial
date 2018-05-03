@@ -6,7 +6,8 @@
 * App.vue
 * entry-client.js
 * entry-server.js
-* index.html.tmpl
+* spa.html.tmpl
+* ssr.html.tmpl
 * service-worker.js
 * Skeleton.vue
 
@@ -41,25 +42,13 @@ Vue SSR 要求我们建立 `entry-client.js` 和 `entry-server.js` 分别作为 
 
 开发者可以在 [Vue SSR 官方文档](https://ssr.vuejs.org/zh/structure.html) 中找到相关的信息。
 
-## index.html.tmpl
+## spa.html.tmpl & ssr.html.tmpl
+
+*在旧版中，两者统一为 `index.html.tmpl`，通过 `if (ssr)` 进行判断*
 
 在服务器端渲染模式下，Vue SSR 要求开发者提供一份 HTML 模板文件作为页面基本框架。其中最重要的 `<!--vue-ssr-outlet-->` 将作为 HTML 注入标记。在浏览器端渲染模式下，我们也需要提供一个类似的模板文件。虽然不需要 HTML 注入点，但也需要一个 `<div id="app">` 从而在 Vue 的 `app.$mount('#app')` 时使用。
 
-为了开发的方便性考虑，不必准备两个模板文件或者频繁修改内容，Lavas 将两种渲染模式下的模板统一到了 `index.html.tmpl` 中。
-
-在使用 `lavas init` 命令生成的项目中，初始状态的模板文件结构如下：
-
-```
-<!DOCTYPE html>
-
-<% if (ssr) { %>
-<!-- ssr content with vue-ssr-outlet -->
-<% } else { %>
-<!-- spa content with <div id="app"></div> -->
-<% } %>
-```
-
-两种模式都包含在内，并且 `ssr` 变量是由 Lavas 内部注入的，可以自行判断，所以 __在开发者切换渲染模式时，不需要对模板进行额外的处理__。
+一般情况下，在项目调研阶段可能会在 SPA 和 SSR 两种渲染模式中互相切换，在进入大规模开发时只会使用其中的一种渲染模式。为了防止另一种渲染模式的代码依然留存在开发者的代码库中，Lavas 将两种模式的模板进行分割，分别命名为 `spa.html.tmpl` 和 `ssr.html.tmpl`。因此为了项目精简考虑，__如果您的项目确定使用某一种渲染方式，您可以删除另外一种渲染方式的模板__。
 
 在 SSR 模式下，Lavas 还支持开发者传入变量并使用。具体方式如下：
 
@@ -69,7 +58,7 @@ Vue SSR 要求我们建立 `entry-client.js` 和 `entry-server.js` 分别作为 
     context.author = {name: 'wangyisheng'};
     ```
 
-2. 在 `index.html.tmpl` 中，使用 `{{}}` 的样式使用这个变量。__一定在 SSR 的分支中使用！__ 如
+2. 在 `ssr.html.tmpl` 中，使用 `{{}}` 的样式使用这个变量。如
 
     ```
     <div class="author">{{ author.name }}</div>
@@ -77,13 +66,13 @@ Vue SSR 要求我们建立 `entry-client.js` 和 `entry-server.js` 分别作为 
     <input value="{{ author.name }}"></input>
     ```
 
-在 SPA 模式下，这种方式并不能奏效。原因也很简单，我们可以从 SPA 和 SSR 的原理上进行考虑。SSR 模式下，由服务器(中间件)获取请求，并把创建的 Vue app 和 context 交给 `renderToString` 方法进行渲染，因此可以进行模板变量的注入和替换；而 SPA 模式下，服务器只负责使用 webpack 进行构建，构建时并不真正运行代码 (entry-client.js)，因此无法获取变量，也就无法替换了。
+在 SPA 模式下，这种方式__并不能奏效__。原因也很简单，我们可以从 SPA 和 SSR 的原理上进行考虑。SSR 模式下，由服务器(中间件)获取请求，并把创建的 Vue app 和 context 交给 `renderToString` 方法进行渲染，因此可以进行模板变量的注入和替换；而 SPA 模式下，服务器只负责使用 webpack 进行构建，构建时并不真正运行代码 (entry-client.js)，因此无法获取变量，也就无法替换了。
 
-### index.html.tmpl 和 App.vue
+### ssr.html.tmpl (spa.html.tmpl) 和 App.vue
 
-开发者可能注意到了，`index.html.tmpl` 和 `App.vue` 都可以充当布局框架使用，在这方面他们有什么区别呢？
+开发者可能注意到了，`spa.html.tmpl` (`ssr.html.tmpl`) 和 `App.vue` 都可以充当布局框架使用，在这方面他们有什么区别呢？
 
-从纯粹技术实现上来说，`index.html.tmpl` 可以处理整个 HTML，即包括 `head` 和 `body`；而 `App.vue` 只是 `body` 的一部分，控制范围小了一些。因此如果需要在 `head` 中进行修改，就必须使用 `index.html.tmpl`，而在 `body` 中的话，两者都能实现。
+从纯粹技术实现上来说，模板文件可以处理整个 HTML，即包括 `head` 和 `body`；而 `App.vue` 只是 `body` 的一部分，控制范围小了一些。因此如果需要在 `head` 中进行修改，就必须使用模板文件，而在 `body` 中的话，两者都能实现。
 
 从代码风格和编程习惯来看，如果是在 `body` 中的修改(最常见的就是增加顶栏、侧边栏、菜单栏或者修改显示样式等)，一般也倾向于放在 `App.vue` 中，毕竟是个 vue 文件，可以使用的方法，变量，判断等都更为丰富。
 
