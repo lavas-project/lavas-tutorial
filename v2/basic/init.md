@@ -174,7 +174,7 @@ lavas-project
 ```html
 <template>
     <header>xxx</header>
-    <router-link></router-link>
+    <router-view></router-view>
 </template>
 ```
 
