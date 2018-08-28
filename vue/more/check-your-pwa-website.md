@@ -1,6 +1,5 @@
 # 检验 PWA 站点
 
-
 ## CheckList
 
 对于 PWA 站点是否完善，Google 通过 PWA 所需要具备的一些特性和最佳实践给出了一个 Checklist, 该 Checklist 从多个方面来提供 PWA 站点检测的标准。如果我们对 PWA 工程的检测要求集成到持续集成系统的话(类似后面所提到的 Lighthouse)，我们可以参照 Checklist 进行一系列的检测。
@@ -32,7 +31,6 @@ Chrome 有一个强大之处在于它的 Devtool 的强大，我们可以通过 
 对于 PWA 工程的具体调试，可以参考 [Service Worker 调试](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-debug)
 也可以深入了解 [Google Chrome Devtool](https://developers.google.cn/web/tools/chrome-devtools)
 
-
 ## Lighthouse
 
 Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。您可以将其作为一个 Chrome 扩展程序运行，或从命令行运行。 您为 Lighthouse 提供一个您要审查的网址，它将针对此页面运行一连串的测试，然后生成一个有关页面性能的报告。
@@ -45,7 +43,6 @@ Lighthouse 是 Google 开发的一个检验站点性能相关的一个应用。�
 运行 Lighthouse 的方式有两种：作为 Chrome 扩展程序运行，或作为命令行工具运行。 Chrome 扩展程序提供了一个对用户更友好的界面，方便读取报告。 命令行工具允许您将 Lighthouse 集成到持续集成系统。
 
 详细信息，可以去 [Lighthouse 官方文档](https://developers.google.cn/web/tools/lighthouse) 查看
-
 
 由于 Lighthouse Chrome 插件由于某些墙的原因在国内无法下载。我们提供一套可以在国内安装插件的步骤如下：
 
@@ -71,7 +68,6 @@ Lighthouse 浏览器插件 [下载地址](./downloads/lighthouse_2.1.0_0.zip)
 - 坐等出检测报告。
 - 根据报告的内容查看当前站点的优缺点，进而优化。
 
-
 ## 真机测试
 
 - 手机百度 / 百度手机浏览器
@@ -81,5 +77,4 @@ Lighthouse 浏览器插件 [下载地址](./downloads/lighthouse_2.1.0_0.zip)
 - UC 浏览器
 - 360 浏览器
 - 猎豹浏览器
-
-PWA 效果可以通过 Andorid 机器体验，iOS暂不具备添加到桌面和离线打开功能
+- iOS 11.3+ / macOS 10.13.4 / Safari 11.1 （从 iOS 11.3 和 macOS 10.13.4 开始，支持标准 PWA 特性）
