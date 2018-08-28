@@ -123,7 +123,7 @@ workboxSW.precache([]);
 
 * __skipWaiting__
 
-    在 Service Worker 的 install 阶段完成后无需等待，立即激活 (activate)。作用等同于 `self.skipWating()`
+    在 Service Worker 的 install 阶段完成后无需等待，立即激活 (activate)。作用等同于 `self.skipWaiting()`
 
 * __clientsClaim__
 
