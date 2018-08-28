@@ -40,5 +40,8 @@
             "name": "以编程方式使用 Lavas",
             "key": "core-api"
         }
+    ],
+    "ignore": [
+        "service-worker-workbox-2"
     ]
 }

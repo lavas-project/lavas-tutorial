@@ -2,7 +2,7 @@
 
 > warn
 >
-> lavas-core-vue@1.2.0 版本开始使用 workbox@3.x，模板部分和配置项发生了一定的变化。本篇文档将以最新版本进行描述，如果您还在使用 lavas-core-vue@1.1.x (即 workbox@2.x )，可以查看[旧版文档](/guide/v2/advanced/service-worker-workbox-2)
+> lavas-core-vue@1.2.0 版本开始使用 workbox@3.x，模板部分和配置项发生了一定的变化。本篇文档作为旧版文档的形式出现，仅为还在使用 lavas-core-vue@1.1.x (workbox@2.x) 的开发者过渡使用。部分链接可能失效，因为 workbox 也对官网进行了升级。[workbox2 官网](https://developers.google.com/web/tools/workbox/reference-docs/v2.1.3/)
 
 Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的部分。有关 Service Worker 本身的介绍可以移步 Lavas 官网的[什么是 Service Worker](https://lavas.baidu.com/doc/offline-and-cache-loading/service-worker/service-worker-introduction)。
 
@@ -18,7 +18,7 @@ Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的
 
 1. __配置部分__
 
-    负责一些基本项的配置，如模板位置，生成位置等等。
+    负责一些基本项的配置，如模板位置，生成位置等等。__静态预缓存文件列表__也在这里配置。
 
 2. __模板部分__
 
@@ -32,10 +32,18 @@ Service Worker 可以说是 PWA 中最能发挥开发者想象力和最复杂的
 module.exports = {
     // ...
     serviceWorker: {
-        enable: true,
         swSrc: path.join(__dirname, 'core/service-worker.js'),
         swDest: path.join(BUILD_PATH, 'service-worker.js'),
-        appshellUrl: '/appshell'
+        globDirectory: path.basename(BUILD_PATH),
+        globPatterns: [
+            '**/*.{html,js,css,eot,svg,ttf,woff}'
+        ],
+        globIgnores: [
+            'sw-register.js',
+            '**/*.map'
+        ],
+        appshellUrl: '/appshell',
+        dontCacheBustUrlsMatching: /\.\w{8}\./
     },
     // ...
 };
@@ -47,10 +55,6 @@ module.exports = {
 
 
 我们来看一下例子中使用的配置项(这些配置项基本都是必选的)。其余的可以参考 Workbox 的[官网](https://developers.google.com/web/tools/workbox/)
-
-* __enable__
-
-    是否启用 Service Worker，默认为 `false`。
 
 * __swSrc__
 
@@ -64,15 +68,29 @@ module.exports = {
 
     生成的 service-worker.js 在 sw-register.js 中默认会使用 publicPath 进行完整可访问路径拼接，如果您需要指定一个专有的 service-worker.js 文件的可访问 path，可以通过 `swPath` 配置指定，该配置字段默认不开启。
 
+* __globDirectory__
+
+    指定需要预缓存的静态文件的目录。例子设定为整体构建目录 (`/dist`)
+
+* __globPatterns__
+
+    相对于 globDirectory 指定的目录，指出哪些文件__需要__被预缓存。这里可以使用通配符，可以参考[node-glob#glob-primer](https://github.com/isaacs/node-glob#glob-primer)
+
+* __globIgnores__
+
+    相对于 globDirectory 指定的目录，指出哪些文件__不需要__被预缓存。和 globPatterns 一样，也可以使用通配符。service-worker.js 本身会被自动排除
+
 * __appshellUrl__
 
     [Skeleton 和 App Shell 模型](/guide/v2/advanced/appshell)文中会详细提及，这里先跳过
 
-### 预缓存文件列表
+* __dontCacheBustUrlsMatching__
 
-workbox-webpack-plugin@3.x 会自动把 webpack 处理的 __所有静态文件__ 列为预缓存文件。在构建完成后会单独保存在一个 precacheList 文件中，以 JSON 的格式。
+    Workbox 会将符合上述 glob 开头的三个配置项条件的所有静态文件逐个生成一个版本号 (称为 revision) 存入缓存，后续在面对同名文件时比较缓存中的版本号决定是否更新。但 Lavas 生成的静态资源文件绝大部分是在文件名中带有 hash 的 (如 `/dist/static/css/manifest.5e1ead3.js`)，一旦文件内容更新 hash 也会更新，因此 Workbox 内置的版本号就不再需要了，所以可以省略这个生成和比较的过程从而提升构建速度。因为 Lavas 生成的 hash 是8位的，所以例子中的正则也正匹配8位字母数字。
 
-如果想对这些文件进行进一步的控制（例如增加额外的，或者删除无用的）需要使用一些高级的配置项，可以查阅 workbox 官网的[这篇文档](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#configuration)
+### 配置预缓存文件
+
+将上述配置项中 glob 开头的三个配置完成，即可指明哪些文件需要被预缓存。一般来说常用的包括 html, js, css以及一些字体文件(如果使用了 iconfont 等字体实现小图标的类库的话)。而例如 map 文件 (用于方便查看混淆后的代码) 和 sw-register.js (用于注册 sw，如果预缓存住则后续无法更新 sw ) 则应该被排除在外。
 
 通过这些配置，WorkboxWebpackPlugin 能够根据这些静态文件的信息生成 `service-worker.js` 并包含符合条件的预缓存文件。如果要实现动态缓存和 appshell，还需要 Service Worker 模板来进一步实现。
 
@@ -82,47 +100,44 @@ Service Worker 的模板位于 `/core/service-worker.js`。观察初始状态下
 
 ```javascript
 
-workbox.core.setCacheNameDetails({
-    prefix: 'lavas-cache',
-    suffix: 'v1',
-    precache: 'install-time',
-    runtime: 'run-time',
-    googleAnalytics: 'ga'
+const workboxSW = new WorkboxSW({
+    cacheId: 'lavas-cache',
+    ignoreUrlParametersMatching: [/^utm_/],
+    skipWaiting: true,
+    clientsClaim: true
 });
 
-workbox.skipWaiting();
-workbox.clientsClaim();
-
-workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+// Define precache injection point.
+workboxSW.precache([]);
 
 // doing something else ...
 ```
 
-第一段设置一些缓存名称的配置项。相当于原先 workbox 2.x 的构造函数。您也可以从[官网文档](https://developers.google.com/web/tools/workbox/reference-docs/latest/workbox.core#.setCacheNameDetails)中获取更多信息
+第一段创建 WorkboxSW 实例的代码中，涉及到一些配置项。
 
-* __prefix__
+* __cacheId__
 
-    指定应用的缓存前缀，同时应用于预缓存和动态缓存的名称，拼接在最前面。
+    指定应用的缓存 ID，这会最终影响到缓存的名称。实际运行效果中，WorkBox 还会将域名加在缓存 ID 中共同作为缓存名称，因此重名的几率还是比较小的。
 
-* __suffix__
+* __ignoreUrlParametersMatching__
 
-    指定应用的缓存后缀，同时应用于预缓存和动态缓存的名称，拼接在最后面。
+    指明什么样的请求参数应该被忽略。Service Worker 的静态文件缓存会根据请求 URL 进行匹配。只要请求 URL 不同则认为是不同的资源。但有些参数出于统计使用，并不影响文件本身的内容，这类参数就应当被忽略。
 
-* __precache__
+    如例子中的 `utm_` 开头，是定义在 `manifest.json` 中的 `"start_url": "/?utm_source=homescreen"`，它不应该影响 Service Worker 对于文件缓存的判断。
 
-    指明预缓存使用的缓存名称
+* __skipWaiting__
 
-* __runtime__
+    在 Service Worker 的 install 阶段完成后无需等待，立即激活 (activate)。作用等同于 `self.skipWating()`
 
-    指定动态缓存使用的缓存名称
+* __clientsClaim__
 
-* __googleAnalytics__
+    在 Service Worker 的 activate 阶段让所有没被控制的页面受控。作用等同于 `self.clients.claim()`
 
-    `workbox-google-analytics` 使用的缓存名称。关于 workbox 和 google analytics 之间的配合，可以查阅[这里](https://developers.google.com/web/tools/workbox/modules/workbox-google-analytics)
+    同时使用 `skipWaiting` 和 `clientsClaim` 可以让 Service Worker 在下载完成后立即生效
 
-第二段的两句 (`workbox.skipWaiting();` 和 `workbox.clientsClaim();`) 一般共同使用，使得 Service Worker 可以在 activate 阶段让所有没被控制的页面受控，让 Service Worker 在下载完成后立即生效
+初始化 WorkboxSW 这个类的其他参数可以参考[WorkBox 文档](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.WorkboxSW)。
 
-第三段的 `workbox.precaching.precacheAndRoute(self.__precacheManifest || []);` 使用到的 `self.__precacheManifest` 是定义在单独的一个预缓存文件列表中。如前所述，这个列表包含 webpack 构建过程中的所有静态文件。而这里就是告诉 workbox 把这些文件预缓存起来。
+第二段的 `workboxSW.precache([]);` 看似是一句空语句，其实是一个代码插入点，刚才提过的预缓存的文件会经过 WorkboxWebpackPlugin 自动插入到这里，如果你感兴趣的话可以尝试看看构建后的 `/dist/service-worker.js`。
 
 在这些准备工作之后，下面就是开发者发挥的空间了。
 
@@ -130,44 +145,30 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 ```javascript
 // Define runtime cache.
-workbox.routing.registerRoute(/^https:\/\/query\.yahooapis\.com\/v1\/public\/yql/,
-    workbox.strategies.networkFirst());
+workboxSW.router.registerRoute(new RegExp('https://query\.yahooapis\.com/v1/public/yql'),
+    workboxSW.strategies.networkFirst());
 ```
 
 > info
 >
-> Workbox 提供的 `resigerRoute` 方法接受两个参数，第一个是匹配请求 URL 的正则表达式，第二个是内置的缓存策略。除了例子中的 networkFirst，Workbox 还提供了 networkOnly, cacheFirst, cacheOnly, staleWhileRevalidate等等。关于这个方法的详细情况请参见 [API](https://developers.google.com/web/tools/workbox/reference-docs/latest/workbox.routing#.registerRoute)
+> Workbox 提供的 `resigerRoute` 方法接受两个参数，第一个是匹配请求 URL 的正则表达式，第二个是内置的缓存策略。除了例子中的 networkFirst，Workbox 还提供了 networkOnly, cacheFirst, cacheOnly, staleWhileRevalidate等等。关于这个方法的详细情况请参见 [API](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-sw.Router#registerRoute)
 
 > 经过这条配置，每次请求的 URL 如果匹配这个正则(其实是雅虎天气获取接口)， 在返回数据时会将数据进行缓存。如果网络连接故障，则返回缓存内容。配合预缓存了所有静态文件，站点就拥有了离线访问能力！
 
-> 如果开发者对于每个缓存策略的含义还不清楚，可以参考 [The Offline Cookbook](https://jakearchibald.com/2014/offline-cookbook/#serving-suggestions-responding-to-requests) 或者 workbox 上也有[简述](https://developers.google.com/web/tools/workbox/modules/workbox-strategies)。
-
-### 缓存策略的参数
-
-上述例子中，我们直接使用了 `networkFirst()`，没有参数。但实际上，每位开发者都可能会有一些个性化的配置，对策略进行更精细化的控制，例如：
-
-1. 使用一个特定的缓存 (指定一个不一样的缓存名称)
-2. 设置缓存失效时间或者个数上限
-
-这些需求都可以通过缓存的参数来实现。主要有两种：
-
-1. `cacheName`： 指定新的缓存名称，使得符合这条正则的请求的缓存全都存到一起
-2. `plugins`：指定插件的数组。插件可以实现缓存失效时间或者个数上限，也包括其他的功能，甚至可以自定义。
+> 如果开发者对于每个缓存策略的含义还不清楚，可以参考 [The Offline Cookbook](https://jakearchibald.com/2014/offline-cookbook/#serving-suggestions-responding-to-requests), 也可以逐个参考 WorkBox 的策略 API，如 [CacheFirst](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-runtime-caching.CacheFirst) 等。
 
 ### 跨域资源的小坑
 
 当请求的是跨域资源(不仅限于接口，也包括图片等)并且目标服务器并没有设置 CORS 时，响应类型会被设置为 `'opaque'` 并且 HTTP 状态码会被设置为 `0`。出于安全考虑，WorkBox 对于这类资源的信任度不高，在使用 CacheFirst 策略时只缓存 HTTP 状态码为 `200` 的资源。所以这类资源不会被缓存，当然在离线时也无法被展现了。
 
-如果开发者想使用跨域的资源且目标站点不支持 CORS，为了缓存下来，我们还需要额外配置合法的 HTTP 状态码。这里就需要用到上面提到的 `plugins`了，如下：
+如果开发者想使用跨域的资源且目标站点不支持 CORS，为了缓存下来，我们还需要额外配置合法的 HTTP 状态码，如下：
 
 ```javascript
-workbox.routing.registerRoute(/^https:\/\/ss\d\.baidu\.com/i,
-    workbox.strategies.cacheFirst({
-        plugins: [
-            new workbox.cacheableResponse.Plugin({
-              statuses: [0, 200]
-            })
-        ]
+workboxSW.router.registerRoute(/^https:\/\/ss\d\.baidu\.com/i,
+    workboxSW.strategies.cacheFirst({
+        cacheableResponse: {
+            statuses: [0, 200]
+        }
     })
 );
 ```
@@ -183,16 +184,16 @@ WorkBox 的内部使用一个数组记录所有动态缓存的正则表达式。
 举例来说
 
 ```javascript
-workbox.routing..registerRoute(/^https:\/\/ss\d\.baidu\.com/i,
-    workbox.strategies.cacheFirst({
+workboxSW.router.registerRoute(/^https:\/\/ss\d\.baidu\.com/i,
+    workboxSW.strategies.cacheFirst({
         cacheableResponse: {
             statuses: [0, 200]
         }
     })
 );
 
-workbox.routing..registerRoute(/^https:\/\/.*\.baidu\.com/i,
-    workbox.strategies.networkOnly());
+workboxSW.router.registerRoute(/^https:\/\/.*\.baidu\.com/i,
+    workboxSW.strategies.networkOnly());
 ```
 
 这种配置下，访问 `*.baidu.com` 的所有请求都会命中第二条规则，从而使用 networkOnly 规则，所以__不会__缓存任何文件。更换两者的注册顺序可以解决这个问题。
