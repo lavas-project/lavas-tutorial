@@ -50,7 +50,7 @@ module.exports = {
 
 * __enable__
 
-    是否启用 Service Worker，默认为 `false`。
+    是否启用 Service Worker，默认为 `true`。
 
 * __swSrc__
 
