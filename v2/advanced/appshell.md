@@ -67,7 +67,7 @@ serviceWorker: {
 
 之前我们展示了 SPA 下如何使用唯一的一个 Skeleton。但是在实际使用过程中，多个页面很难抽象出一个统一的 Skeleton，只能用类似 loading 的方式兼顾。
 
-`lavas-core-vue@1.0.6` 支持 SPA 下每个按照不同路由路径展示不同 Skeleton，同时兼容老版本。所以如果想体验这一特性，可以升级已有 Lavas 模版项目中的 lavas-core-vue 依赖。
+`lavas-core-vue@1.0.6` 支持 SPA 下每个按照不同路由路径展示不同 Skeleton，同时兼容老版本。所以如果想体验这一特性，可以升级已有 Lavas 模板项目中的 lavas-core-vue 依赖。
 
 在 `lavas.config.js` 中新增配置项 `skeleton`，包含如下属性：
 - `enable` 布尔值，可以关闭整个 Skeleton 特性

@@ -43,7 +43,7 @@ $ lavas init
 
 ## 目录结构
 
-通过初始化命令，通过选择模版类型 App Shell (这里有 4 种模板类型，供您选择)，可以在当前目录下下找到我们新建的项目 `pwa-project` 文件夹。
+通过初始化命令，通过选择模板类型 App Shell (这里有 4 种模板类型，供您选择)，可以在当前目录下下找到我们新建的项目 `pwa-project` 文件夹。
 
 ```
 pwa-project/ (项目根目录)
@@ -66,7 +66,7 @@ pwa-project/ (项目根目录)
 
 ```
 
-项目目录结构我们参照的基础是 Vue 工程推荐使用的模版文件目录 [https://github.com/vuejs-templates](https://github.com/vuejs-templates)，在其基础上进行了 PWA 相关的集成封装。
+项目目录结构我们参照的基础是 Vue 工程推荐使用的模板文件目录 [https://github.com/vuejs-templates](https://github.com/vuejs-templates)，在其基础上进行了 PWA 相关的集成封装。
 
 **build 文件夹**
 

@@ -12,9 +12,9 @@ github 地址：[https://github.com/lavas-project/vue-skeleton-webpack-plugin](h
 
 参考[饿了么的 PWA 升级实践](https://huangxuan.me/2017/07/12/upgrading-eleme-to-pwa/#在构建时使用-vue-预渲染骨架屏)一文，我们希望在构建时渲染 skeleton 组件，将渲染 DOM 插入 html 的挂载点中，同时将使用的样式通过 style 标签内联。这样在前端 JS 渲染完成之前，用户将看到页面的大致骨架，感知到页面是正在加载的。
 
-我们当然可以选择在开发时直接将页面骨架内容写入 html 模版中，但是这会带来两个问题：
+我们当然可以选择在开发时直接将页面骨架内容写入 html 模板中，但是这会带来两个问题：
 1. 开发 skeleton 与其他组件体验不一致。
-2. 多页应用中多个页面可能共用同一个 html 模版，而又有独立的 skeleton。
+2. 多页应用中多个页面可能共用同一个 html 模板，而又有独立的 skeleton。
 
 下面我们将看看插件在具体实现中是如何解决这两个问题的。
 
@@ -45,7 +45,7 @@ github 地址：[https://github.com/lavas-project/vue-skeleton-webpack-plugin](h
 
 > info
 >
-> 多页中的 webpack 配置对象示例，可参考[多页测试用例](https://github.com/lavas-project/vue-skeleton-webpack-plugin/tree/master/examples/multipage)或者[Lavas MPA 模版](https://github.com/lavas-project/lavas-template-vue-mpa)。
+> 多页中的 webpack 配置对象示例，可参考[多页测试用例](https://github.com/lavas-project/vue-skeleton-webpack-plugin/tree/master/examples/multipage)或者[Lavas MPA 模板](https://github.com/lavas-project/lavas-template-vue-mpa)。
 
 webpack 将使用传入的配置对象进行编译，由于我们不需要将最终产物保存在硬盘中，使用内存文件系统[memory-fs](https://github.com/webpack/memory-fs)能够减少不必要的I/O开销。最终会生成一个 bundle 文件，使用`createBundleRenderer`创建一个 renderer，就可以在 Node.js 环境得到渲染结果了。
 
@@ -83,7 +83,7 @@ serverWebpackConfig.plugins.push(new ExtractTextPlugin({
 
 渲染结果中包含 DOM 结构和样式两部分，样式可以直接插入`</head>`之前，而 DOM 的插入与挂载点相关，默认使用`<div id="app">`，当然插件使用者可以通过参数传入。
 
-在多页应用中，相比单页情况会变的稍稍复杂。多页项目中通常会引入多个 html-webpack-plugin，例如我们在[Lavas MPA 模版](https://github.com/lavas-project/lavas-template-vue-mpa)中使用的[ multipage插件](https://github.com/mutualofomaha/multipage-webpack-plugin)就是如此，这就会导致`html-webpack-plugin-before-html-processing`事件被多次触发。我们需要在每次事件触发时识别出当前处理的入口文件，执行 webpack 编译当前页面对应的入口文件，渲染对应的 skeleton 组件。
+在多页应用中，相比单页情况会变的稍稍复杂。多页项目中通常会引入多个 html-webpack-plugin，例如我们在[Lavas MPA 模板](https://github.com/lavas-project/lavas-template-vue-mpa)中使用的[ multipage插件](https://github.com/mutualofomaha/multipage-webpack-plugin)就是如此，这就会导致`html-webpack-plugin-before-html-processing`事件被多次触发。我们需要在每次事件触发时识别出当前处理的入口文件，执行 webpack 编译当前页面对应的入口文件，渲染对应的 skeleton 组件。
 
 查找当前处理的入口文件过程如下：
 ```js
@@ -129,11 +129,11 @@ routes: [
 ]
 ```
 
-在多页应用中，使用者可以通过占位符设置依赖语句和路由规则的模版，loader 在运行时会使用这些模版，用真实的 skeleton 名称替换掉占位符，[插入多条语句](https://github.com/lavas-project/vue-skeleton-webpack-plugin/blob/master/src/loader.js#L27-L39)。
+在多页应用中，使用者可以通过占位符设置依赖语句和路由规则的模板，loader 在运行时会使用这些模板，用真实的 skeleton 名称替换掉占位符，[插入多条语句](https://github.com/lavas-project/vue-skeleton-webpack-plugin/blob/master/src/loader.js#L27-L39)。
 
 > info
 >
-> 多页中的具体应用示例，可参考[多页测试用例](https://github.com/lavas-project/vue-skeleton-webpack-plugin/tree/master/examples/multipage)或者[Lavas MPA 模版](https://github.com/lavas-project/lavas-template-vue-mpa)。
+> 多页中的具体应用示例，可参考[多页测试用例](https://github.com/lavas-project/vue-skeleton-webpack-plugin/tree/master/examples/multipage)或者[Lavas MPA 模板](https://github.com/lavas-project/lavas-template-vue-mpa)。
 
 ## 参数说明
 

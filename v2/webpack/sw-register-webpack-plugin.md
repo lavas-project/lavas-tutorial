@@ -230,9 +230,9 @@ navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js?
 
 #### filePath
 
-filePath 字段是用来指定开发者自己维护的 `sw-register.js` 的，如 Lavas 解决方案的模版中，会在 `/src` 下有一个 `sw-register.js` 文件，开发者可以通过维护这个文件达到维护 Servier Worker 的目的。
+filePath 字段是用来指定开发者自己维护的 `sw-register.js` 的，如 Lavas 解决方案的模板中，会在 `/src` 下有一个 `sw-register.js` 文件，开发者可以通过维护这个文件达到维护 Servier Worker 的目的。
 
-如果是 Lavas 解决方案的模版中的使用场景的话，我们可以配置此参数如下：
+如果是 Lavas 解决方案的模板中的使用场景的话，我们可以配置此参数如下：
 
 ```js
 const path = require('path');

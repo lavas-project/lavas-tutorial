@@ -1,10 +1,10 @@
 # 开发一个页面
 
-在模版项目中，所有的路由组件页面都放在 `src/pages` 下。我们以 NotFound 页面为例，介绍一下页面开发的基本步骤。
+在模板项目中，所有的路由组件页面都放在 `src/pages` 下。我们以 NotFound 页面为例，介绍一下页面开发的基本步骤。
 
 ## 添加路由
 
-模版项目使用异步懒加载路由对象的方式，减少首屏请求大小，所以需要在 `src/router.js` 中定义[代码切割点](https://ssr.vuejs.org/en/routing.html)。
+模板项目使用异步懒加载路由对象的方式，减少首屏请求大小，所以需要在 `src/router.js` 中定义[代码切割点](https://ssr.vuejs.org/en/routing.html)。
 然后向 vue-router 的路由列表中添加页面对应的路由对象，代码如下：
 
 ```js
@@ -82,7 +82,7 @@ export default {
 
 ### 通过 Vuex 提交修改动作
 
-模版项目中 app shell 组件的状态放在 store 中统一管理，页面组件可以通过 `mapStates/Actions` 访问当前 store 的状态和提交修改操作。
+模板项目中 app shell 组件的状态放在 store 中统一管理，页面组件可以通过 `mapStates/Actions` 访问当前 store 的状态和提交修改操作。
 
 在具体实现中，`/store/modules/app-shell.js` 中的 actions 对象定义了一系列操作，通过 mapActions 引入就可以在组件中使用这些方法，代码如下：
 

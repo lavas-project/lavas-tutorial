@@ -2,7 +2,7 @@
 
 > info
 >
-> 注：[Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
+> 注：[Lavas Basic 模板](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
 
 项目使用 [vuetify](https://vuetifyjs.com/) 作为组件库，根据 vuetify 的实现，主题配置分为两个部分：
 
