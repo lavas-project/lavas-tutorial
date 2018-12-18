@@ -1,6 +1,6 @@
 # router-loader 介绍
 
-> 仅有[Lavas MPA 模版](https://github.com/lavas-project/lavas-template-vue-mpa)包含此功能
+> 仅有[Lavas MPA 模板](https://github.com/lavas-project/lavas-template-vue-mpa)包含此功能
 
 ## 问题背景
 
@@ -56,7 +56,7 @@ function validateRoute(path) {
 const allRoutes = [];
 ```
 
-在[Lavas MPA 模版](https://github.com/lavas-project/lavas-template-vue-mpa)中，每个页面有独立的路由文件：
+在[Lavas MPA 模板](https://github.com/lavas-project/lavas-template-vue-mpa)中，每个页面有独立的路由文件：
 ``` bash
 lavas-template-vue-mpa
     |---src
@@ -66,7 +66,7 @@ lavas-template-vue-mpa
                 |--- Detail.vue 路由组件
                 |--- entry-skeleton.js skeleton入口
                 |--- entry.js entry入口
-                |--- index.html 页面模版，供htmlWebpackPlugin使用
+                |--- index.html 页面模板，供htmlWebpackPlugin使用
                 |--- router.js 单页面使用的路由
             |---home 主页模块
             |---search 搜索页模块

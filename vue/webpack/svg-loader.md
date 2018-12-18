@@ -1,13 +1,13 @@
 # svg-loader 介绍
 
-> [Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
+> [Lavas Basic 模板](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
 
 在[ 如何在项目中使用图标 ](https://lavas.baidu.com/guide/vue/doc/vue/advanced/how-to-use-icon)一节中，我们介绍了开发时引入自定义 svg 图标的方法，例如：
 
 - 将自定义 svg 文件放入指定文件夹下，自动完成注册
 - 修改 `config/icon.js` 配置文件引入 svg 格式的 fontawesome 图标
 
-以上修改甚至都不需要重启开发服务器，这一切都是通过模版项目中的 `build/loaders/svg-loader` 完成的，本文将介绍其实现原理。
+以上修改甚至都不需要重启开发服务器，这一切都是通过模板项目中的 `build/loaders/svg-loader` 完成的，本文将介绍其实现原理。
 
 ## loader 是什么
 

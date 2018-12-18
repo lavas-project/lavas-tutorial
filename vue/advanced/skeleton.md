@@ -8,7 +8,7 @@
 
 受 [ele.me 升级至 PWA](http://geek.csdn.net/news/detail/210535) 一文启发，我们采取的实现方法大致是：
 
-1. 在构建时将一个固定的 Skeleton 路由组件的渲染结果插入 HTML 模版中
+1. 在构建时将一个固定的 Skeleton 路由组件的渲染结果插入 HTML 模板中
 2. 在 Service Worker 中配置其对包含 Skeleton 的 HTML 进行缓存
 3. 页面切换时直接读取缓存获取包含 Skeleton 的 HTML，大大缩短甚至去除白屏时间
 
@@ -16,9 +16,9 @@
 
 以提升 Web App 用户体验为核心的 PWA 自然应该将 Skeleton 纳入考虑范围，因此 Lavas 也将 Skeleton 的支持集成到所有初始化的项目中(不论选择的是哪种模板)。因此生成的项目在切换页面时会率先渲染 Skeleton ，效果会是这样：
 
-![模版项目展示的 skeleton](./images/lavas-skeleton.png)
+![模板项目展示的 skeleton](./images/lavas-skeleton.png)
 
-这里还需要注意一点：skeleton 会在页面首次进入时出现。在单页应用情况下( [Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)和 [Lavas App Shell 模版](https://github.com/lavas-project/lavas-template-vue-appshell))，因为后续页面切换均由 Vue 在前端完成，因此 Skeleton 只会在第一次进入页面时展现。而在多页应用情况下( [Lavas MPA 模版](https://github.com/lavas-project/lavas-template-vue-mpa))，Lavas 支持为每个页面都提供一个 Skeleton ，因此在每个页面之间切换都会有目标页面对应的 Skeleton 展现。
+这里还需要注意一点：skeleton 会在页面首次进入时出现。在单页应用情况下( [Lavas Basic 模板](https://github.com/lavas-project/lavas-template-vue-basic)和 [Lavas App Shell 模板](https://github.com/lavas-project/lavas-template-vue-appshell))，因为后续页面切换均由 Vue 在前端完成，因此 Skeleton 只会在第一次进入页面时展现。而在多页应用情况下( [Lavas MPA 模板](https://github.com/lavas-project/lavas-template-vue-mpa))，Lavas 支持为每个页面都提供一个 Skeleton ，因此在每个页面之间切换都会有目标页面对应的 Skeleton 展现。
 
 ### 默认 Skeleton
 
@@ -77,7 +77,7 @@ module.exports = merge(baseWebpackConfig, {
 
 ### Lavas SSR 模板和 Skeleton
 
-在使用服务端渲染时，由于服务端返回的 HTML 已经包含了首屏的页面结构，并不需要客户端渲染首屏内容，此时 Skeleton 就没有存在的必要了，可参考我们的 [Lavas SSR 模版](https://github.com/lavas-project/lavas-template-vue-ssr)。
+在使用服务端渲染时，由于服务端返回的 HTML 已经包含了首屏的页面结构，并不需要客户端渲染首屏内容，此时 Skeleton 就没有存在的必要了，可参考我们的 [Lavas SSR 模板](https://github.com/lavas-project/lavas-template-vue-ssr)。
 
 ### 一些注意点
 

@@ -2,7 +2,7 @@
 
 > info
 >
-> [Lavas Basic 模版](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
+> [Lavas Basic 模板](https://github.com/lavas-project/lavas-template-vue-basic)并不包含此功能
 
 在项目中有两种使用图标的方式，可以同时使用：
 
@@ -43,7 +43,7 @@
 
 1. 将 `test.svg` 放入配置文件中的指定文件夹下
 
-2. 在模版中使用 `<icon name="svg-test"></icon>` ，注意此处 name 需要加上配置文件中指定的前缀
+2. 在模板中使用 `<icon name="svg-test"></icon>` ，注意此处 name 需要加上配置文件中指定的前缀
 
 > info
 >

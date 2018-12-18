@@ -1,6 +1,6 @@
 # 以编程方式使用 Lavas
 
-使用 `lavas init` 创建的模版项目中，在以下场景下都会以编程方式使用 Lavas：
+使用 `lavas init` 创建的模板项目中，在以下场景下都会以编程方式使用 Lavas：
 * `server.dev.js` 开发环境下的 SPA／SSR 模式。
 * `server.prod.js` 生产环境下的 SSR 模式。
 
