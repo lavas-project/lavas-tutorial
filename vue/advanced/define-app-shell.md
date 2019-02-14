@@ -48,7 +48,7 @@ src/components
 以 `AppHeader` （页面头部）组件举例，我们在 store 中已经给头部定义了一些状态：
 
 | state    | @type   | 含义             |
-| :---:    | :-----: | :-------------: |
+| ---    | ----- | ------------- |
 | show     | boolean | 是否展示顶部导航栏 |
 | title    | string  | 标题内容 |
 | logoIcon | string  | logo图标名称 |
